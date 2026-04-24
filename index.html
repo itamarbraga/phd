@@ -1,0 +1,1503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>PhD Defense — Itamar Dias | May 21, 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#08090d;--surf:#0e1018;--surf2:#13161f;--surf3:#1a1e2a;
+  --border:#1e2435;--border2:#252c40;
+  --teal:#00c9b1;--teal-dim:#00c9b115;
+  --blue:#4a8fff;--blue-dim:#4a8fff12;
+  --gold:#f5c842;--gold-dim:#f5c84215;
+  --red:#ff5c6a;--red-dim:#ff5c6a15;
+  --green:#36d68c;--green-dim:#36d68c15;
+  --purple:#9b6dff;--purple-dim:#9b6dff15;
+  --orange:#ff8c42;--orange-dim:#ff8c4215;
+  --text:#e8eaf2;--text2:#9099b5;--text3:#5a6484;
+  --font-display:'DM Serif Display',serif;
+  --font-body:'DM Sans',sans-serif;
+  --font-mono:'DM Mono',monospace;
+  --r:10px;--r2:16px;
+}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-body);background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;
+  background-image:radial-gradient(ellipse 80% 50% at 50% -10%,rgba(74,143,255,.06) 0%,transparent 60%),
+  radial-gradient(ellipse 40% 30% at 90% 80%,rgba(0,201,177,.04) 0%,transparent 50%);}
+
+/* ── NAV ── */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(8,9,13,.85);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);padding:0 20px;height:58px;
+  display:flex;align-items:center;gap:8px;}
+.nav-logo{font-family:var(--font-display);font-size:17px;color:var(--teal);margin-right:16px;white-space:nowrap;}
+.nav-tabs{display:flex;gap:2px;flex:1;overflow-x:auto;}
+.nav-tabs::-webkit-scrollbar{height:0;}
+.tab-btn{background:none;border:none;color:var(--text3);font-family:var(--font-body);font-size:13px;font-weight:500;
+  padding:6px 14px;border-radius:6px;cursor:pointer;transition:all .2s;white-space:nowrap;}
+.tab-btn:hover{color:var(--text);background:var(--surf2);}
+.tab-btn.active{color:var(--teal);background:var(--teal-dim);}
+.nav-countdown{font-family:var(--font-mono);font-size:12px;color:var(--gold);background:var(--gold-dim);
+  padding:4px 12px;border-radius:6px;border:1px solid var(--gold)22;white-space:nowrap;}
+
+/* ── LAYOUT ── */
+.main{padding-top:78px;padding-bottom:80px;}
+.page{display:none;max-width:1100px;margin:0 auto;padding:24px 20px;}
+.page.active{display:block;}
+
+/* ── TYPOGRAPHY ── */
+h1{font-family:var(--font-display);font-size:32px;line-height:1.2;color:var(--text);}
+h2{font-family:var(--font-display);font-size:24px;line-height:1.3;color:var(--text);}
+h3{font-family:var(--font-body);font-size:16px;font-weight:600;color:var(--text);}
+h4{font-family:var(--font-body);font-size:13px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.8px;}
+p{font-size:14px;line-height:1.7;color:var(--text2);}
+
+/* ── CARDS ── */
+.card{background:var(--surf);border:1px solid var(--border);border-radius:var(--r2);padding:20px;}
+.card+.card{margin-top:12px;}
+.card-sm{background:var(--surf2);border:1px solid var(--border);border-radius:var(--r);padding:14px;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
+@media(max-width:700px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+/* ── BADGES ── */
+.badge{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;letter-spacing:.4px;text-transform:uppercase;}
+.badge-teal{background:var(--teal-dim);color:var(--teal);border:1px solid var(--teal)22;}
+.badge-gold{background:var(--gold-dim);color:var(--gold);border:1px solid var(--gold)22;}
+.badge-red{background:var(--red-dim);color:var(--red);border:1px solid var(--red)22;}
+.badge-blue{background:var(--blue-dim);color:var(--blue);border:1px solid var(--blue)22;}
+.badge-green{background:var(--green-dim);color:var(--green);border:1px solid var(--green)22;}
+.badge-purple{background:var(--purple-dim);color:var(--purple);border:1px solid var(--purple)22;}
+.badge-orange{background:var(--orange-dim);color:var(--orange);border:1px solid var(--orange)22;}
+
+/* ── BUTTONS ── */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:var(--r);
+  font-family:var(--font-body);font-size:14px;font-weight:600;cursor:pointer;border:none;transition:all .15s;}
+.btn-primary{background:var(--teal);color:#000;}
+.btn-primary:hover{background:#00dfc6;transform:translateY(-1px);}
+.btn-ghost{background:var(--surf3);color:var(--text2);border:1px solid var(--border);}
+.btn-ghost:hover{color:var(--text);border-color:var(--border2);}
+.btn-danger{background:var(--red-dim);color:var(--red);border:1px solid var(--red)22;}
+.btn-lg{padding:14px 28px;font-size:16px;}
+.btn-sm{padding:6px 14px;font-size:13px;}
+
+/* ── PROGRESS ── */
+.progress-bar{background:var(--surf3);border-radius:20px;height:8px;overflow:hidden;}
+.progress-fill{height:100%;border-radius:20px;transition:width .5s ease;background:var(--teal);}
+.progress-fill.gold{background:var(--gold);}
+.progress-fill.blue{background:var(--blue);}
+
+/* ─── DASHBOARD ─── */
+.hero{text-align:center;padding:40px 20px 32px;position:relative;}
+.hero-tag{font-family:var(--font-mono);font-size:11px;color:var(--teal);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;}
+.hero h1{font-size:40px;margin-bottom:8px;}
+.hero-sub{font-size:16px;color:var(--text2);margin-bottom:24px;}
+.hero-date{font-family:var(--font-mono);font-size:13px;color:var(--gold);}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:24px 0;}
+@media(max-width:600px){.stats-row{grid-template-columns:1fr 1fr;}}
+.stat-card{background:var(--surf);border:1px solid var(--border);border-radius:var(--r2);padding:16px;text-align:center;}
+.stat-num{font-family:var(--font-mono);font-size:28px;font-weight:500;color:var(--teal);}
+.stat-label{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;margin-top:4px;}
+
+/* today plan */
+.today-block{background:var(--surf);border:1px solid var(--border);border-radius:var(--r2);padding:24px;margin-bottom:16px;}
+.session-item{display:flex;align-items:flex-start;gap:14px;padding:12px 0;border-bottom:1px solid var(--border);}
+.session-item:last-child{border-bottom:none;}
+.session-time{font-family:var(--font-mono);font-size:12px;color:var(--teal);min-width:90px;padding-top:2px;}
+.session-content h3{font-size:14px;margin-bottom:4px;}
+
+/* pomodoro */
+.pomo-wrap{background:var(--surf2);border:1px solid var(--border);border-radius:var(--r2);padding:20px;text-align:center;}
+.pomo-ring{width:120px;height:120px;margin:12px auto;position:relative;}
+.pomo-ring svg{transform:rotate(-90deg);}
+.pomo-ring circle{fill:none;stroke-width:8;stroke-linecap:round;}
+.pomo-ring .bg-circle{stroke:var(--surf3);}
+.pomo-ring .progress-circle{stroke:var(--teal);stroke-dasharray:283;stroke-dashoffset:0;transition:stroke-dashoffset .5s linear;}
+.pomo-time{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--font-mono);font-size:24px;font-weight:500;}
+.pomo-mode{font-size:11px;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;}
+.pomo-btns{display:flex;gap:8px;justify-content:center;margin-top:12px;}
+
+/* ─── CALENDAR ─── */
+.cal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
+.week-label{font-family:var(--font-display);font-size:18px;color:var(--teal);}
+.day-card{background:var(--surf);border:1px solid var(--border);border-radius:var(--r);
+  margin-bottom:8px;overflow:hidden;cursor:pointer;transition:border-color .2s;}
+.day-card:hover{border-color:var(--border2);}
+.day-card.today{border-color:var(--teal)44;background:linear-gradient(135deg,var(--surf),var(--teal-dim));}
+.day-card.completed{border-color:var(--green)22;opacity:.7;}
+.day-header{display:flex;align-items:center;gap:12px;padding:12px 16px;}
+.day-num{font-family:var(--font-mono);font-size:12px;color:var(--text3);min-width:80px;}
+.day-title{font-size:14px;font-weight:600;flex:1;}
+.day-badges{display:flex;gap:6px;flex-wrap:wrap;}
+.day-body{padding:0 16px 16px;display:none;}
+.day-body.open{display:block;}
+.session-block{margin-top:12px;}
+.session-block h4{margin-bottom:6px;}
+.task-list{list-style:none;margin:0;}
+.task-list li{padding:4px 0;font-size:13px;color:var(--text2);display:flex;align-items:flex-start;gap:8px;}
+.task-list li::before{content:'→';color:var(--teal);flex-shrink:0;}
+
+/* ─── QUIZ ─── */
+.quiz-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:gap;}
+.quiz-cats{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;}
+.cat-btn{background:var(--surf2);border:1px solid var(--border);color:var(--text2);
+  font-size:12px;padding:5px 12px;border-radius:20px;cursor:pointer;transition:all .2s;}
+.cat-btn:hover,.cat-btn.selected{background:var(--teal-dim);color:var(--teal);border-color:var(--teal)33;}
+.quiz-card{background:var(--surf);border:1px solid var(--border);border-radius:var(--r2);padding:28px;text-align:center;min-height:300px;display:flex;flex-direction:column;justify-content:center;}
+.quiz-progress{font-family:var(--font-mono);font-size:12px;color:var(--text3);margin-bottom:16px;}
+.quiz-question{font-size:17px;line-height:1.6;color:var(--text);margin-bottom:24px;font-weight:500;}
+.quiz-answer{background:var(--surf2);border:1px solid var(--border);border-radius:var(--r);
+  padding:16px;text-align:left;font-size:14px;line-height:1.6;color:var(--text2);display:none;margin-bottom:16px;}
+.quiz-answer.visible{display:block;}
+.key-phrase{font-family:var(--font-mono);font-size:12px;color:var(--teal);background:var(--teal-dim);
+  padding:8px 12px;border-radius:6px;margin-top:10px;border-left:3px solid var(--teal);}
+.quiz-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+.answer-reveal-btn{background:var(--blue-dim);color:var(--blue);border:1px solid var(--blue)33;}
+.answer-reveal-btn:hover{background:var(--blue);color:#000;}
+.score-good{background:var(--green-dim)!important;color:var(--green)!important;border-color:var(--green)33!important;}
+.score-bad{background:var(--red-dim)!important;color:var(--red)!important;border-color:var(--red)33!important;}
+.quiz-done{text-align:center;padding:40px;}
+.quiz-score-ring{width:150px;height:150px;margin:20px auto;position:relative;}
+.quiz-score-ring svg{transform:rotate(-90deg);}
+.quiz-score-ring .score-text{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--font-mono);font-size:28px;font-weight:500;}
+.quiz-history{margin-top:24px;}
+.history-row{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);font-size:13px;}
+.score-pill{font-family:var(--font-mono);font-size:12px;padding:3px 10px;border-radius:20px;min-width:56px;text-align:center;}
+.score-pass{background:var(--green-dim);color:var(--green);}
+.score-fail{background:var(--red-dim);color:var(--red);}
+
+/* ─── COMMITTEE ─── */
+.member-card{background:var(--surf);border:1px solid var(--border);border-radius:var(--r2);overflow:hidden;margin-bottom:16px;}
+.member-header{display:flex;align-items:flex-start;gap:16px;padding:20px;cursor:pointer;transition:background .15s;}
+.member-header:hover{background:var(--surf2);}
+.member-avatar{width:52px;height:52px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:20px;flex-shrink:0;}
+.member-info{flex:1;}
+.member-name{font-size:16px;font-weight:600;margin-bottom:2px;}
+.member-affil{font-size:12px;color:var(--text3);}
+.member-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;}
+.danger-stars{font-size:14px;}
+.member-body{display:none;padding:20px;border-top:1px solid var(--border);}
+.member-body.open{display:block;}
+.q-item{background:var(--surf2);border:1px solid var(--border);border-radius:var(--r);padding:14px;margin-bottom:10px;}
+.q-item h4{color:var(--text2);margin-bottom:6px;}
+.q-text{font-size:14px;font-weight:600;margin-bottom:8px;line-height:1.5;}
+.q-strategy{font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:8px;}
+.q-keyphrase{font-family:var(--font-mono);font-size:11px;color:var(--teal);background:var(--teal-dim);
+  padding:8px 12px;border-radius:6px;border-left:3px solid var(--teal);}
+.reading-links{margin-top:12px;padding:12px;background:var(--surf3);border-radius:var(--r);}
+.reading-links h4{margin-bottom:6px;}
+.reading-links p{font-size:12px;}
+
+/* ─── READING LIST ─── */
+.rl-filter{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;}
+.paper-item{background:var(--surf2);border:1px solid var(--border);border-radius:var(--r);padding:14px;margin-bottom:8px;transition:border-color .2s;}
+.paper-item:hover{border-color:var(--border2);}
+.paper-num{font-family:var(--font-mono);font-size:11px;color:var(--teal);margin-bottom:4px;}
+.paper-citation{font-size:13px;font-weight:500;margin-bottom:4px;}
+.paper-msg{font-size:12px;color:var(--text2);line-height:1.5;}
+.priority-must{border-left:3px solid var(--red);}
+.priority-high{border-left:3px solid var(--gold);}
+.priority-solid{border-left:3px solid var(--blue);}
+
+/* ─── STRATEGY ─── */
+.narrative-box{background:linear-gradient(135deg,var(--surf),var(--teal-dim));border:1px solid var(--teal)33;
+  border-radius:var(--r2);padding:24px;margin-bottom:20px;}
+.narrative-box p{font-size:15px;line-height:1.8;color:var(--text);}
+.law-card{display:flex;gap:14px;padding:14px;background:var(--surf2);border:1px solid var(--border);border-radius:var(--r);margin-bottom:8px;}
+.law-num{font-family:var(--font-mono);font-size:22px;color:var(--teal);line-height:1;min-width:28px;}
+.numbers-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;}
+.num-card{background:var(--surf2);border:1px solid var(--border);border-radius:var(--r);padding:14px;}
+.num-val{font-family:var(--font-mono);font-size:20px;color:var(--gold);font-weight:500;}
+.num-label{font-size:12px;color:var(--text2);margin-top:4px;}
+
+/* ─── MISC ─── */
+.divider{height:1px;background:var(--border);margin:20px 0;}
+.info-box{background:var(--blue-dim);border:1px solid var(--blue)22;border-radius:var(--r);padding:14px;margin-bottom:12px;}
+.info-box p{font-size:13px;color:var(--text2);}
+.warn-box{background:var(--gold-dim);border:1px solid var(--gold)22;border-radius:var(--r);padding:14px;margin-bottom:12px;}
+.new-badge{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;background:var(--green-dim);color:var(--green);border-radius:20px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;border:1px solid var(--green)22;}
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+.page.active{animation:fadeIn .25s ease;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.5;}}
+.pulse{animation:pulse 2s infinite;}
+
+/* scrollbar */
+::-webkit-scrollbar{width:6px;height:6px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px;}
+::-webkit-scrollbar-thumb:hover{background:var(--text3);}
+
+/* adhd focus mode */
+.focus-banner{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--teal);color:#000;
+  text-align:center;padding:12px;font-weight:700;font-size:15px;z-index:200;}
+.focus-banner.show{display:block;}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav class="nav">
+  <div class="nav-logo">🧬 Itamar · Defense</div>
+  <div class="nav-tabs">
+    <button class="tab-btn active" onclick="showTab('dashboard')">🏠 Dashboard</button>
+    <button class="tab-btn" onclick="showTab('calendar')">📅 Study Plan</button>
+    <button class="tab-btn" onclick="showTab('quiz')">🎯 Quiz</button>
+    <button class="tab-btn" onclick="showTab('committee')">👥 Committee</button>
+    <button class="tab-btn" onclick="showTab('reading')">📚 Reading List</button>
+    <button class="tab-btn" onclick="showTab('strategy')">🗡️ Strategy</button>
+  </div>
+  <div class="nav-countdown" id="nav-countdown">Loading…</div>
+</nav>
+
+<main class="main">
+
+<!-- ══════════════════════ DASHBOARD ══════════════════════ -->
+<section class="page active" id="page-dashboard">
+  <div class="hero">
+    <div class="hero-tag">PhD Defense Preparation</div>
+    <h1>From Vulnerability to Resilience</h1>
+    <div class="hero-sub">Molecular Mechanisms of Cancer Therapy-Induced Cardiotoxicity</div>
+    <div class="hero-date">🗓️ Defense: Thursday, May 21, 2026 — 12:45 · Academie Gebouw, Broerstraat 5, Groningen</div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-num" id="stat-days">—</div>
+      <div class="stat-label">Days Until Defense</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" id="stat-study-days">—</div>
+      <div class="stat-label">Study Days Left</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" id="stat-correct">—%</div>
+      <div class="stat-label">Quiz Accuracy</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" id="stat-streak">0</div>
+      <div class="stat-label">Day Streak 🔥</div>
+    </div>
+  </div>
+
+  <!-- Progress Bar -->
+  <div class="card" style="margin-bottom:12px;">
+    <div style="display:flex;justify-content:space-between;margin-bottom:8px;"><h4>Overall Preparation Progress</h4><span class="badge badge-teal" id="overall-pct">0%</span></div>
+    <div class="progress-bar"><div class="progress-fill" id="overall-bar" style="width:0%"></div></div>
+    <p style="margin-top:8px;font-size:12px;">Study period: <strong>April 28 – May 19</strong> (22 days · 4 hrs/day)</p>
+  </div>
+
+  <!-- Today's Plan -->
+  <div class="today-block">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+      <h2 id="today-title">Today's Plan</h2>
+      <button class="btn btn-sm" onclick="markTodayDone()">✓ Mark Day Done</button>
+    </div>
+    <div id="today-content">
+      <p>Loading today's plan…</p>
+    </div>
+  </div>
+
+  <!-- Pomodoro Timer -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;" id="pomo-grid">
+    <div class="pomo-wrap">
+      <h4>🍅 ADHD Pomodoro Timer</h4>
+      <div class="pomo-mode" id="pomo-mode">FOCUS SESSION</div>
+      <div class="pomo-ring">
+        <svg width="120" height="120" viewBox="0 0 120 120">
+          <circle class="bg-circle" cx="60" cy="60" r="45"/>
+          <circle class="progress-circle" id="pomo-arc" cx="60" cy="60" r="45"/>
+        </svg>
+        <div class="pomo-time" id="pomo-time">25:00</div>
+      </div>
+      <div class="pomo-btns">
+        <button class="btn btn-primary btn-sm" id="pomo-start" onclick="pomoStart()">▶ Start</button>
+        <button class="btn btn-ghost btn-sm" onclick="pomoReset()">↺ Reset</button>
+      </div>
+      <div style="margin-top:8px;font-family:var(--font-mono);font-size:11px;color:var(--text3);">Session <span id="pomo-count">1</span>/8 today</div>
+    </div>
+
+    <!-- Quick Stats Card -->
+    <div class="pomo-wrap">
+      <h4>📊 Quiz Overview</h4>
+      <div style="margin-top:12px;" id="quiz-overview">
+        <div id="cat-progress-list"></div>
+      </div>
+      <button class="btn btn-primary btn-sm" style="margin-top:12px;width:100%;" onclick="showTab('quiz')">Start Quiz →</button>
+    </div>
+  </div>
+
+  <!-- Elevator Pitch Reminder -->
+  <div class="card">
+    <h3 style="margin-bottom:10px;">🎤 90-Second Elevator Pitch — Practice Daily</h3>
+    <div class="narrative-box" style="margin-bottom:0;">
+      <p><em>"We started with a clinical paradox: some patients develop severe heart failure after <strong>low doses</strong> of anthracyclines, while others tolerate much higher cumulative doses with no cardiac injury. We hypothesized this reflects <strong>constitutional vulnerability</strong> rather than treatment effects. Using patient-derived iPSC cardiomyocytes and 3D engineered heart tissues, we found that cardiotoxic patients harbor pre-existing <strong>mitochondrial genome instability</strong> — with an insertion-biased mutation pattern (~77% in TOX vs ~54% in RES) — and inadequate antioxidant defenses (GPX1, GSTM1), creating a constitutionally vulnerable cardiac phenotype. This shifts the paradigm from 'how much drug causes heart failure' to '<strong>who is already positioned close to cardiac failure thresholds</strong>.' The clinical implication is a biomarker-guided, personalized cardioprotection strategy before treatment begins."</em></p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════ CALENDAR ══════════════════════ -->
+<section class="page" id="page-calendar">
+  <div style="margin-bottom:24px;">
+    <h2>22-Day Study Plan</h2>
+    <p style="margin-top:4px;">April 28 – May 19, 2026 · 4 hours/day · ADHD-optimized (Pomodoro 25+5)</p>
+  </div>
+  <div class="info-box">
+    <p>🧠 <strong>ADHD Schedule:</strong> Split 4 hours into two 2-hour blocks (morning + afternoon). Each block = 2 × Pomodoro (25min focus + 5min break) + 30min active recall quiz. Never study the same topic for more than 50 minutes continuously.</p>
+  </div>
+  <div id="calendar-container"></div>
+</section>
+
+
+<!-- ══════════════════════ QUIZ ══════════════════════ -->
+<section class="page" id="page-quiz">
+  <div style="margin-bottom:24px;">
+    <h2>🎯 Active Recall Quiz Engine</h2>
+    <p>Spaced repetition · Target: <strong>90% correct</strong> before moving on · All progress saved locally</p>
+  </div>
+
+  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:12px;">
+    <div class="quiz-cats" id="quiz-cats"></div>
+    <div style="display:flex;gap:8px;">
+      <button class="btn btn-ghost btn-sm" onclick="showHistory()">📊 History</button>
+      <button class="btn btn-danger btn-sm" onclick="resetProgress()">↺ Reset</button>
+    </div>
+  </div>
+
+  <div id="quiz-main">
+    <!-- quiz content injected here -->
+  </div>
+
+  <div class="quiz-history" id="quiz-history-panel" style="display:none;">
+    <h3 style="margin-bottom:12px;">Session History</h3>
+    <div id="history-list"></div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════ COMMITTEE ══════════════════════ -->
+<section class="page" id="page-committee">
+  <div style="margin-bottom:24px;">
+    <h2>👥 Opposition Committee</h2>
+    <p>Defense order · May 21, 2026 · Know every member's lens, their papers, their questions</p>
+  </div>
+  <div class="warn-box"><p>⚡ <strong>Key tactic:</strong> Before the defense, find one sentence in each member's recent paper to reference directly. This single move transforms cross-examination into scientific conversation.</p></div>
+  <div id="committee-container"></div>
+</section>
+
+
+<!-- ══════════════════════ READING LIST ══════════════════════ -->
+<section class="page" id="page-reading">
+  <div style="margin-bottom:24px;">
+    <h2>📚 50 Essential Papers</h2>
+    <p>Priority reading list · MUST READ = complete by Week 2 · HIGH = Week 3 · SOLID = context</p>
+  </div>
+  <div class="rl-filter" id="rl-filter"></div>
+  <div id="reading-container"></div>
+</section>
+
+
+<!-- ══════════════════════ STRATEGY ══════════════════════ -->
+<section class="page" id="page-strategy">
+  <div style="margin-bottom:24px;">
+    <h2>🗡️ Defense Strategy</h2>
+    <p>The three laws · Key numbers · Cross-cutting tactics</p>
+  </div>
+
+  <div class="card" style="margin-bottom:16px;">
+    <h3 style="margin-bottom:14px;">The Three Laws of Defense Answers</h3>
+    <div class="law-card"><div class="law-num">1</div><div><h3>Acknowledge Before Defending</h3><p>"That is an important limitation. We addressed it by…" — Never be defensive. Show scientific maturity.</p></div></div>
+    <div class="law-card"><div class="law-num">2</div><div><h3>Data Before Opinion</h3><p>Ground every answer in your actual figures and statistics before making interpretive claims.</p></div></div>
+    <div class="law-card"><div class="law-num">3</div><div><h3>Offer the Future</h3><p>For every limitation, propose the experiment that would resolve it. This signals you are a scientist, not just a student.</p></div></div>
+  </div>
+
+  <div class="card" style="margin-bottom:16px;">
+    <h3 style="margin-bottom:14px;">🔢 Know These Numbers Cold</h3>
+    <div class="numbers-grid" id="numbers-grid"></div>
+  </div>
+
+  <div class="card" style="margin-bottom:16px;">
+    <h3 style="margin-bottom:14px;">📊 Thesis Architecture — 90-Second Chapter Map</h3>
+    <div id="chapter-map"></div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-bottom:14px;">🎯 One-Line Quick Reference per Committee Member</h3>
+    <div id="quick-ref"></div>
+  </div>
+</section>
+
+</main>
+
+<div class="focus-banner" id="focus-banner">🍅 FOCUS SESSION ACTIVE — <span id="focus-topic">Study time!</span></div>
+
+<script>
+// ════════════════════════════════════════
+//  DATA
+// ════════════════════════════════════════
+
+// ── STUDY PLAN DATA ──
+const STUDY_PLAN = [
+  // W1 — Thesis Architecture & Senescence
+  {
+    day:1, date:'2026-04-28', weekday:'Monday', theme:'Thesis Architecture',
+    focus:'Re-read full thesis · annotate 5 strongest + 5 weakest claims per chapter · write 90-sec pitch',
+    color:'teal', week:1,
+    morning:{label:'Morning · 09:00–11:00',tasks:['Re-read Ch.1 Introduction: identify the clinical paradox and constitutional vulnerability hypothesis','Write the thesis elevator pitch from memory (90 seconds)','List all statistical tests used — verify you can explain each one','Read paper #1 (Herrmann 2020) + paper #3 (Lyon 2022 ESC Guidelines)']},
+    afternoon:{label:'Afternoon · 14:00–16:00',tasks:['Re-read Ch.2 and Ch.3 overviews','Annotate: 5 strongest and 5 weakest claims in the thesis','Quiz: category "Thesis Core" — stop when 90% correct','Write chapter summary cards (one index card per chapter)']},
+    papers:['#1 Herrmann 2020','#2 Zamorano 2016','#3 Lyon 2022']
+  },
+  {
+    day:2, date:'2026-04-29', weekday:'Tuesday', theme:'Chapter 1 — Introduction & Paradox',
+    focus:'Dose-response paradigm · clinical paradox · constitutional vulnerability · cardio-oncology landscape',
+    color:'teal', week:1,
+    morning:{label:'Morning · 09:00–11:00',tasks:['Master the dose-response straw man (Swain 2003) — the paradigm your thesis challenges','Understand the cardiotoxicity classification per 2022 ESC Guidelines (LVEF thresholds)','Know why iPSC-CMs were chosen over primary cardiomyocytes (pros/cons)','Paper #4 (Swain 2003) + paper #5 (Zhang 2012 Top2B)']},
+    afternoon:{label:'Afternoon · 14:00–16:00',tasks:['How your thesis fits within the 2022 ESC CardioOncology Guidelines framework','Prepare 2-min explanation of why the dose-response model is insufficient','Quiz: Category "Cardio-Oncology Field"','Prepare propositions (stellingen) language for constitutional vulnerability']},
+    papers:['#4 Swain 2003','#5 Zhang 2012','#6 Wallace 2020']
+  },
+  {
+    day:3, date:'2026-04-30', weekday:'Wednesday', theme:'Chapter 2 — Senescence & dyn-EHT',
+    focus:'Senescence hallmarks · SASP · AICAR · dyn-EHT validation · p16/p21 pathways',
+    color:'purple', week:1,
+    morning:{label:'Morning · 09:00–11:00',tasks:['Master the 10 hallmarks of cellular senescence (Campisi)','SASP composition: IL-6, IL-8, MMP3, PAI-1 — memorize the major components','Understand AICAR as senomorphic agent (mechanism and evidence)','Paper #16 (Childs 2017) + paper #17 (Campisi 2013)']},
+    afternoon:{label:'Afternoon · 14:00–16:00',tasks:['How does your dyn-EHT platform recapitulate in vivo biology? Prepare the validation argument','Distinguish senescence from apoptosis in your model (markers: p21, SA-β-Gal, p16, γH2AX)','Paper #18 (Dookun 2020) + paper #19 (Grosse 2020)','Quiz: category "Senescence" — aim for 90%']},
+    papers:['#16 Childs 2017','#17 Campisi 2013','#18 Dookun 2020','#19 Grosse 2020']
+  },
+  {
+    day:4, date:'2026-05-01', weekday:'Thursday', theme:'iPSC Methodology',
+    focus:'Wnt differentiation · maturation state · fibroblast controls · quality control pipeline',
+    color:'blue', week:1,
+    morning:{label:'Morning · 09:00–11:00',tasks:['Know the Wnt temporal modulation protocol (Lian 2012) cold','Memorize your iPSC QC pipeline: OCT4/NANOG/SOX2, alkaline phosphatase, cTnT+ %, karyotype method','Understand the maturation limitations of iPSC-CMs and how dyn-EHT partially addresses them','Paper #9 (Takahashi 2007) + paper #10 (Lian 2012)']},
+    afternoon:{label:'Afternoon · 14:00–16:00',tasks:['Prepare response to epigenetic memory artifact question (fibroblast → iPSC donor match argument)','Know your exact cTnT+ efficiency percentage and batch count','Paper #11 (Ronaldson-Bouchard 2018) — benchmark for maturation state','Quiz: category "iPSC Methodology"']},
+    papers:['#9 Takahashi 2007','#10 Lian 2012','#11 Ronaldson-Bouchard 2018','#14 Streckfuss-Bömeke 2013']
+  },
+  {
+    day:5, date:'2026-05-02', weekday:'Friday', theme:'Ch.3 — Mitochondrial Dynamics',
+    focus:'DRP1 · MFN1/MFN2 · OPA1 · fission-fusion-mitophagy axis · hyperfusion trap',
+    color:'gold', week:1,
+    morning:{label:'Morning · 09:00–11:00',tasks:['Master: DRP1 (fission), MFN1/MFN2 and OPA1 (fusion) biology','Explain why fission is REQUIRED for mitophagy (Twig 2008 — essential)','The hyperfusion trap: constitutive hyperfusion → no mitophagy → quality control failure in TOX cells','Paper #23 (Youle & van der Bliek 2012) + paper #24 (Twig 2008)']},
+    afternoon:{label:'Afternoon · 14:00–16:00',tasks:['Henning paradox: hibernation protective hyperfusion vs. TOX pathological hyperfusion — key distinction','Prepare 3-slide mental diagram of fission-fusion-mitophagy axis','Paper #25 (Dorn 2015) + paper #28 (Ong 2010)','Quiz: category "Mitochondrial Dynamics"']},
+    papers:['#22 Ichikawa 2014','#23 Youle 2012','#24 Twig 2008','#25 Dorn 2015']
+  },
+  {
+    day:6, date:'2026-05-03', weekday:'Saturday', theme:'Ch.3 — mtDNA Sequencing & Biomarker',
+    focus:'Insertion bias · VAF threshold · Kennedy method · heteroplasmy thresholds',
+    color:'gold', week:1,
+    morning:{label:'Morning · 09:00–11:00',tasks:['KNOW YOUR EXACT NUMBERS: 77% insertions in TOX, 54% in RES — total indels, VAF threshold, coverage depth','mtDNA sequencing methodology (Kennedy 2013): strand orientation filter, error modelling, panel of normals','Why insertion-biased mutagenesis differs from deletion-dominated in fibroblasts (rules out artifact)','Paper #32 (Kennedy 2013) — read every detail']},
+    afternoon:{label:'Afternoon · 14:00–16:00',tasks:['Heteroplasmy thresholds: Stewart & Chinnery 2015 — all humans carry heteroplasmic variants (threshold concept)','Prepare the Bennett methodology questions: exact VAF, coverage, bioinformatics tool name','Paper #30 (Stewart & Chinnery 2015) + paper #33 (Ju 2014)','Quiz: category "mtDNA & Biomarker" — aim 90%']},
+    papers:['#30 Stewart & Chinnery 2015','#31 Greaves 2012','#32 Kennedy 2013','#33 Ju 2014']
+  },
+  {
+    day:7, date:'2026-05-04', weekday:'Sunday', theme:'Week 1 Review & Quiz Sprint',
+    focus:'Active recall all Week 1 topics · write Q&A pairs · numbers drill',
+    color:'green', week:1,
+    morning:{label:'Morning · 09:00–11:00',tasks:['Full quiz run: ALL categories from Week 1 — no looking at notes','Write 5 Q&A pairs per chapter (Ch.1, 2, 3 Part 1) in your own words','Numbers drill out loud: 77%, 54%, 47%, 62%, 2.05x, 21 genes — can you recite them without notes?','Record yourself giving the 90-second elevator pitch']},
+    afternoon:{label:'Afternoon · 14:00–16:00',tasks:['Repeat pitch exercise — is it under 90 seconds? Does it flow naturally?','Review any quiz questions you got wrong this week','Write the 3-law framework from memory on paper','Rest! Week 2 starts tomorrow — you\'ve earned it.']},
+    papers:[]
+  },
+
+  // W2 — Mitochondrial Science Deep Dive
+  {
+    day:8, date:'2026-05-05', weekday:'Monday', theme:'Redox Biology & Antioxidants',
+    focus:'GPX1 · GSTM1 · glutathione pathway · MitoSOX · ROS signaling vs. damage',
+    color:'orange', week:2,
+    morning:{label:'Morning · 09:00–11:00',tasks:['GPX1 mechanism: glutathione peroxidase reduces H2O2 and lipid hydroperoxides','GSTM1: glutathione S-transferase M1, detoxifies DOX metabolites, null polymorphism significance','Paper #38 (Lubos 2011 GPX1 review) — this is a committee question target']},
+    afternoon:{label:'Afternoon · 14:00–16:00',tasks:['ROS dual role: signaling vs. damaging — dose-response concept (Schieber & Chandel 2014)','TMRM (membrane potential) and MitoSOX (mitochondrial superoxide) — how these assays work','2.05-fold higher baseline ROS in TOX cells: what does this mean clinically?','Quiz: Redox Biology category']},
+    papers:['#37 Schieber 2014','#38 Lubos 2011','#39 Hayes 2005','#40 Berthiaume 2007']
+  },
+  {
+    day:9, date:'2026-05-06', weekday:'Tuesday', theme:'Bioenergetics — Seahorse & FAO',
+    focus:'Seahorse XF assay · MitoStress · FAO assay · metabolic flexibility · glycolysis switch',
+    color:'orange', week:2,
+    morning:{label:'Morning · 09:00–11:00',tasks:['Brand & Nicholls 2011 — master OCR interpretation: basal respiration, ATP production, spare capacity','Explain: 47% reduced ATP production and 62% energy deficit in TOX cells','MitoStress test parameters: oligomycin, FCCP, rotenone/antimycin A — what each reveals','FAO assay: etomoxir as control — why fatty acid oxidation matters for mature cardiomyocytes']},
+    afternoon:{label:'Afternoon · 14:00–16:00',tasks:['Metabolic rigidity: TOX cells cannot shift to FAO under stress — mechanistic explanation','Henning connection: SUL-138 shifts mitochondrial proteome toward FAO — propose collaboration experiment','Paper #44 (Bertero & Maack 2018) + paper #45 (Lopaschuk 2010)','Quiz: Bioenergetics category']},
+    papers:['#43 Brand & Nicholls 2011','#44 Bertero & Maack 2018','#45 Lopaschuk 2010']
+  },
+  {
+    day:10, date:'2026-05-07', weekday:'Wednesday', theme:'Ch.3 — Transcriptomics & 21-Gene Signature',
+    focus:'GSEA methodology · 21-gene resilience signature · pathway enrichment · GPX1/GSTM1 protein validation',
+    color:'blue', week:2,
+    morning:{label:'Morning · 09:00–11:00',tasks:['GSEA (Subramanian 2005): NES values, FDR threshold — know what makes a pathway hit meaningful','The 21-gene signature: NOT a random list. Emerged from coherent biological pathways:','→ mitochondrial QC, autophagy/mitophagy, antioxidant metabolism, fission-fusion dynamics','Paper #42 (Subramanian 2005 GSEA)']},
+    afternoon:{label:'Afternoon · 14:00–16:00',tasks:['Bennett question: functional gene cluster vs. statistical list — prepare the GSEA pathway coherence argument','Cross-platform validation: protein-level confirmation of GPX1 and GSTM1 (Western blot)','What is the top GSEA pathway by NES score in your thesis? Have this memorized.','Quiz: Transcriptomics category']},
+    papers:['#42 Subramanian 2005','#46 Cappola 2010']
+  },
+  {
+    day:11, date:'2026-05-08', weekday:'Thursday', theme:'Ch.4 — Heteroplasmy Review',
+    focus:'Heteroplasmy thresholds · tissue specificity · cardiac vulnerability · universal heteroplasmy',
+    color:'purple', week:2,
+    morning:{label:'Morning · 09:00–11:00',tasks:['Key concept: ALL humans carry heteroplasmic variants (Payne 2013) — it\'s about threshold, not presence','Threshold effects: how % heteroplasmy determines disease manifestation (tipping point concept)','Cardiomyocytes as post-mitotic cells: why they accumulate mtDNA damage vs. proliferating cells','Papers #30, #31, #34, #35']},
+    afternoon:{label:'Afternoon · 14:00–16:00',tasks:['POLRMT variant (nuclear-encoded mitochondrial RNA polymerase) — López-Fernández/Gietema may raise this','Germline vs. somatic mtDNA layer: how iPSC model captures both','De Boer question: low-heteroplasmy variants having functional consequences? Prepare answer','Quiz: heteroplasmy-focused questions']},
+    papers:['#34 Payne 2013','#35 Gorman 2016','#36 Alexeyev 2013']
+  },
+  {
+    day:12, date:'2026-05-09', weekday:'Friday', theme:'Ch.5 — Ribociclib & CDK4/6 Inhibitors',
+    focus:'MONALEESA-2 trial · spliceosome dysfunction · CDK4/6i biology · Foijer 2024 paper',
+    color:'red', week:2,
+    morning:{label:'Morning · 09:00–11:00',tasks:['MONALEESA-2 trial (Hortobagyi 2016): ribociclib efficacy + cardiac safety monitoring','CDK4/6 inhibitor mechanism: cell cycle arrest at G1/S, non-canonical functions on splicing','Foijer 2024: CDK4/6i → cell enlargement → mitotic errors → aneuploidy (KNOW THIS PAPER — HE WILL ASK)','How spliceosome dysfunction differs mechanistically from anthracycline cardiotoxicity']},
+    afternoon:{label:'Afternoon · 14:00–16:00',tasks:['Post-mitotic cardiomyocytes: limited susceptibility to mitotic-error aneuploidy vs. iPSC-CMs','cGAS/STING-IL6 axis (Foijer 2022 Nature paper) — connecting nuclear CIN to your mtDNA findings','Paper #49 (Tasan 2020) + paper #50 (Moslehi 2019)','Quiz: CDK4/6i and ribociclib questions']},
+    papers:['#48 Hortobagyi 2016','#49 Tasan 2020','#50 Moslehi 2019']
+  },
+  {
+    day:13, date:'2026-05-10', weekday:'Saturday', theme:'Ch.6 — Dantrolene & Cardioprotection',
+    focus:'RyR2 calcium dysregulation · dantrolene mechanism · Ser2808/Ser2814 phosphorylation',
+    color:'red', week:2,
+    morning:{label:'Morning · 09:00–11:00',tasks:['RyR2 (ryanodine receptor 2): calcium release from SR, hyperphosphorylation in HF','Dantrolene: blocks RyR2, prevents calcium leak — mechanism from malignant hyperthermia pharmacology','Henning knows RyR2 cold from anesthesiology — do NOT be vague','Know: pSer2808 (PKA-mediated) and pSer2814 (CaMKII-mediated) phosphorylation sites']},
+    afternoon:{label:'Afternoon · 14:00–16:00',tasks:['What WAS measured in your dantrolene experiments (functional EHT contractility rescue)','What was NOT measured (RyR2 phosphorylation) — acknowledge gap and propose the experiment','SR calcium load: caffeine rapid application test — explain this methodology','Quiz: Ch.6 Dantrolene questions']},
+    papers:['Lehnart 2005 (RyR2 phosphodiesterase)','Priori 2001 (CPVT)']
+  },
+  {
+    day:14, date:'2026-05-11', weekday:'Sunday', theme:'Week 2 Review & Numbers Drill',
+    focus:'Full active recall · critical numbers memorization · connecting all chapters',
+    color:'green', week:2,
+    morning:{label:'Morning · 09:00–11:00',tasks:['Numbers drill — recite ALL from memory: 77% / 54% / 47% / 62% / 2.05x / 21 genes / patient cohort sizes','Full quiz sprint: ALL categories — flag weak spots for Week 3','Connect the dots: how do Ch.2 (senescence), Ch.3 (mtDNA), Ch.4 (heteroplasmy) fit one narrative?','Write the "one paragraph thesis" from memory — compare to the template']},
+    afternoon:{label:'Afternoon · 14:00–16:00',tasks:['Address any quiz categories below 70% — these are danger zones','Prepare chapter transition sentences: how each chapter leads to the next','De Boer question: cGAS/STING future experiment — can you describe it in detail?','Rest and prepare for Week 3 committee focus']},
+    papers:[]
+  },
+
+  // W3 — Committee-Specific Prep & Mock
+  {
+    day:15, date:'2026-05-12', weekday:'Monday', theme:'Committee Prep — De Boer',
+    focus:'SECRETE-HF · galectin-3 validation pipeline · LifeLines · bidirectional axis',
+    color:'teal', week:3,
+    morning:{label:'Morning · 09:00–11:00',tasks:['READ: Meijers WC et al., Circulation 2018 (SECRETE-HF) — foundational paper','READ: de Boer RA et al., Eur J Heart Fail 2019 (cancer and heart disease associations)','Memorize: galectin-3 validation journey (CHARM + CORONA sub-studies → clinical thresholds)','Practice: the galectin-3 analogy answer verbally (3 times)']},
+    afternoon:{label:'Afternoon · 14:00–16:00',tasks:['De Boer Q1: Small cohort vs. 15 years of galectin-3 → "Every validated biomarker started as a mechanistic discovery"','De Boer Q2: SECRETE-HF heart-to-cancer feedback → "Our goal is not higher doses, but identifying vulnerable patients"','De Boer Q3: LifeLines subclinical cardiac dysfunction → "iPSC model removes cardiac history — vulnerability is cellular"','Quiz: De Boer-specific questions until 90%']},
+    papers:['Meijers 2018 SECRETE-HF','van der Velde 2016 galectin-3 serial']
+  },
+  {
+    day:16, date:'2026-05-13', weekday:'Tuesday', theme:'Committee Prep — Foijer',
+    focus:'cGAS/STING · CDK4/6i 2024 paper · single-cell WGS · iPSC QC numbers cold',
+    color:'purple', week:3,
+    morning:{label:'Morning · 09:00–11:00',tasks:['READ: Hong C, Foijer F et al., Nature 2022 (IL6/cGAS/STING in CIN cancers) — READ EVERY WORD','Foijer 2024: CDK4/6i → cell enlargement → aneuploidy pathway — contrast with your spliceosome finding','cGAS/STING bridge: mtDNA leakage → cytosolic dsDNA → cGAS/STING → SASP/IL-6 in TOX cells','Prepare: your exact iPSC QC numbers (cTnT+ %, karyotype method used, pluripotency markers, batch count)']},
+    afternoon:{label:'Afternoon · 14:00–16:00',tasks:['Foijer Q1: nuclear CIN vs. your mitochondrial instability — acknowledge gap, propose future experiment','Foijer Q2: CDK4/6i mechanisms (his 2024 vs. your spliceosome) — they are NOT mutually exclusive','Foijer Q3: iPSC QC pipeline — practice saying your exact QC numbers without hesitation','Quiz: Foijer-specific questions until 90%']},
+    papers:['Hong C, Foijer 2022 Nature','Foijer 2024 CDK4/6i aneuploidy']
+  },
+  {
+    day:17, date:'2026-05-14', weekday:'Wednesday', theme:'Committee Prep — Henning + Bennett',
+    focus:'SUL-138 · hibernation · RyR2 · gene cluster methodology · sequencing precision',
+    color:'orange', week:3,
+    morning:{label:'Morning · 09:00–11:00',tasks:['Henning: SUL-138 compound mechanism — FAO proteome shift during hibernation','The toggle switch distinction: regulated/reversible (hibernation) vs. constitutive/fixed (TOX hyperfusion)','Practice Henning Q1 verbally: "The distinction is between a programmed pause and a permanent jam"','Practice Henning Q2: propose the SUL-138 + dyn-EHT + Seahorse experiment design']},
+    afternoon:{label:'Afternoon · 14:00–16:00',tasks:['Bennett: functional gene cluster vs. statistical list — GSEA coherence argument','Bennett epigenetic memory question: fibroblast vs. iPSC-CM mutagenesis pattern as key control','Bennett methodology: VAF threshold, strand filter, panel of normals — recite your exact numbers','Quiz: Henning + Bennett questions until 90%']},
+    papers:['Henning RH SUL-138 paper','Kennedy 2013 methodology']
+  },
+  {
+    day:18, date:'2026-05-15', weekday:'Thursday', theme:'Committee Prep — Ter Maaten & Gietema',
+    focus:'NEW MEMBERS · acute HF + cardio-oncology · late effects · testicular cancer survivors',
+    color:'green', week:3,
+    morning:{label:'Morning · 09:00–11:00',tasks:['Dr. Jozine ter Maaten: acute heart failure specialist + cardio-oncology at UMCG','Her research: diuretic response, urinary sodium, congestion in HF patients','READ: her approach to NT-proBNP/troponin monitoring in HF patients','How your mtDNA biomarker complements her HF biomarker toolkit (troponin, NT-proBNP, GLS)']},
+    afternoon:{label:'Afternoon · 14:00–16:00',tasks:['Prof. Jourik Gietema: medical oncologist — late effects of cancer treatment, testicular cancer CVD','His expertise: cisplatin/bleomycin → long-term cardiovascular toxicity in TC survivors','Key question from Gietema: does constitutional vulnerability apply beyond anthracyclines? (cisplatin, bleomycin, CDK4/6i?)','Bridge: your thesis provides the mechanistic framework for why some TC survivors develop CVD and others don\'t','Quiz: Ter Maaten + Gietema questions']},
+    papers:['Lubberts, Gietema 2023 JCO — CVD in TC survivors','ter Maaten acute HF / cardio-oncology']
+  },
+  {
+    day:19, date:'2026-05-16', weekday:'Friday', theme:'Full Committee Run-Through',
+    focus:'Answer all committee questions verbally · cross-cutting tactics · one-line table',
+    color:'teal', week:3,
+    morning:{label:'Morning · 09:00–11:00',tasks:['Verbally answer every question in the committee dossier — time each answer (target: 2-3 min each)','Practice the one disarming move: reference their papers by name and year — do this for ALL 6 members','Check: can you say one sentence from each member\'s own paper from memory?','Master the one-line quick reference table (see Strategy tab)']},
+    afternoon:{label:'Afternoon · 14:00–16:00',tasks:['Cross-cutting questions: paradigm (Q1: supportive care confounders), clinical translation (Q7: implementation)','Prepare the Dekker grant pitch in 2 minutes: what is the next study and why?','Run through ALL 8+ questions from the prep report (Section 4A-4C)','Full quiz: all categories — target 90%+ across all']},
+    papers:[]
+  },
+  {
+    day:20, date:'2026-05-17', weekday:'Saturday', theme:'Mock Defense #1',
+    focus:'Full 45-minute presentation · timed Q&A · record yourself · identify weak points',
+    color:'red', week:3,
+    morning:{label:'Morning · 09:00–11:00',tasks:['SET UP: Ask your supervisor, labmate, or paranymph to mock-question you','Present full thesis overview: 15 minutes (not slides — verbal only is harder and better)','Q&A from the dossier: simulate each committee member\'s questions','Record yourself — pay attention to filler words, defensive posture, and unclear moments']},
+    afternoon:{label:'Afternoon · 14:00–16:00',tasks:['Review recording: which 3 answers were weakest? Write them down.','Revisit weak answers — rewrite them using the 3-law framework','Practice only those weak answers until they flow naturally','Note: "I will need to check my exact figures" is allowed — but only for things you genuinely need to verify']},
+    papers:[]
+  },
+  {
+    day:21, date:'2026-05-18', weekday:'Sunday', theme:'Final Weak Point Targeting',
+    focus:'Address mock #1 gaps · final numbers drill · polish propositions',
+    color:'gold', week:3,
+    morning:{label:'Morning · 09:00–11:00',tasks:['Address ALL weak points identified in Mock Defense #1','Re-practice the 5 hardest questions ONLY — do not introduce new material','Final numbers drill: recite all key statistics without notes','Confirm your propositions (stellingen) — practice defending each one verbally']},
+    afternoon:{label:'Afternoon · 14:00–16:00',tasks:['One more run through all committee Q&As verbally','Prepare what to bring: printed thesis copies, water, ID','Review logistics: venue is Academie Gebouw, Broerstraat 5 — arrive at 12:15 sharp (30 min early)','STOP STUDYING BY 18:00 — your brain needs rest now, not more input']},
+    papers:[]
+  },
+  {
+    day:22, date:'2026-05-19', weekday:'Monday', theme:'Final Polish + Rest',
+    focus:'Light review only · core narrative · sleep · logistics final check',
+    color:'green', week:3,
+    morning:{label:'Morning · 09:00–10:30',tasks:['ONLY: read your 90-second core narrative pitch 5 times','ONLY: say the one-line quick reference for each committee member from memory','ONLY: verify your key numbers (77%, 54%, 47%, 2.05x, 21 genes) — just once','STOP: No new material. Your preparation is complete.']},
+    afternoon:{label:'Afternoon · REST',tasks:['Eat well. Hydrate. Walk outside.','Prepare your outfit, arrival plan, phone charged','Sleep early (before 22:00 if possible)','Tomorrow you demonstrate that you are the world\'s leading expert on your own work — because you are. 🎯']},
+    papers:[]
+  }
+];
+
+// ── COMMITTEE DATA ──
+const COMMITTEE = [
+  {
+    id:'deboer', order:1, name:'Prof. dr. Rudolf de Boer', affiliation:'Erasmus MC (online)',
+    icon:'🫀', color:'teal', danger:5,
+    lens:'Heart failure biomarkers (galectin-3) · SECRETE-HF ERC grant · heart-cancer bidirectional axis · LifeLines population cohort · clinical translation',
+    badges:['Biomarker Expert','Heart-Cancer Axis','Clinical Cohorts'],
+    chapters:['Ch.3 — mtDNA biomarker','Ch.1 — clinical paradox'],
+    isNew: false,
+    questions:[
+      {
+        q:'Galectin-3 required 15 years and tens of thousands of patients before clinical utility was established. You have a small mechanistic cohort. Why should clinicians take your mtDNA biomarker seriously?',
+        strategy:'Acknowledge the discovery vs. validation stage distinction explicitly. Name his galectin-3 pipeline directly — show you know where validated biomarkers come from. Mechanistic coherence is your basis for scientific seriousness, not yet clinical utility. Your Dekker grant proposal is your forward plan — mention it proactively.',
+        keyphrase:'Every validated biomarker started as a mechanistic discovery. Galectin-3 began as exactly this kind of finding before the CHARM and CORONA sub-studies established clinical thresholds. What we have here is mechanistic coherence — a biologically grounded signal in accessible tissue with a clear validation pathway. The Dekker-funded prospective cohort study we are designing is meant to do for mtDNA exactly what those large population studies did for galectin-3.'
+      },
+      {
+        q:'Your SECRETE-HF data show heart failure promotes intestinal tumour growth. If your cardioprotective strategy allows cancer patients to tolerate treatment better, does it risk worsening the heart-to-cancer feedback loop?',
+        strategy:'Name SECRETE-HF directly. Your strategy is NOT to increase anthracycline doses — it is to protect vulnerable patients at doses they would already receive. Personalised stratification means better-matched dosing and enhanced monitoring, not more drug.',
+        keyphrase:'Our goal is not to enable higher anthracycline doses, but to identify constitutionally vulnerable patients who are at cardiac risk at doses they would otherwise receive anyway. A patient identified as high-risk receives enhanced monitoring and cardioprotective co-therapy — not more drug. The SECRETE-HF findings are precisely why protecting cardiac function in cancer patients matters: a failing heart creates the permissive environment your group has shown promotes tumour growth.'
+      },
+      {
+        q:'Could pre-existing subclinical cardiac dysfunction — the kind we detect in LifeLines with NT-proBNP or subclinical LVEF changes — explain the TOX phenotype without invoking constitutional mitochondrial vulnerability?',
+        strategy:'Know your patient selection criteria: patients WITHOUT pre-existing cardiac dysfunction were included. The iPSC model is your definitive argument: both groups differentiated identically in vitro yet the TOX phenotype persists without any cardiac history.',
+        keyphrase:'Patient selection excluded pre-existing cardiac dysfunction by design. More decisively, our iPSC model removes the cardiac history entirely: when RES and TOX cardiomyocytes are differentiated under identical in vitro conditions, they faithfully recapitulate the clinical phenotype. The vulnerability is carried at the cellular level — in the genome and mitochondrial biology of the individual — not acquired through prior cardiac injury.'
+      }
+    ],
+    reads:'Meijers WC, de Boer RA et al. Heart failure promotes intestinal precancerous polyp growth. Circulation 2018. | de Boer RA et al. Cancer and heart disease. Eur J Heart Fail 2019. | van der Velde AR, de Boer RA et al. Serial galectin-3. Heart 2016.'
+  },
+  {
+    id:'foijer', order:2, name:'Prof. dr. ir. Floris Foijer', affiliation:'ERIBA — UMCG',
+    icon:'🧬', color:'purple', danger:5,
+    lens:'Chromosomal instability (CIN) · aneuploidy · CDK4/6 inhibitor biology · cGAS/STING-IL6 axis · director UMCG iPSC/CRISPR facility · single-cell WGS',
+    badges:['⚠️ Highest Risk','iPSC Facility Director','Genomics Expert','CIN Biology'],
+    chapters:['Ch.3 — sequencing','Ch.5 — ribociclib','Ch.2 — senescence'],
+    isNew: false,
+    questions:[
+      {
+        q:'You describe mitochondrial genome instability. My lab studies nuclear chromosomal instability. Have you measured nuclear CIN or micronucleus formation in your TOX cardiomyocytes? How do the two forms interact?',
+        strategy:'Nuclear CIN was not directly measured — acknowledge this gap directly and confidently. Make the mechanistic bridge using his own cGAS/STING work: micronuclei release cytosolic DNA → cGAS/STING → SASP/IL6. This unifies your mitochondrial, inflammatory, and senescence findings under one axis.',
+        keyphrase:'Nuclear CIN was not directly measured in our system — this is an acknowledged gap and a priority future experiment. However, the elevated ROS we document in TOX cardiomyocytes is a known driver of nuclear double-strand breaks. More intriguingly, your 2022 Nature paper on cGAS/STING-IL6 signalling in chromosomally unstable cancers provides exactly the mechanistic bridge: mtDNA leakage from damaged mitochondria could activate cGAS/STING in TOX cells, driving the SASP-like inflammatory programme we observe in our senescence chapter.'
+      },
+      {
+        q:'I published in 2024 that CDK4/6 inhibitor-treated cells that evade senescence undergo cell enlargement leading to mitotic errors and aneuploidy. Your Chapter 5 proposes spliceosome dysfunction as the ribociclib mechanism. Are these mutually exclusive?',
+        strategy:'His 2024 paper is directly applicable — he WILL expect you to know it. Key distinction: mature post-mitotic cardiomyocytes do not divide, so mitotic-error aneuploidy is limited. In iPSC-CMs retaining partial proliferative capacity, both mechanisms could co-exist.',
+        keyphrase:'Your 2024 finding on CDK4/6i-induced cell enlargement, mitotic errors, and aneuploidy is directly relevant. The key distinction is that terminally differentiated post-mitotic cardiomyocytes do not undergo mitotic chromosome segregation, so nuclear aneuploidy via that specific mechanism is limited. However, in our iPSC-CM system which retains partial proliferative capacity, both mechanisms could co-exist and compound each other — spliceosome dysfunction and mitotic-error-driven aneuploidy may act synergistically, not exclusively.'
+      },
+      {
+        q:'You used iPSC lines generated at our ERIBA facility. What was your quality control pipeline? Differentiation efficiency, karyotypic stability, pluripotency markers?',
+        strategy:'He runs this facility. He knows every protocol. Be precise — do not be vague. Pluripotency QC: OCT4, NANOG, SOX2; alkaline phosphatase. Differentiation: flow cytometry for cTnT. Karyotype: state your exact method (G-banding, SNP array). Single-cell was not done — acknowledge directly.',
+        keyphrase:'Pluripotency was confirmed by OCT4/NANOG/SOX2 expression and alkaline phosphatase staining. Differentiation efficiency was validated by flow cytometry for cardiac troponin T. Karyotypic stability was confirmed by [your exact method]. Single-cell transcriptomics was not performed; bulk RNA-seq with differentiation batch as the biological replicate unit was our approach.'
+      },
+      {
+        q:'The cGAS/STING pathway detects cytosolic double-stranded DNA — including from mitochondria. Did you measure cGAS/STING activation, type I interferon, or IL-6 secretion in your TOX cardiomyocytes?',
+        strategy:'This is his scientific home. Show you know his 2022 Nature paper. cGAS/STING was not directly measured — acknowledge clearly and be enthusiastic about proposing it. mtDNA leakage → cGAS/STING → SASP/IL6 is the top-priority future experiment.',
+        keyphrase:'cGAS/STING activation was not directly measured in our system, and I would identify it as the single most exciting mechanistic experiment to add. The hypothesis is compelling: damaged mitochondria in TOX cardiomyocytes could release mtDNA into the cytoplasm, activating cGAS/STING and driving a SASP-like programme. Your 2022 Nature demonstration that CIN-driven cGAS/STING-IL6 signalling is a targetable survival mechanism in cancer cells could represent the same pathway operating pathologically in stressed post-mitotic cardiomyocytes.'
+      }
+    ],
+    reads:'Hong C, Foijer F et al. IL6 signalling in CIN cancers. Nature 2022. (Read every word) | Foijer F et al. CDK4/6i-treated cells → cell enlargement → aneuploidy. 2024. | Bolhaqueiro ACF, Foijer F et al. CIN in colorectal cancer. Nature Genetics 2019.'
+  },
+  {
+    id:'henning', order:3, name:'Prof. Rob Henning', affiliation:'UMCG Pharmacology',
+    icon:'🧪', color:'orange', danger:4,
+    lens:'Hibernation biology · mitochondrial protection (SUL-138, H2S) · organ preservation · ischemia-reperfusion · mitochondrial proteomics · FAO-based cytoprotection',
+    badges:['Pharmacologist','Hibernation Expert','Mitochondrial FAO'],
+    chapters:['Ch.6 — dantrolene','Ch.3 — hyperfusion trap'],
+    isNew: false,
+    questions:[
+      {
+        q:'Hibernating animals maintain mitochondrial integrity through profound suppression of fission during torpor. How is constitutive hyperfusion in TOX cells pathological when it is protective in hibernation?',
+        strategy:'REGULATED + REVERSIBLE (hibernation) vs. CONSTITUTIVE + FIXED (TOX cardiomyocytes). In hibernation, fission suppression is programmed, environmentally triggered, and fully reversible on arousal. The toggle switch exists. In TOX cells, there is no toggle switch.',
+        keyphrase:'The distinction is between a regulated, reversible, environmentally-triggered suppression of fission — as your group has shown so elegantly — and a constitutive, fixed incapacity to engage fission when needed. In hibernators, the DRP1-mediated fission machinery is suppressed temporarily and restored on arousal. The toggle switch exists and is used adaptively. In TOX cardiomyocytes, we observe a pre-existing hyperfusion with no capacity to engage the fission-mitophagy quality control cycle under any condition. The machinery is permanently stuck, not programmatically paused.'
+      },
+      {
+        q:'SUL-138 shifts the mitochondrial proteome toward fatty acid oxidation and confers cytoprotection. Your TOX cells show an inability to shift to FAO under stress. Would a hibernation-derived compound be a rational cardioprotective pre-treatment?',
+        strategy:'This is a gift — he is proposing a collaboration. Be enthusiastic. Name SUL-138 explicitly. Propose the specific experiment: pre-treat TOX EHTs with SUL-138, challenge with doxorubicin, measure OCR and contractility using Seahorse + dyn-EHT.',
+        keyphrase:'This is a scientifically precise connection. If TOX cardiomyocytes fundamentally lack the capacity to shift toward FAO under anthracycline stress, then a compound that pre-conditions the mitochondrial proteome toward FAO — as SUL-138 does — is a biologically motivated intervention to test. Our dyn-EHT platform is ideally positioned: pre-treating TOX EHTs with SUL-138 before doxorubicin challenge, measuring both contractile force and Seahorse oxygen consumption rate, would provide a direct mechanistic answer.'
+      },
+      {
+        q:'Dantrolene targets RyR2. What direct evidence do you have for RyR2 involvement? Did you measure Ser2808/Ser2814 phosphorylation, calcium spark frequency, or SR calcium load?',
+        strategy:'He knows RyR2 pharmacology cold. Be precise about what your chapter measured (functional EHT contractility rescue) vs. what was inferred. Acknowledge the gap and propose: pSer2808/pSer2814 Western blot, confocal calcium spark imaging, caffeine SR calcium load test.',
+        keyphrase:'Direct RyR2 phosphorylation at Ser2808 and Ser2814 was not measured in our dantrolene experiments — the data are primarily functional, showing contractile rescue in the EHT system. This is an acknowledged mechanistic gap. The confirmatory experiment is clear: pSer2808 and pSer2814 Western blotting, confocal calcium spark frequency imaging at baseline and under doxorubicin stress, and SR calcium load assessment by rapid caffeine application.'
+      }
+    ],
+    reads:'Henning RH et al. SUL-138 shifts mitochondrial proteome toward FAO. | Ong SB et al. Inhibiting mitochondrial fission protects against I/R injury. Circulation 2010. | Lehnart SE et al. PDE4D deficiency causes RyR2 hyperphosphorylation. Cell 2005.'
+  },
+  {
+    id:'bennett', order:4, name:'Prof. Joan W. Bennett', affiliation:'Tulane University, New Orleans (online)',
+    icon:'🔬', color:'blue', danger:3,
+    lens:'Fungal genetics · mycotoxin biosynthesis gene clusters · genomics methodology · volatile organic compounds · experimental rigor · scientific design',
+    badges:['National Academy of Sciences','Genomics Rigor','Outside-Field Member'],
+    chapters:['All chapters — methodology'],
+    isNew: false,
+    questions:[
+      {
+        q:'In fungal genetics we distinguish a functional gene cluster from a statistical gene list. Your 21-gene resilience signature: which is it?',
+        strategy:'She is asking whether your signature has biological coherence or is a GWAS-style correlation list. Explain GSEA pathway enrichment underpinning. Name specific GO-BP pathway terms. Protein-level validation of GPX1 and GSTM1 provides cross-platform confirmation.',
+        keyphrase:'The signature is not a random list of significant genes — it emerged from GSEA pathway enrichment analysis and represents genes clustering around coherent biological functions: mitochondrial quality control, autophagy, antioxidant metabolism, and organelle dynamics. The mechanistic coherence is cross-validated at the protein level through Western blotting of key nodes including GPX1 and GSTM1. This is more analogous to a biosynthetic gene cluster than a random statistical hit: the genes co-function within a conserved stress response network with a demonstrable biological output.'
+      },
+      {
+        q:'Fibroblast-derived iPSCs carry epigenetic memory. How confident are you that RES vs. TOX differences are not artefacts of differential epigenetic memory between fibroblast donors?',
+        strategy:'Your key argument: matched fibroblasts from the SAME patients show deletion-dominated mtDNA mutagenesis, not insertion-biased. The pattern DIFFERS between cell types from the same donor. Cell-type specificity argues for cardiomyocyte-intrinsic biology, not a reprogramming artefact.',
+        keyphrase:'The key control is our matched fibroblasts from the same patients. If epigenetic memory from the fibroblast state were driving the cardiomyocyte mutagenesis pattern, we would expect the same pattern in both cell types from the same donor. Instead, fibroblasts show deletion-dominated mtDNA instability while cardiomyocytes from the same individuals show insertion-biased mutagenesis. This cell-type specificity argues against a reprogramming artefact and points to cardiomyocyte-intrinsic biology.'
+      },
+      {
+        q:'What is your minimum variant allele frequency threshold for mtDNA variant calling, and how did you distinguish genuine low-frequency somatic variants from sequencing error?',
+        strategy:'She demands methodological precision. Know your exact numbers: VAF threshold, coverage depth, strand orientation requirement, error modelling pipeline. Reference Kennedy et al. 2013. State your bioinformatics pipeline by name. Do not hedge — be precise.',
+        keyphrase:'We applied a minimum VAF threshold of [your exact value] with minimum coverage of [your depth, e.g., 1000×] per position. Variants were required on both strand orientations to exclude strand-specific artefacts. Position-specific background error rate modelling was applied using a panel of normals approach. This pipeline is benchmarked against the Kennedy et al. 2013 framework for ultra-sensitive somatic mtDNA variant detection.'
+      }
+    ],
+    reads:'Kennedy SR et al. Ultra-sensitive sequencing reveals age-related somatic mtDNA mutations. PLOS Genet 2013. (Every detail) | Ju YS et al. Somatic mtDNA mutations in cancer. eLife 2014. | Payne BAI et al. Universal heteroplasmy of human mtDNA. Hum Mol Genet 2013.'
+  },
+  {
+    id:'termaaten', order:5, name:'Dr. Jozine ter Maaten', affiliation:'UMCG Cardiology',
+    icon:'💊', color:'green', danger:3,
+    lens:'Acute heart failure · diuretic response · congestion · urinary sodium biomarkers · cardio-oncology · NT-proBNP · Dekker Grant researcher',
+    badges:['⭐ NEW','Cardio-Oncology','HF Specialist','UMCG Colleague'],
+    chapters:['Clinical implications','HF monitoring','Biomarker integration'],
+    isNew: true,
+    questions:[
+      {
+        q:'You are proposing a new pre-treatment constitutional biomarker. In clinical heart failure practice, we already have troponin and NT-proBNP for monitoring. How does your mtDNA biomarker integrate with what we already use?',
+        strategy:'Dr. ter Maaten is an acute HF specialist with cardio-oncology interest. Your biomarker is DIFFERENT: troponin and NT-proBNP detect damage AFTER it begins. Your mtDNA biomarker identifies constitutional vulnerability BEFORE the first dose. It sits at a different time point — pre-treatment screening vs. on-treatment surveillance.',
+        keyphrase:'Our biomarker operates at the pre-treatment constitutional risk assessment step — before any drug is administered. Unlike troponin and natriuretic peptides, which detect damage after it begins, mtDNA metrics identify who is constitutionally positioned close to failure thresholds before exposure. High-risk patients would then be flagged for the enhanced troponin and NT-proBNP surveillance and cardioprotective interventions already used in clinical practice. It complements the existing toolkit rather than replacing any component.'
+      },
+      {
+        q:'Some patients with cancer treatment-related cardiac dysfunction present with congestion phenotypes similar to acute HF. Do your TOX patients show clinical signs of fluid retention or congestion, and does this alter how you stratify them?',
+        strategy:'Connect to her research: congestion and diuretic response. If any of your TOX patients developed overt HF symptoms including congestion, discuss. More broadly: constitutional vulnerability predicts who will reach the clinical decompensation threshold — including congestion — before it happens.',
+        keyphrase:'Our RES/TOX phenotyping captured functional cardiac endpoints including LVEF decline and troponin elevation; overt congestion and fluid retention were captured as clinical events. The constitutional vulnerability paradigm predicts who will cross the threshold into symptomatic HF — including the congestion phenotype your group studies so rigorously — before clinical decompensation occurs. The ideal future application: integrate our biomarker at baseline with your urinary sodium monitoring framework for a comprehensive risk-and-response approach.'
+      },
+      {
+        q:'The UMCG cardio-oncology program sees patients receiving anthracyclines, HER2-targeted agents, CDK4/6 inhibitors, and immune checkpoint inhibitors. Does your constitutional vulnerability framework apply across all these drug classes?',
+        strategy:'Honest answer: your primary data is on anthracyclines. Ribociclib (Ch.5) is a second drug class — showing the framework extends to CDK4/6i via a different mechanism (spliceosome). The framework is a paradigm, not a single-drug finding. Propose: the iPSC-dyn-EHT platform could be applied to any cardiotoxic drug.',
+        keyphrase:'Our primary mechanistic data characterizes anthracycline cardiotoxicity, with ribociclib as a second drug class showing a mechanistically distinct but constitutionally influenced pathway. The constitutional vulnerability paradigm — pre-existing mitochondrial and antioxidant deficiency — is likely relevant across cardiotoxic drug classes because the cellular stress response capacity is fixed regardless of the drug\'s specific mechanism. Our iPSC-dyn-EHT platform is drug-agnostic and could be applied to HER2-targeted agents and ICIs in future studies.'
+      }
+    ],
+    reads:'Lyon AR, López-Fernández T et al. 2022 ESC Guidelines on Cardio-Oncology. Eur Heart J 2022. | ter Maaten JM et al. Urinary sodium in acute HF. Nature Medicine 2023. | Cardiac CARE Trial. Lancet 2022.'
+  },
+  {
+    id:'gietema', order:6, name:'Prof. dr. Jourik Gietema', affiliation:'UMCG Medical Oncology',
+    icon:'⚕️', color:'gold', danger:3,
+    lens:'Medical oncology · late effects of cancer treatment · testicular cancer cardiovascular toxicity · cisplatin-based chemotherapy · survivorship care · personalized cancer medicine',
+    badges:['⭐ NEW','Medical Oncologist','Late Effects Expert','Cancer Survivor CVD'],
+    chapters:['Clinical translation','Drug class relevance','Oncologist perspective'],
+    isNew: true,
+    questions:[
+      {
+        q:'As an oncologist, my concern is: how do I translate your mechanistic findings into a clinical decision I can act on Monday morning? What is the actual clinical workflow you envision?',
+        strategy:'Gietema is an oncologist who has spent his career on the real-world consequences of chemotherapy. He wants practical translation. Walk through your fibroblast biomarker rationale: skin biopsy before chemo, targeted mtDNA panel, decision threshold. Acknowledge limitations. Mention the Dekker grant prospective validation study.',
+        keyphrase:'The clinical implementation pathway we envision uses readily accessible tissue — skin fibroblasts from a simple punch biopsy before treatment initiation. A targeted mtDNA sequencing panel would classify patients as high constitutional risk, triggering enhanced surveillance and cardioprotective co-medication per the ESC guidelines. We are designing a Dekker-funded prospective cohort study specifically to establish the sensitivity, specificity, and decision thresholds needed for clinical implementation. I recognize this is not Monday-morning-ready — but the mechanistic foundation makes this pathway scientifically credible and fundable.'
+      },
+      {
+        q:'My research shows cisplatin-based treatment in testicular cancer survivors causes long-term cardiovascular disease decades later. Your thesis focuses on anthracyclines. Is constitutional mitochondrial vulnerability also relevant for cisplatin and other non-anthracycline regimens?',
+        strategy:'This is his direct research area. Show you know it: Gietema\'s group showed CVD risk in testicular cancer survivors increases with cisplatin dose. Bridge: constitutional vulnerability is a cellular property, not drug-class specific. Cisplatin generates ROS and mitochondrial damage via different mechanisms, but the cellular response capacity (antioxidant reserve, mitochondrial quality control) may be the same limiting factor.',
+        keyphrase:'Your group\'s work on cardiovascular late effects in testicular cancer survivors is exactly the clinical context our framework would extend to. Constitutional mitochondrial vulnerability — insufficient antioxidant reserve and impaired mitochondrial quality control — is a cellular property determined before any drug exposure. Cisplatin generates genotoxic stress and reactive oxygen species via different mechanisms than anthracyclines, but the cellular capacity to respond to that stress is the same limiting factor. Our iPSC platform could be applied to cisplatin-treated cardiomyocytes using the same RES/TOX stratification framework.'
+      },
+      {
+        q:'Given that testicular cancer patients are young and often cured, maximizing cancer efficacy is paramount. If your biomarker identified a patient as high constitutional cardiac risk, would you recommend reducing their chemotherapy dose?',
+        strategy:'This is the clinical tension at the heart of cardio-oncology. Be precise: the goal is NOT dose reduction, which could compromise cure rates. The goal is enhanced monitoring + cardioprotective co-therapy at the SAME dose. In extreme cases, dose modification is a joint oncology-cardiology decision — not a unilateral biomarker-driven action. Show you understand the oncology priority.',
+        keyphrase:'This is the central tension, and I want to be clear: our biomarker\'s purpose is emphatically not to reduce doses that are curative. For testicular cancer — where cure rates are excellent and dose compromise carries real mortality risk — identifying a high-risk patient triggers enhanced cardioprotective co-therapy and closer surveillance, not dose modification. In the small subset where cardiac risk is truly prohibitive, that conversation is a joint oncology-cardiology decision, not a biomarker-driven algorithmic action. The biomarker helps you know who needs that conversation before the first cycle.'
+      }
+    ],
+    reads:'Lubberts S, Gietema JA et al. Cardiovascular Disease in Testicular Cancer Survivors. JCO 2023. | Altena R, Gietema JA et al. Cardiovascular toxicity caused by cancer treatment: strategies for early detection. Lancet Oncology 2009. | Meinardi MT, Gietema JA et al. Cardiovascular morbidity in long-term survivors of metastatic testicular cancer. JCO 2000.'
+  }
+];
+
+// ── QUIZ DATABASE ──
+const QUIZ_DB = [
+  // THESIS CORE
+  {id:'tc01',cat:'Thesis Core',q:'What is the central paradigm shift in your thesis?',a:'From dose-dependent cardiotoxicity → constitutional vulnerability: pre-existing mitochondrial genome instability and antioxidant deficiency in TOX patients explains why some develop HF at low doses and others tolerate much higher doses.',key:'Constitutional vulnerability hypothesis',ch:'All'},
+  {id:'tc02',cat:'Thesis Core',q:'What percentage of mtDNA mutations are insertions in TOX cells?',a:'~77% insertions in TOX patients (vs ~54% in RES patients)',key:'77% insertions in TOX',ch:'Ch.3'},
+  {id:'tc03',cat:'Thesis Core',q:'How many genes are in the resilience transcriptomic signature?',a:'21 genes — the "21-gene resilience signature" distinguishing cardiotoxic from resilient patients before drug exposure',key:'21-gene signature',ch:'Ch.3'},
+  {id:'tc04',cat:'Thesis Core',q:'What is the "hyperfusion trap" in TOX cardiomyocytes?',a:'Constitutive mitochondrial hyperfusion that prevents adaptive fission and mitophagy. Without fission, damaged mitochondria cannot be segregated and eliminated via mitophagy → quality control failure.',key:'Hyperfusion trap — no fission = no mitophagy',ch:'Ch.3'},
+  {id:'tc05',cat:'Thesis Core',q:'What two antioxidant proteins are deficient in TOX cells?',a:'GPX1 (glutathione peroxidase 1) and GSTM1 (glutathione S-transferase M1) — both involved in reducing ROS and detoxifying DOX metabolites.',key:'GPX1 and GSTM1',ch:'Ch.3'},
+  {id:'tc06',cat:'Thesis Core',q:'What is the bioenergetic deficit in TOX cardiomyocytes?',a:'47% reduced ATP production and 62% overall energy deficit compared to RES cardiomyocytes (Seahorse XF data)',key:'47% ATP reduction, 62% energy deficit',ch:'Ch.3'},
+  {id:'tc07',cat:'Thesis Core',q:'What fold-change in baseline ROS is observed in TOX vs. RES cells?',a:'2.05-fold higher baseline reactive oxygen species in TOX cardiomyocytes vs. RES',key:'2.05-fold ROS in TOX',ch:'Ch.3'},
+  {id:'tc08',cat:'Thesis Core',q:'What does ribociclib cardiotoxicity proceed through, mechanistically distinct from anthracyclines?',a:'Spliceosome dysfunction — a mechanistically distinct pathway from the mitochondrial/ROS-based anthracycline cardiotoxicity',key:'Spliceosome dysfunction (Ch.5)',ch:'Ch.5'},
+  {id:'tc09',cat:'Thesis Core',q:'What drug targets calcium dysregulation in TOX cardiomyocytes and through which receptor?',a:'Dantrolene targets RyR2 (ryanodine receptor 2), preventing calcium leak from the sarcoplasmic reticulum',key:'Dantrolene → RyR2',ch:'Ch.6'},
+  {id:'tc10',cat:'Thesis Core',q:'What experimental platform faithfully recapitulates individual clinical phenotypes in vitro?',a:'Patient-derived iPSC + 3D dynamic engineered heart tissue (dyn-EHT) platform',key:'iPSC + dyn-EHT',ch:'Ch.2'},
+  {id:'tc11',cat:'Thesis Core',q:'What does the clinical paradox in Chapter 1 describe?',a:'Some patients develop severe heart failure after LOW doses of anthracyclines, while others tolerate MUCH HIGHER cumulative doses with no cardiac injury — the dose-response model alone is insufficient.',key:'Dose-response paradox',ch:'Ch.1'},
+  {id:'tc12',cat:'Thesis Core',q:'What is the key clinical implication of the constitutional vulnerability paradigm?',a:'A biomarker-guided, personalized cardioprotection strategy before treatment begins — identifying high-risk patients BEFORE first dose using skin fibroblast-derived mtDNA metrics.',key:'Pre-treatment biomarker → personalized cardioprotection',ch:'All'},
+  // SENESCENCE
+  {id:'sen01',cat:'Senescence',q:'Name at least 5 key hallmarks of cellular senescence.',a:'Growth arrest (p21/p16-Rb), SASP (IL-6, IL-8, MMP3, PAI-1), SA-β-Gal activity, γH2AX (DNA damage foci), telomere shortening, lysosomal enlargement, altered chromatin (SAHF), resistance to apoptosis',key:'SASP, SA-β-Gal, p21/p16, γH2AX, growth arrest',ch:'Ch.2'},
+  {id:'sen02',cat:'Senescence',q:'What is SASP and name 4 key components?',a:'Senescence-Associated Secretory Phenotype. Key components: IL-6, IL-8 (inflammation), MMP3/MMP9 (matrix remodeling), PAI-1 (plasminogen activator), VEGF, and GRO-α',key:'SASP = secreted inflammatory milieu',ch:'Ch.2'},
+  {id:'sen03',cat:'Senescence',q:'What is AICAR and why is it relevant to your Ch.2 findings?',a:'AICAR (5-Aminoimidazole-4-carboxamide ribonucleotide) is an AMPK activator used as a senomorphic agent — it modulates but does not clear senescent cells, reducing SASP without eliminating viable cells',key:'AICAR = senomorphic AMPK activator',ch:'Ch.2'},
+  {id:'sen04',cat:'Senescence',q:'How do you distinguish senescence from apoptosis in your EHT model?',a:'Senescence: SA-β-Gal+, p21/p16 upregulation, growth arrest, intact membranes, SASP secretion, γH2AX foci. Apoptosis: caspase-3 activation, PARP cleavage, sub-G1 DNA content, membrane blebbing. Key: senescent cells RESIST apoptosis.',key:'Senescence ≠ apoptosis — SA-β-Gal vs. caspase-3',ch:'Ch.2'},
+  {id:'sen05',cat:'Senescence',q:'What is the Dookun 2020 paper about and why is it relevant?',a:'Dookun E et al. JCI Insight 2020: Clearance of senescent cells during cardiac ischemia-reperfusion prevents heart failure — navitoclax (senolytic) treatment. Directly supports senescence as a cardiac injury mechanism.',key:'Dookun 2020 = senolytic therapy in cardiac I/R',ch:'Ch.2'},
+  // MITOCHONDRIAL DYNAMICS
+  {id:'mito01',cat:'Mitochondrial Dynamics',q:'Name the three key proteins involved in mitochondrial fission and fusion and their roles.',a:'DRP1 (dynamin-related protein 1) = fission (cytosolic, recruited to OMM). MFN1 and MFN2 (mitofusins) = OMM fusion. OPA1 = IMM fusion. OPA1 cleavage = fission-promoting signal.',key:'DRP1=fission, MFN1/2+OPA1=fusion',ch:'Ch.3'},
+  {id:'mito02',cat:'Mitochondrial Dynamics',q:'Why is fission REQUIRED for mitophagy? What happens if fission is blocked?',a:'Twig 2008: Fission segregates damaged mitochondria with low Δψm from healthy networks. Only fission-produced small mitochondria are engulfed by autophagosomes. If fission is blocked (as in TOX hyperfusion): damaged components cannot be isolated → no mitophagy → quality control failure.',key:'Fission → segregation → mitophagy selection (Twig 2008)',ch:'Ch.3'},
+  {id:'mito03',cat:'Mitochondrial Dynamics',q:'How is constitutive hyperfusion in TOX cells DIFFERENT from protective fission suppression in hibernation?',a:'Hibernation: REGULATED, REVERSIBLE, environmentally-triggered, toggle switch exists and is used adaptively. TOX hyperfusion: CONSTITUTIVE, FIXED, no trigger needed, no capacity to engage fission under any condition. The machinery is permanently stuck vs. programmatically paused.',key:'Regulated/reversible (hibernation) vs. constitutive/fixed (TOX)',ch:'Ch.3'},
+  {id:'mito04',cat:'Mitochondrial Dynamics',q:'What does TMRM measure and what does MitoSOX measure?',a:'TMRM (tetramethylrhodamine methyl ester) = mitochondrial membrane potential (Δψm). Higher TMRM signal = higher potential = more active mitochondria. MitoSOX = mitochondrial superoxide (O2•−), a specific ROS indicator. Both are live-cell fluorescence assays.',key:'TMRM=membrane potential, MitoSOX=superoxide',ch:'Ch.3'},
+  // MTDNA & BIOMARKER
+  {id:'mtdna01',cat:'mtDNA & Biomarker',q:'What is the key finding about mtDNA mutagenesis bias in TOX vs. RES patients?',a:'TOX cardiomyocytes: ~77% insertion-biased mtDNA mutations. RES cardiomyocytes: ~54% insertions (more balanced / deletion-dominated). Matched fibroblasts from same patients show deletion-dominated pattern — rules out library prep artifact.',key:'77% insertion (TOX) vs 54% (RES) — cell-type specific',ch:'Ch.3'},
+  {id:'mtdna02',cat:'mtDNA & Biomarker',q:'What did Kennedy et al. 2013 establish and why is it your methodological benchmark?',a:'Kennedy SR et al. PLOS Genet 2013: Ultra-sensitive sequencing reveals age-related somatic mtDNA mutations inconsistent with oxidative damage. Established methodology for deep mtDNA sequencing including insertion bias in somatic mutations. Your VAF threshold + strand filter + error correction is benchmarked against this.',key:'Kennedy 2013 = ultra-sensitive mtDNA sequencing benchmark',ch:'Ch.3'},
+  {id:'mtdna03',cat:'mtDNA & Biomarker',q:'Why does the different mutagenesis pattern in fibroblasts vs. iPSC-CMs from same donors argue AGAINST library prep artifact?',a:'If insertion bias were a sequencing artifact from library preparation, the same artifact would affect ALL samples from ALL cell types. The fact that fibroblasts from the SAME PATIENT show deletion-dominated pattern while cardiomyocytes from the SAME PATIENT show insertion bias means the difference is biologically real and cell-type specific.',key:'Cell-type specificity = not artifact',ch:'Ch.3'},
+  {id:'mtdna04',cat:'mtDNA & Biomarker',q:'What does "universal heteroplasmy" mean (Payne 2013) and why is it important for your thesis?',a:'All humans carry some heteroplasmic mtDNA variants — it is normal. The question is not presence but THRESHOLD: when does heteroplasmic burden exceed the cellular compensation threshold and cause functional impairment? Your TOX patients are constitutionally closer to that threshold.',key:'Universal heteroplasmy → threshold model',ch:'Ch.4'},
+  {id:'mtdna05',cat:'mtDNA & Biomarker',q:'What is the clinical implementation pathway for your mtDNA biomarker?',a:'Skin fibroblast punch biopsy before treatment initiation → targeted mtDNA sequencing panel → classify as high/low constitutional risk → high-risk patients: enhanced surveillance + cardioprotective co-therapy per ESC guidelines. Prospective validation via Dekker grant.',key:'Skin biopsy → mtDNA panel → risk-stratified monitoring',ch:'All'},
+  // CARDIO-ONCOLOGY FIELD
+  {id:'co01',cat:'Cardio-Oncology Field',q:'What are the LVEF thresholds defining cardiotoxicity per the 2022 ESC CardioOncology Guidelines?',a:'New LVEF drop > 10 percentage points to a value < 53%, or any new LVEF drop to < 53% with symptoms of heart failure. Subclinical dysfunction = GLS relative reduction > 15% or new troponin elevation.',key:'LVEF drop >10pp to <53% = cardiotoxicity',ch:'Ch.1'},
+  {id:'co02',cat:'Cardio-Oncology Field',q:'What is GLS and what is its normal value and subclinical toxicity threshold?',a:'Global Longitudinal Strain measured by speckle-tracking echocardiography. Normal: ≥ -18% (absolute). Subclinical cardiotoxicity: relative reduction > 15% from baseline. More sensitive than LVEF for early detection.',key:'GLS ≥ -18%, >15% reduction = subclinical toxicity',ch:'All'},
+  {id:'co03',cat:'Cardio-Oncology Field',q:'What did the Cardiac CARE trial demonstrate?',a:'Cardiac CARE Trial (Lancet 2022): hsTnI-guided cardioprotection in anthracycline-treated patients. Used high-sensitivity troponin I to trigger cardioprotective therapy (beta-blocker/ACEi) — showed preservation of cardiac function.',key:'Cardiac CARE = hsTnI-guided cardioprotection',ch:'All'},
+  {id:'co04',cat:'Cardio-Oncology Field',q:'What did the SUCCOUR trial demonstrate?',a:'SUCCOUR Trial (Eur Heart J 2021): GLS-guided carvedilol/ACEi therapy in cancer patients receiving cardiotoxic chemotherapy. GLS monitoring triggered earlier cardioprotective treatment → LVEF preservation.',key:'SUCCOUR = GLS-guided therapy → LVEF preservation',ch:'All'},
+  {id:'co05',cat:'Cardio-Oncology Field',q:'Where in the ESC risk algorithm does your mtDNA biomarker fit?',a:'STEP 1: Pre-treatment baseline constitutional risk assessment — BEFORE the first dose. It identifies constitutional vulnerability before troponin/GLS changes can occur. It complements (not replaces) troponin surveillance (which detects damage after it begins).',key:'Pre-treatment Step 1 — not competing with troponin',ch:'All'},
+  {id:'co06',cat:'Cardio-Oncology Field',q:'What paper did López-Fernández / the ESC Cardio-Oncology guidelines come from?',a:'Lyon AR, López-Fernández T et al. 2022 ESC Guidelines on Cardio-Oncology. European Heart Journal 2022;43:4229–4361.',key:'Lyon AR + López-Fernández 2022 Eur Heart J',ch:'All'},
+  // IPSC METHODOLOGY
+  {id:'ipsc01',cat:'iPSC Methodology',q:'What is the Wnt temporal modulation protocol for iPSC-CM differentiation?',a:'Lian X et al. PNAS 2012: Wnt activation (CHIR99021 / GSK3β inhibitor) on Day 0 → Wnt inhibition (IWP2/IWR1) on Day 3 → spontaneous beating cardiomyocytes by Day 9-15. Reproducible, scalable.',key:'Lian 2012 = CHIR99021 (D0) → IWP2 (D3) → beating CMs',ch:'Ch.2'},
+  {id:'ipsc02',cat:'iPSC Methodology',q:'What pluripotency markers confirm successful iPSC reprogramming?',a:'OCT4 (POU5F1), NANOG, SOX2 — transcription factor immunostaining. Alkaline phosphatase staining (enzyme activity). Flow cytometry for SSEA-4 and Tra-1-81 (surface markers). All should be highly expressed.',key:'OCT4, NANOG, SOX2, alkaline phosphatase',ch:'Ch.2'},
+  {id:'ipsc03',cat:'iPSC Methodology',q:'How is iPSC-CM differentiation efficiency validated?',a:'Flow cytometry for cardiac troponin T (cTnT, gene TNNT2) — the most standard cardiac marker. Your exact cTnT+ percentage is a number Foijer will ask you to state. Also: cardiac troponin I, KCNQ1, MYH7 expression.',key:'Flow cytometry cTnT+ % (Foijer will ask your exact number)',ch:'Ch.2'},
+  {id:'ipsc04',cat:'iPSC Methodology',q:'What is the maturation limitation of iPSC-CMs and how does dyn-EHT partially address it?',a:'iPSC-CMs are metabolically immature: predominantly glycolytic, not fatty acid oxidizing; smaller, less organized sarcomeres; lack T-tubules. dyn-EHT (dynamic mechanical loading) promotes maturation through mechanical stimulation — improves sarcomere organization and partial metabolic shift. Still not fully adult-like.',key:'iPSC-CMs immature → dyn-EHT improves but doesn\'t fully mature',ch:'Ch.2'},
+  // COMMITTEE-SPECIFIC
+  {id:'db01',cat:'Committee — De Boer',q:'What is SECRETE-HF and what did it find?',a:'SECRETE-HF is De Boer\'s ERC Consolidator Grant studying how heart failure promotes cancer. Key finding (Meijers et al., Circulation 2018): heart failure promotes growth of intestinal precancerous polyps via cardiac excreted factors — establishing the heart-to-cancer bidirectional axis.',key:'SECRETE-HF = failing heart promotes cancer (Meijers 2018)',ch:'All'},
+  {id:'db02',cat:'Committee — De Boer',q:'Name the two large trials that established clinical thresholds for galectin-3.',a:'CHARM trial (Candesartan in Heart failure — Assessment of Reduction in Mortality and morbidity) and CORONA trial (Rosuvastatin in patients with Heart failure) — sub-studies established galectin-3 clinical prediction thresholds.',key:'CHARM + CORONA sub-studies',ch:'All'},
+  {id:'ff01',cat:'Committee — Foijer',q:'What did Foijer\'s 2024 paper show about CDK4/6i?',a:'CDK4/6 inhibitor-treated cells that evade senescence undergo cell enlargement → mitotic errors → nuclear aneuploidy. Directly relevant to your ribociclib chapter. Key contextual distinction: post-mitotic cardiomyocytes don\'t divide, so this mechanism is limited in adult CMs but relevant in iPSC-CMs.',key:'Foijer 2024: CDK4/6i → enlargement → aneuploidy',ch:'Ch.5'},
+  {id:'ff02',cat:'Committee — Foijer',q:'What did Foijer\'s 2022 Nature paper show?',a:'Hong C, Foijer F et al. Nature 2022: IL-6 signalling activated by cGAS/STING (via cytosolic DNA from micronuclei in chromosomally unstable cancers) acts as a survival mechanism. The cGAS/STING-IL6 axis is targetable. Bridge: mtDNA leakage in TOX cells could activate this same axis → SASP amplification.',key:'Foijer 2022: cGAS/STING-IL6 = survival in CIN cancers (Nature)',ch:'Ch.3'},
+  {id:'rh01',cat:'Committee — Henning',q:'What is SUL-138 and what does it do?',a:'SUL-138 is a compound developed by Henning\'s group that shifts the mitochondrial proteome toward fatty acid oxidation (FAO), mimicking the metabolic state of hibernating animals during torpor. It confers cytoprotection in ischemia-reperfusion models.',key:'SUL-138 = hibernation-mimetic FAO protectant',ch:'Ch.6'},
+  {id:'rh02',cat:'Committee — Henning',q:'What are the two RyR2 phosphorylation sites involved in calcium dysregulation?',a:'Ser2808 (phosphorylated by PKA — protein kinase A) and Ser2814 (phosphorylated by CaMKII — calmodulin-dependent protein kinase II). Hyperphosphorylation at these sites → RyR2 channel leakiness → SR calcium leak → contractile dysfunction.',key:'RyR2: Ser2808 (PKA) and Ser2814 (CaMKII)',ch:'Ch.6'},
+  {id:'tm01',cat:'Committee — Ter Maaten',q:'What is Dr. ter Maaten\'s primary research focus?',a:'Acute heart failure management — specifically improving diuretic response and outcomes. She developed urinary sodium as a biomarker for personalizing diuretic therapy. Recently expanded to cardio-oncology. Holds Dekker grant from Dutch Heart Foundation.',key:'ter Maaten = acute HF + urinary Na biomarker + cardio-oncology',ch:'All'},
+  {id:'tm02',cat:'Committee — Ter Maaten',q:'How does your mtDNA biomarker complement troponin and NT-proBNP in her clinical framework?',a:'Troponin and NT-proBNP detect DAMAGE AFTER IT BEGINS. Your mtDNA biomarker detects CONSTITUTIONAL VULNERABILITY BEFORE THE FIRST DOSE. Different time point, different purpose. Together they form a comprehensive monitoring framework: pre-treatment (mtDNA) + on-treatment surveillance (troponin/NT-proBNP/GLS).',key:'Pre-treatment (mtDNA) + on-treatment (troponin/NT-proBNP)',ch:'All'},
+  {id:'jg01',cat:'Committee — Gietema',q:'What is Prof. Gietema\'s research specialty and most relevant clinical finding?',a:'Medical oncologist specializing in testicular cancer late effects. Key finding: cisplatin-based treatment in TC survivors causes long-term cardiovascular disease decades later (metabolic syndrome, dyslipidemia, hypertension, ischemic heart disease — Gietema group JCO papers since 2000s).',key:'Gietema = cisplatin CVD late effects in TC survivors',ch:'All'},
+  {id:'jg02',cat:'Committee — Gietema',q:'If Gietema asks whether your biomarker could lead to dose reduction in curative patients, what is your answer?',a:'Emphatic NO to dose reduction as default. Goal = enhanced monitoring + cardioprotective co-therapy at the SAME dose. In curative testicular cancer especially, dose compromise carries real mortality risk. In extreme cases: joint oncology-cardiology decision, not a unilateral biomarker-driven action. Biomarker identifies WHO needs that conversation.',key:'NOT dose reduction — enhanced monitoring at same dose',ch:'All'},
+  // METHODOLOGY
+  {id:'me01',cat:'Methodology',q:'What does GSEA stand for and what did Subramanian 2005 establish?',a:'GSEA = Gene Set Enrichment Analysis. Subramanian A et al. PNAS 2005: a knowledge-based approach for interpreting genome-wide expression profiles using curated biological pathway gene sets. NES (normalized enrichment score) and FDR-adjusted p-values determine pathway significance.',key:'GSEA = ranked gene set enrichment (Subramanian 2005)',ch:'Ch.3'},
+  {id:'me02',cat:'Methodology',q:'In the Seahorse XF MitoStress test, what do oligomycin, FCCP, and rotenone/antimycin A each reveal?',a:'Oligomycin (ATP synthase inhibitor) → reveals ATP-linked respiration vs. proton leak. FCCP (uncoupler) → reveals maximal respiration and spare respiratory capacity (SRC). Rotenone + Antimycin A (Complex I + III inhibitors) → blocks all mitochondrial respiration → reveals non-mitochondrial oxygen consumption.',key:'Oligomycin=ATP-linked, FCCP=maximal, Rot/AA=baseline',ch:'Ch.3'},
+  {id:'me03',cat:'Methodology',q:'What is spare respiratory capacity (SRC) and why is it critical in your thesis?',a:'SRC = difference between maximal (FCCP-stimulated) and basal respiration. Indicates the cell\'s energetic reserve to respond to increased demand. LOW SRC in TOX cells = metabolic rigidity (no reserve to meet stress). RES cells: higher SRC = metabolic flexibility.',key:'Low SRC in TOX = no metabolic reserve',ch:'Ch.3'},
+  {id:'me04',cat:'Methodology',q:'What does etomoxir do and why is it used in FAO assay as control?',a:'Etomoxir inhibits CPT1 (carnitine palmitoyltransferase 1), preventing long-chain fatty acid entry into mitochondria. As FAO assay negative control: etomoxir-treated OCR subtracted from total OCR reveals the FAO-dependent component. TOX cells show impaired capacity to increase FAO-linked OCR.',key:'Etomoxir = CPT1 inhibitor = FAO assay control',ch:'Ch.3'},
+  // PAPERS KNOWLEDGE
+  {id:'pa01',cat:'Key Papers',q:'What is the key message of Youle & van der Bliek Science 2012?',a:'The canonical review of mitochondrial fission and fusion dynamics. DRP1 drives fission; MFN1/2 and OPA1 drive fusion. Fission and fusion are in dynamic balance. Stress shifts balance toward fission. Mitochondrial morphology is functionally linked to cell health. Essential for defending hyperfusion trap concept.',key:'Youle & van der Bliek 2012 = canonical fission/fusion review',ch:'Ch.3'},
+  {id:'pa02',cat:'Key Papers',q:'What is the key message of Stewart & Chinnery Nat Rev Genet 2015?',a:'The definitive review on heteroplasmy dynamics. All tissues carry somatic heteroplasmy; levels change with age. Disease manifestation depends on crossing tissue-specific thresholds. Genetic drift and purifying selection determine heteroplasmy fate. Directly underpins your Ch.4 and biomarker concept.',key:'Stewart & Chinnery 2015 = heteroplasmy dynamics & thresholds',ch:'Ch.4'},
+  {id:'pa03',cat:'Key Papers',q:'What did Swain et al. 2003 establish and why does your thesis challenge it?',a:'Swain SM, Cancer 2003: Classic dose-response relationship paper — congestive HF incidence correlated with cumulative doxorubicin dose. This is the "straw man" paradigm your thesis challenges by showing that at the same cumulative dose, patients differ dramatically in cardiac outcome based on constitutional vulnerability.',key:'Swain 2003 = dose-response (the paradigm you challenge)',ch:'Ch.1'},
+  {id:'pa04',cat:'Key Papers',q:'What is the Ronaldson-Bouchard 2018 paper about?',a:'Ronaldson-Bouchard K et al. Nature 2018: Advanced maturation of human cardiac tissue grown from pluripotent stem cells using intensive exercise-like electrical stimulation protocols. Benchmark for EHT maturation state — your dyn-EHTs should be positioned relative to this benchmark.',key:'Ronaldson-Bouchard 2018 = gold standard EHT maturation',ch:'Ch.2'},
+  {id:'pa05',cat:'Key Papers',q:'What did Brand & Nicholls 2011 establish?',a:'Brand MD, Nicholls DG. Biochem J 2011: The canonical reference for interpreting Seahorse XF respirometry outputs. Defines: basal OCR, ATP-linked OCR, maximal OCR, SRC, proton leak, and non-mitochondrial respiration. Required to defend your Seahorse assay design and data interpretation.',key:'Brand & Nicholls 2011 = Seahorse interpretation bible',ch:'Ch.3'}
+];
+
+// ── KEY NUMBERS ──
+const KEY_NUMBERS = [
+  {val:'~77%',label:'mtDNA insertions in TOX cardiomyocytes'},
+  {val:'~54%',label:'mtDNA insertions in RES cardiomyocytes'},
+  {val:'47%',label:'Reduced ATP production in TOX cells (vs. RES)'},
+  {val:'62%',label:'Overall energy deficit in TOX cells'},
+  {val:'2.05×',label:'Higher baseline ROS in TOX vs. RES cells'},
+  {val:'21 genes',label:'Resilience transcriptomic signature size'},
+  {val:'May 21 · 12:45',label:'Defense date and time'},
+  {val:'8',label:'Committee members (incl. promotors)'},
+  {val:'>15%',label:'Relative GLS reduction = subclinical cardiotoxicity'},
+  {val:'<53%',label:'LVEF threshold for cardiotoxicity (ESC 2022)'},
+  {val:'1000×',label:'Target sequencing depth for mtDNA variant calling'},
+  {val:'Ser2808 + Ser2814',label:'RyR2 phosphorylation sites (PKA + CaMKII)'}
+];
+
+// ── READING LIST ──
+const PAPERS = [
+  {num:1,topic:'Anthracycline Cardiotoxicity',citation:'Herrmann J. Adverse cardiac effects of cancer therapies. Nat Rev Cardiol. 2020;17:474-502.',msg:'Comprehensive framework for cardiotoxicity classification. Committee will expect mastery of this taxonomy.',priority:'MUST'},
+  {num:2,topic:'Anthracycline Cardiotoxicity',citation:'Zamorano JL et al. 2016 ESC Position Paper on cancer treatments and cardiovascular toxicity. Eur Heart J. 2016;37:2768-2801.',msg:'Defines clinical thresholds and surveillance protocols your patient cohort was managed under.',priority:'MUST'},
+  {num:3,topic:'Anthracycline Cardiotoxicity',citation:'Lyon AR et al. 2022 ESC Guidelines on cardio-oncology. Eur Heart J. 2022;43:4229-4361.',msg:'Most recent clinical framework. Know how your biomarker fits within it.',priority:'MUST'},
+  {num:4,topic:'Anthracycline Cardiotoxicity',citation:'Swain SM, Whaley FS, Ewer MS. Congestive heart failure in patients treated with doxorubicin. Cancer. 2003;97:2869-2879.',msg:'Classic dose-response relationship paper — the paradigm your thesis challenges. Know it precisely to argue against it.',priority:'MUST'},
+  {num:5,topic:'Anthracycline Cardiotoxicity',citation:'Zhang S et al. Identification of the molecular basis of doxorubicin-induced cardiotoxicity. Nat Med. 2012;18:1639-1642.',msg:'Top2B as mechanism — crucial counterpoint to your mitochondrial focus. Committee will ask how your findings relate to Top2B.',priority:'MUST'},
+  {num:6,topic:'Anthracycline Cardiotoxicity',citation:'Wallace KB, Sardão VA, Oliveira PJ. Mitochondrial determinants of doxorubicin-induced cardiomyopathy. Circ Res. 2020;126:926-941.',msg:'Most current mitochondrial mechanism review for DOX cardiotoxicity. Directly supports your mechanistic framework.',priority:'MUST'},
+  {num:7,topic:'Anthracycline Cardiotoxicity',citation:'Minotti G et al. Anthracyclines: molecular advances and pharmacologic developments. Pharmacol Rev. 2004;56:185-229.',msg:'Seminal comprehensive review. Classic redox cycling and iron mechanism. Background for antioxidant defense discussion.',priority:'HIGH'},
+  {num:8,topic:'Anthracycline Cardiotoxicity',citation:'Cardinale D et al. Early detection of anthracycline cardiotoxicity and improvement with heart failure therapy. Circulation. 2015;131:1981-1988.',msg:'Key clinical data showing reversibility with early intervention; informs your biomarker rationale.',priority:'HIGH'},
+  {num:9,topic:'iPSC Models',citation:'Takahashi K et al. Induction of pluripotent stem cells from adult human fibroblasts by defined factors. Cell. 2007;131:861-872.',msg:'The foundational iPSC paper. Know it cold; any committee member may reference it.',priority:'MUST'},
+  {num:10,topic:'iPSC Models',citation:'Lian X et al. Robust cardiomyocyte differentiation from human pluripotent stem cells via temporal modulation of canonical Wnt signaling. PNAS. 2012;109:E1848.',msg:'Wnt-based differentiation protocol foundational to your cardiomyocyte generation.',priority:'MUST'},
+  {num:11,topic:'iPSC Models',citation:'Ronaldson-Bouchard K et al. Advanced maturation of human cardiac tissue grown from pluripotent stem cells. Nature. 2018;556:239-243.',msg:'Benchmark paper for EHT maturation state. Know where your dyn-EHTs sit on the maturation spectrum.',priority:'MUST'},
+  {num:12,topic:'iPSC Models',citation:'Zimmermann WH et al. Engineered heart tissue grafts improve systolic and diastolic function in infarcted rat hearts. Nat Med. 2006;12:452-458.',msg:'Pioneering EHT work. Contextualizes your platform within the EHT field.',priority:'HIGH'},
+  {num:13,topic:'iPSC Models',citation:'Mills RJ et al. Functional screening in human cardiac organoids reveals a metabolic mechanism for cardiomyocyte cell cycle arrest. PNAS. 2017;114:E8372.',msg:'Metabolic regulation of maturation. Important for your bioenergetic findings interpretation.',priority:'HIGH'},
+  {num:14,topic:'iPSC Models',citation:'Streckfuss-Bömeke K et al. Comparative study of human iPSC derived from bone marrow, keratinocytes, and skin fibroblasts. Eur Heart J. 2013;34:2618.',msg:'iPSC source variation — important for discussing your fibroblast-derived cell controls (Foijer question).',priority:'HIGH'},
+  {num:15,topic:'iPSC Models',citation:'Pioner JM et al. Isolation and mechanical measurements of myofibrils from human iPSC-derived cardiomyocytes. Stem Cell Reports. 2016;6:885-896.',msg:'Functional properties of iPSC-CMs; maturation limitations.',priority:'SOLID'},
+  {num:16,topic:'Senescence',citation:'Childs BG et al. Senescent cells: an emerging target for diseases of ageing. Nat Rev Drug Discov. 2017;16:718-735.',msg:'Comprehensive review of senescence in disease; hallmarks, SASP, and therapeutic targeting. Foundation for Ch.2.',priority:'MUST'},
+  {num:17,topic:'Senescence',citation:'Campisi J. Aging, cellular senescence, and cancer. Annu Rev Physiol. 2013;75:685-705.',msg:'Campisi\'s seminal conceptualization of senescence as an aging mechanism. Key authority for your aging-as-cardiotoxicity paradigm.',priority:'MUST'},
+  {num:18,topic:'Senescence',citation:'Dookun E et al. Clearance of senescent cells during cardiac ischemia-reperfusion prevents HF. JCI Insight. 2020;5:e130535.',msg:'Senescence in cardiac injury; therapeutic clearance with navitoclax. Direct experimental support for senescence as cardiac injury mechanism.',priority:'MUST'},
+  {num:19,topic:'Senescence',citation:'Grosse L et al. Defined p16-/p21- conditions determine distinct modes of senescence. Cell Rep. 2020;32:107995.',msg:'Mechanistic distinction between p16 and p21 pathways — required for defending your senescence marker selection.',priority:'HIGH'},
+  {num:20,topic:'Senescence',citation:'Demaria M et al. An essential role for senescent cells in optimal wound healing. Dev Cell. 2014;31:722-733.',msg:'Beneficial senescence; committee may ask whether senescence here is purely pathological.',priority:'HIGH'},
+  {num:21,topic:'Senescence',citation:'Quijano C et al. Oncogene-induced senescence results in marked metabolic and bioenergetic alterations. Cell Cycle. 2012;11:1383-1392.',msg:'Metabolic reprogramming in senescence. Connects your Seahorse data to the senescence phenotype.',priority:'HIGH'},
+  {num:22,topic:'Mitochondrial Biology',citation:'Ichikawa Y et al. Cardiotoxicity of doxorubicin is mediated through mitochondrial iron accumulation. J Clin Invest. 2014;124:617-630.',msg:'Mitochondrial iron as DOX cardiotoxicity mechanism — supports mitochondrial targeting of DOX.',priority:'MUST'},
+  {num:23,topic:'Mitochondrial Biology',citation:'Youle RJ, van der Bliek AM. Mitochondrial fission, fusion, and stress. Science. 2012;337:1062-1065.',msg:'The canonical reference for fission/fusion dynamics. Essential for defending the hyperfusion trap concept.',priority:'MUST'},
+  {num:24,topic:'Mitochondrial Biology',citation:'Twig G et al. Fission and selective fusion govern mitochondrial segregation and elimination by autophagy. EMBO J. 2008;27:433-446.',msg:'Establishes that fission is required for mitophagy — mechanistic basis of your hyperfusion trap.',priority:'MUST'},
+  {num:25,topic:'Mitochondrial Biology',citation:'Dorn GW. Mitochondrial dynamism and heart disease: changing shape and shaping change. EMBO Mol Med. 2015;7:865-877.',msg:'Cardiac-specific mitochondrial dynamics review. Required for committee questions on mitochondrial morphology.',priority:'MUST'},
+  {num:26,topic:'Mitochondrial Biology',citation:'Pfanner N, Warscheid B, Wiedemann N. Mitochondrial proteins: from biogenesis to functional networks. Nat Rev Mol Cell Biol. 2019;20:267-284.',msg:'Comprehensive protein import and assembly — supports your interpretation of mitochondrial transcript upregulation.',priority:'HIGH'},
+  {num:27,topic:'Mitochondrial Biology',citation:'Varga ZV et al. Drug-induced mitochondrial dysfunction and cardiotoxicity. Am J Physiol. 2015;309:H1453.',msg:'Mitochondrial dysfunction spectrum in cardiotoxicity. Mechanistic context for ROS and membrane potential findings.',priority:'HIGH'},
+  {num:28,topic:'Mitochondrial Biology',citation:'Ong SB et al. Inhibiting mitochondrial fission protects the heart against ischemia/reperfusion injury. Circulation. 2010;121:2012-2022.',msg:'Paradoxically, inhibiting fission is cardioprotective in I/R — contrast with TOX hyperfusion pathology. Henning question.',priority:'HIGH'},
+  {num:29,topic:'Mitochondrial Biology',citation:'Kageyama Y et al. Parkin-independent mitophagy requires Drp1 and maintains integrity of mammalian heart. EMBO J. 2014;33:2798-2813.',msg:'Parkin-independent mitophagy — relevant to your Parkin-TOM20 colocalization data.',priority:'HIGH'},
+  {num:30,topic:'mtDNA & Heteroplasmy',citation:'Stewart JB, Chinnery PF. The dynamics of mitochondrial DNA heteroplasmy. Nat Rev Genet. 2015;16:530-542.',msg:'The definitive reference for heteroplasmy dynamics. Know this paper thoroughly — foundational for Ch.4 and biomarker claim.',priority:'MUST'},
+  {num:31,topic:'mtDNA & Heteroplasmy',citation:'Greaves LC et al. Mitochondrial DNA and disease. J Pathol. 2012;226:274-286.',msg:'Disease-causing heteroplasmy thresholds; the tipping point concept. Directly supports your threshold-based vulnerability model.',priority:'MUST'},
+  {num:32,topic:'mtDNA & Heteroplasmy',citation:'Kennedy SR et al. Ultra-sensitive sequencing reveals age-related somatic mitochondrial mutations. PLOS Genet. 2013;9:e1003794.',msg:'Methodological benchmark for deep mtDNA sequencing; insertion bias discussion. Critical for defending your methodology (Bennett question).',priority:'MUST'},
+  {num:33,topic:'mtDNA & Heteroplasmy',citation:'Ju YS et al. Origins and functional consequences of somatic mitochondrial DNA mutations in human cancer. eLife. 2014;3:e02935.',msg:'Somatic mtDNA mutations; insertion vs. deletion patterns. Comparative framework for your 77% insertion bias finding.',priority:'MUST'},
+  {num:34,topic:'mtDNA & Heteroplasmy',citation:'Payne BAI et al. Universal heteroplasmy of human mitochondrial DNA. Hum Mol Genet. 2013;22:384-390.',msg:'All humans carry heteroplasmic variants — it is about threshold, not presence. Required for your biomarker framing.',priority:'HIGH'},
+  {num:35,topic:'mtDNA & Heteroplasmy',citation:'Gorman GS et al. Mitochondrial diseases. Nat Rev Dis Primers. 2016;2:16080.',msg:'Clinical spectrum of mitochondrial disease; threshold effects and tissue specificity. Supports heteroplasmy chapter.',priority:'HIGH'},
+  {num:36,topic:'mtDNA & Heteroplasmy',citation:'Alexeyev M et al. The maintenance of mitochondrial DNA integrity — critical analysis. PLOS Genet. 2013;9:e1003354.',msg:'mtDNA maintenance mechanisms and repair pathways. Why cardiomyocytes accumulate mtDNA damage vs. proliferating cells.',priority:'HIGH'},
+  {num:37,topic:'Redox Biology',citation:'Schieber M, Chandel NS. ROS function in redox signaling and oxidative stress. Curr Biol. 2014;24:R453-R462.',msg:'ROS as signaling vs. damaging agent — dose-response concept in redox biology. Essential framework for MitoSOX and TMRM.',priority:'MUST'},
+  {num:38,topic:'Redox Biology',citation:'Lubos E, Loscalzo J, Handy DE. Glutathione peroxidase-1 in health and disease. Antioxid Redox Signal. 2011;15:1957-1997.',msg:'GPX1 biology comprehensive review — your key protein finding. Core paper for GPX1 deficiency in TOX patients.',priority:'MUST'},
+  {num:39,topic:'Redox Biology',citation:'Hayes JD, Flanagan JU, Jowsey IR. Glutathione transferases. Annu Rev Pharmacol Toxicol. 2005;45:51-88.',msg:'GSTM1 and GST family mechanisms; detoxification of DOX metabolites. Required for GSTM1 antioxidant finding.',priority:'HIGH'},
+  {num:40,topic:'Redox Biology',citation:'Berthiaume JM, Wallace KB. Adriamycin-induced oxidative mitochondrial cardiotoxicity. Cell Biol Toxicol. 2007;23:15-25.',msg:'Mitochondrial-specific oxidative damage from doxorubicin. Mechanistic link between DOX, ROS, and mitochondrial phenotype.',priority:'HIGH'},
+  {num:41,topic:'Redox Biology',citation:'Trachootham D, Alexandre J, Huang P. Targeting cancer cells by ROS-mediated mechanisms. Nat Rev Drug Discov. 2009;8:579-591.',msg:'ROS threshold concept — cancer vs. normal cell biology. Background for anti-tumor efficacy balance question.',priority:'SOLID'},
+  {num:42,topic:'Transcriptomics',citation:'Subramanian A et al. Gene set enrichment analysis. PNAS. 2005;102:15545-15550.',msg:'GSEA methodology — required if committee asks about your pathway analysis. Know NES, FDR threshold criteria.',priority:'MUST'},
+  {num:43,topic:'Bioenergetics',citation:'Brand MD, Nicholls DG. Assessing mitochondrial dysfunction in cells. Biochem J. 2011;435:297-312.',msg:'The canonical reference for interpreting Seahorse XF assay outputs. Required for defending all bioenergetic data.',priority:'MUST'},
+  {num:44,topic:'Bioenergetics',citation:'Bertero E, Maack C. Metabolic remodelling in heart failure. Nat Rev Cardiol. 2018;15:457-470.',msg:'Metabolic flexibility in cardiac disease; FAO vs. glycolysis switch. Contextualizes your metabolic rigidity (TOX) narrative.',priority:'MUST'},
+  {num:45,topic:'Bioenergetics',citation:'Lopaschuk GD et al. Myocardial fatty acid metabolism in health and disease. Physiol Rev. 2010;90:207-258.',msg:'Definitive substrate oxidation review for cardiac metabolism. Required for defending FAO assay design and interpretation.',priority:'HIGH'},
+  {num:46,topic:'Transcriptomics',citation:'Cappola TP et al. Genetic variants associated with heart failure risk. JAMA. 2010;304:1711-1718.',msg:'Constitutional genetic determinism in heart failure — parallel to your iPSC model. Supports constitutional vulnerability paradigm.',priority:'HIGH'},
+  {num:47,topic:'Bioenergetics',citation:'de Baat EC et al. Cardiotoxicity of breast cancer treatment: a phenotypic study of risk stratification. Eur Heart J. 2021;42:2267.',msg:'Clinical risk stratification data; real-world cardiotoxicity incidence by cumulative dose.',priority:'HIGH'},
+  {num:48,topic:'CDK4/6 Inhibitors',citation:'Hortobagyi GN et al. Ribociclib as first-line therapy for HR-positive, advanced breast cancer (MONALEESA-2). NEJM. 2016;375:1738-1748.',msg:'MONALEESA-2 trial: ribociclib clinical efficacy and cardiac safety monitoring rationale. Essential for Ch.5 context.',priority:'MUST'},
+  {num:49,topic:'CDK4/6 Inhibitors',citation:'Tasan I et al. CDK4/6 inhibitors in breast cancer: beyond cell cycle arrest. Trends Pharmacol Sci. 2020;41:553-562.',msg:'Non-canonical CDK4/6i functions including spliceosome regulation. Supports your spliceosome mechanism.',priority:'HIGH'},
+  {num:50,topic:'CDK4/6 Inhibitors',citation:'Moslehi J et al. Cardiovascular effects of CDK4/6 inhibitors. JACC CardioOncology. 2019;1:84-87.',msg:'Clinical cardiovascular safety data for CDK4/6i class. Background for positioning your mechanistic finding vs. known clinical effects.',priority:'HIGH'}
+];
+
+// ── CHAPTER MAP ──
+const CHAPTERS = [
+  {ch:'Ch.1',theme:'Introduction & Review',finding:'Cardiotoxicity paradox; dose-response model insufficient; constitutional vulnerability hypothesis',attack:'Why iPSC-CMs? What are their limitations vs. primary cardiomyocytes?',color:'teal'},
+  {ch:'Ch.2',theme:'dyn-EHT Platform & Senescence',finding:'Cardiotoxicity = accelerated aging; senescence as key injury mechanism; AICAR as senomorphic agent',attack:'How do you validate EHT faithfully recapitulates in vivo biology? How is senescence different from apoptosis?',color:'purple'},
+  {ch:'Ch.3',theme:'RES vs. TOX — Main Paper',finding:'Constitutional mitochondrial vulnerability; 21-gene signature; hyperfusion trap; insertion-biased mtDNA mutagenesis; bioenergetic rigidity',attack:'Multiple sub-questions on biomarker, methodology, mutagenesis, and clinical translation. MAIN BATTLEGROUND.',color:'gold'},
+  {ch:'Ch.4',theme:'Heteroplasmy Review',finding:'Heteroplasmy thresholds as universal cardiac vulnerability mechanism',attack:'How do you reconcile low-heteroplasmy variants having functional consequences?',color:'blue'},
+  {ch:'Ch.5',theme:'Ribociclib Cardiotoxicity',finding:'CDK4/6 inhibitor causes cardiotoxicity via spliceosome dysfunction — mechanistically distinct from anthracyclines',attack:'What is the clinical relevance? Are these patients overlapping with your RES/TOX cohort?',color:'red'},
+  {ch:'Ch.6',theme:'Dantrolene & Cardioprotection',finding:'Calcium dysregulation as therapeutic target; dantrolene as potential cardioprotective agent',attack:'What is the evidence this works in vivo? Pharmacokinetic concerns?',color:'orange'}
+];
+
+// ── QUICK REF TABLE ──
+const QUICK_REF = [
+  {member:'De Boer',concern:'Is the biomarker clinically real?',phrase:'"This is the mechanistic foundation. The Dekker study is the galectin-3 moment — that comes next."'},
+  {member:'Foijer',concern:'Is your genomics rigorous? Nuclear-mitochondrial link?',phrase:'"Your cGAS/STING-IL6 axis may be the bridge between our mtDNA findings and innate immune activation in TOX cells."'},
+  {member:'Henning',concern:'Is the drug mechanism precise?',phrase:'"RyR2 phosphorylation at Ser2808/Ser2814 is the confirmatory experiment — here is exactly how I would design it."'},
+  {member:'Bennett',concern:'Is the experimental design clean?',phrase:'"Cell-type specificity of the mutagenesis pattern rules out reprogramming artefact."'},
+  {member:'Ter Maaten',concern:'How does it integrate with HF monitoring?',phrase:'"Pre-treatment (mtDNA biomarker) + on-treatment (troponin/NT-proBNP) = comprehensive, not competing."'},
+  {member:'Gietema',concern:'Does this translate to my oncology patients?',phrase:'"Constitutional vulnerability is cellular — the framework applies to any cardiotoxic drug, not just anthracyclines."'}
+];
+
+
+// ════════════════════════════════════════
+//  STATE
+// ════════════════════════════════════════
+let state = JSON.parse(localStorage.getItem('phd_defense_state') || '{}');
+if(!state.completedDays) state.completedDays = [];
+if(!state.quizHistory) state.quizHistory = [];
+if(!state.cardProgress) state.cardProgress = {};
+if(!state.streak) state.streak = 0;
+if(!state.lastStudyDate) state.lastStudyDate = null;
+
+function saveState(){ localStorage.setItem('phd_defense_state', JSON.stringify(state)); }
+
+// ════════════════════════════════════════
+//  UTILITIES
+// ════════════════════════════════════════
+const DEFENSE_DATE = new Date('2026-05-21T12:45:00');
+const STUDY_START = new Date('2026-04-28T00:00:00');
+const STUDY_END = new Date('2026-05-19T23:59:59');
+
+function daysUntilDefense(){
+  return Math.max(0, Math.ceil((DEFENSE_DATE - new Date()) / 86400000));
+}
+function studyDaysLeft(){
+  const now = new Date();
+  if(now > STUDY_END) return 0;
+  if(now < STUDY_START) return 22;
+  return Math.max(0, Math.ceil((STUDY_END - now) / 86400000));
+}
+function todayDateStr(){
+  const d = new Date();
+  return d.toISOString().split('T')[0];
+}
+function getTodayPlan(){
+  const today = todayDateStr();
+  return STUDY_PLAN.find(d => d.date === today) || null;
+}
+function overallProgress(){
+  const total = STUDY_PLAN.length;
+  const done = state.completedDays.length;
+  return Math.round((done/total)*100);
+}
+function quizAccuracy(){
+  if(!state.quizHistory.length) return null;
+  const recent = state.quizHistory.slice(-50);
+  const correct = recent.filter(r=>r.correct).length;
+  return Math.round((correct/recent.length)*100);
+}
+
+// ════════════════════════════════════════
+//  COUNTDOWN
+// ════════════════════════════════════════
+function updateCountdown(){
+  const now = new Date();
+  const diff = DEFENSE_DATE - now;
+  if(diff <= 0){ document.getElementById('nav-countdown').textContent = '🎓 DEFENSE DAY!'; return; }
+  const d = Math.floor(diff/86400000);
+  const h = Math.floor((diff%86400000)/3600000);
+  const m = Math.floor((diff%3600000)/60000);
+  document.getElementById('nav-countdown').textContent = `⏱ ${d}d ${h}h ${m}m`;
+  document.getElementById('stat-days').textContent = d;
+  document.getElementById('stat-study-days').textContent = studyDaysLeft();
+  const acc = quizAccuracy();
+  document.getElementById('stat-correct').textContent = acc !== null ? acc+'%' : '—';
+  document.getElementById('stat-streak').textContent = state.streak || 0;
+  const pct = overallProgress();
+  document.getElementById('overall-bar').style.width = pct+'%';
+  document.getElementById('overall-pct').textContent = pct+'%';
+}
+
+// ════════════════════════════════════════
+//  TABS
+// ════════════════════════════════════════
+function showTab(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  event?.target?.classList.add('active');
+  if(id==='quiz') renderQuiz();
+}
+
+// ════════════════════════════════════════
+//  DASHBOARD
+// ════════════════════════════════════════
+function renderDashboard(){
+  const plan = getTodayPlan();
+  const el = document.getElementById('today-content');
+  if(!plan){
+    const today = todayDateStr();
+    if(today < '2026-04-28'){
+      el.innerHTML = `<div class="info-box"><p>📅 Study period begins <strong>April 28, 2026</strong>. Prepare your study environment and review your thesis introduction today.</p></div>`;
+    } else if(today > '2026-05-19'){
+      el.innerHTML = `<div class="narrative-box"><p>🎯 Study period complete! Your defense is on <strong>May 21, 2026</strong>. Review your core narrative one more time and get some rest. You've got this, Itamar!</p></div>`;
+    } else {
+      el.innerHTML = `<p>No plan found for today. Check the Study Plan tab.</p>`;
+    }
+    document.getElementById('today-title').textContent = 'Today\'s Plan';
+    return;
+  }
+  document.getElementById('today-title').textContent = `Day ${plan.day}/22 — ${plan.weekday}, ${plan.date.slice(5)}`;
+  const done = state.completedDays.includes(plan.date);
+  el.innerHTML = `
+    <div class="badge badge-${plan.color}" style="margin-bottom:10px;">${plan.theme}</div>
+    ${done ? '<div class="badge badge-green" style="margin-bottom:10px;">✓ Completed</div>' : ''}
+    <p style="margin-bottom:14px;font-size:14px;color:var(--text);">${plan.focus}</p>
+    <div class="session-block">
+      <h4>🌅 ${plan.morning.label}</h4>
+      <ul class="task-list">${plan.morning.tasks.map(t=>`<li>${t}</li>`).join('')}</ul>
+    </div>
+    <div class="session-block" style="margin-top:12px;">
+      <h4>🌆 ${plan.afternoon.label}</h4>
+      <ul class="task-list">${plan.afternoon.tasks.map(t=>`<li>${t}</li>`).join('')}</ul>
+    </div>
+    ${plan.papers.length ? `<div style="margin-top:12px;"><h4>📄 Papers for Today</h4><p style="font-size:13px;margin-top:4px;">${plan.papers.join(' · ')}</p></div>` : ''}
+  `;
+  // Category progress
+  renderCatProgress();
+}
+
+function renderCatProgress(){
+  const cats = [...new Set(QUIZ_DB.map(q=>q.cat))];
+  const el = document.getElementById('cat-progress-list');
+  if(!el) return;
+  el.innerHTML = cats.slice(0,5).map(cat=>{
+    const qs = QUIZ_DB.filter(q=>q.cat===cat);
+    const answered = qs.filter(q=> state.cardProgress[q.id]);
+    const correct = answered.filter(q=> state.cardProgress[q.id]?.correct);
+    const pct = answered.length ? Math.round(correct.length/answered.length*100) : 0;
+    const color = pct>=90?'green':pct>=70?'gold':'blue';
+    return `<div style="margin-bottom:8px;"><div style="display:flex;justify-content:space-between;margin-bottom:3px;"><span style="font-size:12px;">${cat}</span><span style="font-family:var(--font-mono);font-size:11px;color:var(--${color});">${pct}%</span></div><div class="progress-bar" style="height:4px;"><div class="progress-fill ${color}" style="width:${pct}%"></div></div></div>`;
+  }).join('');
+}
+
+function markTodayDone(){
+  const plan = getTodayPlan();
+  if(!plan) return;
+  if(!state.completedDays.includes(plan.date)){
+    state.completedDays.push(plan.date);
+    const today = todayDateStr();
+    if(state.lastStudyDate){
+      const last = new Date(state.lastStudyDate);
+      const diff = Math.round((new Date(today) - last) / 86400000);
+      if(diff <= 1) state.streak = (state.streak||0) + 1;
+      else state.streak = 1;
+    } else { state.streak = 1; }
+    state.lastStudyDate = today;
+    saveState();
+    renderDashboard();
+    updateCountdown();
+  }
+}
+
+// ════════════════════════════════════════
+//  CALENDAR
+// ════════════════════════════════════════
+function renderCalendar(){
+  const container = document.getElementById('calendar-container');
+  const weeks = [1,2,3];
+  container.innerHTML = weeks.map(w=>{
+    const days = STUDY_PLAN.filter(d=>d.week===w);
+    const wLabel = ['Week 1: Apr 28 – May 4 | Thesis Architecture + Senescence + iPSC','Week 2: May 5 – May 11 | Mitochondrial Science Deep Dive','Week 3: May 12 – May 19 | Committee Prep + Mock Defense'][w-1];
+    return `<div style="margin-bottom:24px;">
+      <div class="cal-header"><div class="week-label">${wLabel}</div></div>
+      ${days.map(d=>{
+        const isToday = d.date === todayDateStr();
+        const done = state.completedDays.includes(d.date);
+        return `<div class="day-card ${isToday?'today':''} ${done?'completed':''}" onclick="toggleDay('day-${d.date}')">
+          <div class="day-header">
+            <span class="day-num">Day ${d.day} · ${d.date.slice(5)} ${d.weekday.slice(0,3)}</span>
+            <span class="day-title">${d.theme}</span>
+            <div class="day-badges">
+              <span class="badge badge-${d.color}" style="font-size:10px;">${d.color==='gold'?'mtDNA':d.color==='purple'?'Senescence':d.color==='blue'?'iPSC':d.color==='orange'?'Redox':d.color==='red'?'Ribociclib/Dantrolene':d.color==='green'?'Review':'Thesis'}</span>
+              ${isToday?'<span class="badge badge-teal" style="font-size:10px;">TODAY</span>':''}
+              ${done?'<span class="badge badge-green" style="font-size:10px;">✓ Done</span>':''}
+            </div>
+          </div>
+          <div class="day-body" id="day-${d.date}">
+            <div style="font-size:13px;color:var(--text2);margin-bottom:10px;font-style:italic;">${d.focus}</div>
+            <div class="session-block"><h4>🌅 ${d.morning.label}</h4><ul class="task-list">${d.morning.tasks.map(t=>`<li>${t}</li>`).join('')}</ul></div>
+            <div class="session-block" style="margin-top:12px;"><h4>🌆 ${d.afternoon.label}</h4><ul class="task-list">${d.afternoon.tasks.map(t=>`<li>${t}</li>`).join('')}</ul></div>
+            ${d.papers.length?`<div style="margin-top:10px;"><span style="font-size:12px;color:var(--text3);">📄 Papers: ${d.papers.join(' · ')}</span></div>`:''}
+            <div style="margin-top:12px;"><button class="btn btn-primary btn-sm" onclick="event.stopPropagation();markDayDone('${d.date}')">✓ Mark Complete</button></div>
+          </div>
+        </div>`;
+      }).join('')}
+    </div>`;
+  }).join('');
+}
+
+function toggleDay(id){
+  const el = document.getElementById(id);
+  el.classList.toggle('open');
+}
+function markDayDone(date){
+  if(!state.completedDays.includes(date)){
+    state.completedDays.push(date);
+    saveState();
+    renderCalendar();
+    updateCountdown();
+  }
+}
+
+// ════════════════════════════════════════
+//  QUIZ ENGINE
+// ════════════════════════════════════════
+let currentCat = 'All';
+let quizQueue = [];
+let currentQIdx = 0;
+let sessionCorrect = 0;
+let sessionTotal = 0;
+let showingAnswer = false;
+
+function getCategories(){
+  return ['All', ...new Set(QUIZ_DB.map(q=>q.cat))];
+}
+
+function buildQueue(cat){
+  const pool = cat==='All' ? [...QUIZ_DB] : QUIZ_DB.filter(q=>q.cat===cat);
+  // Spaced repetition: sort by due date / error rate
+  pool.sort((a,b)=>{
+    const pa = state.cardProgress[a.id];
+    const pb = state.cardProgress[b.id];
+    if(!pa) return -1; // Unseen first
+    if(!pb) return 1;
+    const ra = pa.correct/(pa.attempts||1);
+    const rb = pb.correct/(pb.attempts||1);
+    return ra - rb; // Worst accuracy first
+  });
+  return pool;
+}
+
+function renderQuizCats(){
+  const cats = getCategories();
+  document.getElementById('quiz-cats').innerHTML = cats.map(c=>
+    `<button class="cat-btn ${c===currentCat?'selected':''}" onclick="selectCat('${c}')">${c}</button>`
+  ).join('');
+}
+
+function selectCat(cat){
+  currentCat = cat;
+  renderQuizCats();
+  startQuiz();
+}
+
+function startQuiz(){
+  quizQueue = buildQueue(currentCat);
+  currentQIdx = 0; sessionCorrect = 0; sessionTotal = 0;
+  renderQuizCard();
+  document.getElementById('quiz-history-panel').style.display='none';
+}
+
+function renderQuiz(){
+  renderQuizCats();
+  startQuiz();
+}
+
+function renderQuizCard(){
+  const el = document.getElementById('quiz-main');
+  if(!quizQueue.length){ el.innerHTML='<div class="quiz-card"><p>No questions available.</p></div>'; return; }
+  const q = quizQueue[currentQIdx % quizQueue.length];
+  const prog = state.cardProgress[q.id] || {attempts:0,correct:0};
+  const accuracy = prog.attempts ? Math.round(prog.correct/prog.attempts*100) : null;
+  showingAnswer = false;
+  el.innerHTML = `
+    <div class="quiz-card">
+      <div class="quiz-progress">
+        Question ${(currentQIdx%quizQueue.length)+1} of ${Math.min(quizQueue.length,20)} · Session: ${sessionCorrect}/${sessionTotal} correct
+        ${accuracy!==null ? ` · Historical accuracy: <span style="color:var(--${accuracy>=90?'green':accuracy>=70?'gold':'red'})">${accuracy}%</span>` : ''}
+      </div>
+      <div style="margin-bottom:8px;"><span class="badge badge-blue" style="font-size:10px;">${q.cat}</span></div>
+      <div class="quiz-question">${q.q}</div>
+      <div class="quiz-answer" id="q-answer">
+        <strong style="color:var(--teal);font-size:12px;display:block;margin-bottom:6px;">ANSWER:</strong>
+        ${q.a}
+        ${q.key ? `<div class="key-phrase">🔑 ${q.key}</div>` : ''}
+        ${q.ch ? `<div style="margin-top:8px;font-size:11px;color:var(--text3);">📖 ${q.ch}</div>` : ''}
+      </div>
+      <div class="quiz-actions" id="q-actions">
+        <button class="btn btn-ghost answer-reveal-btn" onclick="revealAnswer()">👁 Reveal Answer</button>
+      </div>
+    </div>
+    <div style="margin-top:10px;text-align:center;">
+      <div class="progress-bar" style="max-width:300px;margin:0 auto;">
+        <div class="progress-fill blue" style="width:${Math.min(100,Math.round((currentQIdx/Math.max(1,Math.min(quizQueue.length,20)))*100))}%"></div>
+      </div>
+    </div>
+  `;
+}
+
+function revealAnswer(){
+  document.getElementById('q-answer').classList.add('visible');
+  document.getElementById('q-actions').innerHTML = `
+    <button class="btn btn-primary score-good" onclick="scoreAnswer(true)">✓ Got It</button>
+    <button class="btn btn-ghost score-bad" onclick="scoreAnswer(false)">✗ Missed It</button>
+  `;
+  showingAnswer = true;
+}
+
+function scoreAnswer(correct){
+  const q = quizQueue[currentQIdx % quizQueue.length];
+  if(!state.cardProgress[q.id]) state.cardProgress[q.id] = {attempts:0,correct:0};
+  state.cardProgress[q.id].attempts++;
+  if(correct) state.cardProgress[q.id].correct++;
+  state.quizHistory.push({id:q.id,cat:q.cat,correct,ts:Date.now()});
+  sessionTotal++;
+  if(correct) sessionCorrect++;
+  saveState();
+  currentQIdx++;
+  // Check if session complete (20 questions or full queue done)
+  if(currentQIdx >= Math.min(quizQueue.length, 20)){
+    renderQuizDone();
+  } else {
+    renderQuizCard();
+  }
+  renderCatProgress();
+}
+
+function renderQuizDone(){
+  const pct = Math.round(sessionCorrect/sessionTotal*100);
+  const pass = pct >= 90;
+  const arc = Math.round(283 * (1 - pct/100));
+  document.getElementById('quiz-main').innerHTML = `
+    <div class="quiz-card quiz-done">
+      <h2 style="margin-bottom:8px;">${pass ? '🎉 Excellent!' : '📖 Keep Studying'}</h2>
+      <p style="margin-bottom:16px;">${pass ? 'You\'ve hit the 90% threshold! Take a short break, then try another category.' : 'Review the answers you missed and try again until you reach 90%.'}</p>
+      <div class="quiz-score-ring">
+        <svg width="150" height="150" viewBox="0 0 150 150">
+          <circle cx="75" cy="75" r="45" fill="none" stroke="var(--surf3)" stroke-width="10"/>
+          <circle cx="75" cy="75" r="45" fill="none" stroke="var(--${pass?'green':'gold'})" stroke-width="10"
+            stroke-dasharray="283" stroke-dashoffset="${arc}" stroke-linecap="round"/>
+        </svg>
+        <div class="score-text" style="color:var(--${pass?'green':'gold'})">${pct}%</div>
+      </div>
+      <p style="margin-bottom:16px;">${sessionCorrect} / ${sessionTotal} correct in this session</p>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+        <button class="btn btn-primary" onclick="startQuiz()">↺ Try Again</button>
+        <button class="btn btn-ghost" onclick="selectCat('All')">📋 Mixed Mode</button>
+      </div>
+    </div>
+  `;
+}
+
+function showHistory(){
+  const panel = document.getElementById('quiz-history-panel');
+  const isShown = panel.style.display!=='none';
+  if(isShown){ panel.style.display='none'; return; }
+  panel.style.display='block';
+  const cats = [...new Set(QUIZ_DB.map(q=>q.cat))];
+  document.getElementById('history-list').innerHTML = cats.map(cat=>{
+    const qs = QUIZ_DB.filter(q=>q.cat===cat);
+    const done = qs.filter(q=>state.cardProgress[q.id]);
+    const correct = done.filter(q=>{const p=state.cardProgress[q.id];return p&&p.correct/p.attempts>=0.9;});
+    const pct = done.length ? Math.round(correct.length/done.length*100) : 0;
+    return `<div class="history-row">
+      <span style="flex:1;font-size:13px;">${cat}</span>
+      <span style="font-size:12px;color:var(--text3);">${done.length}/${qs.length} attempted</span>
+      <span class="score-pill ${pct>=90?'score-pass':'score-fail'}">${pct}%</span>
+    </div>`;
+  }).join('');
+}
+
+function resetProgress(){
+  if(confirm('Reset ALL quiz progress? This cannot be undone.')){
+    state.cardProgress = {};
+    state.quizHistory = [];
+    saveState();
+    startQuiz();
+  }
+}
+
+// ════════════════════════════════════════
+//  COMMITTEE
+// ════════════════════════════════════════
+function renderCommittee(){
+  const container = document.getElementById('committee-container');
+  container.innerHTML = COMMITTEE.map(m=>`
+    <div class="member-card">
+      <div class="member-header" onclick="toggleMember('m-${m.id}')">
+        <div class="member-avatar" style="border-color:var(--${m.color})22;background:var(--${m.color}-dim,var(--surf3));">
+          ${m.icon}
+        </div>
+        <div class="member-info">
+          <div class="member-name">${m.order}. ${m.name} ${m.isNew?'<span class="new-badge">NEW</span>':''}</div>
+          <div class="member-affil">${m.affiliation}</div>
+          <div class="member-tags">
+            ${m.badges.map(b=>`<span class="badge badge-${m.color}" style="font-size:10px;">${b}</span>`).join('')}
+          </div>
+        </div>
+        <div>
+          <div class="danger-stars">${'⭐'.repeat(m.danger)}</div>
+          <div style="font-size:10px;color:var(--text3);margin-top:2px;">${m.questions.length} Q&As</div>
+        </div>
+      </div>
+      <div class="member-body" id="m-${m.id}">
+        <div class="card-sm" style="margin-bottom:14px;">
+          <h4>Research Lens</h4>
+          <p style="margin-top:4px;font-size:13px;">${m.lens}</p>
+          <p style="margin-top:6px;font-size:12px;color:var(--text3);">Chapters at risk: ${m.chapters.join(' · ')}</p>
+        </div>
+        ${m.questions.map((q,i)=>`
+          <div class="q-item">
+            <h4>Q${i+1}</h4>
+            <div class="q-text">${q.q}</div>
+            <div class="q-strategy"><strong style="color:var(--text);font-size:12px;">Strategy: </strong>${q.strategy}</div>
+            <div class="q-keyphrase">💬 "${q.keyphrase}"</div>
+          </div>
+        `).join('')}
+        <div class="reading-links">
+          <h4>📖 Read Before Facing ${m.name.split(' ').pop()}</h4>
+          <p>${m.reads}</p>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function toggleMember(id){
+  const el = document.getElementById(id);
+  el.classList.toggle('open');
+}
+
+// ════════════════════════════════════════
+//  READING LIST
+// ════════════════════════════════════════
+let currentTopicFilter = 'All';
+function renderReadingList(){
+  const topics = ['All', ...new Set(PAPERS.map(p=>p.topic))];
+  document.getElementById('rl-filter').innerHTML = topics.map(t=>
+    `<button class="cat-btn ${t===currentTopicFilter?'selected':''}" onclick="filterPapers('${t}')">${t}</button>`
+  ).join('');
+  const filtered = currentTopicFilter==='All' ? PAPERS : PAPERS.filter(p=>p.topic===currentTopicFilter);
+  document.getElementById('reading-container').innerHTML = filtered.map(p=>`
+    <div class="paper-item priority-${p.priority.toLowerCase()}">
+      <div class="paper-num">#${p.num} · <span class="badge badge-${p.priority==='MUST'?'red':p.priority==='HIGH'?'gold':'blue'}" style="font-size:9px;">${p.priority}</span> · ${p.topic}</div>
+      <div class="paper-citation">${p.citation}</div>
+      <div class="paper-msg">${p.msg}</div>
+    </div>
+  `).join('');
+}
+function filterPapers(topic){
+  currentTopicFilter = topic;
+  renderReadingList();
+}
+
+// ════════════════════════════════════════
+//  STRATEGY
+// ════════════════════════════════════════
+function renderStrategy(){
+  document.getElementById('numbers-grid').innerHTML = KEY_NUMBERS.map(n=>`
+    <div class="num-card"><div class="num-val">${n.val}</div><div class="num-label">${n.label}</div></div>
+  `).join('');
+  document.getElementById('chapter-map').innerHTML = CHAPTERS.map(c=>`
+    <div class="card-sm" style="margin-bottom:8px;">
+      <div style="display:flex;align-items:flex-start;gap:12px;">
+        <span class="badge badge-${c.color}">${c.ch}</span>
+        <div style="flex:1;">
+          <div style="font-weight:600;font-size:14px;margin-bottom:4px;">${c.theme}</div>
+          <div style="font-size:13px;color:var(--text2);margin-bottom:4px;"><strong>Key finding:</strong> ${c.finding}</div>
+          <div style="font-size:12px;color:var(--red);"><strong>Attack vector:</strong> ${c.attack}</div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+  document.getElementById('quick-ref').innerHTML = `<div style="overflow-x:auto;"><table style="width:100%;border-collapse:collapse;font-size:13px;">
+    <tr style="border-bottom:1px solid var(--border);">
+      <th style="text-align:left;padding:8px;color:var(--text2);">Member</th>
+      <th style="text-align:left;padding:8px;color:var(--text2);">Core Concern</th>
+      <th style="text-align:left;padding:8px;color:var(--text2);">Your Anchor Phrase</th>
+    </tr>
+    ${QUICK_REF.map(r=>`<tr style="border-bottom:1px solid var(--border);">
+      <td style="padding:8px;font-weight:600;">${r.member}</td>
+      <td style="padding:8px;color:var(--text2);">${r.concern}</td>
+      <td style="padding:8px;color:var(--teal);font-style:italic;">${r.phrase}</td>
+    </tr>`).join('')}
+  </table></div>`;
+}
+
+// ════════════════════════════════════════
+//  POMODORO
+// ════════════════════════════════════════
+let pomoInterval = null;
+let pomoSeconds = 25*60;
+let pomoDuration = 25*60;
+let pomoRunning = false;
+let pomoSessionCount = 0;
+let isBreak = false;
+
+function formatTime(s){ return `${Math.floor(s/60).toString().padStart(2,'0')}:${(s%60).toString().padStart(2,'0')}`; }
+function updatePomoUI(){
+  document.getElementById('pomo-time').textContent = formatTime(pomoSeconds);
+  const frac = 1 - (pomoSeconds/pomoDuration);
+  const offset = 283 * (1-frac);
+  document.getElementById('pomo-arc').style.strokeDashoffset = offset;
+  document.getElementById('pomo-arc').style.stroke = isBreak ? 'var(--green)' : 'var(--teal)';
+  document.getElementById('pomo-mode').textContent = isBreak ? 'BREAK TIME 🍃' : 'FOCUS SESSION 🧠';
+  document.getElementById('pomo-count').textContent = pomoSessionCount+1;
+}
+function pomoStart(){
+  if(pomoRunning){ clearInterval(pomoInterval); pomoRunning=false; document.getElementById('pomo-start').textContent='▶ Resume'; return; }
+  pomoRunning=true;
+  document.getElementById('pomo-start').textContent='⏸ Pause';
+  document.getElementById('focus-banner').classList.add('show');
+  const plan = getTodayPlan();
+  document.getElementById('focus-topic').textContent = plan ? plan.theme : 'Study time!';
+  pomoInterval = setInterval(()=>{
+    pomoSeconds--;
+    if(pomoSeconds<=0){
+      clearInterval(pomoInterval); pomoRunning=false;
+      if(!isBreak){
+        pomoSessionCount++;
+        isBreak=true;
+        pomoDuration=5*60; pomoSeconds=5*60;
+        document.getElementById('pomo-start').textContent='▶ Start Break';
+        document.getElementById('focus-banner').classList.remove('show');
+        if(Notification.permission==='granted') new Notification('🍅 Focus session done! Take a 5-minute break.');
+      } else {
+        isBreak=false;
+        pomoDuration=25*60; pomoSeconds=25*60;
+        document.getElementById('pomo-start').textContent='▶ Start Session';
+      }
+    }
+    updatePomoUI();
+  },1000);
+}
+function pomoReset(){
+  clearInterval(pomoInterval); pomoRunning=false; isBreak=false;
+  pomoSeconds=25*60; pomoDuration=25*60;
+  document.getElementById('pomo-start').textContent='▶ Start';
+  document.getElementById('focus-banner').classList.remove('show');
+  updatePomoUI();
+}
+
+// ════════════════════════════════════════
+//  INIT
+// ════════════════════════════════════════
+document.addEventListener('DOMContentLoaded',()=>{
+  updateCountdown();
+  setInterval(updateCountdown, 60000);
+  renderDashboard();
+  renderCalendar();
+  renderCommittee();
+  renderReadingList();
+  renderStrategy();
+  updatePomoUI();
+  if(Notification.permission==='default') Notification.requestPermission();
+  // Activate correct tab button
+  document.querySelectorAll('.tab-btn')[0].classList.add('active');
+});
+</script>
+</body>
+</html>
