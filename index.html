@@ -220,6 +220,23 @@ select.p-sel{background:var(--surf3);border:1px solid var(--border);color:var(--
         <button class="btn btn-g btn-sm" onclick="pmReset()">↺</button>
       </div>
       <div style="font-family:var(--mono);font-size:10px;color:var(--text3);margin-top:6px;">Session <span id="pm-cnt">1</span>/8</div>
+
+      <!-- Manual time log -->
+      <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--border);">
+        <div style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px;">⏱ Log study manually</div>
+        <div style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap;">
+          <button class="btn btn-g btn-sm" onclick="logManual(25)">+25m</button>
+          <button class="btn btn-g btn-sm" onclick="logManual(30)">+30m</button>
+          <button class="btn btn-g btn-sm" onclick="logManual(45)">+45m</button>
+          <button class="btn btn-g btn-sm" onclick="logManual(60)">+1h</button>
+          <button class="btn btn-g btn-sm" onclick="logManual(90)">+1h30</button>
+        </div>
+        <div style="display:flex;gap:6px;justify-content:center;margin-top:6px;align-items:center;">
+          <input type="number" id="manual-min" min="1" max="240" placeholder="min" style="width:60px;background:var(--surf3);border:1px solid var(--border2);color:var(--text);border-radius:6px;padding:5px 8px;font-family:var(--font);font-size:12px;text-align:center;"/>
+          <button class="btn btn-g btn-sm" onclick="logManualCustom()">Log</button>
+        </div>
+        <div id="log-confirm" style="font-size:11px;color:var(--green);margin-top:6px;min-height:16px;"></div>
+      </div>
     </div>
 
     <div class="card">
@@ -970,6 +987,34 @@ function pmReset(){
   pmWallStart = null; pmWallElapsed = 0;
   document.getElementById('pm-btn').textContent = '▶ Start';
   pmUI();
+}
+
+// Manual time logging — for when you study on another device or screen saver kicks in
+async function logManual(minutes){
+  const plan = getTodayPlan();
+  await P.logPomodoro(minutes, plan ? plan.theme : 'Study');
+  await checkAntiOverStudy();
+  showLogConfirm(`+${minutes} min logged ✓`);
+  await updateStats();
+}
+
+async function logManualCustom(){
+  const input = document.getElementById('manual-min');
+  const minutes = parseInt(input.value);
+  if(!minutes || minutes < 1 || minutes > 240){
+    showLogConfirm('Enter a number between 1–240', true);
+    return;
+  }
+  input.value = '';
+  await logManual(minutes);
+}
+
+function showLogConfirm(msg, isErr=false){
+  const el = document.getElementById('log-confirm');
+  if(!el) return;
+  el.textContent = msg;
+  el.style.color = isErr ? 'var(--red)' : 'var(--green)';
+  setTimeout(() => { el.textContent = ''; }, 2500);
 }
 
 // Resume countdown display instantly when user returns to tab
