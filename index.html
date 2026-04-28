@@ -448,7 +448,9 @@ const P = {
     const vals=Object.values(p); const correct=vals.reduce((a,v)=>a+(v.correct||0),0); const total=vals.reduce((a,v)=>a+(v.attempts||0),0);
     return {quizAccuracy:total?Math.round(correct/total*100):null,daysDone:(ls.completed||[]).length,todayPomodoros:0};
   },
-  isCompleted(date){ const ls=lsGet(); return (ls.completed||[]).includes(date); }
+  isCompleted(date){ const ls=lsGet(); return (ls.completed||[]).includes(date); },
+  taskDone(id){ const ls=lsGet(); return !!(ls.tasks||{})[id]; },
+  toggleTask(id){ const ls=lsGet(); ls.tasks=ls.tasks||{}; ls.tasks[id]=!ls.tasks[id]; lsSave(ls); return ls.tasks[id]; }
 };
 
 function today(){ return new Date().toISOString().split('T')[0]; }
@@ -456,75 +458,79 @@ function today(){ return new Date().toISOString().split('T')[0]; }
 // ════════════════════════════════════════════════════
 //  STUDY PLAN DATA
 // ════════════════════════════════════════════════════
+// Task helper — IDs for individual completion tracking
+function tid(d,b,i){ return `d${d}_${b}${i}`; }
+function t(id,text){ return {id,text}; }
+
 const PLAN = [
   {day:1,date:'2026-04-28',wd:'Mon',theme:'Thesis Architecture & Core Narrative',color:'teal',week:1,
-   m:{t:'Morning 09:00–11:00',tasks:['Re-read all 6 chapters — one full pass, no notes yet','Annotate: 5 strongest + 5 weakest claims per chapter','Write the 90-second elevator pitch from memory — time it','Papers #1, #3, #4']},
-   a:{t:'Afternoon 14:00–16:00',tasks:['List ALL statistical tests used — verify you can explain each one','Quiz: Thesis Core category — stop when 90%','Write one index card per chapter (theme + key finding + attack vector)','Practice pitch again — get it to exactly 90 seconds']}},
-  {day:2,date:'2026-04-29',wd:'Tue',theme:'Chapter 1 — Clinical Paradox & ESC Context',color:'teal',week:1,
-   m:{t:'Morning 09:00–11:00',tasks:['Master Swain 2003 dose-response (the paradigm you challenge)','LVEF and GLS thresholds for CTRCD per 2022 ESC guidelines','Why the dose-response model alone is insufficient','Papers #2, #5, #6']},
-   a:{t:'Afternoon 14:00–16:00',tasks:['How your biomarker fits Step 1 of the ESC risk algorithm','iPSC-CMs vs. primary cardiomyocytes — pros and cons','Quiz: Cardio-Oncology Field + ESC Guidelines','Review ESC tab in this website']},},
+   m:{t:'Morning 09:00–11:00',tasks:[t('d1_m0','Read Ch.1 (Introduction) + Ch.2 (Senescence) — one pass each, note the main argument per chapter'),t('d1_m1','Paper #1 — Herrmann 2020: cardiotoxicity classification framework (~30 min)'),t('d1_m2','Write the 90-second elevator pitch draft from memory — time it')]},
+   a:{t:'Afternoon 14:00–16:00',tasks:[t('d1_a0','Read Ch.3 (Main findings) + Ch.4 (Heteroplasmy) — note 3 key results each'),t('d1_a1','Paper #4 — Swain 2003: dose-response paradigm you challenge'),t('d1_a2','Write one index card per chapter: theme + key finding + main attack point')]}},
+  {day:2,date:'2026-04-29',wd:'Tue',theme:'Ch.1 Clinical Paradox + ESC Context',color:'teal',week:1,
+   m:{t:'Morning 09:00–11:00',tasks:[t('d2_m0','Read Ch.5 (Ribociclib) + Ch.6 (Dantrolene) — complete your first thesis pass'),t('d2_m1','Paper #2 — Zamorano 2016 ESC position paper: monitoring thresholds'),t('d2_m2','Write: why the dose-response model alone is insufficient — 3 sentences from memory')]},
+   a:{t:'Afternoon 14:00–16:00',tasks:[t('d2_a0','Paper #5 — Zhang 2012 Nat Med: Top2B mechanism (key counterpoint to your mitochondrial focus)'),t('d2_a1','LVEF and GLS CTRCD thresholds (ESC 2022) — write them from memory, check ESC tab'),t('d2_a2','Practice elevator pitch again — aim exactly 90 seconds, record yourself')]}},
   {day:3,date:'2026-04-30',wd:'Wed',theme:'Chapter 2 — Senescence & dyn-EHT',color:'purple',week:1,
-   m:{t:'Morning 09:00–11:00',tasks:['10 hallmarks of senescence (Campisi)','SASP components: IL-6, IL-8, MMP3, PAI-1 — memorize the major ones','AICAR mechanism as senomorphic (vs. senolytic) agent','Papers #16, #17, #18']},
-   a:{t:'Afternoon 14:00–16:00',tasks:['How to distinguish senescence from apoptosis in your model','How dyn-EHT platform validates faithfulness to in vivo biology','Papers #19, #20, #21','Quiz: Senescence category']},},
+   m:{t:'Morning 09:00–11:00',tasks:[t('d3_m0','Paper #16 — Childs 2017: senescence hallmarks review (foundation for Ch.2)'),t('d3_m1','Paper #17 — Campisi 2013: aging + senescence (key authority)'),t('d3_m2','Memorize SASP components relevant to cardiac: IL-6, IL-8, MMP3, PAI-1')]},
+   a:{t:'Afternoon 14:00–16:00',tasks:[t('d3_a0','Paper #18 — Dookun 2020 JCI Insight: senolytic clearance prevents HF (senescence is CAUSAL)'),t('d3_a1','AICAR = senomorphic vs. senolytics — explain the difference out loud'),t('d3_a2','Quiz: Senescence category — stop when 90%')]}},
   {day:4,date:'2026-05-01',wd:'Thu',theme:'iPSC Methodology Deep Dive',color:'blue',week:1,
-   m:{t:'Morning 09:00–11:00',tasks:['Wnt temporal modulation protocol (Lian 2012) — memorize Day 0 and Day 3 reagents','iPSC QC pipeline: OCT4/NANOG/SOX2, alkaline phosphatase, cTnT+ %','Karyotypic stability: your exact method name','Papers #9, #10, #11']},
-   a:{t:'Afternoon 14:00–16:00',tasks:['Fibroblast epigenetic memory — prepare the cell-type specificity counter-argument','Maturation limitation of iPSC-CMs — and how dyn-EHT partially addresses it','Papers #12, #13, #14','Quiz: iPSC Methodology']},},
+   m:{t:'Morning 09:00–11:00',tasks:[t('d4_m0','Paper #9 — Takahashi 2007 Cell: Yamanaka factors OCT4/SOX2/KLF4/cMYC (Nobel foundation)'),t('d4_m1','Paper #10 — Lian 2012 PNAS: Wnt protocol — Day 0 CHIR99021, Day 3 IWP2 (memorize these)'),t('d4_m2','iPSC QC pipeline: OCT4/NANOG/SOX2, alkaline phosphatase, cTnT+ % — write your exact numbers')]},
+   a:{t:'Afternoon 14:00–16:00',tasks:[t('d4_a0','Paper #11 — Ronaldson-Bouchard 2018 Nature: EHT maturation benchmark'),t('d4_a1','Fibroblast epigenetic memory counter-argument — cell-type specificity from same donor'),t('d4_a2','Quiz: iPSC Methodology — stop when 90%')]}},
   {day:5,date:'2026-05-02',wd:'Fri',theme:'Mitochondrial Dynamics — Fission & Fusion',color:'gold',week:1,
-   m:{t:'Morning 09:00–11:00',tasks:['DRP1=fission, MFN1/MFN2+OPA1=fusion — roles and cardiac specifics','Twig 2008: WHY fission is required for mitophagy (this is essential)','The hyperfusion trap: constitutive → no mitophagy → quality control failure','Papers #22, #23, #24, #25']},
-   a:{t:'Afternoon 14:00–16:00',tasks:['Henning paradox: hibernation protective fusion vs. TOX pathological fusion — prepare the answer','How DRP1 is regulated: phosphorylation (Ser616 activation, Ser637 inhibition)','Papers #26, #28, #29','Quiz: Mitochondrial Dynamics']},},
+   m:{t:'Morning 09:00–11:00',tasks:[t('d5_m0','Paper #23 — Youle & van der Bliek Science 2012: canonical fission/fusion review (essential)'),t('d5_m1','Paper #24 — Twig 2008 EMBO J: WHY fission is required for mitophagy — know every step'),t('d5_m2','The hyperfusion trap: constitutive → no fission → no mitophagy → quality control failure')]},
+   a:{t:'Afternoon 14:00–16:00',tasks:[t('d5_a0','Paper #25 — Dorn 2015: cardiac-specific fission/fusion context'),t('d5_a1','DRP1 regulation: Ser616 (activation by CDK1) vs Ser637 (inhibition by PKA) — write from memory'),t('d5_a2','Quiz: Mitochondrial Dynamics — stop when 90%')]}},
   {day:6,date:'2026-05-03',wd:'Sat',theme:'mtDNA Sequencing & the Biomarker',color:'gold',week:1,
-   m:{t:'Morning 09:00–11:00',tasks:['YOUR EXACT NUMBERS: 77% insertions TOX, 54% RES — burn these in','VAF threshold, coverage depth, strand orientation filter — your exact values','Kennedy 2013 methodology: know every detail','Paper #32 (read every word)']},
-   a:{t:'Afternoon 14:00–16:00',tasks:['Why the fibroblast deletion-dominated pattern rules out library prep artifact','Heteroplasmy threshold concept — universal heteroplasmy (Payne 2013)','Papers #30, #31, #33, #34','Quiz: mtDNA & Biomarker']},},
+   m:{t:'Morning 09:00–11:00',tasks:[t('d6_m0','Paper #32 — Kennedy 2013 PLOS Genet: ultra-sensitive mtDNA sequencing method (READ EVERY WORD)'),t('d6_m1','YOUR EXACT NUMBERS: 77% insertions TOX, 54% RES — write them 5 times without looking'),t('d6_m2','VAF threshold, coverage depth, strand filter, panel-of-normals — recite your exact pipeline')]},
+   a:{t:'Afternoon 14:00–16:00',tasks:[t('d6_a0','Paper #30 — Stewart & Chinnery 2015 Nat Rev Genet: heteroplasmy dynamics (definitive review)'),t('d6_a1','Paper #33 — Ju 2014 eLife: insertion vs deletion patterns — comparative framework for your 77%'),t('d6_a2','Quiz: mtDNA & Biomarker — stop when 90%')]}},
   {day:7,date:'2026-05-04',wd:'Sun',theme:'Week 1 Review Sprint',color:'green',week:1,
-   m:{t:'Morning 09:00–11:00',tasks:['Full quiz: all Week 1 categories — identify weak spots','Numbers drill (no notes): 77% / 54% / 47% / 62% / 2.05x / 21 genes','Record yourself giving the elevator pitch — watch it back','Write down what you got wrong and why']},
-   a:{t:'Afternoon 14:00–16:00',tasks:['Re-practice only the weak areas identified in morning','Write 3 Q&A pairs for your weakest chapter','Short walk / rest — Week 2 starts tomorrow','STOP at 4 hours — sleep consolidates today\'s learning']}},
+   m:{t:'Morning 09:00–11:00',tasks:[t('d7_m0','Full quiz: all Week 1 categories — identify weak spots (below 70% = red flag)'),t('d7_m1','Numbers drill out loud without notes: 77% / 54% / 47% / 62% / 2.05× / 21 genes'),t('d7_m2','Record yourself giving the elevator pitch — watch it back, note weak points')]},
+   a:{t:'Afternoon 14:00–16:00',tasks:[t('d7_a0','Re-quiz only the categories below 70% from this morning'),t('d7_a1','Write 3 Q&A pairs for your weakest topic'),t('d7_a2','STOP at 4 hours. Short walk. Week 2 starts tomorrow.')]}},
 
   {day:8,date:'2026-05-05',wd:'Mon',theme:'Redox Biology — GPX1, GSTM1, ROS',color:'orange',week:2,
-   m:{t:'Morning 09:00–11:00',tasks:['GPX1 mechanism: reduces H₂O₂ and lipid hydroperoxides via glutathione','GSTM1: detoxifies DOX metabolites — null polymorphism significance','ROS dual role: signaling (low dose) vs. damaging (high dose)','Papers #37, #38']},
-   a:{t:'Afternoon 14:00–16:00',tasks:['TMRM = membrane potential (Δψm). MitoSOX = mitochondrial superoxide — live cell assays','2.05-fold higher baseline ROS in TOX — connect to antioxidant deficiency','Papers #39, #40','Quiz: Redox Biology category']},},
+   m:{t:'Morning 09:00–11:00',tasks:[t('d8_m0','Paper #37 — Schieber & Chandel 2014: ROS signaling vs damage (dose-response concept)'),t('d8_m1','Paper #38 — Lubos 2011: GPX1 comprehensive review — your KEY protein finding'),t('d8_m2','GPX1 mechanism: reduces H₂O₂ via glutathione. GSTM1: detoxifies DOX metabolites')]},
+   a:{t:'Afternoon 14:00–16:00',tasks:[t('d8_a0','Paper #39 — Hayes 2005: GST family — GSTM1 null polymorphism significance'),t('d8_a1','TMRM = Δψm (membrane potential). MitoSOX = O₂•⁻ (superoxide). Connect to your 2.05× ROS finding'),t('d8_a2','Quiz: Thesis Core + Mitochondrial Dynamics — target 90%')]}},
   {day:9,date:'2026-05-06',wd:'Tue',theme:'Bioenergetics — Seahorse XF & FAO',color:'orange',week:2,
-   m:{t:'Morning 09:00–11:00',tasks:['Brand & Nicholls 2011: basal OCR, ATP-linked, maximal, SRC, proton leak — formulas','47% reduced ATP + 62% energy deficit in TOX: know these cold','Oligomycin → ATP-linked; FCCP → maximal; Rot/AA → non-mitochondrial','Paper #43 (read carefully)']},
-   a:{t:'Afternoon 14:00–16:00',tasks:['FAO assay: etomoxir blocks CPT1 → FAO-linked OCR component isolated','Metabolic rigidity: why TOX cells cannot shift to FAO under anthracycline stress','Henning connection: SUL-138 → FAO shift (this is a gift question)','Papers #44, #45; Quiz: Bioenergetics']},},
+   m:{t:'Morning 09:00–11:00',tasks:[t('d9_m0','Paper #43 — Brand & Nicholls 2011 Biochem J: Seahorse parameters Bible — read every formula'),t('d9_m1','6 Seahorse parameters: basal OCR, ATP-linked, maximal, SRC, proton leak, non-mito — write from memory'),t('d9_m2','YOUR NUMBERS: 47% ATP↓ + 62% energy deficit in TOX — what assay, what conditions')]},
+   a:{t:'Afternoon 14:00–16:00',tasks:[t('d9_a0','Paper #44 — Bertero & Maack 2018: metabolic remodelling in HF — FAO vs glycolysis switch'),t('d9_a1','Metabolic rigidity: why TOX cannot shift to FAO. Henning link: SUL-138 → FAO shift (gift question)'),t('d9_a2','Quiz: Senescence + iPSC Methodology — catch up on any below 80%')]}},
   {day:10,date:'2026-05-07',wd:'Wed',theme:'Transcriptomics — GSEA & 21-Gene Signature',color:'blue',week:2,
-   m:{t:'Morning 09:00–11:00',tasks:['GSEA Subramanian 2005: NES, FDR — what makes a pathway significant','The 21-gene signature: NOT statistical noise — emerged from biological pathway coherence','Four coherent pathways: mitochondrial QC, autophagy, antioxidant metabolism, organelle dynamics','Paper #42']},
-   a:{t:'Afternoon 14:00–16:00',tasks:['Bennett question: functional gene cluster vs. statistical list — GSEA coherence argument','Protein-level validation: GPX1 and GSTM1 Western blots cross-validate the RNA data','GSEA top pathway by NES in your thesis — have this memorized','Quiz: Transcriptomics + Thesis Core']},},
-  {day:11,date:'2026-05-08',wd:'Thu',theme:'Ch.4 — Heteroplasmy Review',color:'purple',week:2,
-   m:{t:'Morning 09:00–11:00',tasks:['All humans carry heteroplasmic variants (Payne 2013) — threshold concept, not presence/absence','Post-mitotic cardiomyocytes accumulate damage without dilution — key mechanism','Gorman 2016: tissue-specific threshold effects in mitochondrial disease','Papers #34, #35, #36']},
-   a:{t:'Afternoon 14:00–16:00',tasks:['POLRMT variant (nuclear-encoded mtRNA polymerase) — Gietema/ter Maaten may raise this','Germline vs. somatic layer: how iPSC captures both simultaneously','Paper #30, #31 re-read for heteroplasmy specifics','Quiz: mtDNA & Biomarker (repeat until 90%)']},},
+   m:{t:'Morning 09:00–11:00',tasks:[t('d10_m0','Paper #42 — Subramanian 2005 PNAS: GSEA methodology — NES, FDR, what makes a pathway significant'),t('d10_m1','21-gene signature: 4 coherent pathways — mitochondrial QC, autophagy, antioxidant, organelle dynamics'),t('d10_m2','Protein-level cross-validation: GPX1 + GSTM1 Western blots — how they confirm RNA signature')]},
+   a:{t:'Afternoon 14:00–16:00',tasks:[t('d10_a0','Paper #6 — Wallace 2020 Circ Res: mitochondrial mechanisms of DOX cardiomyopathy'),t('d10_a1','Bennett question: functional gene cluster vs statistical list — rehearse GSEA coherence argument'),t('d10_a2','Quiz: mtDNA & Biomarker — stop when 90%')]}},
+  {day:11,date:'2026-05-08',wd:'Thu',theme:'Ch.4 — Heteroplasmy & Thresholds',color:'purple',week:2,
+   m:{t:'Morning 09:00–11:00',tasks:[t('d11_m0','Paper #31 — Greaves 2012 J Pathol: disease threshold concept for heteroplasmy'),t('d11_m1','Paper #34 — Payne 2013: ALL humans carry heteroplasmy — threshold model not presence/absence'),t('d11_m2','Post-mitotic cardiomyocytes accumulate damage without dilution — why this makes them vulnerable')]},
+   a:{t:'Afternoon 14:00–16:00',tasks:[t('d11_a0','Paper #35 — Gorman 2016: tissue-specific threshold effects in mitochondrial disease'),t('d11_a1','POLRMT variant: germline layer + somatic mtDNA layer = two complementary vulnerabilities in iPSC'),t('d11_a2','Quiz: Cardio-Oncology Field + ESC Guidelines — stop when 90%')]}},
   {day:12,date:'2026-05-09',wd:'Fri',theme:'Ch.5 — Ribociclib & CDK4/6 Inhibitors',color:'red',week:2,
-   m:{t:'Morning 09:00–11:00',tasks:['MONALEESA-2 (Hortobagyi 2016): ribociclib efficacy + QTc risk profile','Foijer 2024: CDK4/6i → cell enlargement → aneuploidy — MEMORIZE this paper','Spliceosome dysfunction vs. mitotic-error aneuploidy: NOT mutually exclusive in iPSC-CMs','QTc monitoring protocol per ESC guidelines: baseline, day 14, monthly × 3']},
-   a:{t:'Afternoon 14:00–16:00',tasks:['Post-mitotic cardiomyocytes: limited susceptibility to mitotic-error aneuploidy (key Foijer answer)','cGAS/STING bridge (Foijer 2022): connect nuclear CIN to your mtDNA findings','Papers #48, #49, #50','Quiz: CDK4/6i + Committee — Foijer']},},
+   m:{t:'Morning 09:00–11:00',tasks:[t('d12_m0','Paper #48 — Hortobagyi 2016 NEJM MONALEESA-2: ribociclib efficacy + QTc risk (read carefully)'),t('d12_m1','QTc monitoring: baseline <450ms required; ECG day 14 cycle 1, day 1 cycle 2, monthly ×3'),t('d12_m2','Spliceosome dysfunction (your finding) vs aneuploidy (Foijer 2024) — NOT mutually exclusive')]},
+   a:{t:'Afternoon 14:00–16:00',tasks:[t('d12_a0','Paper #49 — Tasan 2020: CDK4/6i non-canonical functions including spliceosome regulation'),t('d12_a1','cGAS/STING bridge: mtDNA leakage → cGAS/STING → SASP — connect Ch.3 to Ch.5'),t('d12_a2','Quiz: Committee — Foijer + Thesis Core — stop when 90%')]}},
   {day:13,date:'2026-05-10',wd:'Sat',theme:'Ch.6 — Dantrolene & Calcium',color:'red',week:2,
-   m:{t:'Morning 09:00–11:00',tasks:['RyR2: SR calcium release; hyperphosphorylation → leaky channel → contractile dysfunction','Dantrolene mechanism: blocks RyR2 (malignant hyperthermia pharmacology context)','Ser2808 (PKA) and Ser2814 (CaMKII) phosphorylation sites — memorize both','Henning background: he knows RyR2 cold from anesthesiology — do not be vague']},
-   a:{t:'Afternoon 14:00–16:00',tasks:['What WAS measured (functional EHT contractility rescue) vs. what was NOT (RyR2 phosphorylation)','Confirmatory experiment: pSer2808 + pSer2814 Western blot + confocal calcium spark imaging','SR calcium load: caffeine rapid application test — know this methodology','Quiz: Ch.6 + Committee — Henning']},},
+   m:{t:'Morning 09:00–11:00',tasks:[t('d13_m0','RyR2 biology: SR calcium release, hyperphosphorylation → leaky channel → contractile dysfunction'),t('d13_m1','Ser2808 (PKA) and Ser2814 (CaMKII) — write both phospho-sites from memory'),t('d13_m2','What WAS measured (EHT contractility rescue) vs NOT (RyR2 phosphorylation) — acknowledge gap')]},
+   a:{t:'Afternoon 14:00–16:00',tasks:[t('d13_a0','Paper #45 — Lopaschuk 2010: substrate oxidation review — required for FAO assay defense'),t('d13_a1','Confirmatory RyR2 experiment: pSer2808+pSer2814 Western + Ca²⁺ spark imaging + caffeine protocol'),t('d13_a2','Quiz: Committee — Henning + Mitochondrial Dynamics')]}},
   {day:14,date:'2026-05-11',wd:'Sun',theme:'Week 2 Review & Integration',color:'green',week:2,
-   m:{t:'Morning 09:00–11:00',tasks:['Full quiz sprint: ALL categories — rank weak spots (below 70% = danger zone)','Numbers drill out loud without notes: ALL key statistics','Write the one-paragraph thesis narrative from scratch — no prompts','Quiz any category below 75%']},
-   a:{t:'Afternoon 14:00–16:00',tasks:['Connect chapters: how does Ch.2 senescence → Ch.3 mtDNA → Ch.4 heteroplasmy form ONE story?','Prepare the cGAS/STING future experiment in full detail','STOP AT 4 HOURS — your brain needs rest more than more input','Early night: sleep consolidation is your study session tonight']}},
+   m:{t:'Morning 09:00–11:00',tasks:[t('d14_m0','Full quiz sprint ALL categories — list every category below 75% (danger zone)'),t('d14_m1','Numbers drill from memory: ALL key statistics without notes'),t('d14_m2','Write the one-paragraph thesis narrative from scratch — no prompts, timed 3 minutes')]},
+   a:{t:'Afternoon 14:00–16:00',tasks:[t('d14_a0','Re-quiz every category below 75% from morning — keep going until above 80%'),t('d14_a1','Connect chapters verbally: Ch.2 senescence → Ch.3 mtDNA → Ch.4 heteroplasmy → ONE story'),t('d14_a2','STOP AT 4 HOURS. Sleep early — consolidation is the session tonight.')]}},
 
   {day:15,date:'2026-05-12',wd:'Mon',theme:'Committee — De Boer',color:'teal',week:3,
-   m:{t:'Morning 09:00–11:00',tasks:['READ: Meijers et al. Circulation 2018 (SECRETE-HF foundational paper)','Galectin-3 validation journey: CHARM + CORONA sub-studies → thresholds','Memorize the exact parallel: galectin-3 biomarker validation = your roadmap','Practice De Boer Q1 verbally × 3 times']},
-   a:{t:'Afternoon 14:00–16:00',tasks:['De Boer Q2: SECRETE-HF heart-to-cancer feedback — "not higher doses, identify vulnerable patients"','De Boer Q3: LifeLines subclinical dysfunction — "iPSC removes cardiac history entirely"','Quiz: Committee — De Boer until 90%','READ: van der Velde 2016 serial galectin-3']},},
+   m:{t:'Morning 09:00–11:00',tasks:[t('d15_m0','READ: Meijers et al. Circulation 2018 — SECRETE-HF: failing heart promotes tumour growth'),t('d15_m1','Galectin-3 journey: CHARM + CORONA → thresholds → clinical use. This is your roadmap.'),t('d15_m2','Practice De Boer Q1 verbally × 3 — use "galectin-3 analogy" answer')]},
+   a:{t:'Afternoon 14:00–16:00',tasks:[t('d15_a0','Paper #12 — Zimmermann 2006 Nat Med: EHT lineage context'),t('d15_a1','De Boer Q2 (SECRETE-HF feedback) + Q3 (LifeLines) — rehearse both answers'),t('d15_a2','Quiz: Committee — De Boer until 90%')]}},
   {day:16,date:'2026-05-13',wd:'Tue',theme:'Committee — Foijer',color:'purple',week:3,
-   m:{t:'Morning 09:00–11:00',tasks:['READ: Hong C, Foijer F et al., Nature 2022 — READ EVERY WORD','READ: Foijer 2024 CDK4/6i → cell enlargement → aneuploidy','Prepare your EXACT iPSC QC numbers: cTnT+ %, karyotype method, batch count','cGAS/STING bridge speech: mtDNA leakage → cGAS/STING → SASP (practice × 3)']},
-   a:{t:'Afternoon 14:00–16:00',tasks:['Foijer Q1: nuclear CIN gap — acknowledge + cGAS/STING bridge','Foijer Q2: CDK4/6i mechanisms — synergistic, not exclusive, in iPSC-CMs','Foijer Q3: iPSC QC pipeline — recite exact numbers without hesitation','Quiz: Committee — Foijer until 90%']},},
+   m:{t:'Morning 09:00–11:00',tasks:[t('d16_m0','READ: Hong C, Foijer F et al. Nature 2022 — cGAS/STING-IL6 in CIN (READ EVERY WORD)'),t('d16_m1','READ: Foijer 2024 — CDK4/6i → cell enlargement → aneuploidy (DIRECTLY relevant to Ch.5)'),t('d16_m2','Your iPSC QC exact numbers: cTnT+ %, karyotype method name, batch count — write from memory')]},
+   a:{t:'Afternoon 14:00–16:00',tasks:[t('d16_a0','Foijer Q1 (nuclear CIN gap) + Q2 (CDK4/6i mechanisms) + Q3 (iPSC QC) — verbal rehearsal'),t('d16_a1','cGAS/STING bridge speech: mtDNA leakage → cGAS/STING → SASP — practice × 3'),t('d16_a2','Quiz: Committee — Foijer until 90%')]}},
   {day:17,date:'2026-05-14',wd:'Wed',theme:'Committee — Henning & Bennett',color:'orange',week:3,
-   m:{t:'Morning 09:00–11:00',tasks:['Henning: SUL-138 → FAO proteome shift — mechanism + propose your collaboration experiment','Regulated/reversible (hibernation) vs. constitutive/fixed (TOX) — the toggle switch metaphor','Practice Henning Q3 (RyR2 confirmation experiment) in detail','Bennett: GSEA coherence argument for 21-gene signature']},
-   a:{t:'Afternoon 14:00–16:00',tasks:['Bennett: epigenetic memory counter-argument using fibroblast pattern difference','Bennett: VAF threshold, strand filter, panel of normals — recite exact numbers','Quiz: Committee — Henning until 90%','Quiz: Committee — Bennett until 90%']},},
-  {day:18,date:'2026-05-15',wd:'Thu',theme:'NEW: Ter Maaten & Gietema',color:'green',week:3,
-   m:{t:'Morning 09:00–11:00',tasks:['Ter Maaten: acute HF + diuretic response + urinary sodium biomarker — understand her work','How mtDNA biomarker COMPLEMENTS troponin/NT-proBNP (different time point, not competing)','Prepare: "Pre-treatment (mtDNA) + on-treatment (troponin/NT-proBNP/GLS) = comprehensive framework"','READ: Lyon 2022 ESC guidelines — the monitoring framework she uses daily']},
-   a:{t:'Afternoon 14:00–16:00',tasks:['Gietema: testicular cancer CVD late effects — cisplatin-based treatment → long-term CVD (Gietema JCO papers)','Bridge: constitutional vulnerability framework applies to ANY cardiotoxic drug (cisplatin, bleomycin)','Gietema dose question: "NOT dose reduction — enhanced monitoring at same dose. Biomarker tells you WHO needs that conversation"','Quiz: Committee — Ter Maaten + Gietema']},},
+   m:{t:'Morning 09:00–11:00',tasks:[t('d17_m0','Henning: SUL-138 → FAO proteome shift. Regulated/reversible (hibernation) vs constitutive/fixed (TOX)'),t('d17_m1','Henning Q3: RyR2 confirmation experiment — recite pSer2808+pSer2814 + Ca²⁺ spark protocol'),t('d17_m2','Paper #50 — Moslehi 2019 JACC CardioOnc: CDK4/6i CV safety data (background context)')]},
+   a:{t:'Afternoon 14:00–16:00',tasks:[t('d17_a0','Bennett: GSEA coherence argument + fibroblast epigenetic memory counter-argument'),t('d17_a1','Bennett: VAF threshold + strand filter + panel-of-normals — recite exact numbers'),t('d17_a2','Quiz: Committee — Henning + Bennett until 90% each')]}},
+  {day:18,date:'2026-05-15',wd:'Thu',theme:'Committee — Ter Maaten & Gietema',color:'green',week:3,
+   m:{t:'Morning 09:00–11:00',tasks:[t('d18_m0','Ter Maaten: acute HF + urinary sodium biomarker (Dekker grant). How mtDNA complements troponin/NT-proBNP'),t('d18_m1','Key answer: "Pre-treatment (mtDNA) + on-treatment (troponin/GLS) = different time points, not competing"'),t('d18_m2','Paper #3 — Lyon 2022 ESC guidelines — the clinical framework ter Maaten uses daily')]},
+   a:{t:'Afternoon 14:00–16:00',tasks:[t('d18_a0','Gietema: cisplatin CVD late effects in testicular cancer survivors — understand his JCO work'),t('d18_a1','Gietema dose question: "NOT dose reduction — enhanced monitoring at SAME curative dose"'),t('d18_a2','Quiz: Committee — Ter Maaten + Gietema until 90%')]}},
   {day:19,date:'2026-05-16',wd:'Fri',theme:'Full Committee Verbal Run',color:'teal',week:3,
-   m:{t:'Morning 09:00–11:00',tasks:['Answer EVERY committee question verbally — time each (target 2–3 min)','Practice the disarming move: reference each member\'s paper by name for all 6 members','Can you say one specific sentence from each member\'s own paper from memory?','Check: all quiz categories > 85%?']},
-   a:{t:'Afternoon 14:00–16:00',tasks:['Paradigm questions: Q1 (supportive care confounders), Q2 (small cohort), Q3 (iPSC maturation)','Clinical translation: Dekker grant pitch in 2 minutes — practice verbally','All 8 questions from prep report Section 4A-4C — run through all','Quiz: ESC Guidelines — aim 90%']},},
+   m:{t:'Morning 09:00–11:00',tasks:[t('d19_m0','Answer ALL committee questions verbally — time each answer (target 2–3 min max)'),t('d19_m1','The disarming move: name one specific paper from each of the 6 committee members from memory'),t('d19_m2','Check all quiz categories — any below 85% gets 15 min targeted re-quiz now')]},
+   a:{t:'Afternoon 14:00–16:00',tasks:[t('d19_a0','Paradigm questions: supportive care confounders / small cohort / iPSC maturation — verbal answers'),t('d19_a1','Clinical translation: Dekker grant pitch in 2 minutes — practice verbally'),t('d19_a2','Quiz: ESC Guidelines 2022 — aim 90%')]}},
   {day:20,date:'2026-05-17',wd:'Sat',theme:'Mock Defense #1',color:'red',week:3,
-   m:{t:'Morning 09:00–11:00',tasks:['Ask supervisor or labmate to mock-question you for 30 minutes','Present thesis overview verbally — 15 minutes (no slides, harder is better)','Q&A simulation: they ask from dossier, you answer in real time','RECORD YOURSELF — review for unclear moments, filler words, defensive posture']},
-   a:{t:'Afternoon 14:00–16:00',tasks:['Review recording: list your 3 weakest answers','Rewrite weak answers using the 3-law framework','Practice only those weak answers until they flow naturally','Write what you want to remember tomorrow morning']},},
+   m:{t:'Morning 09:00–11:00',tasks:[t('d20_m0','Ask supervisor or labmate to mock-question you for 30 min from the committee dossier'),t('d20_m1','Present thesis overview verbally — 15 min no slides (harder than with slides, better practice)'),t('d20_m2','RECORD YOURSELF — review for filler words, defensive posture, unclear moments')]},
+   a:{t:'Afternoon 14:00–16:00',tasks:[t('d20_a0','Review recording: list your 3 weakest answers specifically'),t('d20_a1','Rewrite weak answers using the 3-law framework: Acknowledge → Data → Future experiment'),t('d20_a2','Practice only those weak answers until they flow naturally')]}},
   {day:21,date:'2026-05-18',wd:'Sun',theme:'Final Targeting & Polish',color:'gold',week:3,
-   m:{t:'Morning 09:00–11:00',tasks:['Address ALL mock #1 weak points ONLY — no new material','Final numbers drill: all statistics from memory','Confirm stellingen (propositions) — practice defending each one','Check logistics: Academie Gebouw, Broerstraat 5 — arrive 12:15 on May 21']},
-   a:{t:'Afternoon 14:00–16:00',tasks:['One more verbal run through ALL committee questions (final time)','STOP STUDYING BY 18:00 — this is a hard boundary','Prepare your outfit, travel plan, water, ID','Rest. Your preparation is complete. Sleep early.']}},
+   m:{t:'Morning 09:00–11:00',tasks:[t('d21_m0','Address ALL mock #1 weak points ONLY — no new material today'),t('d21_m1','Final numbers drill: all key statistics from memory — 77% / 54% / 47% / 2.05× / 21 genes'),t('d21_m2','Logistics: Academie Gebouw, Broerstraat 5 — arrive 12:15 on May 21. Outfit. Water. ID.')]},
+   a:{t:'Afternoon 14:00–16:00',tasks:[t('d21_a0','One final verbal run through ALL committee questions'),t('d21_a1','STOP STUDYING BY 18:00 — hard boundary. No exceptions.'),t('d21_a2','Rest. Your preparation is complete. Sleep before 22:00.')]}},
   {day:22,date:'2026-05-19',wd:'Mon',theme:'Final Light Review — REST DAY',color:'green',week:3,
-   m:{t:'Morning 09:00–10:30 (MAXIMUM)',tasks:['ONLY: read core narrative pitch × 5 times','ONLY: say one-line quick reference per committee member from memory','ONLY: verify key numbers once (77% / 54% / 47% / 2.05x / 21 genes)','STOP. No new material. Your preparation is complete.']},
-   a:{t:'Afternoon — REST',tasks:['Eat well. Hydrate. Walk outside.','Sleep early — before 22:00','May 20 (tomorrow): gentle review day or full rest','May 21: YOU ARE READY. 🎓']}}
+   m:{t:'Morning 09:00–10:30 MAX',tasks:[t('d22_m0','Read core narrative pitch × 5 times only'),t('d22_m1','One-line anchor phrase per committee member — say from memory'),t('d22_m2','Verify key numbers once only: 77% / 54% / 47% / 2.05× / 21 genes. STOP.')]},
+   a:{t:'Afternoon — REST',tasks:[t('d22_a0','Eat well. Hydrate. Walk outside. No studying.'),t('d22_a1','Sleep early — before 22:00. May 20: full rest.'),t('d22_a2','May 21: YOU ARE READY. 🎓')]}}
 ];
 
 // ════════════════════════════════════════════════════
@@ -981,26 +987,53 @@ function renderCal(){
     const wl=['Week 1 · Apr 28–May 4 · Thesis Architecture, Senescence & iPSC','Week 2 · May 5–11 · Mitochondrial Science Deep Dive','Week 3 · May 12–19 · Committee Prep & Mock Defense'][w-1];
     return `<div style="margin-bottom:20px;"><div style="font-family:var(--font-d);font-size:17px;color:var(--teal);margin-bottom:10px;">${wl}</div>
     ${days.map(d=>{
+      const allTasks=[...d.m.tasks,...d.a.tasks];
+      const doneCount=allTasks.filter(t=>P.taskDone(t.id)).length;
       const isTod=d.date===today(); const done=P.isCompleted(d.date);
       return `<div class="day-card ${isTod?'today':''} ${done?'done':''}" onclick="toggleDay('dc-${d.date}')">
         <div class="day-hdr">
           <span class="day-num">Day ${d.day} · ${d.date.slice(5)} ${d.wd}</span>
           <span class="day-title">${d.theme}</span>
-          <div style="display:flex;gap:5px;flex-wrap:wrap;">
+          <div style="display:flex;gap:5px;flex-wrap:wrap;align-items:center;">
+            <span style="font-family:var(--mono);font-size:10px;color:var(--${doneCount===allTasks.length?'green':'text3'});">${doneCount}/${allTasks.length}</span>
             <span class="badge b-${d.color}">${d.color}</span>
             ${isTod?'<span class="badge b-teal">TODAY</span>':''}
             ${done?'<span class="badge b-green">✓</span>':''}
           </div>
         </div>
         <div class="day-body" id="dc-${d.date}">
-          <div class="card-sm" style="margin-bottom:8px;"><h4>${d.m.t}</h4><ul class="task-list">${d.m.tasks.map(t=>`<li>${t}</li>`).join('')}</ul></div>
-          <div class="card-sm"><h4>${d.a.t}</h4><ul class="task-list">${d.a.tasks.map(t=>`<li>${t}</li>`).join('')}</ul></div>
-          <button class="btn btn-p btn-sm" style="margin-top:10px;" onclick="event.stopPropagation();markDay('${d.date}',${d.day},'${d.theme}')">✓ Mark Complete</button>
+          <div class="card-sm" style="margin-bottom:8px;">
+            <h4 style="margin-bottom:6px;">${d.m.t}</h4>
+            ${d.m.tasks.map(t=>calTaskRow(t)).join('')}
+          </div>
+          <div class="card-sm">
+            <h4 style="margin-bottom:6px;">${d.a.t}</h4>
+            ${d.a.tasks.map(t=>calTaskRow(t)).join('')}
+          </div>
+          <button class="btn btn-p btn-sm" style="margin-top:10px;" onclick="event.stopPropagation();markDay('${d.date}',${d.day},'${d.theme}')">✓ Mark Day Complete</button>
         </div>
       </div>`;
     }).join('')}
     </div>`;
   }).join('');
+}
+
+function calTaskRow(task){
+  const done=P.taskDone(task.id);
+  return `<div style="display:flex;align-items:flex-start;gap:8px;padding:5px 0;border-bottom:1px solid var(--border);" id="task-row-${task.id}">
+    <button onclick="event.stopPropagation();toggleTask('${task.id}');rerenderCalCounter('${task.id}')" style="background:${done?'var(--teal)':'var(--surf3)'};border:1px solid ${done?'var(--teal)':'var(--border2)'};border-radius:4px;width:16px;height:16px;flex-shrink:0;margin-top:2px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#000;font-size:10px;font-weight:700;">${done?'✓':''}</button>
+    <span style="font-size:12px;line-height:1.6;color:${done?'var(--text3)':'var(--text2)'};${done?'text-decoration:line-through;':''}">${task.text}</span>
+  </div>`;
+}
+
+function rerenderCalCounter(taskId){
+  // find which day this task belongs to, update the counter in header
+  const plan=PLAN.find(d=>[...d.m.tasks,...d.a.tasks].some(t=>t.id===taskId));
+  if(!plan) return;
+  const allTasks=[...plan.m.tasks,...plan.a.tasks];
+  const doneCount=allTasks.filter(t=>P.taskDone(t.id)).length;
+  const hdr=document.querySelector(`#dc-${plan.date}`)?.closest('.day-card')?.querySelector('span[style*="mono"]');
+  if(hdr){ hdr.textContent=`${doneCount}/${allTasks.length}`; hdr.style.color=doneCount===allTasks.length?'var(--green)':'var(--text3)'; }
 }
 function toggleDay(id){ const el=document.getElementById(id); if(el) el.classList.toggle('open'); }
 async function markDay(date,day,theme){ await P.markDayDone(day,theme); renderCal(); }
@@ -1013,8 +1046,59 @@ function getTodayPlan(){ return PLAN.find(d=>d.date===today())||null; }
 function renderTodayFocus(){
   const el=document.getElementById('today-focus'); if(!el) return;
   const plan=getTodayPlan();
-  if(!plan){ const tod=today(); if(tod<'2026-04-28') el.innerHTML='<p>Study begins <strong>April 28</strong>. Review your thesis tonight.</p>'; else if(tod>'2026-05-19') el.innerHTML='<p>Study period complete! Defense is <strong>May 21</strong>. Relax and trust your preparation. 🎓</p>'; else el.innerHTML='<p>No plan for today. Check the Plan tab.</p>'; return; }
-  el.innerHTML=`<div class="badge b-${plan.color}" style="margin-bottom:8px;">Day ${plan.day}/22 — ${plan.theme}</div><div class="card-sm" style="margin-bottom:6px;"><h4>${plan.m.t}</h4><ul class="task-list">${plan.m.tasks.slice(0,2).map(t=>`<li>${t}</li>`).join('')}</ul></div><div class="card-sm"><h4>${plan.a.t}</h4><ul class="task-list">${plan.a.tasks.slice(0,2).map(t=>`<li>${t}</li>`).join('')}</ul></div>`;
+  if(!plan){
+    const tod=today();
+    if(tod<'2026-04-28') el.innerHTML='<p>Study begins <strong>April 28</strong>. Review your thesis tonight.</p>';
+    else if(tod>'2026-05-19') el.innerHTML='<p>Study period complete! Defense is <strong>May 21</strong>. Rest and trust your preparation. 🎓</p>';
+    else el.innerHTML='<p>No plan for today. Check the Plan tab.</p>';
+    return;
+  }
+  const allTasks = [...plan.m.tasks, ...plan.a.tasks];
+  const done = allTasks.filter(t=>P.taskDone(t.id)).length;
+  const pct = Math.round(done/allTasks.length*100);
+  el.innerHTML = `
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+      <span class="badge b-${plan.color}">Day ${plan.day}/22 — ${plan.theme}</span>
+      <span style="font-family:var(--mono);font-size:11px;color:var(--${pct===100?'green':'text3'});">${done}/${allTasks.length} done</span>
+    </div>
+    <div class="pbar" style="height:4px;margin-bottom:12px;"><div class="pbar-f" style="background:var(--${pct===100?'green':'teal'});width:${pct}%"></div></div>
+    <div style="font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.7px;margin-bottom:6px;">${plan.m.t}</div>
+    ${plan.m.tasks.map(t=>taskCheckbox(t)).join('')}
+    <div style="font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.7px;margin:10px 0 6px;">${plan.a.t}</div>
+    ${plan.a.tasks.map(t=>taskCheckbox(t)).join('')}
+  `;
+}
+
+function taskCheckbox(task){
+  const done = P.taskDone(task.id);
+  return `<div style="display:flex;align-items:flex-start;gap:10px;padding:7px 0;border-bottom:1px solid var(--border);" id="task-row-${task.id}">
+    <button onclick="toggleTask('${task.id}')" style="background:${done?'var(--teal)':'var(--surf3)'};border:1px solid ${done?'var(--teal)':'var(--border2)'};border-radius:4px;width:18px;height:18px;flex-shrink:0;margin-top:1px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#000;font-size:11px;font-weight:700;">${done?'✓':''}</button>
+    <span style="font-size:12px;line-height:1.6;color:${done?'var(--text3)':'var(--text2)'};${done?'text-decoration:line-through;':''}">${task.text}</span>
+  </div>`;
+}
+
+function toggleTask(id){
+  const done = P.toggleTask(id);
+  // Re-render just that row's button and text
+  const row = document.getElementById('task-row-'+id);
+  if(row){
+    const btn = row.querySelector('button');
+    const span = row.querySelector('span');
+    btn.style.background = done?'var(--teal)':'var(--surf3)';
+    btn.style.borderColor = done?'var(--teal)':'var(--border2)';
+    btn.textContent = done?'✓':'';
+    span.style.color = done?'var(--text3)':'var(--text2)';
+    span.style.textDecoration = done?'line-through':'none';
+  }
+  // Update counter
+  const plan=getTodayPlan(); if(!plan) return;
+  const allTasks=[...plan.m.tasks,...plan.a.tasks];
+  const doneCount=allTasks.filter(t=>P.taskDone(t.id)).length;
+  const pct=Math.round(doneCount/allTasks.length*100);
+  const pbar=document.querySelector('#today-focus .pbar-f');
+  const counter=document.querySelector('#today-focus span[style*="mono"]');
+  if(pbar){ pbar.style.width=pct+'%'; pbar.style.background=pct===100?'var(--green)':'var(--teal)'; }
+  if(counter){ counter.textContent=`${doneCount}/${allTasks.length} done`; counter.style.color=pct===100?'var(--green)':'var(--text3)'; }
 }
 
 async function markTodayDone(){
