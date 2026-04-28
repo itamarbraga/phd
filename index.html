@@ -896,18 +896,80 @@ async function checkAntiOverStudy(){
 // ════════════════════════════════════════════════════
 //  POMODORO
 // ════════════════════════════════════════════════════
-let pmI=null, pmSec=1500, pmDur=1500, pmOn=false, pmBreak=false, pmCnt=0;
-function pmFmt(s){ return `${Math.floor(s/60).toString().padStart(2,'0')}:${(s%60).toString().padStart(2,'0')}`; }
-function pmUI(){ document.getElementById('pm-time').textContent=pmFmt(pmSec); const f=1-(pmSec/pmDur); document.getElementById('pm-arc').style.strokeDashoffset=264*(1-f); document.getElementById('pm-arc').style.stroke=pmBreak?'var(--green)':'var(--teal)'; document.getElementById('pm-mode').textContent=pmBreak?'BREAK 🍃':'FOCUS 🧠'; document.getElementById('pm-cnt').textContent=pmCnt+1; }
-async function pmStart(){
-  if(pmOn){ clearInterval(pmI); pmOn=false; document.getElementById('pm-btn').textContent='▶ Resume'; return; }
-  pmOn=true; document.getElementById('pm-btn').textContent='⏸ Pause';
-  pmI=setInterval(async()=>{ pmSec--; if(pmSec<=0){ clearInterval(pmI); pmOn=false;
-    if(!pmBreak){ pmCnt++; const plan=getTodayPlan(); await P.logPomodoro(25,plan?plan.theme:'Study'); pmBreak=true; pmDur=300; pmSec=300; document.getElementById('pm-btn').textContent='▶ Start Break'; checkAntiOverStudy(); }
-    else{ pmBreak=false; pmDur=1500; pmSec=1500; document.getElementById('pm-btn').textContent='▶ Start'; }
-  } pmUI(); },1000);
+// ── Pomodoro — wall-clock based (survives background tabs & page switches) ──
+const PM_FOCUS = 25 * 60;  // 25 minutes in seconds
+const PM_BREAK = 5 * 60;   // 5 minutes in seconds
+let pmI=null, pmSec=PM_FOCUS, pmDur=PM_FOCUS, pmOn=false, pmBreak=false, pmCnt=0, pmWallStart=null, pmWallElapsed=0;
+
+function pmFmt(s){
+  s = Math.max(0, Math.round(s));
+  return `${Math.floor(s/60).toString().padStart(2,'0')}:${(s%60).toString().padStart(2,'0')}`;
 }
-function pmReset(){ clearInterval(pmI); pmOn=false; pmBreak=false; pmSec=1500; pmDur=1500; document.getElementById('pm-btn').textContent='▶ Start'; pmUI(); }
+
+function pmUI(){
+  document.getElementById('pm-time').textContent = pmFmt(pmSec);
+  const f = 1 - (pmSec / pmDur);
+  document.getElementById('pm-arc').style.strokeDashoffset = 264 * (1 - f);
+  document.getElementById('pm-arc').style.stroke = pmBreak ? 'var(--green)' : 'var(--teal)';
+  document.getElementById('pm-mode').textContent = pmBreak ? 'BREAK 🍃' : 'FOCUS 🧠';
+  document.getElementById('pm-cnt').textContent = pmCnt + 1;
+}
+
+function pmTick(){
+  // Always compute remaining from real wall-clock time — immune to tab throttling
+  const elapsed = pmWallElapsed + Math.floor((Date.now() - pmWallStart) / 1000);
+  pmSec = Math.max(0, pmDur - elapsed);
+  pmUI();
+  if(pmSec <= 0) pmFinish();
+}
+
+async function pmFinish(){
+  clearInterval(pmI); pmI = null; pmOn = false;
+  if(!pmBreak){
+    pmCnt++;
+    const plan = getTodayPlan();
+    await P.logPomodoro(25, plan ? plan.theme : 'Study');
+    pmBreak = true; pmDur = PM_BREAK; pmSec = PM_BREAK;
+    pmWallElapsed = 0; pmWallStart = null;
+    document.getElementById('pm-btn').textContent = '▶ Start Break';
+    checkAntiOverStudy();
+    if(Notification.permission === 'granted') new Notification('🍅 Focus done! Take a 5-min break.');
+  } else {
+    pmBreak = false; pmDur = PM_FOCUS; pmSec = PM_FOCUS;
+    pmWallElapsed = 0; pmWallStart = null;
+    document.getElementById('pm-btn').textContent = '▶ Start';
+    if(Notification.permission === 'granted') new Notification('✅ Break over! Ready to focus?');
+  }
+  pmUI();
+}
+
+async function pmStart(){
+  if(pmOn){
+    // Pause — save elapsed so far
+    clearInterval(pmI); pmI = null; pmOn = false;
+    pmWallElapsed += Math.floor((Date.now() - pmWallStart) / 1000);
+    pmWallStart = null;
+    document.getElementById('pm-btn').textContent = '▶ Resume';
+    return;
+  }
+  pmOn = true;
+  pmWallStart = Date.now();
+  document.getElementById('pm-btn').textContent = '⏸ Pause';
+  pmI = setInterval(pmTick, 500); // 500ms for smooth display; actual time from Date.now()
+}
+
+function pmReset(){
+  clearInterval(pmI); pmI = null; pmOn = false;
+  pmBreak = false; pmDur = PM_FOCUS; pmSec = PM_FOCUS;
+  pmWallStart = null; pmWallElapsed = 0;
+  document.getElementById('pm-btn').textContent = '▶ Start';
+  pmUI();
+}
+
+// Resume countdown display instantly when user returns to tab
+document.addEventListener('visibilitychange', () => {
+  if(!document.hidden && pmOn && pmWallStart) pmTick();
+});
 
 // ════════════════════════════════════════════════════
 //  CALENDAR
