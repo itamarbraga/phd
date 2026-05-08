@@ -1271,6 +1271,7 @@ function go(id){
   ['dash','plan','quiz','papers','esg','committee','strategy'].forEach((t,i)=>{ if(t===id) document.querySelectorAll('.tb')[i].classList.add('active'); });
   if(id==='quiz') initQuiz();
   if(id==='papers') renderPapers();
+  if(id==='plan'){ renderCal(); setTimeout(()=>{ const el=document.getElementById('dc-'+today()); if(el) el.classList.add('open'); },100); }
 }
 
 // ── STATS ──
