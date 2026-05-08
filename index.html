@@ -275,6 +275,7 @@ select.p-sel{background:var(--surf3);border:1px solid var(--border);color:var(--
     <button class="tb" onclick="go('esg')">ESC Guidelines</button>
     <button class="tb" onclick="go('committee')">Committee</button>
     <button class="tb" onclick="go('strategy')">Strategy</button>
+    <button class="tb" onclick="go('mechanism')">Mechanism</button>
   </div>
   <div class="nav-cd" id="cd">—</div>
 </nav>
@@ -652,6 +653,399 @@ select.p-sel{background:var(--surf3);border:1px solid var(--border);color:var(--
     <div id="ch-map"></div>
   </div>
 </section>
+<!-- ══════════════════════════════════════
+     MECHANISM STUDY GUIDE
+══════════════════════════════════════ -->
+<section class="page" id="page-mechanism">
+<div style="margin-bottom:18px;">
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+    <div style="width:40px;height:40px;background:var(--teal-d);border:1px solid rgba(0,201,177,.2);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;">🧬</div>
+    <div>
+      <h2>Defense Mechanism Study Guide</h2>
+      <p style="margin-top:2px;">Constitutional vulnerability chain · POLG feedback loop · Twig-Shirihai failure · Heteroplasmy · Dexrazoxane · 20 Q&As</p>
+    </div>
+  </div>
+  <div class="info"><p style="font-size:12px;">🎯 <strong>How to use:</strong> Read each section, then use the Q&A accordions at the bottom without looking — cover the answer and test yourself. Colour code: <span style="color:var(--teal);">■ Teal = RES/resilient</span> · <span style="color:var(--pink);">■ Pink = TOX/vulnerable</span> · <span style="color:var(--gold);">■ Gold = POLG/mechanism</span></p></div>
+</div>
+
+<!-- SECTION 1: THREE AXES -->
+<div class="card" style="margin-bottom:12px;">
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
+    <span class="badge b-blue">Section 1</span>
+    <h3>The Three-Axis Model — Why Antioxidants Failed and DEX Works</h3>
+  </div>
+  <div class="g3" style="margin-bottom:12px;">
+    <div class="card-sm" style="border-left:3px solid var(--red);">
+      <h4 style="color:var(--red);margin-bottom:6px;">Axis 1 — ROS (FAILED)</h4>
+      <p>DXR redox cycling + Fe²⁺ → ROS burst. Clinical trials: Vit E, C, NAC, CoQ10 — all failed. <strong>Why failed:</strong> ROS is secondary to TOP2B-mediated DSBs, not the primary cause.</p>
+    </div>
+    <div class="card-sm" style="border-left:3px solid var(--blue);">
+      <h4 style="color:var(--blue);margin-bottom:6px;">Axis 2 — TOP2B (DEX works)</h4>
+      <p>DXR traps TOP2B on DNA → nuclear DSBs → transcriptome disruption → impaired mitoB → ROS (secondary). Dexrazoxane depletes TOP2B — <strong>NOT iron chelation</strong>. 60–80% protection. (Sterba 2021 Circ HF)</p>
+    </div>
+    <div class="card-sm" style="border-left:3px solid var(--gold);">
+      <h4 style="color:var(--gold);margin-bottom:6px;">Axis 3 — POLG (Your Thesis)</h4>
+      <p>Constitutional GSTM1/GPX1 insufficiency → chronic 4-HNE/H₂O₂ → POLG exo impaired → insertion-biased mtDNA. <strong>Pre-existing, DEX-resistant.</strong> Explains the 20–40% residual risk. The deletion result (ns) rules out DSBs as the mechanism.</p>
+    </div>
+  </div>
+  <div class="warn"><p style="font-size:12px;"><strong>The deletion asymmetry is your strongest mechanistic argument:</strong> insertions ↑ (significant) + deletions ns = POLG proofreading impairment signature. Generic oxidative damage = symmetric indels. TOP2B/DSBs = deletions dominant. Only POLG exo impairment matches all 5 tissue findings.</p></div>
+</div>
+
+<!-- SECTION 2: VULNERABILITY CHAIN -->
+<div class="card" style="margin-bottom:12px;">
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
+    <span class="badge b-gold">Section 2</span>
+    <h3>The Constitutional Vulnerability Chain</h3>
+  </div>
+  <div style="overflow-x:auto;padding-bottom:8px;">
+    <svg viewBox="0 0 900 160" xmlns="http://www.w3.org/2000/svg" style="min-width:600px;width:100%;">
+      <defs>
+        <marker id="arr" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+          <path d="M0,0 L0,6 L8,3 z" fill="#8b94b5"/>
+        </marker>
+      </defs>
+      <!-- boxes -->
+      <rect x="5" y="45" width="130" height="70" rx="8" fill="rgba(52,73,94,0.3)" stroke="#4a5270" stroke-width="1"/>
+      <text x="70" y="72" text-anchor="middle" fill="#e8eaf2" font-family="sans-serif" font-size="11" font-weight="bold">Low GPX1</text>
+      <text x="70" y="87" text-anchor="middle" fill="#e8eaf2" font-family="sans-serif" font-size="11" font-weight="bold">Low GSTM1</text>
+      <text x="70" y="102" text-anchor="middle" fill="#8b94b5" font-family="sans-serif" font-size="9">Nuclear genes</text>
+      <line x1="135" y1="80" x2="153" y2="80" stroke="#8b94b5" stroke-width="1.5" marker-end="url(#arr)"/>
+      <rect x="155" y="45" width="130" height="70" rx="8" fill="rgba(230,126,34,0.12)" stroke="var(--orange)" stroke-width="1"/>
+      <text x="220" y="68" text-anchor="middle" fill="#ff8c42" font-family="sans-serif" font-size="11" font-weight="bold">4-HNE from</text>
+      <text x="220" y="82" text-anchor="middle" fill="#ff8c42" font-family="sans-serif" font-size="11" font-weight="bold">cardiolipin FAO</text>
+      <text x="220" y="96" text-anchor="middle" fill="#8b94b5" font-family="sans-serif" font-size="9">+ H₂O₂ OXPHOS/MAO-A</text>
+      <text x="220" y="107" text-anchor="middle" fill="#8b94b5" font-family="sans-serif" font-size="9">+ DOPEGAL catecholamine</text>
+      <line x1="285" y1="80" x2="303" y2="80" stroke="#8b94b5" stroke-width="1.5" marker-end="url(#arr)"/>
+      <rect x="305" y="45" width="130" height="70" rx="8" fill="rgba(231,76,60,0.12)" stroke="#ff5c6a" stroke-width="1"/>
+      <text x="370" y="68" text-anchor="middle" fill="#ff5c6a" font-family="sans-serif" font-size="11" font-weight="bold">POLG exo</text>
+      <text x="370" y="83" text-anchor="middle" fill="#ff5c6a" font-family="sans-serif" font-size="11" font-weight="bold">domain impaired</text>
+      <text x="370" y="97" text-anchor="middle" fill="#8b94b5" font-family="sans-serif" font-size="9">H₂O₂ oxidizes Cys/Met</text>
+      <text x="370" y="108" text-anchor="middle" fill="#8b94b5" font-family="sans-serif" font-size="9">4-HNE Michael adducts</text>
+      <line x1="435" y1="80" x2="453" y2="80" stroke="#8b94b5" stroke-width="1.5" marker-end="url(#arr)"/>
+      <rect x="455" y="45" width="130" height="70" rx="8" fill="rgba(233,30,142,0.12)" stroke="#ff6eb4" stroke-width="1"/>
+      <text x="520" y="68" text-anchor="middle" fill="#ff6eb4" font-family="sans-serif" font-size="11" font-weight="bold">76-77%</text>
+      <text x="520" y="83" text-anchor="middle" fill="#ff6eb4" font-family="sans-serif" font-size="11" font-weight="bold">insertion bias</text>
+      <text x="520" y="97" text-anchor="middle" fill="#8b94b5" font-family="sans-serif" font-size="9">vs ~54% RES</text>
+      <text x="520" y="108" text-anchor="middle" fill="#8b94b5" font-family="sans-serif" font-size="9">Frameshifts in ETC genes</text>
+      <line x1="585" y1="80" x2="603" y2="80" stroke="#8b94b5" stroke-width="1.5" marker-end="url(#arr)"/>
+      <rect x="605" y="45" width="130" height="70" rx="8" fill="rgba(125,60,152,0.12)" stroke="#9b6dff" stroke-width="1"/>
+      <text x="670" y="68" text-anchor="middle" fill="#9b6dff" font-family="sans-serif" font-size="11" font-weight="bold">ETC dysfunction</text>
+      <text x="670" y="83" text-anchor="middle" fill="#9b6dff" font-family="sans-serif" font-size="11" font-weight="bold">+ more ROS</text>
+      <text x="670" y="97" text-anchor="middle" fill="#8b94b5" font-family="sans-serif" font-size="9">Electron leak at CI/CIII</text>
+      <text x="670" y="108" text-anchor="middle" fill="#8b94b5" font-family="sans-serif" font-size="9">Feeds back to Step 2</text>
+      <line x1="735" y1="80" x2="753" y2="80" stroke="#8b94b5" stroke-width="1.5" marker-end="url(#arr)"/>
+      <rect x="755" y="45" width="130" height="70" rx="8" fill="rgba(231,76,60,0.18)" stroke="#ff5c6a" stroke-width="2"/>
+      <text x="820" y="68" text-anchor="middle" fill="#ff5c6a" font-family="sans-serif" font-size="11" font-weight="bold">↺ AMPLIFICATION</text>
+      <text x="820" y="83" text-anchor="middle" fill="#ff5c6a" font-family="sans-serif" font-size="11" font-weight="bold">LOOP</text>
+      <text x="820" y="97" text-anchor="middle" fill="#8b94b5" font-family="sans-serif" font-size="9">Self-amplifying, pre-DXR</text>
+      <text x="820" y="108" text-anchor="middle" fill="#8b94b5" font-family="sans-serif" font-size="9">Post-mitotic: no escape</text>
+      <!-- Feedback arrow bottom -->
+      <path d="M820,115 Q820,145 450,145 Q80,145 70,115" fill="none" stroke="#ff5c6a" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arr)"/>
+      <text x="450" y="155" text-anchor="middle" fill="#ff5c6a" font-family="sans-serif" font-size="9">forward feedback loop</text>
+    </svg>
+  </div>
+  <div class="g2" style="margin-top:10px;">
+    <div class="card-sm">
+      <h4 style="margin-bottom:5px;">Pre-DXR Electrophiles in Cardiomyocytes</h4>
+      <p><strong style="color:var(--orange);">4-HNE</strong> — from cardiolipin peroxidation during FAO (heart = 60-70% FAO-dependent). Detoxified by GSTP1/GSTM1.</p>
+      <p><strong style="color:var(--blue);">H₂O₂</strong> — from OXPHOS electron leak (CI/CIII) + MAO-A oxidative deamination of norepinephrine. Scavenged by GPX1.</p>
+      <p><strong style="color:var(--purple);">DOPEGAL</strong> — catecholaldehyde from sympathetic NE metabolism (MAO-A). GSTM1 detoxifies. Cardiac-specific (high sympathetic tone).</p>
+    </div>
+    <div class="card-sm">
+      <h4 style="margin-bottom:5px;">Two POLG Impairment Routes (parallel)</h4>
+      <p><strong>Route 1:</strong> H₂O₂ oxidises Cys/Met residues in exo active site → sulfenic acid, disulfides. Exo activity falls faster than pol. (Anderson 2020 Nucleic Acids Res)</p>
+      <p><strong>Route 2:</strong> 4-HNE forms Michael adducts at Cys/Lys/His → sterically blocks the 32 Å primer backtracking required for mismatch excision (cryo-EM 2024).</p>
+      <p style="margin-top:6px;font-size:11px;color:var(--teal);">Important nuance: POLG impairment IS ROS-dependent. The key distinction is that this ROS is constitutive/enzymatic vs the acute DXR-generated ROS antioxidant trials targeted.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 3: MITOCHONDRIAL DYNAMICS -->
+<div class="card" style="margin-bottom:12px;">
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
+    <span class="badge b-teal">Section 3</span>
+    <h3>Mitochondrial Dynamics — The Twig-Shirihai Quality Control Failure</h3>
+  </div>
+  <div class="g2" style="margin-bottom:10px;">
+    <div>
+      <div style="font-size:11px;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px;">✅ Normal QC in RES (balanced dynamics)</div>
+      <svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;background:var(--surf2);border-radius:8px;padding:4px;">
+        <ellipse cx="55" cy="50" rx="40" ry="16" fill="rgba(0,201,177,0.2)" stroke="#00c9b1" stroke-width="1.5"/>
+        <text x="55" y="54" text-anchor="middle" fill="#00c9b1" font-family="sans-serif" font-size="9" font-weight="bold">Parent mito</text>
+        <line x1="95" y1="50" x2="115" y2="50" stroke="#8b94b5" stroke-width="1.5" marker-end="url(#arr)"/>
+        <text x="105" y="44" text-anchor="middle" fill="#8b94b5" font-family="sans-serif" font-size="8">DRP1</text>
+        <ellipse cx="155" cy="35" rx="32" ry="13" fill="rgba(0,201,177,0.25)" stroke="#00c9b1" stroke-width="1.5"/>
+        <text x="155" y="39" text-anchor="middle" fill="#00c9b1" font-family="sans-serif" font-size="9">ΔΨm HIGH ↑</text>
+        <ellipse cx="155" cy="68" rx="28" ry="12" fill="rgba(233,30,142,0.25)" stroke="#ff6eb4" stroke-width="1.5"/>
+        <text x="155" y="72" text-anchor="middle" fill="#ff6eb4" font-family="sans-serif" font-size="9">ΔΨm LOW ↓</text>
+        <path d="M187,35 Q220,35 220,55 Q220,65 190,60" fill="none" stroke="#00c9b1" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#arr)"/>
+        <text x="235" y="50" text-anchor="middle" fill="#00c9b1" font-family="sans-serif" font-size="8">re-fuses</text>
+        <line x1="155" y1="80" x2="155" y2="98" stroke="#ff6eb4" stroke-width="1.5" marker-end="url(#arr)"/>
+        <rect x="100" y="100" width="110" height="28" rx="5" fill="rgba(233,30,142,0.15)" stroke="#ff6eb4" stroke-width="1"/>
+        <text x="155" y="112" text-anchor="middle" fill="#ff6eb4" font-family="sans-serif" font-size="9" font-weight="bold">PINK1 → Parkin</text>
+        <text x="155" y="122" text-anchor="middle" fill="#ff6eb4" font-family="sans-serif" font-size="8">→ mitophagy ✓</text>
+        <text x="160" y="155" text-anchor="middle" fill="#4a5270" font-family="sans-serif" font-size="8">~5 cycles/hr · ~5% → sustained depolarization</text>
+        <text x="160" y="165" text-anchor="middle" fill="#00c9b1" font-family="sans-serif" font-size="8">Damaged mtDNA continuously cleared</text>
+      </svg>
+    </div>
+    <div>
+      <div style="font-size:11px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px;">❌ QC Failure in TOX (3 simultaneous failures)</div>
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <div class="card-sm" style="border-left:3px solid var(--red);padding:10px;">
+          <div style="font-size:11px;font-weight:700;color:var(--red);margin-bottom:3px;">Failure 1 — Fission suppressed</div>
+          <p style="font-size:11px;">Hyperfusion → few fission events → no asymmetric daughters generated</p>
+        </div>
+        <div class="card-sm" style="border-left:3px solid var(--orange);padding:10px;">
+          <div style="font-size:11px;font-weight:700;color:var(--orange);margin-bottom:3px;">Failure 2 — ΔΨm averaged</div>
+          <p style="font-size:11px;">Fused network shares ΔΨm → local depolarisation from damaged mtDNA immediately buffered → no unit crosses PINK1 threshold</p>
+        </div>
+        <div class="card-sm" style="border-left:3px solid var(--purple);padding:10px;">
+          <div style="font-size:11px;font-weight:700;color:var(--purple);margin-bottom:3px;">Failure 3 — Refusion before Parkin acts</div>
+          <p style="font-size:11px;">When rare fission occurs, pro-fusion environment allows re-fusion before PINK1-Parkin can ubiquitinate MFN1/2 and block refusion</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="success-box"><p style="font-size:12px;"><strong>IMARIS data:</strong> TOX baseline = fewer, larger, elongated interconnected mitochondria (compensatory hyperfusion). Under DXR: +91 organelles, −0.84 µm³ volume, −0.40 µm branch length, −0.63 junctions/mito (all p&lt;0.05). RES: no significant change in any IMARIS parameter.</p></div>
+</div>
+
+<!-- SECTION 4: HETEROPLASMY -->
+<div class="card" style="margin-bottom:12px;">
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
+    <span class="badge b-purple">Section 4</span>
+    <h3>Heteroplasmy and the Tissue-Specific Threshold</h3>
+  </div>
+  <div class="g2">
+    <div class="card-sm">
+      <h4 style="margin-bottom:7px;">Why the Heart Has the Lowest Threshold</h4>
+      <p>The threshold = heteroplasmy level where OXPHOS dysfunction becomes phenotypically manifest. Determined by <strong>spare respiratory capacity</strong>: heart works near max capacity continuously, cannot reduce contractile output, cannot switch to anaerobic glycolysis long-term, cannot dilute through division.</p>
+      <p style="margin-top:7px;"><strong>Approximate thresholds:</strong></p>
+      <div style="margin-top:6px;display:flex;flex-direction:column;gap:3px;">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div style="width:80px;height:8px;border-radius:4px;background:var(--pink);"></div>
+          <span style="font-size:11px;color:var(--pink);">Heart ~40% (lowest)</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div style="width:100px;height:8px;border-radius:4px;background:var(--gold);"></div>
+          <span style="font-size:11px;color:var(--gold);">Brain ~55%</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div style="width:115px;height:8px;border-radius:4px;background:var(--orange);"></div>
+          <span style="font-size:11px;color:var(--orange);">Skeletal muscle ~68%</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div style="width:130px;height:8px;border-radius:4px;background:var(--blue);"></div>
+          <span style="font-size:11px;color:var(--blue);">Liver ~78%</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div style="width:155px;height:8px;border-radius:4px;background:var(--text3);"></div>
+          <span style="font-size:11px;color:var(--text3);">Blood ~87%</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-sm">
+      <h4 style="margin-bottom:7px;">Why Blood Underestimates Cardiac Burden</h4>
+      <p>Leukocytes reduce heteroplasmy via: <strong>vegetative segregation</strong> at each division, <strong>purifying selection</strong> against high-mutant cells, <strong>mitochondrial turnover</strong> via mitophagy. All require cell division. Post-mitotic cardiomyocytes have none of these, plus the Twig-Shirihai QC failure further impairs mitophagy. Cardiac heteroplasmy progressively diverges upward from blood heteroplasmy over decades.</p>
+      <div style="background:var(--red-d);border-left:3px solid var(--red);padding:9px;border-radius:0 var(--r) var(--r) 0;margin-top:9px;">
+        <p style="font-size:12px;">A patient with 20% in blood may have 50–60% in cardiac tissue — already at or above the cardiac threshold. This is the scientific basis for your FFPE biomarker study design (adjacent normal tissue, not blood).</p>
+      </div>
+      <p style="margin-top:8px;font-size:11px;color:var(--text3);">Note: insertion bias ≠ single variant heteroplasmy. It measures constitutional POLG fidelity — the upstream determinant of how fast any pathogenic variant accumulates.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 5: DXR RESPONSE -->
+<div class="card" style="margin-bottom:12px;">
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
+    <span class="badge b-red">Section 5</span>
+    <h3>When DXR Arrives — The Ashley & Poulton Circuit and Why TOX Fails It</h3>
+  </div>
+  <div class="g2">
+    <div>
+      <div style="font-size:11px;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px;">✅ RES — Protective Circuit Executes</div>
+      <div style="display:flex;flex-direction:column;gap:5px;">
+        <div style="display:flex;gap:10px;align-items:flex-start;">
+          <div style="width:22px;height:22px;border-radius:6px;background:rgba(0,201,177,0.15);color:var(--teal);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:bold;flex-shrink:0;">1</div>
+          <p style="font-size:12px;">DXR intercalates mtDNA nucleoids → p53 activates and translocates to mitochondria</p>
+        </div>
+        <div style="display:flex;gap:10px;align-items:flex-start;">
+          <div style="width:22px;height:22px;border-radius:6px;background:rgba(0,201,177,0.15);color:var(--teal);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:bold;flex-shrink:0;">2</div>
+          <p style="font-size:12px;">p53 enhances POLG exo activity (intact in RES) → drives nucleoid remodelling</p>
+        </div>
+        <div style="display:flex;gap:10px;align-items:flex-start;">
+          <div style="width:22px;height:22px;border-radius:6px;background:rgba(0,201,177,0.15);color:var(--teal);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:bold;flex-shrink:0;">3</div>
+          <p style="font-size:12px;">Nucleoid remodelling requires MFN1/OPA1 (fusion machinery) — available in RES from balanced baseline</p>
+        </div>
+        <div style="display:flex;gap:10px;align-items:flex-start;">
+          <div style="width:22px;height:22px;border-radius:6px;background:rgba(0,201,177,0.15);color:var(--teal);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:bold;flex-shrink:0;">4</div>
+          <p style="font-size:12px;">Remodelled nucleoids exclude DXR → mtDNA synthesis continues → GPX1/GSTM1 buffer ROS surge → cell survives</p>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:11px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px;">❌ TOX — Circuit Fails at Two Nodes</div>
+      <div style="display:flex;flex-direction:column;gap:5px;">
+        <div style="display:flex;gap:10px;align-items:flex-start;">
+          <div style="width:22px;height:22px;border-radius:6px;background:var(--red-d);color:var(--red);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:bold;flex-shrink:0;">A</div>
+          <p style="font-size:12px;"><strong>Node 1 broken:</strong> POLG exo constitutionally impaired — p53 signal arrives at a broken receiver, cannot enhance exo activity</p>
+        </div>
+        <div style="display:flex;gap:10px;align-items:flex-start;">
+          <div style="width:22px;height:22px;border-radius:6px;background:var(--red-d);color:var(--red);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:bold;flex-shrink:0;">B</div>
+          <p style="font-size:12px;"><strong>Node 2 exhausted:</strong> Fusion capacity already maxed by compensatory hyperfusion — no reserve to mount acute nucleoid remodelling response</p>
+        </div>
+        <div style="display:flex;gap:10px;align-items:flex-start;">
+          <div style="width:22px;height:22px;border-radius:6px;background:var(--red-d);color:var(--red);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:bold;flex-shrink:0;">C</div>
+          <p style="font-size:12px;">Non-remodelled nucleoids DXR-saturated → ΔΨm collapse → OMA1 fires → L-OPA1 lost → DRP1 fires → mass fragmentation (IMARIS: +91 organelles)</p>
+        </div>
+        <div style="display:flex;gap:10px;align-items:flex-start;">
+          <div style="width:22px;height:22px;border-radius:6px;background:var(--red-d);color:var(--red);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:bold;flex-shrink:0;">D</div>
+          <p style="font-size:12px;">p53 also sequesters Parkin (Hoshino 2013) + phosphorylates DRP1-Ser637 via PKA → doubly blocks quality-control mitophagy</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;">
+    <div style="flex:1;min-width:180px;background:var(--blue-d);border:1px solid rgba(74,143,255,.15);border-radius:var(--r);padding:10px;">
+      <div style="font-size:10px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px;">Why DEX (not antioxidants)</div>
+      <p style="font-size:12px;">DEX depletes TOP2B before DXR can form the trapped ternary complex. NOT iron chelation (ADR-925 provides no protection alone; Sterba 2021). DEX protects Axis 2 only — Axis 3 remains unaddressed.</p>
+    </div>
+    <div style="flex:1;min-width:180px;background:var(--gold-d);border:1px solid rgba(255,209,102,.15);border-radius:var(--r);padding:10px;">
+      <div style="font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px;">The Residual 20–40%</div>
+      <p style="font-size:12px;">DEX gives 60–80% protection. The residual risk may be enriched in patients with the constitutional POLG impairment your thesis identifies. Topobexin (2025) = TOP2B-selective inhibitor, next-gen DEX — still does not address Axis 3.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 6: BIOMARKER STRATEGY -->
+<div class="card" style="margin-bottom:16px;">
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
+    <span class="badge b-green">Section 6</span>
+    <h3>Clinical Biomarker Strategy</h3>
+  </div>
+  <div class="g3">
+    <div class="card-sm" style="border-top:3px solid var(--teal);">
+      <h4 style="color:var(--teal);margin-bottom:6px;">Primary Biomarker</h4>
+      <p>Total indels per 1,000 mt reads — significant across all three contexts (fibroblasts, iPSC-CMs, LVAD cardiac tissue). Robust, tissue-portable, clinically actionable as a threshold classifier.</p>
+    </div>
+    <div class="card-sm" style="border-top:3px solid var(--gold);">
+      <h4 style="color:var(--gold);margin-bottom:6px;">Mechanistic Discriminator</h4>
+      <p>Insertion/deletion ratio (insertion bias). Rules out generic damage (symmetric) and TOP2B-DSBs (deletion-dominant). Validates the POLG proofreading mechanism even if not used as the clinical classifier.</p>
+    </div>
+    <div class="card-sm" style="border-top:3px solid var(--purple);">
+      <h4 style="color:var(--purple);margin-bottom:6px;">FFPE Study Design</h4>
+      <p>Tumor-adjacent normal cells from breast cancer FFPE blocks (Hospital do Amor). Pre-treatment DNA. Deep mtDNA sequencing (&gt;5,000×). Strand-bias filters, UMI consensus, panel-of-normals. Primary: total indels. NOT SNVs (FFPE C→T artefact).</p>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 7: Q&A ACCORDION -->
+<div style="margin-bottom:8px;">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+    <h3>20 Defense Q&As — Test Yourself</h3>
+    <div style="font-size:11px;color:var(--text3);">Click any question to reveal the answer</div>
+  </div>
+  <div id="mech-qa"></div>
+</div>
+</section>
+
+<script>
+// ── MECHANISM Q&A DATA ──
+const MECH_QA = [
+  {q:"Q1. Your model says POLG impairment drives the insertion bias. But you never directly measured POLG oxidation state. How do you support this mechanistic claim?",
+   a:"You are right that POLG protein oxidation was not directly measured. The claim is supported by three lines of evidence: (1) The insertion-dominant, deletion-sparing indel pattern is the specific signature of POLG proofreading deficiency documented in the D257A mutator mouse — generic oxidative damage or TOP2B-mediated DSBs produce different spectra. (2) The elevated baseline MitoSOX signal provides the oxidative context in which POLG exo domain impairment is mechanistically predicted (Anderson et al. 2020). (3) The co-occurrence of lower GSTM1 protein, lower GPX1, elevated ROS, and insertion-biased mtDNA in the same cells constitutes a coherent mechanistic chain. Direct measurement of POLG exo activity is the clear next experiment.",
+   analogy:"If you find wet floors, open windows, and a broken umbrella, you can infer it rained without seeing the rain. State your inference and identify the direct measurement that would confirm it."},
+  {q:"Q2. Why didn't you measure GSTP1 by western blot alongside GSTM1? GSTP1 is the predominant cardiac GST isoform.",
+   a:"That is a real limitation. GSTM1 was prioritised because of its established clinical genetics association with AIC: the null genotype is associated with cardiotoxicity risk in paediatric survivors across multiple cohorts, and it was functionally validated in the CRISPR screen by Magdy et al. 2024. However, the CDNB activity assay detects GSTM, GSTA, and GSTP isoforms — given that GSTP1 is highly expressed in cardiomyocytes, the reduced total GST activity likely reflects downregulation beyond GSTM1 alone. Measuring GSTP1 by western blot is the obvious next experiment. The two measurements together — specific GSTM1 protein WB + broad Phase II activity — are concordant and together demonstrate a constitutional Phase II detoxification insufficiency.",
+   analogy:"Finding the head janitor has fewer supplies (GSTM1 WB) plus the whole cleaning budget is reduced (GST activity) suggests the whole department is underfunded, not just one person."},
+  {q:"Q3. The LVAD cardiac tissue comparison: how do you know the insertion bias wasn't caused by heart failure itself rather than being constitutional?",
+   a:"The cardiac tissue data alone is cross-sectional and cannot establish causality. The constitutional inference comes from the iPSC-CM data: those cells were derived from patient blood, reprogrammed through pluripotency, and re-differentiated without ever seeing doxorubicin. Any baseline difference in these cells reflects the patient's nuclear genetic background, not accumulated cardiac damage. The constitutional insertion bias in iPSC-CMs, combined with the same pattern in actual failing cardiac tissue, is consistent with the bias being pre-existing and present at disease endpoint. The two datasets provide mutually supportive evidence rather than either proving causality alone.",
+   analogy:"If you find someone is genetically predisposed to weak bones (constitutional, iPSC-CM finding) and they have broken bones at autopsy (cardiac tissue), you don't conclude the fractures caused the genetic predisposition."},
+  {q:"Q4. Why did the failed antioxidant trials not already demonstrate that your antioxidant-related model is wrong?",
+   a:"The antioxidant trials tested non-enzymatic chain-breakers targeting acute drug-generated ROS. My finding implicates constitutive enzymatic insufficiency generating chronic low-level mitochondrial ROS — mechanistically distinct. Vitamin E or NAC cannot restore GSTM1 or GPX1 protein levels or their specific catalytic functions. Furthermore, ROS from DXR is now understood to be secondary to TOP2B-mediated nuclear DNA damage (Sterba 2021), so the trials were targeting a consequence rather than a cause. They also enrolled unselected patients, so any benefit in the constitutionally vulnerable subgroup was diluted to invisibility. My model is consistent with, and explained by, the failure of those trials.",
+   analogy:"Fire suppression systems deploying water (vitamin E) failed to prevent electrical fires. This doesn't mean electricity is not involved in fires. It means water is the wrong intervention for an electrical fire. My finding says some patients have structurally faulty wiring that makes electrical fires inevitable."},
+  {q:"Q5. The deletion result is not significant in the cardiac tissue data. Is this statistically robust, or just a power issue?",
+   a:"The deletion result is one of the most important findings precisely because it is NOT significant. The effect size for deletions (~0.6 vs 0.78, ns) is smaller than for insertions (~0.7 vs 1.35, *), but more importantly the pattern is asymmetric — insertions significantly elevated, deletions not. Generic oxidative damage would elevate both equally. TOP2B-mediated DSBs in mitochondria would elevate deletions specifically. The asymmetry is the mechanistic discriminator, not the absolute values. If power were the issue, both metrics would trend toward significance similarly — which is not what the data shows.",
+   analogy:"If a factory has more left-shoe defects but normal right-shoe defect rates, you don't conclude the quality inspector is generically exhausted. You conclude there is a specific problem in the left-shoe line."},
+  {q:"Q6. Could elevated copy number in cardiotoxic hearts explain higher indel counts as an artefact?",
+   a:"No. The indel counts are already normalised to reads per 1,000 mitochondrial reads — the ratio is what is elevated, not the absolute count. Higher copy number means more template molecules and more sequencing reads, but the insertion rate per 1,000 reads is independent of copy number. The elevated copy number is in fact a separate and concordant finding: it represents the compensatory biogenesis response to qualitative mtDNA impairment (AMPK→PGC-1α→TFAM), consistent with the 14 upregulated mt-encoded transcripts in TOX iPSC-CMs. Both findings represent the same homeostatic response in two different experimental contexts.",
+   analogy:""},
+  {q:"Q7. iPSC-CMs are metabolically immature and glycolysis-dominant. Does this undermine your findings?",
+   a:"This is a real limitation that I state explicitly. However, the RES vs TOX comparison is an internal control: both genotypes are equally immature. The differential effects — insertion bias, morphology, bioenergetics — appear on top of the shared immaturity baseline and are attributable to genotype differences rather than maturation state. The dyn-EHT platform provides a more mature comparator for some findings. The cardiac tissue data from LVAD patients in actual adult hearts is the validation that the findings translate to the fully mature cardiac context.",
+   analogy:"Comparing two children on the same standardised developmental assessment is valid even though neither is an adult. The comparison reveals constitutional differences that will be present and amplified in adulthood."},
+  {q:"Q8. Dexrazoxane gives 60-80% protection. Is the remaining 20-40% explained by your Axis 3, or could there be other explanations?",
+   a:"I cannot claim that Axis 3 explains all of the residual 20–40%, and I should not overclaim this. What I can say is: (a) DEX addresses the TOP2B axis and does not address the constitutional POLG axis; (b) the residual risk is therefore mechanistically unexplained by the TOP2B model alone; (c) Axis 3 provides a candidate explanation for a constitutional subgroup within that residual. Other explanations (DEX dose, cardiac TOP2B level, other mechanisms) cannot be excluded. The testable prediction is that patients with high constitutional indel burden will have higher cardiotoxicity rates even among DEX-treated patients.",
+   analogy:""},
+  {q:"Q9. What would formal proof of causality require?",
+   a:"Four experiments: (1) Rescue: overexpress GSTM1 or GPX1 in TOX iPSC-CMs — does insertion bias normalise? (2) Forward perturbation: CRISPR knock down GSTM1/GPX1 in RES iPSC-CMs — does it recapitulate the TOX phenotype? (3) POLG fidelity measurement: quantify POLG exo activity and oxidation state (4-HNE adducts + sulfinylation by mass spec) directly in TOX vs RES cells. (4) Temporal precedence: FFPE study showing constitutional indel burden before treatment predicts who develops cardiotoxicity after treatment. Together these meet the Bradford Hill causality criteria.",
+   analogy:"Proving causality is like proving a specific gene causes a disease: someone with the gene gets the disease (correlation), removing it prevents it (rescue), inserting it causes it (forward), and it was there before the disease developed (temporal)."},
+  {q:"Q10. The CDNB activity assay does not measure GSTM1-specific activity. How do you connect the WB and activity findings?",
+   a:"The western blot specifically shows lower GSTM1 protein. The CDNB assay measures combined activity of GSTA, GSTM, and GSTP isoforms (GSTT1 is not detected by CDNB). These are concordant but not interchangeable. I do not claim lower GSTM1 caused the lower CDNB activity, because GSTP1 also contributes — and GSTP1 is highly expressed in cardiomyocytes. What the combined data demonstrates is a broad constitutional downregulation of Phase II GST detoxification capacity in TOX cells, with GSTM1 specifically confirmed by WB and independently validated by clinical genetics (null genotype → AIC risk in paediatric survivors; Magdy et al. 2024 CRISPR screen).",
+   analogy:"Finding a specific employee is paid less (GSTM1 WB) plus the whole department has lower productivity (CDNB activity) tells you the whole team is under-resourced, with specific evidence for one individual."},
+  {q:"Q11. What is 'insertion bias' — explain it to a cardiologist with no molecular biology background.",
+   a:"Every time your mitochondria copy their DNA, a molecular machine called POLG reads the template and writes the copy. It has a built-in spell-checker (the exonuclease domain) that catches and removes mistakes. In vulnerable patients, this spell-checker is oxidatively damaged before any chemotherapy begins. When the spell-checker is broken, a specific type of mistake accumulates: extra letters get inserted into the DNA sequence. If that happens in the gene for a power plant protein, the protein is made wrong and the power plant runs less efficiently. Over years of beating 100,000 times per day, this inefficiency accumulates. When doxorubicin arrives, there is no reserve left to protect the mitochondria from additional damage.",
+   analogy:"A factory where the quality inspector has been quietly getting worse at spotting defects for years. The factory ships increasing numbers of faulty products. When a major order comes in (chemotherapy), the factory cannot meet quality standards and breaks down."},
+  {q:"Q12. How does heteroplasmy relate to your insertion bias finding — are they the same thing?",
+   a:"They are related but distinct. Heteroplasmy refers to the presence of two or more distinct mtDNA sequences — typically a known pathogenic variant alongside wild-type — measured as the fraction of mutant copies. The insertion bias I describe is a mutagenesis rate signature across the entire mtDNA, capturing how many insertion errors accumulate per 1,000 reads. It is a functional readout of POLG fidelity, not the frequency of any single specific variant. They are connected: a constitutionally higher insertion bias means POLG is generating new mutations faster, so any pathogenic variant that arises will accumulate to higher heteroplasmy more rapidly in TOX cardiomyocytes over the patient's lifetime.",
+   analogy:"Heteroplasmy level = the fraction of defective products from a specific production line. Insertion bias = the factory's overall defect rate. A factory with a higher overall defect rate will also accumulate more defective products in any specific line."},
+  {q:"Q13. The Twig-Shirihai model was established in pancreatic beta cells. How do you know it applies to cardiomyocytes?",
+   a:"The original Twig-Shirihai work used INS1 pancreatic beta cells for quantitative kinetics. However, the mechanistic principles are not beta-cell specific: asymmetric fission producing daughters of unequal membrane potential, with the depolarised daughter targeted for mitophagy via PINK1 accumulation, is a conserved quality-control mechanism documented across many cell types. PINK1/Parkin mitophagy has been directly shown in cardiac context — Hoshino et al. 2013, specifically in cardiomyocytes. The dependency of PINK1 accumulation on ΔΨm is a fundamental thermodynamic principle of TIM23-mediated import, not cell-type specific.",
+   analogy:""},
+  {q:"Q14. Could lower GSTM1/GPX1 in TOX be a consequence of mitochondrial dysfunction rather than its cause?",
+   a:"This is a valid reverse-causality concern for any cross-sectional measurement. However, GSTM1 and GPX1 are nuclear-encoded genes whose expression is largely set by the nuclear genetic background and the NRF2 antioxidant response programme. In iPSC-CMs derived through reprogramming, the cells have never experienced mitochondrial dysfunction. Any GSTM1/GPX1 protein difference in these cells reflects the patient's nuclear gene expression programme at baseline, before any mitochondrial stress has occurred. This iPSC-CM finding is what rules out reverse causality for the constitutional direction of the effect. In the LVAD cardiac tissue, reverse causality cannot be excluded by the data alone — which is why I frame that dataset as corroborating the iPSC-CM finding rather than independently establishing causality.",
+   analogy:""},
+  {q:"Q15. Why 'constitutional' rather than 'genetic'? Did you identify specific GSTM1 or GPX1 variants?",
+   a:"I use 'constitutional' because it means present in the patient's baseline biology without implying I identified the specific genetic mechanism. In clinical genetics literature, the GSTM1 null genotype (deletion of both alleles, present in ~50% of Europeans) is associated with AIC risk. However, I measured GSTM1 at the protein and activity level, not at the genotype level. The protein level differences could reflect the null genotype, promoter variants, epigenetic regulation, or other mechanisms. The constitutional framing is accurate and appropriately humble: the effect is pre-existing and stable, but its precise genetic basis was not determined in this thesis. Alternative words: intrinsic, pre-existing, patient-intrinsic, endogenously driven, inherited mitochondrial background. Do NOT say 'germline' for mtDNA (germline refers to nuclear Mendelian inheritance via meiosis).",
+   analogy:""},
+  {q:"Q16. What is the single most important sentence of your thesis?",
+   a:"We show that a subset of patients carry a constitutional cardiac vulnerability, encoded upstream of any drug exposure as an insertion-biased mtDNA mutagenesis signature consistent with impaired POLG proofreading from constitutively reduced Phase II enzymatic detoxification capacity, and that this vulnerability is detectable prospectively in patient-derived cells and is mechanistically orthogonal to the TOP2B axis addressed by dexrazoxane, providing both a biological explanation for residual cardiotoxicity risk and a foundation for pre-treatment patient stratification.",
+   analogy:""},
+  {q:"Q17. Topobexin was published in 2025 as a next-generation TOP2B-selective inhibitor. How does your thesis position relative to that?",
+   a:"Topobexin targets a previously unidentified druggable pocket unique to TOP2B, avoiding the shared TOP2A/TOP2B dimer interface that dexrazoxane targets — providing cleaner cardioprotection without potential TOP2A interference. Even the most selective TOP2B inhibitor only addresses Axis 2. It does not restore GSTM1 or GPX1 function, does not correct POLG exo impairment, and does not prevent constitutional insertion-biased mutagenesis from accumulating. My thesis identifies the unmet need that persists even in the era of optimal TOP2B-targeted cardioprotection. This is a useful thing to mention in the defense to demonstrate you are current with the 2025 literature.",
+   analogy:""},
+  {q:"Q18. How would you design the one experiment that would most directly test the POLG exo impairment hypothesis?",
+   a:"Measure POLG 3'→5' exonuclease activity directly in mitochondrial protein extracts from TOX vs RES iPSC-CMs using a fluorescence-based mismatch excision assay (3'-mismatched substrate). If TOX cells show significantly lower exo activity relative to pol activity, it converts the model from 'consistent with' to 'mechanistically demonstrated'. Secondary: perform POLG immunoprecipitation followed by mass spectrometry to quantify 4-HNE adducts and sulfinylated residues at cysteine/methionine in the exo domain specifically. Tertiary: treat TOX iPSC-CMs with mitochondria-targeted antioxidant (MitoTEMPO) or 4-HNE scavenger (carnosine) for 4 weeks before measuring insertion bias — if it normalises toward RES levels, confirms the constitutive electrophile burden is the proximal driver.",
+   analogy:""},
+  {q:"Q19. The Cochrane review notes low-quality evidence for dexrazoxane in children and a potential secondary malignancy signal. How does this affect your argument?",
+   a:"The secondary malignancy concern has been substantially revised in recent analyses. The most recent Children's Oncology Group data shows DEX does not compromise tumour response or overall survival. The mechanistic basis for the concern was potential TOP2A inhibition in tumour cells — Topobexin's TOP2B selectivity would eliminate this concern entirely. For my thesis, the key point is not whether DEX is perfectly safe in all populations, but that its mechanism (TOP2B depletion) is now definitively established and is orthogonal to my constitutional POLG axis. DEX remains the most effective available cardioprotective intervention and the standard of care in appropriate clinical contexts.",
+   analogy:""},
+  {q:"Q20. If you could do one more experiment before your defense, what would it be?",
+   a:"Measure POLG 3'→5' exonuclease activity directly in mitochondrial protein extracts from TOX vs RES iPSC-CMs. This bridges the upstream finding (lower GSTM1/GPX1, higher ROS) with the downstream phenotype (insertion bias) with a single direct enzymatic measurement. If TOX cells show significantly lower exo/pol activity ratio, it would directly support impaired proofreading as the molecular mechanism, convert my model from 'consistent with' to 'mechanistically demonstrated', and provide the most compelling single addition to the thesis. It would also give the FFPE biomarker a concrete biochemical anchor.",
+   analogy:""}
+];
+
+function renderMechQA(){
+  const el=document.getElementById('mech-qa'); if(!el) return;
+  el.innerHTML=MECH_QA.map((item,i)=>`
+    <div style="background:var(--surf);border:1px solid var(--border);border-radius:var(--r);margin-bottom:6px;overflow:hidden;">
+      <div style="padding:12px 16px;cursor:pointer;display:flex;align-items:flex-start;gap:10px;" onclick="toggleMechQA(${i})">
+        <span style="font-family:var(--mono);font-size:10px;color:var(--teal);flex-shrink:0;margin-top:2px;">${String(i+1).padStart(2,'0')}</span>
+        <span style="font-size:13px;font-weight:500;flex:1;line-height:1.55;">${item.q}</span>
+        <span style="color:var(--text3);font-size:12px;" id="mqa-icon-${i}">▶</span>
+      </div>
+      <div id="mqa-body-${i}" style="display:none;padding:0 16px 14px;border-top:1px solid var(--border);margin-top:0;">
+        <p style="font-size:13px;line-height:1.78;color:var(--text2);padding-top:12px;">${item.a}</p>
+        ${item.analogy?`<div style="background:rgba(155,109,255,.1);border:1px solid rgba(155,109,255,.2);border-radius:var(--r);padding:10px 14px;margin-top:10px;"><span style="font-size:10px;font-weight:700;color:var(--purple);text-transform:uppercase;letter-spacing:1px;">Analogy: </span><span style="font-size:12.5px;color:var(--text2);font-style:italic;">${item.analogy}</span></div>`:''}
+      </div>
+    </div>`).join('');
+}
+
+function toggleMechQA(i){
+  const body=document.getElementById('mqa-body-'+i);
+  const icon=document.getElementById('mqa-icon-'+i);
+  if(!body) return;
+  const open=body.style.display==='block';
+  body.style.display=open?'none':'block';
+  if(icon) icon.textContent=open?'▶':'▼';
+}
+
+// Initialize when mechanism tab is opened
+const origGo=go;
+window.go=function(id){
+  origGo(id);
+  if(id==='mechanism') renderMechQA();
+};
+</script>
+
 </main>
 
 <div class="stop-banner" id="stop-banner">
@@ -1350,7 +1744,7 @@ function go(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.tb').forEach(b=>b.classList.remove('active'));
   document.getElementById('page-'+id).classList.add('active');
-  ['dash','plan','quiz','papers','esg','committee','strategy'].forEach((t,i)=>{ if(t===id) document.querySelectorAll('.tb')[i].classList.add('active'); });
+  ['dash','plan','quiz','papers','esg','committee','strategy','mechanism'].forEach((t,i)=>{ if(t===id) document.querySelectorAll('.tb')[i].classList.add('active'); });
   if(id==='quiz') initQuiz();
   if(id==='papers') renderPapers();
   if(id==='plan'){ renderCal(); setTimeout(()=>{ const el=document.getElementById('dc-'+today()); if(el) el.classList.add('open'); },100); }
