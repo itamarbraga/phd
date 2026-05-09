@@ -1134,6 +1134,7 @@ window.go=function(id){
           <th style="padding:7px 10px;text-align:left;color:var(--text3);font-size:11px;text-transform:uppercase;letter-spacing:.5px;font-weight:600;">Supplier</th>
           <th style="padding:7px 10px;text-align:left;color:var(--text3);font-size:11px;text-transform:uppercase;letter-spacing:.5px;font-weight:600;">MW</th>
           <th style="padding:7px 10px;text-align:left;color:var(--text3);font-size:11px;text-transform:uppercase;letter-spacing:.5px;font-weight:600;">Block with</th>
+          <th style="padding:7px 10px;text-align:left;color:var(--text3);font-size:11px;text-transform:uppercase;letter-spacing:.5px;font-weight:600;">Panel</th>
         </tr>
       </thead>
       <tbody id="ab-table-body"></tbody>
@@ -1167,6 +1168,100 @@ window.go=function(id){
     <span style="font-size:11px;color:var(--text3);">Click to expand</span>
   </div>
   <div id="protocol-list"></div>
+</div>
+
+<!-- MULTIPLEX PANELS -->
+<div class="card" style="margin-bottom:12px;">
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
+    <span class="badge b-purple">Multiplex</span>
+    <h3>Gel Panel Design — Maximise WCL Efficiency by Membrane Cutting</h3>
+  </div>
+  <div class="info" style="margin-bottom:12px;"><p style="font-size:12px;"><strong>Strategy:</strong> After ONE gel run + ONE transfer, cut the membrane horizontally at MW boundaries using a clean scalpel and the pre-stained ladder as guide. Each strip is probed simultaneously in its own blocking condition. No waiting for stripping between targets on DIFFERENT strips. Only strip/reprobe within the SAME strip. <strong>Result: ~3× faster than sequential single-target WBs.</strong></p></div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
+
+    <!-- Panel 1 -->
+    <div class="card-sm" style="border-top:3px solid var(--teal);">
+      <div style="font-size:10px;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px;">Panel 1 — Signaling Cascade · 10% gel</div>
+      <p style="font-size:12px;margin-bottom:8px;color:var(--text2);"><em>Reads AMPK→p53→PKA→DRP1-S637 from one gel. 6 readouts.</em></p>
+      <div style="font-family:var(--mono);font-size:11px;line-height:2;background:var(--surf2);border-radius:6px;padding:10px;">
+        <div style="color:var(--text3);">Cut at 70 kDa</div>
+        <div><span style="color:var(--teal);">&gt;70 kDa strip</span> — DRP1 ~82 kDa</div>
+        <div style="padding-left:12px;color:var(--text2);">① pDRP1-Ser637 (BSA)</div>
+        <div style="padding-left:12px;color:var(--text2);">→ strip → ② pDRP1-Ser616 (BSA)</div>
+        <div style="padding-left:12px;color:var(--text2);">→ strip → ③ Total DRP1 (milk)</div>
+        <div style="color:var(--text3);margin-top:4px;">Cut at 55 kDa</div>
+        <div><span style="color:var(--gold);">&gt;55 kDa strip</span> — AMPK ~62 kDa</div>
+        <div style="padding-left:12px;color:var(--text2);">① pAMPK-Thr172 (BSA)</div>
+        <div style="padding-left:12px;color:var(--text2);">→ strip → ② Total AMPK (milk)</div>
+        <div style="color:var(--text3);margin-top:4px;">Cut at 45 kDa</div>
+        <div><span style="color:var(--purple);">&gt;45 kDa strip</span> — p53 ~53 kDa</div>
+        <div style="padding-left:12px;color:var(--text2);">① pp53-Ser15P (BSA)</div>
+        <div style="padding-left:12px;color:var(--text2);">→ strip → ② Total p53 (milk)</div>
+        <div style="color:var(--text3);margin-top:4px;">Bottom strip: Beta-actin (milk)</div>
+      </div>
+    </div>
+
+    <!-- Panel 2 -->
+    <div class="card-sm" style="border-top:3px solid var(--pink);">
+      <div style="font-size:10px;font-weight:700;color:var(--pink);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px;">Panel 2 — Fusion + Mitophagy · 8% gel ⚠️</div>
+      <p style="font-size:12px;margin-bottom:8px;color:var(--text2);"><em>OPA1 L/S ratio, MFN1/2, PINK1, Parkin. <strong>Must use 8% gel</strong> to resolve L-OPA1 (~100 kDa) from S-OPA1 (~80 kDa).</em></p>
+      <div style="font-family:var(--mono);font-size:11px;line-height:2;background:var(--surf2);border-radius:6px;padding:10px;">
+        <div style="color:var(--text3);">Cut at 75 kDa</div>
+        <div><span style="color:var(--pink);">&gt;75 kDa strip</span> — OPA1 / MFN1/2</div>
+        <div style="padding-left:12px;color:var(--text2);">① OPA1 (milk) — read L/S bands!</div>
+        <div style="padding-left:12px;color:var(--text2);">→ strip → ② MFN2 (milk)</div>
+        <div style="padding-left:12px;color:var(--text2);">→ strip → ③ MFN1 (milk)</div>
+        <div style="padding-left:12px;font-size:10px;color:var(--text3);">Note: all ~80-85 kDa — sequential</div>
+        <div style="color:var(--text3);margin-top:4px;">Cut at 40 kDa</div>
+        <div><span style="color:var(--orange);">45–75 kDa strip</span> — PINK1/Parkin</div>
+        <div style="padding-left:12px;color:var(--text2);">① PINK1 ~63 kDa (milk)</div>
+        <div style="padding-left:12px;color:var(--text2);">→ strip → ② Parkin ~52 kDa (milk)</div>
+        <div style="color:var(--text3);margin-top:4px;">Bottom: GAPDH loading control (milk)</div>
+      </div>
+    </div>
+
+    <!-- Panel 3 -->
+    <div class="card-sm" style="border-top:3px solid var(--gold);">
+      <div style="font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px;">Panel 3 — Phase II + Senescence · 12% gel</div>
+      <p style="font-size:12px;margin-bottom:8px;color:var(--text2);"><em>GSTP1, GSTM1, GPX1, p21. All in 21–26 kDa window — run gel long (90–100 min at 100V) for separation.</em></p>
+      <div style="font-family:var(--mono);font-size:11px;line-height:2;background:var(--surf2);border-radius:6px;padding:10px;">
+        <div style="color:var(--text3);">Cut at 28 kDa</div>
+        <div><span style="color:var(--gold);">&gt;28 kDa strip</span> — GSTP1/GSTM1</div>
+        <div style="padding-left:12px;color:var(--text2);">① GSTP1 ~23 kDa (milk)</div>
+        <div style="padding-left:12px;color:var(--text2);">→ strip → ② GSTM1 ~26 kDa (milk)</div>
+        <div style="color:var(--text3);margin-top:4px;">Cut at 20 kDa</div>
+        <div><span style="color:var(--purple);">18–28 kDa strip</span> — GPX1/p21</div>
+        <div style="padding-left:12px;color:var(--text2);">① p21 ~21 kDa (milk)</div>
+        <div style="padding-left:12px;color:var(--text2);">→ strip → ② GPX1 ~22 kDa (milk)</div>
+        <div style="color:var(--text3);margin-top:4px;">Upper strip: Beta-actin ~42 kDa (milk)</div>
+      </div>
+    </div>
+
+    <!-- Panel 4 -->
+    <div class="card-sm" style="border-top:3px solid var(--red);">
+      <div style="font-size:10px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px;">Panel 4 — Pan-Activity Smears · 10% gel, NO REDUCING AGENT</div>
+      <p style="font-size:12px;margin-bottom:8px;color:var(--text2);"><em>Pan-PKA substrate smear (PKA activity readout) + 4-HNE smear (electrophile burden). Both use BSA. <strong>Load samples WITHOUT DTT.</strong> Heat 70°C 10 min.</em></p>
+      <div style="font-family:var(--mono);font-size:11px;line-height:2;background:var(--surf2);border-radius:6px;padding:10px;">
+        <div style="color:var(--pink);">Pan-PKA substrate (CST #9624)</div>
+        <div style="padding-left:12px;color:var(--text2);">Rabbit, 1:1,000, 5% BSA</div>
+        <div style="padding-left:12px;color:var(--text2);">Higher/denser smear in TOX baseline</div>
+        <div style="padding-left:12px;color:var(--text2);">= PKA constitutively more active</div>
+        <div style="color:var(--text3);margin-top:4px;">→ strip → 4-HNE (Invitrogen MA5-27570)</div>
+        <div style="padding-left:12px;color:var(--text2);">Mouse, 1:1,000, 5% BSA</div>
+        <div style="padding-left:12px;color:var(--text2);">Higher smear in TOX baseline</div>
+        <div style="padding-left:12px;color:var(--text2);">= constitutive 4-HNE excess</div>
+        <div style="margin-top:8px;color:var(--teal);font-size:10px;">If LI-COR available: co-probe both smears</div>
+        <div style="color:var(--teal);font-size:10px;">simultaneously (rabbit IR800 + mouse IR680)</div>
+        <div style="color:var(--teal);font-size:10px;">on same membrane — no stripping needed.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Key decision on PKA -->
+  <div style="background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.2);border-radius:var(--r);padding:12px 16px;">
+    <p style="font-size:12px;"><strong style="color:var(--purple);">Why pan-PKA substrate (not total PKA protein):</strong> PKA is regulated by cAMP-dependent activation, not by expression level. Measuring total PKA-Cα protein tells you nothing about whether PKA is active. The pan-phospho-PKA substrate antibody (CST #9624) detects all proteins phosphorylated at the RRXpS/T motif, giving a smear that directly reflects PKA enzymatic activity. This has been validated specifically in the context of PKA-mediated DRP1-Ser637 phosphorylation at the outer mitochondrial membrane (PNAS 2018). A higher/denser smear in TOX at baseline directly explains the elevated pDRP1-Ser637 — completing the AMPK→p53→PKA→DRP1 chain in one experiment.</p>
+  </div>
 </div>
 
 <!-- NARRATIVE CHAIN -->
@@ -1253,14 +1348,25 @@ window.go=function(id){
 <script>
 // ── EXPERIMENTS TAB DATA ──
 const AB_TABLE = [
-  {target:"pDRP1-Ser637",clone:"D3A4 / #6319",supplier:"Cell Signaling",mw:"~82 kDa",block:"5% BSA ⚠️"},
-  {target:"pDRP1-Ser616",clone:"D9A1 / #4494",supplier:"Cell Signaling",mw:"~82 kDa",block:"5% BSA ⚠️"},
-  {target:"Total DRP1 (if not in kit)",clone:"D6C7 / #8570",supplier:"Cell Signaling",mw:"~82 kDa",block:"5% milk"},
-  {target:"OPA1 (if not in kit)",clone:"D6U6N / #80471",supplier:"Cell Signaling",mw:"80–100 kDa",block:"5% milk"},
-  {target:"GSTP1",clone:"#3369",supplier:"Cell Signaling",mw:"~23 kDa",block:"5% milk"},
-  {target:"4-HNE (modified proteins)",clone:"12F7 / MA5-27570",supplier:"Invitrogen/ThermoFisher",mw:"Pan smear",block:"5% BSA ⚠️"},
-  {target:"POLG (IP-validated)",clone:"ab128899",supplier:"Abcam",mw:"~140 kDa",block:"5% milk"},
-  {target:"TOMM20 (IF co-stain)",clone:"EPR15581-54 / ab186735",supplier:"Abcam",mw:"~20 kDa",block:"5% BSA"},
+  // --- Signaling cascade (NEW) ---
+  {target:"pAMPK-Thr172 ★ NEW",clone:"D79.5E / #2535",supplier:"Cell Signaling",mw:"~62 kDa",block:"5% BSA ⚠️",panel:"Panel 1"},
+  {target:"Total AMPK ★ NEW",clone:"D5A2 / #5832",supplier:"Cell Signaling",mw:"~62 kDa",block:"5% milk",panel:"Panel 1"},
+  {target:"pp53-Ser15P ★ NEW",clone:"#9284",supplier:"Cell Signaling",mw:"~53 kDa",block:"5% BSA ⚠️",panel:"Panel 1"},
+  {target:"Total p53 ★ NEW",clone:"DO-7 / M7001 (mouse)",supplier:"Dako / Agilent",mw:"~53 kDa",block:"5% milk",panel:"Panel 1"},
+  {target:"Pan-phospho-PKA substrate ★ NEW",clone:"100G7E / #9624",supplier:"Cell Signaling",mw:"Pan smear",block:"5% BSA ⚠️",panel:"Panel 4"},
+  {target:"p21 / CDKN1A ★ NEW",clone:"12D1 / #2947",supplier:"Cell Signaling",mw:"~21 kDa",block:"5% milk",panel:"Panel 3"},
+  // --- DRP1 fission brake ---
+  {target:"pDRP1-Ser637",clone:"D3A4 / #6319",supplier:"Cell Signaling",mw:"~82 kDa",block:"5% BSA ⚠️",panel:"Panel 1"},
+  {target:"pDRP1-Ser616",clone:"D9A1 / #4494",supplier:"Cell Signaling",mw:"~82 kDa",block:"5% BSA ⚠️",panel:"Panel 1"},
+  {target:"Total DRP1 (if not in kit)",clone:"D6C7 / #8570",supplier:"Cell Signaling",mw:"~82 kDa",block:"5% milk",panel:"Panel 1"},
+  // --- Fusion machinery ---
+  {target:"OPA1 (if not in kit)",clone:"D6U6N / #80471",supplier:"Cell Signaling",mw:"80–100 kDa",block:"5% milk",panel:"Panel 2"},
+  // --- Phase II ---
+  {target:"GSTP1",clone:"#3369",supplier:"Cell Signaling",mw:"~23 kDa",block:"5% milk",panel:"Panel 3"},
+  {target:"4-HNE (modified proteins)",clone:"12F7 / MA5-27570",supplier:"Invitrogen",mw:"Pan smear",block:"5% BSA ⚠️",panel:"Panel 4"},
+  // --- POLG IP ---
+  {target:"POLG (IP-validated)",clone:"ab128899",supplier:"Abcam",mw:"~140 kDa",block:"5% milk",panel:"IP"},
+  {target:"TOMM20 (IF co-stain)",clone:"EPR15581-54 / ab186735",supplier:"Abcam",mw:"~20 kDa",block:"5% BSA",panel:"IF"},
 ];
 
 const PROTOCOLS = [
@@ -1375,6 +1481,7 @@ function renderAbTable(){
       <td style="padding:7px 10px;color:var(--text3);">${r.supplier}</td>
       <td style="padding:7px 10px;color:var(--text3);">${r.mw}</td>
       <td style="padding:7px 10px;font-weight:600;color:${r.block.includes('BSA')? 'var(--gold)': 'var(--text2)'};">${r.block}</td>
+      <td style="padding:7px 10px;font-family:var(--mono);font-size:10px;color:var(--teal);">${r.panel||''}</td>
     </tr>`).join('');
 }
 
