@@ -276,6 +276,7 @@ select.p-sel{background:var(--surf3);border:1px solid var(--border);color:var(--
     <button class="tb" onclick="go('committee')">Committee</button>
     <button class="tb" onclick="go('strategy')">Strategy</button>
     <button class="tb" onclick="go('mechanism')">Mechanism</button>
+    <button class="tb" onclick="go('experiments')">Experiments</button>
   </div>
   <div class="nav-cd" id="cd">—</div>
 </nav>
@@ -1046,6 +1047,384 @@ window.go=function(id){
 };
 </script>
 
+<!-- ══════════════════════════════════════
+     EXPERIMENTS — MATERIALS & PROTOCOLS
+══════════════════════════════════════ -->
+<section class="page" id="page-experiments">
+<div style="margin-bottom:18px;">
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+    <div style="width:40px;height:40px;background:var(--purp-d,rgba(139,92,246,.15));border:1px solid rgba(139,92,246,.25);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;">🔬</div>
+    <div>
+      <h2>Post-Defense Publication Experiments</h2>
+      <p style="margin-top:2px;">Materials list · Detailed protocols · Narrative integration — Fission inhibition and POLG-4HNE story</p>
+    </div>
+  </div>
+  <div class="info"><p style="font-size:12px;">🎯 <strong>Goal:</strong> Complement the indel biomarker with a mechanistic story proving why fission is constitutionally suppressed in TOX cells and why POLG is specifically impaired by 4-HNE. mtDNA remains the centrepiece. All experiments run from existing whole cell lysates (WCL), FFPE 3D blocks, and 2D coverslips.</p></div>
+</div>
+
+<!-- THE 5 EXPERIMENTS OVERVIEW -->
+<div class="card" style="margin-bottom:12px;">
+  <h3 style="margin-bottom:12px;">The Five Key Experiments — Ranked by Mechanistic Weight</h3>
+  <div style="overflow-x:auto;">
+    <table style="width:100%;border-collapse:collapse;font-size:12.5px;">
+      <thead>
+        <tr style="background:var(--surf2);">
+          <th style="padding:8px 12px;text-align:left;font-weight:600;color:var(--text3);font-size:11px;text-transform:uppercase;letter-spacing:.5px;">#</th>
+          <th style="padding:8px 12px;text-align:left;font-weight:600;color:var(--text3);font-size:11px;text-transform:uppercase;letter-spacing:.5px;">Experiment</th>
+          <th style="padding:8px 12px;text-align:left;font-weight:600;color:var(--text3);font-size:11px;text-transform:uppercase;letter-spacing:.5px;">Key Readout</th>
+          <th style="padding:8px 12px;text-align:left;font-weight:600;color:var(--text3);font-size:11px;text-transform:uppercase;letter-spacing:.5px;">Sample</th>
+          <th style="padding:8px 12px;text-align:left;font-weight:600;color:var(--text3);font-size:11px;text-transform:uppercase;letter-spacing:.5px;">Priority</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-top:1px solid var(--border);">
+          <td style="padding:8px 12px;font-family:var(--mono);color:var(--teal);">01</td>
+          <td style="padding:8px 12px;font-weight:600;">pDRP1-Ser637 + pDRP1-Ser616 / total DRP1</td>
+          <td style="padding:8px 12px;">DRP1 constitutionally inactivated via AMPK-p53-PKA</td>
+          <td style="padding:8px 12px;color:var(--text3);">Existing WCL</td>
+          <td style="padding:8px 12px;"><span style="color:var(--teal);font-weight:700;">★★★</span></td>
+        </tr>
+        <tr style="border-top:1px solid var(--border);background:var(--surf);">
+          <td style="padding:8px 12px;font-family:var(--mono);color:var(--teal);">02</td>
+          <td style="padding:8px 12px;font-weight:600;">OPA1 L-form vs S-form band ratio</td>
+          <td style="padding:8px 12px;">IMM fusion constitutively dominant — OMA1 not fully activated</td>
+          <td style="padding:8px 12px;color:var(--text3);">Existing WCL</td>
+          <td style="padding:8px 12px;"><span style="color:var(--teal);font-weight:700;">★★★</span></td>
+        </tr>
+        <tr style="border-top:1px solid var(--border);">
+          <td style="padding:8px 12px;font-family:var(--mono);color:var(--gold);">03</td>
+          <td style="padding:8px 12px;font-weight:600;">GSTP1 WB</td>
+          <td style="padding:8px 12px;">Phase II deficit broader than GSTM1 — explains 4-HNE accumulation</td>
+          <td style="padding:8px 12px;color:var(--text3);">Existing WCL</td>
+          <td style="padding:8px 12px;"><span style="color:var(--gold);font-weight:700;">★★</span></td>
+        </tr>
+        <tr style="border-top:1px solid var(--border);background:var(--surf);">
+          <td style="padding:8px 12px;font-family:var(--mono);color:var(--gold);">04</td>
+          <td style="padding:8px 12px;font-weight:600;">4-HNE whole lysate WB</td>
+          <td style="padding:8px 12px;">Global 4-HNE adduct burden higher in TOX at baseline</td>
+          <td style="padding:8px 12px;color:var(--text3);">Existing WCL</td>
+          <td style="padding:8px 12px;"><span style="color:var(--gold);font-weight:700;">★★</span></td>
+        </tr>
+        <tr style="border-top:1px solid var(--border);">
+          <td style="padding:8px 12px;font-family:var(--mono);color:var(--teal);">05</td>
+          <td style="padding:8px 12px;font-weight:600;">POLG IP → anti-4-HNE WB</td>
+          <td style="padding:8px 12px;">4-HNE adducts specifically on POLG protein — higher in TOX</td>
+          <td style="padding:8px 12px;color:var(--text3);">Existing WCL (pool)</td>
+          <td style="padding:8px 12px;"><span style="color:var(--teal);font-weight:700;">★★★</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="warn" style="margin-top:12px;"><p style="font-size:12px;"><strong>Critical rule for all experiments:</strong> always run and present the <strong>baseline (control, no DXR)</strong> condition first. The constitutional story requires showing differences exist before any drug exposure.</p></div>
+</div>
+
+<!-- MATERIALS -->
+<div class="card" style="margin-bottom:12px;">
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
+    <span class="badge b-gold">Materials</span>
+    <h3>Antibodies to Purchase</h3>
+  </div>
+  <p style="font-size:12px;color:var(--text3);margin-bottom:10px;">You already have the CST Mitochondrial Dynamics Antibody Sampler Kit (total DRP1, MFN1, MFN2, OPA1, FIS1). The phospho-specific antibodies are typically NOT included — check your kit before ordering.</p>
+  <div style="overflow-x:auto;">
+    <table style="width:100%;border-collapse:collapse;font-size:12px;">
+      <thead>
+        <tr style="background:var(--surf2);">
+          <th style="padding:7px 10px;text-align:left;color:var(--text3);font-size:11px;text-transform:uppercase;letter-spacing:.5px;font-weight:600;">Target</th>
+          <th style="padding:7px 10px;text-align:left;color:var(--text3);font-size:11px;text-transform:uppercase;letter-spacing:.5px;font-weight:600;">Clone / Cat #</th>
+          <th style="padding:7px 10px;text-align:left;color:var(--text3);font-size:11px;text-transform:uppercase;letter-spacing:.5px;font-weight:600;">Supplier</th>
+          <th style="padding:7px 10px;text-align:left;color:var(--text3);font-size:11px;text-transform:uppercase;letter-spacing:.5px;font-weight:600;">MW</th>
+          <th style="padding:7px 10px;text-align:left;color:var(--text3);font-size:11px;text-transform:uppercase;letter-spacing:.5px;font-weight:600;">Block with</th>
+        </tr>
+      </thead>
+      <tbody id="ab-table-body"></tbody>
+    </table>
+  </div>
+  <div style="background:rgba(233,30,142,.07);border:1px solid rgba(233,30,142,.2);border-radius:var(--r);padding:10px 14px;margin-top:10px;">
+    <p style="font-size:12px;"><strong style="color:var(--pink);">Blocking rule:</strong> Use <strong>5% BSA / TBST</strong> for all phospho-antibodies and 4-HNE antibody. Milk contains casein (a phosphoprotein) which blocks phospho-epitopes and increases background with lipid-adduct antibodies. Use <strong>5% milk / TBST</strong> for all other total-protein antibodies.</p>
+  </div>
+
+  <div style="margin-top:14px;">
+    <h4 style="margin-bottom:8px;font-size:13px;">Additional reagents for IP (Experiment 5)</h4>
+    <div class="g2">
+      <div class="card-sm">
+        <p style="font-size:12px;"><strong>Protein A/G magnetic beads</strong> — Pierce #88803 (ThermoFisher). Preferred over agarose: faster washes, cleaner background, no centrifugation pellet loss.</p>
+        <p style="font-size:12px;margin-top:5px;"><strong>Rabbit IgG isotype control</strong> — CST #2729. Must match host species of POLG antibody (rabbit). Essential negative control.</p>
+        <p style="font-size:12px;margin-top:5px;"><strong>NP-40 lysis buffer</strong> — see protocol. Do NOT use RIPA for IP; SDS/deoxycholate denature proteins and disrupt epitopes needed for IP.</p>
+      </div>
+      <div class="card-sm">
+        <p style="font-size:12px;"><strong>PhosSTOP</strong> — Roche #4906845001. Add to all lysis buffers for phospho-WBs. Critical for preserving pSer637/pSer616 signal.</p>
+        <p style="font-size:12px;margin-top:5px;"><strong>cOmplete protease inhibitor</strong> — Roche #11697498001. Add to all lysis buffers.</p>
+        <p style="font-size:12px;margin-top:5px;"><strong>8% pre-cast gel</strong> — For OPA1 L-form vs S-form resolution. Standard 10-12% gels cannot separate the ~20 kDa difference between L-OPA1 (~100 kDa) and S-OPA1 (~80 kDa).</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROTOCOLS ACCORDION -->
+<div style="margin-bottom:12px;">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+    <h3>Step-by-Step Protocols</h3>
+    <span style="font-size:11px;color:var(--text3);">Click to expand</span>
+  </div>
+  <div id="protocol-list"></div>
+</div>
+
+<!-- NARRATIVE CHAIN -->
+<div class="card" style="margin-bottom:12px;">
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
+    <span class="badge b-teal">Story</span>
+    <h3>How the Experiments Build the Mechanistic Narrative</h3>
+  </div>
+  <div style="overflow-x:auto;padding-bottom:8px;">
+    <svg viewBox="0 0 860 340" xmlns="http://www.w3.org/2000/svg" style="min-width:580px;width:100%;background:var(--surf2);border-radius:8px;">
+      <defs>
+        <marker id="narr-arr" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+          <path d="M0,0 L0,6 L8,3 z" fill="#8b94b5"/>
+        </marker>
+      </defs>
+      <!-- Row 1: Phase II deficit -->
+      <rect x="10" y="20" width="190" height="55" rx="7" fill="rgba(26,188,156,.12)" stroke="#1abc9c" stroke-width="1.2"/>
+      <text x="105" y="40" text-anchor="middle" fill="#1abc9c" font-family="sans-serif" font-size="10" font-weight="700">Exp 3: GSTP1 WB</text>
+      <text x="105" y="55" text-anchor="middle" fill="#a8bdd0" font-family="sans-serif" font-size="9">GSTP1↓ in TOX baseline</text>
+      <text x="105" y="68" text-anchor="middle" fill="#8b94b5" font-family="sans-serif" font-size="8">+ existing GSTM1↓ + GST activity↓</text>
+      <line x1="200" y1="47" x2="218" y2="47" stroke="#8b94b5" stroke-width="1.2" marker-end="url(#narr-arr)"/>
+
+      <!-- Row 1: 4-HNE accumulation -->
+      <rect x="220" y="20" width="190" height="55" rx="7" fill="rgba(230,126,34,.12)" stroke="#e67e22" stroke-width="1.2"/>
+      <text x="315" y="40" text-anchor="middle" fill="#e67e22" font-family="sans-serif" font-size="10" font-weight="700">Exp 4: 4-HNE WB (lysate)</text>
+      <text x="315" y="55" text-anchor="middle" fill="#a8bdd0" font-family="sans-serif" font-size="9">Global 4-HNE adducts↑ TOX</text>
+      <text x="315" y="68" text-anchor="middle" fill="#8b94b5" font-family="sans-serif" font-size="8">Constitutive excess before DXR</text>
+      <line x1="410" y1="47" x2="428" y2="47" stroke="#8b94b5" stroke-width="1.2" marker-end="url(#narr-arr)"/>
+
+      <!-- Row 1: POLG 4-HNE -->
+      <rect x="430" y="20" width="190" height="55" rx="7" fill="rgba(233,30,142,.12)" stroke="#ff6eb4" stroke-width="1.2"/>
+      <text x="525" y="40" text-anchor="middle" fill="#ff6eb4" font-family="sans-serif" font-size="10" font-weight="700">Exp 5: POLG IP → 4-HNE WB</text>
+      <text x="525" y="55" text-anchor="middle" fill="#a8bdd0" font-family="sans-serif" font-size="9">4-HNE adducts on POLG↑ TOX</text>
+      <text x="525" y="68" text-anchor="middle" fill="#8b94b5" font-family="sans-serif" font-size="8">Direct modification of exo domain</text>
+
+      <!-- Arrow down to mtDNA -->
+      <line x1="525" y1="75" x2="525" y2="95" stroke="#8b94b5" stroke-width="1.2" marker-end="url(#narr-arr)"/>
+      <line x1="315" y1="75" x2="315" y2="108" stroke="#8b94b5" stroke-width="1.2"/>
+      <line x1="315" y1="108" x2="525" y2="108" stroke="#8b94b5" stroke-width="1.2"/>
+
+      <!-- mtDNA box (existing data) -->
+      <rect x="370" y="100" width="310" height="55" rx="7" fill="rgba(139,92,246,.15)" stroke="#8b5cf6" stroke-width="1.5"/>
+      <text x="525" y="120" text-anchor="middle" fill="#8b5cf6" font-family="sans-serif" font-size="10" font-weight="700">EXISTING DATA: Insertion-biased mtDNA</text>
+      <text x="525" y="135" text-anchor="middle" fill="#a8bdd0" font-family="sans-serif" font-size="9">76–77% insertions TOX vs ~54% RES (p&lt;0.001)</text>
+      <text x="525" y="148" text-anchor="middle" fill="#8b94b5" font-family="sans-serif" font-size="8">POLG exo impaired → strand slippage → frameshifts in ETC genes</text>
+
+      <!-- Arrow down to ETC dysfunction -->
+      <line x1="525" y1="155" x2="525" y2="175" stroke="#8b94b5" stroke-width="1.2" marker-end="url(#narr-arr)"/>
+      <rect x="370" y="178" width="310" height="45" rx="7" fill="rgba(192,57,43,.1)" stroke="#ff5c6a" stroke-width="1.2"/>
+      <text x="525" y="198" text-anchor="middle" fill="#ff5c6a" font-family="sans-serif" font-size="10" font-weight="700">ETC dysfunction → AMPK-p53-PKA</text>
+      <text x="525" y="213" text-anchor="middle" fill="#8b94b5" font-family="sans-serif" font-size="8">Seahorse: 47% ATP loss, 2.05x ROS | TMRM: ΔΨm↓</text>
+
+      <!-- Arrow down to DRP1 -->
+      <line x1="525" y1="223" x2="525" y2="243" stroke="#8b94b5" stroke-width="1.2" marker-end="url(#narr-arr)"/>
+
+      <!-- Row 3: DRP1 phospho -->
+      <rect x="220" y="245" width="190" height="55" rx="7" fill="rgba(26,188,156,.12)" stroke="#1abc9c" stroke-width="1.5"/>
+      <text x="315" y="265" text-anchor="middle" fill="#1abc9c" font-family="sans-serif" font-size="10" font-weight="700">Exp 1: pDRP1-Ser637↑</text>
+      <text x="315" y="280" text-anchor="middle" fill="#a8bdd0" font-family="sans-serif" font-size="9">DRP1 constitutionally braked</text>
+      <text x="315" y="292" text-anchor="middle" fill="#8b94b5" font-family="sans-serif" font-size="8">Cannot translocate to OMM</text>
+      <line x1="410" y1="272" x2="428" y2="272" stroke="#8b94b5" stroke-width="1.2" marker-end="url(#narr-arr)"/>
+
+      <!-- OPA1 -->
+      <rect x="430" y="245" width="190" height="55" rx="7" fill="rgba(26,188,156,.12)" stroke="#1abc9c" stroke-width="1.5"/>
+      <text x="525" y="265" text-anchor="middle" fill="#1abc9c" font-family="sans-serif" font-size="10" font-weight="700">Exp 2: OPA1 L/S ratio↑</text>
+      <text x="525" y="280" text-anchor="middle" fill="#a8bdd0" font-family="sans-serif" font-size="9">IMM fusion dominant</text>
+      <text x="525" y="292" text-anchor="middle" fill="#8b94b5" font-family="sans-serif" font-size="8">OMA1 not maximally activated</text>
+
+      <!-- Connect ETC to DRP1 path -->
+      <line x1="525" y1="223" x2="315" y2="243" stroke="#8b94b5" stroke-width="1.2" stroke-dasharray="4,2"/>
+
+      <!-- Final outcome -->
+      <rect x="220" y="315" width="400" height="22" rx="5" fill="rgba(233,30,142,.18)" stroke="#e91e8e" stroke-width="1.2"/>
+      <text x="420" y="330" text-anchor="middle" fill="#e91e8e" font-family="sans-serif" font-size="9.5" font-weight="700">Fission suppressed → Twig-Shirihai QC fails → Damaged mtDNA accumulates → Feedback loop</text>
+      <line x1="315" y1="300" x2="315" y2="314" stroke="#8b94b5" stroke-width="1.2" marker-end="url(#narr-arr)"/>
+      <line x1="525" y1="300" x2="525" y2="314" stroke="#8b94b5" stroke-width="1.2"/>
+      <line x1="315" y1="314" x2="525" y2="314" stroke="#8b94b5" stroke-width="1.2"/>
+    </svg>
+  </div>
+</div>
+
+</section>
+
+<script>
+// ── EXPERIMENTS TAB DATA ──
+const AB_TABLE = [
+  {target:"pDRP1-Ser637",clone:"D3A4 / #6319",supplier:"Cell Signaling",mw:"~82 kDa",block:"5% BSA ⚠️"},
+  {target:"pDRP1-Ser616",clone:"D9A1 / #4494",supplier:"Cell Signaling",mw:"~82 kDa",block:"5% BSA ⚠️"},
+  {target:"Total DRP1 (if not in kit)",clone:"D6C7 / #8570",supplier:"Cell Signaling",mw:"~82 kDa",block:"5% milk"},
+  {target:"OPA1 (if not in kit)",clone:"D6U6N / #80471",supplier:"Cell Signaling",mw:"80–100 kDa",block:"5% milk"},
+  {target:"GSTP1",clone:"#3369",supplier:"Cell Signaling",mw:"~23 kDa",block:"5% milk"},
+  {target:"4-HNE (modified proteins)",clone:"12F7 / MA5-27570",supplier:"Invitrogen/ThermoFisher",mw:"Pan smear",block:"5% BSA ⚠️"},
+  {target:"POLG (IP-validated)",clone:"ab128899",supplier:"Abcam",mw:"~140 kDa",block:"5% milk"},
+  {target:"TOMM20 (IF co-stain)",clone:"EPR15581-54 / ab186735",supplier:"Abcam",mw:"~20 kDa",block:"5% BSA"},
+];
+
+const PROTOCOLS = [
+  {
+    id:'p1',
+    title:'Protocol 1 — pDRP1-Ser637 + pDRP1-Ser616 / total DRP1',
+    badge:'★★★',
+    color:'var(--teal)',
+    principle:'Elevated pSer637/total DRP1 in TOX at baseline = DRP1 constitutionally inactivated via AMPK-p53-PKA. If pSer616/total DRP1 is simultaneously lower, the activating/inhibiting balance is doubly skewed.',
+    steps:[
+      '<strong>Lysis:</strong> RIPA buffer with PhosSTOP + protease inhibitors. Keep on ice. Quantify by BCA.',
+      '<strong>Sample prep:</strong> 20–30 µg per lane. Add 4× loading buffer WITH 100 mM DTT. Heat at <strong>70°C for 5 min</strong> (not 95°C — reduces loss of phosphorylation signal).',
+      '<strong>Gel:</strong> 10% SDS-PAGE, 120V until dye front exits.',
+      '<strong>Transfer:</strong> PVDF membrane. Semi-dry 25V 30 min, or wet 100V 60–90 min at 4°C.',
+      '<strong>Block:</strong> <span style="color:var(--gold);">5% BSA / TBST</span>, 1 hour RT. BSA is mandatory for phospho-antibodies.',
+      '<strong>Primary pSer637:</strong> CST #6319, 1:1,000 in 5% BSA / TBST. Overnight at 4°C.',
+      '<strong>Day 2:</strong> Wash 3 × 10 min TBST. Anti-rabbit HRP secondary (CST #7074) 1:2,000 in 5% BSA / TBST, 1 hour RT. Wash, ECL, image.',
+      '<strong>Strip</strong> (commercial stripping buffer 15 min, wash 3× TBST). Re-block in 5% BSA.',
+      '<strong>Repeat</strong> with pSer616 antibody (CST #4494, 1:1,000) for the activating phosphorylation readout.',
+      '<strong>Strip again, re-block in 5% milk.</strong> Apply total DRP1 (CST #8570, 1:1,000 in milk) for the denominator.',
+      '<strong>Analysis:</strong> Densitometry in ImageJ. Calculate pSer637/total DRP1 and pSer616/total DRP1 ratios per patient line. Compare RES vs TOX at baseline.',
+    ],
+    expected:'pSer637/total DRP1 ratio HIGHER in TOX at baseline. pSer616/total DRP1 ratio LOWER in TOX at baseline.'
+  },
+  {
+    id:'p2',
+    title:'Protocol 2 — OPA1 L-form vs S-form Band Ratio',
+    badge:'★★★',
+    color:'var(--teal)',
+    principle:'Only L-OPA1 is required for stress-induced fusion. In TOX, ΔΨm is reduced but not catastrophically lost, so OMA1 is not fully activated and L-OPA1 is not cleaved. You are reading the band intensity ratio, not total OPA1.',
+    steps:[
+      '<strong>Critical gel requirement:</strong> <span style="color:var(--pink);">8% SDS-PAGE only.</span> On 10–12% gels, L-OPA1 (~100 kDa) and S-OPA1 (~80 kDa) collapse into one smear. Run slower (100V, ~2–2.5 hours) for better resolution.',
+      '<strong>Sample prep:</strong> 20–30 µg per lane, standard loading buffer with DTT, 70°C 5 min.',
+      '<strong>Transfer:</strong> Overnight wet transfer at 30V, 4°C. Necessary for efficient transfer of high-MW proteins near 100 kDa.',
+      '<strong>Block:</strong> 5% milk / TBST, 1 hour RT.',
+      '<strong>Primary OPA1:</strong> CST #80471 (or your kit antibody), 1:1,000 in 5% milk / TBST. Overnight at 4°C.',
+      '<strong>Day 2:</strong> Wash, secondary, ECL, image.',
+      '<strong>Analysis:</strong> Identify band pattern — typically 2 heavy L-OPA1 bands (100–105 kDa) and 2 lighter S-OPA1 bands (80–85 kDa). Quantify: L-OPA1 = L1+L2, S-OPA1 = S1+S2. Calculate L/(L+S) ratio per sample.',
+    ],
+    expected:'Higher L/(L+S) ratio in TOX at baseline = IMM fusion constitutively dominant. Under DXR in TOX: ratio may invert as OMA1 fires, corresponding to the mass fragmentation event in IMARIS data.'
+  },
+  {
+    id:'p3',
+    title:'Protocol 3 — GSTP1 Western Blot',
+    badge:'★★',
+    color:'var(--gold)',
+    principle:'GSTP1 is the predominant cardiac GST isoform and the primary enzyme conjugating 4-HNE to glutathione. Lower GSTP1 in TOX directly explains why 4-HNE accumulates and reaches POLG.',
+    steps:[
+      '<strong>Note on MW:</strong> GSTP1 (~23 kDa) and GSTM1 (~25–26 kDa) are very close. Use a <strong>12% gel</strong> and run long for separation. Alternative: run separate gels and strip/reprobe.',
+      '<strong>Sample prep:</strong> 20–30 µg, standard loading buffer, 70°C 5 min.',
+      '<strong>Transfer:</strong> Semi-dry 25V 20 min is sufficient for 23 kDa.',
+      '<strong>Block:</strong> 5% milk / TBST, 1 hour RT.',
+      '<strong>Primary GSTP1:</strong> CST #3369, 1:1,000 in 5% milk / TBST. Overnight at 4°C.',
+      '<strong>Day 2:</strong> Wash, secondary (anti-rabbit HRP), ECL, image.',
+      '<strong>Loading control:</strong> Strip and reprobe with beta-actin or GAPDH. Or cut membrane below 37 kDa and probe loading control on the lower portion simultaneously.',
+    ],
+    expected:'Lower GSTP1 protein in TOX at baseline, consistent with the reduced total GST activity (CDNB assay). Together: GSTP1↓ + GSTM1↓ + GST activity↓ = broad Phase II insufficiency, not a single isoform.'
+  },
+  {
+    id:'p4',
+    title:'Protocol 4 — 4-HNE Whole Lysate Western Blot',
+    badge:'★★',
+    color:'var(--gold)',
+    principle:'Anti-4-HNE antibody (Invitrogen MA5-27570) detects 4-HNE-modified proteins — the result is a smear or ladder of bands. Higher smear intensity in TOX at baseline = constitutive 4-HNE excess from insufficient GSTP1/GSTM1.',
+    steps:[
+      '<strong>Sample prep — critical difference:</strong> Do NOT add reducing agent (DTT, beta-ME) to loading buffer. 4-HNE Michael adducts are covalent and stable, but standard protocol applies otherwise.',
+      '<strong>Heat at 70°C for 10 min</strong> (not 95°C — avoid excessive heat that can artefactually alter adduct pattern).',
+      '<strong>Gel:</strong> 10% SDS-PAGE.',
+      '<strong>Transfer:</strong> Standard PVDF.',
+      '<strong>Block: <span style="color:var(--gold);">5% BSA / TBST only.</span></strong> Milk increases background significantly with this antibody.',
+      '<strong>Primary:</strong> Anti-4-HNE mouse monoclonal 12F7 (Invitrogen MA5-27570), 1:1,000 in 5% BSA / TBST. Overnight at 4°C.',
+      '<strong>Secondary:</strong> Anti-mouse HRP (CST #7076), 1:2,000 in 5% BSA / TBST, 1 hour RT.',
+      '<strong>Detect:</strong> ECL with multiple exposures. The smear may require longer exposure than single-band WBs.',
+      '<strong>Analysis:</strong> Quantify total lane intensity in defined MW range (25–150 kDa, excluding loading control region) using ImageJ. Normalise to total protein (Ponceau stain or total protein stain).',
+    ],
+    expected:'Higher total 4-HNE adduct signal in TOX at baseline. Consistent with insufficient GSTP1/GSTM1 allowing 4-HNE to accumulate constitutively.'
+  },
+  {
+    id:'p5',
+    title:'Protocol 5 — POLG Immunoprecipitation → 4-HNE Western Blot',
+    badge:'★★★',
+    color:'var(--teal)',
+    principle:'The mechanistically definitive experiment. Pull down POLG, probe the pulldown with anti-4-HNE. 4-HNE adducts on POLG specifically, higher in TOX at baseline = direct biochemical proof that constitutive 4-HNE excess modifies the POLG exo domain.',
+    steps:[
+      '<strong>Input requirement:</strong> 500 µg – 1 mg total protein per IP reaction. Pool patient lysates within each group if needed. Save 30 µg per sample as INPUT lane.',
+      '<strong>Lysis buffer: NP-40 buffer, NOT RIPA.</strong> SDS/deoxycholate in RIPA denatures proteins and disrupts native epitopes needed for IP antibody binding. Recipe: 50 mM Tris pH 7.5, 150 mM NaCl, 1% NP-40, 1 mM EDTA, 10% glycerol + inhibitors.',
+      '<strong>Lysis:</strong> Add NP-40 buffer, incubate on ice 30 min with brief vortex every 10 min. Spin 14,000×g, 10 min, 4°C. Transfer supernatant.',
+      '<strong>Pre-clearing:</strong> Add 20 µL pre-washed Protein A/G magnetic beads to lysate. Rotate 4°C, 30–60 min. Place on magnet, transfer supernatant to new tube (discard beads).',
+      '<strong>Antibody incubation:</strong> Add 3–5 µg anti-POLG (Abcam ab128899) to IP sample. Add 3–5 µg rabbit IgG isotype control (CST #2729) to negative control. Rotate overnight at 4°C.',
+      '<strong>Day 2 — Bead capture:</strong> Add 30 µL pre-washed Protein A/G beads to each tube. Rotate 4°C, 2 hours.',
+      '<strong>Washes:</strong> Place on magnet. Remove supernatant. Wash beads 5× with 500 µL ice-cold NP-40 buffer (resuspend, magnet 30 sec, discard). Remove all residual buffer after final wash.',
+      '<strong>Elution:</strong> Add 30–40 µL of 4× loading buffer WITHOUT DTT directly to beads. Heat 70°C, 10 min. Place on magnet. Transfer eluate to new tube.',
+      '<strong>Gel lanes:</strong> INPUT RES + INPUT TOX (30 µg each) | IP RES eluate | IP TOX eluate | IgG control RES | IgG control TOX.',
+      '<strong>Transfer:</strong> Overnight wet transfer at 30V, 4°C (POLG = ~140 kDa).',
+      '<strong>Block:</strong> 5% BSA / TBST, 1 hour RT.',
+      '<strong>Blot A (key readout):</strong> Anti-4-HNE (MA5-27570, mouse), 1:1,000 in 5% BSA / TBST, overnight 4°C. Wash, anti-mouse HRP secondary, ECL. Focus on band at ~140 kDa.',
+      '<strong>Strip membrane.</strong> Re-block in 5% milk / TBST.',
+      '<strong>Blot B (IP loading control):</strong> Anti-POLG (ab128899, rabbit), 1:1,000 in 5% milk / TBST, overnight 4°C. Wash, anti-rabbit HRP secondary, ECL.',
+      '<strong>Analysis:</strong> Quantify 4-HNE signal at ~140 kDa (Blot A) / POLG band (Blot B) per sample. IgG lanes must be near-zero — any signal = non-specific background (repeat with more stringent washing or higher antibody stringency).',
+    ],
+    expected:'Higher 4-HNE/POLG ratio in TOX at baseline = constitutional 4-HNE adduction of POLG confirmed. This is the mechanistic bridge from insufficient GSTP1/GSTM1 → 4-HNE accumulation → POLG-specific modification → insertion-biased mtDNA mutagenesis.'
+  },
+];
+
+function renderAbTable(){
+  const el = document.getElementById('ab-table-body');
+  if(!el) return;
+  el.innerHTML = AB_TABLE.map((r,i) => `
+    <tr style="border-top:1px solid var(--border);${i%2===1?'background:var(--surf);':''}">
+      <td style="padding:7px 10px;font-weight:600;">${r.target}</td>
+      <td style="padding:7px 10px;font-family:var(--mono);font-size:11px;">${r.clone}</td>
+      <td style="padding:7px 10px;color:var(--text3);">${r.supplier}</td>
+      <td style="padding:7px 10px;color:var(--text3);">${r.mw}</td>
+      <td style="padding:7px 10px;font-weight:600;color:${r.block.includes('BSA')? 'var(--gold)': 'var(--text2)'};">${r.block}</td>
+    </tr>`).join('');
+}
+
+function renderProtocols(){
+  const el = document.getElementById('protocol-list');
+  if(!el) return;
+  el.innerHTML = PROTOCOLS.map(p => `
+    <div style="background:var(--surf);border:1px solid var(--border);border-radius:var(--r);margin-bottom:6px;overflow:hidden;">
+      <div style="padding:12px 16px;cursor:pointer;display:flex;align-items:center;gap:12px;" onclick="toggleProtocol('${p.id}')">
+        <span style="font-family:var(--mono);font-size:11px;font-weight:700;color:${p.color};">${p.badge}</span>
+        <span style="font-size:13px;font-weight:600;flex:1;">${p.title}</span>
+        <span style="color:var(--text3);font-size:12px;" id="prot-icon-${p.id}">▶</span>
+      </div>
+      <div id="prot-body-${p.id}" style="display:none;border-top:1px solid var(--border);">
+        <div style="padding:14px 16px;">
+          <div style="background:var(--surf2);border-left:3px solid ${p.color};padding:10px 14px;border-radius:0 var(--r) var(--r) 0;margin-bottom:12px;">
+            <p style="font-size:12.5px;color:var(--text2);font-style:italic;">${p.principle}</p>
+          </div>
+          <ol style="padding-left:18px;display:flex;flex-direction:column;gap:7px;">
+            ${p.steps.map(s => `<li style="font-size:12.5px;line-height:1.7;">${s}</li>`).join('')}
+          </ol>
+          <div style="background:rgba(26,188,156,.08);border:1px solid rgba(26,188,156,.2);border-radius:var(--r);padding:10px 14px;margin-top:12px;">
+            <span style="font-size:10px;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:.8px;">Expected result: </span>
+            <span style="font-size:12.5px;color:var(--text2);">${p.expected}</span>
+          </div>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function toggleProtocol(id){
+  const body = document.getElementById('prot-body-'+id);
+  const icon = document.getElementById('prot-icon-'+id);
+  if(!body) return;
+  const open = body.style.display === 'block';
+  body.style.display = open ? 'none' : 'block';
+  if(icon) icon.textContent = open ? '▶' : '▼';
+}
+
+// Hook into go() for experiments tab init
+const _goOld2 = window.go;
+window.go = function(id){
+  _goOld2(id);
+  if(id === 'experiments'){
+    renderAbTable();
+    renderProtocols();
+  }
+};
+</script>
+
 </main>
 
 <div class="stop-banner" id="stop-banner">
@@ -1744,7 +2123,7 @@ function go(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.tb').forEach(b=>b.classList.remove('active'));
   document.getElementById('page-'+id).classList.add('active');
-  ['dash','plan','quiz','papers','esg','committee','strategy','mechanism'].forEach((t,i)=>{ if(t===id) document.querySelectorAll('.tb')[i].classList.add('active'); });
+  ['dash','plan','quiz','papers','esg','committee','strategy','mechanism','experiments'].forEach((t,i)=>{ if(t===id) document.querySelectorAll('.tb')[i].classList.add('active'); });
   if(id==='quiz') initQuiz();
   if(id==='papers') renderPapers();
   if(id==='plan'){ renderCal(); setTimeout(()=>{ const el=document.getElementById('dc-'+today()); if(el) el.classList.add('open'); },100); }
