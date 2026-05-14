@@ -277,6 +277,7 @@ select.p-sel{background:var(--surf3);border:1px solid var(--border);color:var(--
     <button class="tb" onclick="go('strategy')">Strategy</button>
     <button class="tb" onclick="go('mechanism')">Mechanism</button>
     <button class="tb" onclick="go('experiments')">Experiments</button>
+    <button class="tb" onclick="go('chapter4')">Chapter 4</button>
   </div>
   <div class="nav-cd" id="cd">—</div>
 </nav>
@@ -1532,6 +1533,380 @@ window.go = function(id){
 };
 </script>
 
+<!-- ══════════════════════════════════════
+     CHAPTER 4 — 21-GENE RESILIENCE SIGNATURE
+══════════════════════════════════════ -->
+<section class="page" id="page-chapter4">
+<div style="margin-bottom:18px;">
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+    <div style="width:40px;height:40px;background:rgba(139,92,246,.15);border:1px solid rgba(139,92,246,.25);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;">📊</div>
+    <div>
+      <h2>Chapter 4 — Transcriptomics &amp; The 21-Gene Resilience Signature</h2>
+      <p style="margin-top:2px;">Complete mechanistic analysis of the intrinsic DEG signature linking transcriptomics to the POLG vulnerability story</p>
+    </div>
+  </div>
+  <div class="info"><p style="font-size:12px;">🎯 Data from Tables S2–S11 | Positive L2FC = higher in RES vs TOX (TOX is reference). Click any gene category or Q&amp;A to expand.</p></div>
+</div>
+
+<!-- OVERVIEW NUMBERS -->
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px;">
+  <div style="background:var(--surf2);border:1px solid var(--border);border-radius:var(--r);padding:14px;text-align:center;">
+    <div style="font-family:var(--mono);font-size:22px;font-weight:700;color:var(--teal);">264</div>
+    <div style="font-size:11px;color:var(--text3);margin-top:3px;">Baseline DEGs<br>(Table S2)</div>
+  </div>
+  <div style="background:var(--surf2);border:1px solid var(--border);border-radius:var(--r);padding:14px;text-align:center;">
+    <div style="font-family:var(--mono);font-size:22px;font-weight:700;color:var(--gold);">62</div>
+    <div style="font-size:11px;color:var(--text3);margin-top:3px;">DXR-treated DEGs<br>(Table S3)</div>
+  </div>
+  <div style="background:var(--surf2);border:1px solid var(--border);border-radius:var(--r);padding:14px;text-align:center;">
+    <div style="font-family:var(--mono);font-size:22px;font-weight:700;color:var(--pink);">21</div>
+    <div style="font-size:11px;color:var(--text3);margin-top:3px;">Intrinsic signature<br>(Table S4)</div>
+  </div>
+  <div style="background:var(--surf2);border:1px solid var(--border);border-radius:var(--r);padding:14px;text-align:center;">
+    <div style="font-family:var(--mono);font-size:22px;font-weight:700;color:var(--purp);">26</div>
+    <div style="font-size:11px;color:var(--text3);margin-top:3px;">mt-encoded genes↑ in TOX<br>(Table S11)</div>
+  </div>
+</div>
+
+<!-- THE 21 GENES — INTERACTIVE CATEGORY CARDS -->
+<div class="card" style="margin-bottom:12px;">
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
+    <span class="badge b-purple">21-Gene Signature</span>
+    <h3>Table S4 — Intrinsic Resilience Signature: 8 Functional Categories</h3>
+  </div>
+  <p style="font-size:12px;color:var(--text3);margin-bottom:12px;">All 21 genes are constitutively different between RES and TOX in <em>both</em> untreated and DXR-treated conditions — they define the pre-existing cellular state, not a drug response. Positive L2FC = higher in RES (protective). Negative L2FC = higher in TOX (vulnerable).</p>
+  <div style="display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;">
+    <span style="font-size:11px;color:var(--teal);">■ Higher in RES (protective)</span>
+    <span style="font-size:11px;color:var(--pink);">■ Higher in TOX (vulnerable)</span>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;" id="ch4-cats"></div>
+  <div style="border:1px solid var(--border);border-radius:var(--r);padding:16px;margin-top:10px;min-height:70px;" id="ch4-detail">
+    <span style="font-size:13px;color:var(--text3);">Click a category to read how it connects to the POLG-mtDNA vulnerability story.</span>
+  </div>
+</div>
+
+<!-- THE DOUBLE COMPLEX I HIT — KEY INSIGHT BOX -->
+<div class="card" style="margin-bottom:12px;border-left:3px solid var(--teal);">
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+    <span class="badge b-teal">Key insight</span>
+    <h3>The Double Complex I Hit — Both Genomes Compromised in TOX</h3>
+  </div>
+  <div class="g2">
+    <div class="card-sm" style="border-left:3px solid var(--pink);">
+      <div style="font-size:10px;font-weight:700;color:var(--pink);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px;">Hit 1 — Mitochondrial genome (your mtDNA data)</div>
+      <p style="font-size:12.5px;">Insertion-biased frameshifts (76–77% in TOX vs 54% in RES) corrupt all seven mt-encoded Complex I subunits: ND1, ND2, ND3, ND4, ND4L, ND5, ND6. Truncated subunits fail to assemble into functional Complex I. This is the constitutional POLG proofreading impairment phenotype.</p>
+    </div>
+    <div class="card-sm" style="border-left:3px solid var(--purp);">
+      <div style="font-size:10px;font-weight:700;color:var(--purp);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px;">Hit 2 — Nuclear genome (Table S4 transcriptomics)</div>
+      <p style="font-size:12.5px;"><strong>NDUFS5</strong> (L2FC +0.69, higher in RES) is a nuclear-encoded Complex I subunit. TOX cells constitutively express less of the nuclear assembly factor for the same complex already being dismantled by mtDNA insertions. Two independent molecular events from two different genomes converge on Complex I — explaining why bioenergetic collapse in TOX exceeds what the insertion bias alone predicts.</p>
+    </div>
+  </div>
+  <div class="warn" style="margin-top:10px;"><p style="font-size:12px;"><strong>Defense statement:</strong> "The severity of Complex I dysfunction in TOX cardiomyocytes cannot be explained by POLG-mediated mtDNA insertion errors alone. Table S4 reveals that NDUFS5, a nuclear-encoded Complex I subunit, is simultaneously and constitutionally lower in TOX — a second, independent genomic contribution to the same complex. This nuclear-mitochondrial convergence is the molecular basis of the bioenergetic ceiling effect we observe in the Seahorse data."</p></div>
+</div>
+
+<!-- PATHWAY ENRICHMENT SUMMARY -->
+<div class="card" style="margin-bottom:12px;">
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
+    <span class="badge b-gold">Pathways</span>
+    <h3>GSEA Pathway Enrichment — Baseline Programme Differences</h3>
+  </div>
+  <div class="g2">
+    <div>
+      <div style="font-size:11px;font-weight:700;color:var(--pink);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px;">TOX enriched at baseline (Tables S7, S8)</div>
+      <div id="tox-paths" style="display:flex;flex-direction:column;gap:5px;"></div>
+    </div>
+    <div>
+      <div style="font-size:11px;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px;">RES enriched at baseline (Tables S5, S6)</div>
+      <div id="res-paths" style="display:flex;flex-direction:column;gap:5px;"></div>
+    </div>
+  </div>
+  <div class="insight" style="margin-top:12px;">
+    <div class="insight-lbl">What these pathways tell you</div>
+    <p style="font-size:12.5px;">TOX cells at baseline are already running at metabolic maximum — every ETC, OXPHOS, and TCA pathway is hyperactivated as compensatory response to constitutively dysfunctional ETC subunits. This is the bioenergetic ceiling. RES cells invest in translation quality, signal transduction, and structural preparedness instead. The contrasting strategies directly predict the outcomes under DXR: TOX cells have no metabolic reserve; RES cells have intact response machinery.</p>
+    <p style="font-size:12.5px;margin-top:8px;"><strong>Critical TOX-specific pathways for the story:</strong> GOBP_CELLULAR_TRANSITION_METAL_ION_HOMEOSTASIS (NES −1.98) and GOBP_STRESS_RESPONSE_TO_METAL_ION (NES −1.98) confirm the HAMP-driven iron dysregulation at baseline, before any drug. REACTOME_CRISTAE_FORMATION (NES −2.03) confirms structural IMM impairment. REACTOME_MITOCHONDRIAL_PROTEIN_IMPORT (NES −2.21) connects to the ΔΨm-driven POLG import failure in the feedback loop.</p>
+  </div>
+</div>
+
+<!-- TREATMENT RESPONSE COMPARISON -->
+<div class="card" style="margin-bottom:12px;">
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
+    <span class="badge b-red">DXR Response</span>
+    <h3>Tables S9 vs S10 — How Each Group Responds to Doxorubicin</h3>
+  </div>
+  <div class="g2">
+    <div>
+      <div style="font-size:11px;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px;">RES response (Table S9) — controlled p53 programme</div>
+      <div style="display:flex;flex-direction:column;gap:5px;" id="res-dxr"></div>
+      <div style="margin-top:10px;background:rgba(26,188,156,.08);border:1px solid rgba(26,188,156,.2);border-radius:var(--r);padding:10px;">
+        <p style="font-size:12px;"><strong style="color:var(--teal);">Interpretation:</strong> RES cells mount a clean, coordinated p53-mediated DNA damage response — upregulating repair genes (DDB2, RRM2B), apoptosis receptors (TNFRSF10B/C), and antioxidant genes (GPX1, FDXR). This is a survivable, reversible stress response. GPX1 mRNA rises in RES under DXR = adaptive upregulation of the primary mitochondrial H₂O₂ scavenger precisely when DXR generates ROS. TOX cells cannot do this.</p>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:11px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px;">TOX response (Table S10) — inflammatory collapse</div>
+      <div style="display:flex;flex-direction:column;gap:5px;" id="tox-dxr"></div>
+      <div style="margin-top:10px;background:var(--red-d);border:1px solid rgba(192,57,43,.2);border-radius:var(--r);padding:10px;">
+        <p style="font-size:12px;"><strong style="color:var(--red);">Interpretation:</strong> TOX cells respond with inflammatory gene activation (CD14 macrophage marker, LAPTM5 lysosomal, PTGS1 prostaglandin synthase) rather than controlled repair. This is the SASP-like secretory phenotype — inflammatory cell activation instead of DNA repair. No adaptive GPX1 upregulation. No clean p53 damage response. The cells shift toward senescence-associated inflammatory gene expression.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- mt-ENCODED GENE UPREGULATION IN TOX -->
+<div class="card" style="margin-bottom:12px;">
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+    <span class="badge b-purple">Table S11</span>
+    <h3>26 mt-Encoded Genes Upregulated in TOX Under DXR — Compensatory Transcription</h3>
+  </div>
+  <p style="font-size:12.5px;margin-bottom:10px;">All 26 upregulated mt-encoded transcripts in TOX under DXR represent the same compensatory biogenesis response visible at the genome level in your LVAD cardiac tissue (higher mtDNA copy number, **). The cell maximises transcription of every mt-encoded gene to compensate for the constitutively dysfunctional ETC subunits. This is the transcriptomics evidence for the same compensatory signal your cardiac tissue data shows at the DNA level.</p>
+  <div style="overflow-x:auto;">
+    <table style="width:100%;border-collapse:collapse;font-size:12px;">
+      <thead><tr style="background:var(--surf2);">
+        <th style="padding:7px 10px;text-align:left;color:var(--text3);font-size:10px;text-transform:uppercase;letter-spacing:.5px;font-weight:600;">Gene</th>
+        <th style="padding:7px 10px;text-align:left;color:var(--text3);font-size:10px;text-transform:uppercase;letter-spacing:.5px;font-weight:600;">Function</th>
+        <th style="padding:7px 10px;text-align:right;color:var(--text3);font-size:10px;text-transform:uppercase;letter-spacing:.5px;font-weight:600;">L2FC in TOX</th>
+        <th style="padding:7px 10px;text-align:left;color:var(--text3);font-size:10px;text-transform:uppercase;letter-spacing:.5px;font-weight:600;">Significance</th>
+      </tr></thead>
+      <tbody id="mt-genes-table"></tbody>
+    </table>
+  </div>
+  <div style="background:rgba(139,92,246,.07);border:1px solid rgba(139,92,246,.2);border-radius:var(--r);padding:10px 14px;margin-top:10px;">
+    <p style="font-size:12px;"><strong style="color:var(--purp);">The convergence argument:</strong> Three independent datasets — iPSC-CM transcriptomics (14 upregulated mt-genes in TOX at baseline), LVAD cardiac tissue sequencing (higher mtDNA copy number **), and this Table S11 (26 mt-genes upregulated in TOX under DXR) — all show the same compensatory biogenesis response in three different experimental contexts: cell model, drug-exposed cell model, and human failing cardiac tissue. This convergence across independent platforms is one of the strongest arguments in the thesis.</p>
+  </div>
+</div>
+
+<!-- Q&A SECTION -->
+<div style="margin-bottom:8px;">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+    <h3>Chapter 4 Defense Q&amp;As</h3>
+    <span style="font-size:11px;color:var(--text3);">Click to expand</span>
+  </div>
+  <div id="ch4-qa"></div>
+</div>
+</section>
+
+<script>
+const CH4_CATS = [
+  {id:'etc2',label:'ETC & mitochondria',color:'var(--purp)',
+   genes:[{n:'NDUFS5',l2fc:0.69,dir:'res'},{n:'MTND3P19',l2fc:-4.23,dir:'tox'}],
+   title:'Double Complex I hit — both genomes',
+   body:'<strong>NDUFS5</strong> (higher in RES): nuclear-encoded Complex I subunit. TOX cells have insertion frameshifts corrupting mt-encoded ND1/ND2/ND5 (mtDNA data) AND lower NDUFS5 expression. Two independent genomic hits on the same complex explain the depth of bioenergetic failure in Seahorse data.<br><br><strong>MTND3P19</strong> (higher in TOX): nuclear mitochondrial DNA segment (NUMT) — a pseudogene copy of ND3. Its differential expression represents retrograde signalling: the nuclear genome sensing constitutive mitochondrial stress from insertion-biased ETC dysfunction.',
+   tags:['Nuclear + mitochondrial genome convergence','Bioenergetic ceiling mechanism','Retrograde mt→nuclear signalling']},
+  {id:'ros2',label:'Phase II / antioxidant',color:'var(--teal)',
+   genes:[{n:'ITLN1',l2fc:2.84,dir:'res'}],
+   title:'ITLN1 — upstream NRF2 signal missing in TOX',
+   body:'<strong>ITLN1</strong> (intelectin-1/omentin, higher in RES): secreted adipokine expressed in cardiomyocytes. Activates AMPK/AKT and upregulates intracellular glutathione synthesis and NRF2-responsive genes including GSTM1 and GPX1.<br><br>Lower ITLN1 in TOX = the upstream signal that maintains GSTM1/GPX1 expression is constitutively absent. Your WB shows lower GSTM1 protein — this is the transcriptional explanation. Table S9 confirms: GPX1 mRNA rises in RES under DXR (adaptive response), does NOT rise in TOX. RES can rescue antioxidant capacity under stress. TOX cannot.',
+   tags:['Explains GSTM1/GPX1 protein deficit','NRF2 axis upstream','Adaptive failure under DXR']},
+  {id:'iron2',label:'Iron metabolism',color:'var(--gold)',
+   genes:[{n:'HAMP',l2fc:-3.76,dir:'tox'},{n:'PIR',l2fc:-0.88,dir:'tox'}],
+   title:'Iron axis — Fenton amplification in TOX',
+   body:'<strong>HAMP</strong> (hepcidin, higher in TOX): master iron regulator. Higher HAMP = more labile intracellular Fe²⁺ retained. Fe²⁺ + H₂O₂ (insufficient GPX1) = Fenton reaction amplified → more OH• → more cardiolipin peroxidation → more 4-HNE. DXR-Fe²⁺ complex also amplified with larger iron pool.<br><br><strong>PIR</strong> (pirin, higher in TOX): non-heme Fe-binding protein + NF-κB co-activator → constitutive low-grade NF-κB inflammation + suppression of apoptosis = damage accumulation over clearance.<br><br>Pathway confirmation: GOBP_CELLULAR_TRANSITION_METAL_ION_HOMEOSTASIS (NES −1.98) enriched in TOX baseline.',
+   tags:['Fenton chemistry amplification','4-HNE upstream','Connects to SASP/NF-κB']},
+  {id:'lipid2',label:'Membrane lipids',color:'var(--orange)',
+   genes:[{n:'ABCA12',l2fc:-8.10,dir:'tox'}],
+   title:'ABCA12 — the most extreme gene: substrate vulnerability',
+   body:'<strong>ABCA12</strong> (L2FC −8.1, FDR 2.8×10⁻¹², the most statistically extreme gene in the entire signature): ABC lipid transporter for phospholipids and glucosylceramide. Higher ABCA12 in TOX alters membrane lipid composition — likely increasing PUFA content in cardiolipin.<br><br>More PUFA in cardiolipin = more peroxidation-susceptible substrate = more 4-HNE per unit ROS, independently of scavenging. Even restoring GSTM1 fully would not normalise 4-HNE if this substrate difference persists.<br><br>Pathway support: sterol biosynthesis (NES −1.96) and isoprenoid metabolism (NES −2.02) enriched in TOX baseline — broad lipid metabolic dysregulation.',
+   tags:['Substrate-level vulnerability','Independent of scavenging','Candidate causal driver']},
+  {id:'sig2',label:'Stress signalling',color:'var(--blue)',
+   genes:[{n:'GABRA4',l2fc:2.43,dir:'res'},{n:'HUNK',l2fc:1.04,dir:'res'},{n:'TBL1XR1',l2fc:0.26,dir:'res'}],
+   title:'Stress response preparedness — 3 layers only in RES',
+   body:'<strong>GABRA4</strong> (GABA-A receptor alpha-4, higher in RES): GABA signalling in cardiomyocytes reduces Ca²⁺ overload-induced apoptosis and oxidative stress. Constitutive anti-stress buffer.<br><br><strong>HUNK</strong> (stress-response kinase, higher in RES): serine/threonine kinase regulating survival and autophagy under metabolic stress. Additional kinase-mediated stress response layer.<br><br><strong>TBL1XR1</strong> (higher in RES): AMPK chromatin recruiter — mediates AMPK\'s transcriptional activation of antioxidant response genes. Better AMPK→transcription coupling explains why RES cells can adaptively upregulate GPX1 under DXR (Table S9) while TOX cannot.',
+   tags:['Ca²⁺ overload protection','AMPK→transcription link','Explains adaptive GPX1 response']},
+  {id:'struct2',label:'Structure & adhesion',color:'var(--teal)',
+   genes:[{n:'AIF1L',l2fc:1.74,dir:'res'},{n:'CDH3',l2fc:1.51,dir:'res'},{n:'NCKAP5',l2fc:0.87,dir:'res'}],
+   title:'Structural integrity — cell coupling and cytoskeleton',
+   body:'<strong>CDH3</strong> (P-cadherin, higher in RES): intercalated disc component — cell-cell mechanical coupling. Higher CDH3 = better force transmission in EHT, explaining preserved contractile integrity in RES tissues vs dilatation and fibrosis in TOX (Masson\'s trichrome data).<br><br><strong>NCKAP5</strong> (actin cytoskeletal organiser via WAVE complex, higher in RES): better cytoskeletal organisation = maintained sarcomere integrity.<br><br><strong>AIF1L</strong> (calcium-binding F-actin bundler, higher in RES): regulates actin bundling and inflammatory signalling.<br><br>Pathway: GOBP_CELL_CELL_ADHESION_MEDIATED_BY_INTEGRIN (NES +2.11) enriched in RES baseline.',
+   tags:['EHT tissue-level outcome','Force transmission','Predicts structural data']},
+  {id:'imm2',label:'Immune/innate',color:'var(--red)',
+   genes:[{n:'CSMD1',l2fc:-2.67,dir:'tox'},{n:'ERV3-1',l2fc:0.73,dir:'res'}],
+   title:'Pre-activated innate immunity in TOX — cGAS-STING connection',
+   body:'<strong>CSMD1</strong> (complement control protein, higher in TOX): constitutive complement pathway activation at baseline. Consistent with cGAS-STING-driven innate immune signalling from leaking mtDNA (your LVAD cardiac tissue data: insertions elevated, copy number elevated). TOX cells are in a low-grade inflammatory state before any drug.<br><br><strong>ERV3-1</strong> (endogenous retrovirus element, higher in RES): co-opted for immune regulation. Better-controlled innate immune sensing.<br><br>Connects to the 2025 Xiong paper: mtDNA leakage activates cGAS-STING → myocardial senescence. Your TOX cells pre-activate this pathway constitutionally.',
+   tags:['cGAS-STING senescence connection','Pre-activated inflammatory state','LVAD tissue data link']},
+  {id:'reg2',label:'Non-coding / regulatory',color:'var(--purp)',
+   genes:[{n:'MIR4458HG',l2fc:-3.11,dir:'tox'},{n:'DLEU1',l2fc:0.57,dir:'res'},{n:'AL358335.2',l2fc:2.68,dir:'res'},{n:'AC087783.2',l2fc:0.60,dir:'res'},{n:'ZNF117',l2fc:0.66,dir:'res'},{n:'SAMD12',l2fc:1.02,dir:'res'},{n:'RPS2P5',l2fc:0.44,dir:'res'}],
+   title:'Post-transcriptional coordination — signature is multi-level',
+   body:'7 regulatory genes (3 lncRNAs, 2 pseudogenes, 1 ZNF, 1 SAM domain) confirm the RES/TOX difference is orchestrated across regulatory layers, not just protein-coding genes.<br><br><strong>MIR4458HG</strong> (higher in TOX): host for miR-4458, ceRNA that blocks miRNAs promoting healthy mitochondrial signalling.<br><br><strong>DLEU1</strong> (higher in RES): tumour suppressor lncRNA at 13q14, regulates cell survival.<br><br><strong>ZNF117</strong> (higher in RES): zinc finger transcription factor contributing to stress response gene control.<br><br><strong>RPS2P5</strong> (higher in RES): ribosomal pseudogene ceRNA regulating protein synthesis pathway genes.<br><br>The constitutional programme is not a sum of independent deficiencies — it is transcriptionally orchestrated.',
+   tags:['Multi-level regulatory control','ceRNA coordination','Constitutional programme is orchestrated']},
+];
+
+const CH4_QA = [
+  {q:'The 21-gene signature includes NDUFS5, a nuclear-encoded Complex I subunit. How does this connect to your mtDNA insertion data?',
+   a:'This is what I call the double Complex I hit. From the mitochondrial side, insertion-biased frameshifts from constitutionally impaired POLG proofreading generate truncated versions of all seven mt-encoded Complex I subunits — ND1, ND2, ND3, ND4, ND4L, ND5, ND6. From the nuclear side, NDUFS5, a nuclear-encoded Complex I assembly factor, is constitutively lower in TOX cardiomyocytes. These are two independent molecular events from two separate genomes converging on the same respiratory chain complex. The convergence explains why the bioenergetic collapse we measure in the Seahorse data is so severe — it cannot be fully explained by the mtDNA insertion bias alone.'},
+  {q:'ABCA12 has the most extreme fold-change in the entire signature (−8.1). Why is a lipid transporter so prominent?',
+   a:'ABCA12 mediates phospholipid and glucosylceramide transport across membranes. Its higher expression in TOX likely alters the PUFA composition of cardiolipin in the inner mitochondrial membrane. Cardiolipin containing more polyunsaturated linoleic acid is more susceptible to peroxidation — for the same ROS level, TOX cells generate more 4-HNE per unit of cardiolipin. This is a substrate-level vulnerability that is independent of and additive to the scavenging capacity deficit from low GSTM1 and GSTP1. Even if you fully restored Phase II enzymatic detoxification in TOX cells, they would still generate more 4-HNE than RES cells because the peroxidation substrate is constitutively more vulnerable.'},
+  {q:'Table S9 shows GPX1 mRNA rising in RES under DXR but not in TOX. What is the mechanistic significance?',
+   a:'This is the adaptive failure. GPX1 is the primary mitochondrial H₂O₂ scavenger and the upstream protection for POLG against oxidative inactivation. When DXR arrives and generates a burst of ROS, RES cells mount an adaptive response — they upregulate GPX1 mRNA, increasing their H₂O₂ scavenging capacity precisely when it is most needed. TOX cells cannot do this. The transcriptional block on adaptive GPX1 upregulation in TOX connects to the TBL1XR1 finding — lower TBL1XR1 in TOX means the AMPK-to-chromatin coupling that would activate GPX1 transcription under stress is impaired. The constitutive deficiency becomes a dynamic failure under challenge.'},
+  {q:'Why do RES and TOX cells show completely different DXR response gene programmes (Table S9 vs S10)?',
+   a:'RES cells respond with a coordinated p53-DNA damage response: p21/CDKN1A upregulated (controlled cell cycle arrest), DDB2 and RRM2B upregulated (DNA repair), TNFRSF10B and TNFRSF10C upregulated (apoptosis signalling), GPX1 upregulated (antioxidant compensation), FDXR upregulated (mitochondrial redox). This is a survivable, controlled, reversible stress response. TOX cells respond with CD14, LAPTM5, PTGS1, and AHNAK2 upregulation — macrophage marker genes, lysosomal inflammation, prostaglandin synthesis. This is a senescence-associated secretory phenotype rather than a damage response. The two groups do not differ only in their baseline state — they process the same insult through fundamentally different transcriptional programmes.'},
+  {q:'The 26 upregulated mt-encoded genes in TOX under DXR (Table S11) — how does this fit with the POLG story?',
+   a:'This is the compensatory biogenesis response made visible at the transcriptional level. With constitutively dysfunctional ETC subunits from insertion frameshifts, TOX cells maximise transcription of every mt-encoded gene trying to compensate for the qualitative deficit through quantity. The mitochondria are trying to make more of the proteins they need but cannot make properly. Three independent datasets show the same response: this transcriptomics data shows 26 mt-genes upregulated in TOX under DXR; my cardiac tissue sequencing shows significantly higher mtDNA copy number in cardiotoxic hearts; and the baseline transcriptomics show 14 mt-encoded genes already higher in TOX before any drug. The compensatory signal is visible at baseline, amplified by DXR, and confirmed in actual failing human hearts. That three-way convergence across independent experimental platforms is one of the strongest arguments in the thesis.'},
+  {q:'HAMP is higher in TOX. How does a hepcidin gene connect to the POLG mechanism?',
+   a:'Hepcidin controls intracellular iron retention by degrading ferroportin — higher HAMP means more labile Fe²⁺ retained in the cell. This connects to the POLG mechanism through two routes. First, Fenton chemistry: Fe²⁺ plus H₂O₂ from insufficient GPX1 generates hydroxyl radical, which directly peroxidises cardiolipin to produce 4-HNE. A larger labile iron pool amplifies the same H₂O₂ into more OH• and more 4-HNE. Second, the cytochrome c-cardiolipin peroxidase route: cytochrome c on the IMS face of the IMM uses Fe³⁺ heme cycling to oxidise cardiolipin to 4-HNE when H₂O₂ is available. More iron amplifies this specific pathway. The pathway enrichment data confirms chronic metal stress in TOX at baseline — GOBP_CELLULAR_TRANSITION_METAL_ION_HOMEOSTASIS enriched at NES −1.98 before any drug.'},
+  {q:'ITLN1 is higher in RES. Why should an adipokine matter in cardiomyocytes?',
+   a:'ITLN1 (intelectin-1/omentin) has expression in cardiomyocytes where it functions through AMPK and AKT signalling to upregulate intracellular glutathione synthesis and NRF2-responsive antioxidant genes including GSTM1 and GPX1. Its importance here is as an upstream regulator: you measured low GSTM1 protein and low GPX1 protein in TOX cardiomyocytes by western blot. The question was always: why are they low? The transcriptomics now provides the answer at the gene expression level — the adipokine signal that constitutively maintains those proteins is itself lower in TOX cells. The enzymatic deficiency is upstream-explained by a signalling deficiency. This also means restoring ITLN1 signalling could be a therapeutic strategy that simultaneously upregulates GSTM1, GSTP1, and GPX1 through the NRF2 axis.'},
+];
+
+const TOX_PATHS = [
+  {nes:'-2.35',name:'Respiratory electron transport (ATP synthesis)',src:'Reactome'},
+  {nes:'-2.31',name:'TCA cycle and respiratory electron transport',src:'Reactome'},
+  {nes:'-2.25',name:'Respiratory electron transport',src:'Reactome'},
+  {nes:'-2.21',name:'Mitochondrial protein import',src:'Reactome'},
+  {nes:'-2.03',name:'Cristae formation',src:'Reactome'},
+  {nes:'-2.21',name:'ATP synthesis coupled electron transport',src:'GO-BP'},
+  {nes:'-2.13',name:'Oxidative phosphorylation',src:'GO-BP'},
+  {nes:'-1.98',name:'Cellular transition metal ion homeostasis',src:'GO-BP'},
+  {nes:'-1.98',name:'Stress response to metal ion',src:'GO-BP'},
+];
+const RES_PATHS = [
+  {nes:'+2.56',name:'Eukaryotic translation elongation',src:'Reactome'},
+  {nes:'+2.37',name:'Eukaryotic translation initiation',src:'Reactome'},
+  {nes:'+2.13',name:'Smooth muscle contraction',src:'Reactome'},
+  {nes:'+2.08',name:'PD-1 signalling',src:'Reactome'},
+  {nes:'+2.11',name:'Cell-cell adhesion mediated by integrin',src:'GO-BP'},
+  {nes:'+1.88',name:'HIF-1α signalling pathway',src:'GO-BP'},
+  {nes:'+1.96',name:'Regulation of histone methylation',src:'GO-BP'},
+];
+const RES_DXR = [
+  {g:'p21/CDKN1A',l2fc:'+3.19',note:'p53→cell cycle arrest'},
+  {g:'TNFRSF10C',l2fc:'+4.10',note:'TRAIL receptor / apoptosis'},
+  {g:'TNFRSF10B',l2fc:'+1.03',note:'Death receptor 5'},
+  {g:'GPX1',l2fc:'+0.90',note:'⭐ Adaptive antioxidant upregulation'},
+  {g:'DDB2',l2fc:'+1.57',note:'DNA damage recognition'},
+  {g:'FDXR',l2fc:'+2.61',note:'Mitochondrial redox / p53 target'},
+  {g:'RRM2B',l2fc:'+1.87',note:'Ribonucleotide reductase / repair'},
+];
+const TOX_DXR = [
+  {g:'CD14',l2fc:'+3.29',note:'Macrophage/LPS receptor — inflammatory'},
+  {g:'LAPTM5',l2fc:'+4.03',note:'Lysosomal inflammation'},
+  {g:'PTGS1',l2fc:'+3.02',note:'COX-1 prostaglandin synthesis'},
+  {g:'ARG2',l2fc:'+3.73',note:'Arginase — inflammatory metabolism'},
+  {g:'AHNAK2',l2fc:'+3.48',note:'Scaffold protein / inflammatory'},
+  {g:'MEOX2',l2fc:'-5.21',note:'Angiogenesis suppressor ↓'},
+  {g:'OPCML',l2fc:'-4.19',note:'Tumour suppressor ↓'},
+];
+const MT_GENES = [
+  {g:'MT-RNR1',fn:'12S rRNA (ribosome)',l2fc:'1.92'},
+  {g:'MT-RNR2',fn:'16S rRNA (ribosome)',l2fc:'1.60'},
+  {g:'MT-ND1',fn:'Complex I subunit',l2fc:'1.68'},
+  {g:'MT-ND2',fn:'Complex I subunit',l2fc:'1.41'},
+  {g:'MT-ND5',fn:'Complex I subunit',l2fc:'1.40'},
+  {g:'MT-CO1',fn:'Complex IV subunit',l2fc:'0.87'},
+  {g:'MT-CO2',fn:'Complex IV subunit',l2fc:'1.29'},
+  {g:'MT-ATP6',fn:'ATP synthase subunit',l2fc:'1.31'},
+  {g:'MT-ATP8',fn:'ATP synthase subunit',l2fc:'1.18'},
+  {g:'MT-TQ',fn:'tRNA-Gln',l2fc:'1.79'},
+  {g:'MT-TM',fn:'tRNA-Met',l2fc:'1.34'},
+  {g:'MT-TD',fn:'tRNA-Asp',l2fc:'1.04'},
+  {g:'MT-TF',fn:'tRNA-Phe',l2fc:'0.89'},
+  {g:'MT-CYB',fn:'Complex III (CYTB)',l2fc:'~1.1'},
+];
+
+function initChapter4(){
+  // Build category cards
+  const cc=document.getElementById('ch4-cats');
+  if(!cc||cc.innerHTML) return;
+  cc.innerHTML=CH4_CATS.map(c=>`
+    <div style="background:var(--surf);border:1px solid var(--border);border-radius:var(--r);padding:14px;cursor:pointer;transition:border-color .15s;" id="ch4c-${c.id}" onclick="toggleCh4Cat('${c.id}')">
+      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:${c.color};margin-bottom:8px;">${c.label}</div>
+      ${c.genes.map(g=>{
+        const w=Math.min(100,Math.abs(g.l2fc)/9*100);
+        const col=g.dir==='res'?'var(--teal)':'var(--pink)';
+        return `<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+          <span style="font-size:12px;font-weight:600;min-width:90px;">${g.n}</span>
+          <div style="flex:1;height:5px;border-radius:3px;background:var(--border);overflow:hidden;">
+            <div style="height:100%;border-radius:3px;background:${col};width:${w}%"></div>
+          </div>
+          <span style="font-size:10px;color:${col};min-width:32px;text-align:right;">${g.dir==='res'?'+':''}${g.l2fc.toFixed(1)}</span>
+        </div>`;}).join('')}
+    </div>`).join('');
+
+  // Pathway rows
+  const tp=document.getElementById('tox-paths');
+  if(tp) tp.innerHTML=TOX_PATHS.map(p=>`
+    <div style="display:flex;gap:8px;align-items:center;padding:5px 8px;background:var(--surf2);border-radius:5px;">
+      <span style="font-family:var(--mono);font-size:11px;color:var(--red);min-width:38px;">${p.nes}</span>
+      <span style="font-size:12px;flex:1;">${p.name}</span>
+      <span style="font-size:10px;color:var(--text3);">${p.src}</span>
+    </div>`).join('');
+
+  const rp=document.getElementById('res-paths');
+  if(rp) rp.innerHTML=RES_PATHS.map(p=>`
+    <div style="display:flex;gap:8px;align-items:center;padding:5px 8px;background:var(--surf2);border-radius:5px;">
+      <span style="font-family:var(--mono);font-size:11px;color:var(--teal);min-width:38px;">${p.nes}</span>
+      <span style="font-size:12px;flex:1;">${p.name}</span>
+      <span style="font-size:10px;color:var(--text3);">${p.src}</span>
+    </div>`).join('');
+
+  // Treatment response
+  const rd=document.getElementById('res-dxr');
+  if(rd) rd.innerHTML=RES_DXR.map(g=>`
+    <div style="display:flex;gap:8px;align-items:center;padding:5px 8px;background:var(--surf2);border-radius:5px;">
+      <span style="font-size:12px;font-weight:600;min-width:80px;color:var(--teal);">${g.g}</span>
+      <span style="font-family:var(--mono);font-size:11px;color:var(--teal);min-width:36px;">${g.l2fc}</span>
+      <span style="font-size:11px;color:var(--text3);">${g.note}</span>
+    </div>`).join('');
+
+  const td=document.getElementById('tox-dxr');
+  if(td) td.innerHTML=TOX_DXR.map(g=>`
+    <div style="display:flex;gap:8px;align-items:center;padding:5px 8px;background:var(--surf2);border-radius:5px;">
+      <span style="font-size:12px;font-weight:600;min-width:80px;color:var(--red);">${g.g}</span>
+      <span style="font-family:var(--mono);font-size:11px;color:var(--red);min-width:36px;">${g.l2fc}</span>
+      <span style="font-size:11px;color:var(--text3);">${g.note}</span>
+    </div>`).join('');
+
+  // mt-genes table
+  const mt=document.getElementById('mt-genes-table');
+  if(mt) mt.innerHTML=MT_GENES.map((g,i)=>`
+    <tr style="border-top:1px solid var(--border);${i%2===1?'background:var(--surf);':''}">
+      <td style="padding:7px 10px;font-family:var(--mono);font-size:12px;font-weight:600;color:var(--purp);">${g.g}</td>
+      <td style="padding:7px 10px;font-size:12px;">${g.fn}</td>
+      <td style="padding:7px 10px;text-align:right;font-family:var(--mono);font-size:12px;color:var(--red);">+${g.l2fc}</td>
+      <td style="padding:7px 10px;font-size:11px;color:var(--text3);">Compensatory upregulation</td>
+    </tr>`).join('');
+
+  // Q&A
+  const qa=document.getElementById('ch4-qa');
+  if(qa) qa.innerHTML=CH4_QA.map((item,i)=>`
+    <div style="background:var(--surf);border:1px solid var(--border);border-radius:var(--r);margin-bottom:6px;overflow:hidden;">
+      <div style="padding:12px 16px;cursor:pointer;display:flex;align-items:flex-start;gap:10px;" onclick="toggleCh4QA(${i})">
+        <span style="font-family:var(--mono);font-size:10px;color:var(--purp);flex-shrink:0;margin-top:2px;">${String(i+1).padStart(2,'0')}</span>
+        <span style="font-size:13px;font-weight:500;flex:1;line-height:1.55;">${item.q}</span>
+        <span style="color:var(--text3);font-size:12px;" id="ch4qa-icon-${i}">▶</span>
+      </div>
+      <div id="ch4qa-body-${i}" style="display:none;padding:0 16px 14px;border-top:1px solid var(--border);">
+        <p style="font-size:13px;line-height:1.78;color:var(--text2);padding-top:12px;">${item.a}</p>
+      </div>
+    </div>`).join('');
+}
+
+let ch4CatActive=null;
+function toggleCh4Cat(id){
+  const cat=CH4_CATS.find(c=>c.id===id);
+  document.querySelectorAll('[id^="ch4c-"]').forEach(el=>{el.style.borderColor='var(--border)';el.style.background='var(--surf)';});
+  if(ch4CatActive===id){ch4CatActive=null;document.getElementById('ch4-detail').innerHTML='<span style="font-size:13px;color:var(--text3);">Click a category to read how it connects to the POLG-mtDNA vulnerability story.</span>';return;}
+  ch4CatActive=id;
+  const el=document.getElementById('ch4c-'+id);
+  if(el){el.style.borderColor='var(--teal)';el.style.background='var(--surf2)';}
+  document.getElementById('ch4-detail').innerHTML=`
+    <div style="font-size:14px;font-weight:600;color:var(--hi);margin-bottom:7px;">${cat.title}</div>
+    <div style="font-size:13px;color:var(--text2);line-height:1.78;">${cat.body}</div>
+    <div style="margin-top:9px;">${cat.tags.map(t=>`<span style="display:inline-block;font-size:11px;padding:2px 9px;border-radius:99px;margin:3px 3px 0 0;background:rgba(26,188,156,.1);color:var(--teal);border:1px solid rgba(26,188,156,.25);">${t}</span>`).join('')}</div>`;
+}
+
+function toggleCh4QA(i){
+  const body=document.getElementById('ch4qa-body-'+i);
+  const icon=document.getElementById('ch4qa-icon-'+i);
+  if(!body) return;
+  const open=body.style.display==='block';
+  body.style.display=open?'none':'block';
+  if(icon) icon.textContent=open?'▶':'▼';
+}
+
+const _goOld3=window.go;
+window.go=function(id){
+  _goOld3(id);
+  if(id==='chapter4') setTimeout(initChapter4,0);
+};
+</script>
 </main>
 
 <div class="stop-banner" id="stop-banner">
@@ -2230,7 +2605,7 @@ function go(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.tb').forEach(b=>b.classList.remove('active'));
   document.getElementById('page-'+id).classList.add('active');
-  ['dash','plan','quiz','papers','esg','committee','strategy','mechanism','experiments'].forEach((t,i)=>{ if(t===id) document.querySelectorAll('.tb')[i].classList.add('active'); });
+  ['dash','plan','quiz','papers','esg','committee','strategy','mechanism','experiments','chapter4'].forEach((t,i)=>{ if(t===id) document.querySelectorAll('.tb')[i].classList.add('active'); });
   if(id==='quiz') initQuiz();
   if(id==='papers') renderPapers();
   if(id==='plan'){ renderCal(); setTimeout(()=>{ const el=document.getElementById('dc-'+today()); if(el) el.classList.add('open'); },100); }
