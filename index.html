@@ -527,6 +527,10 @@ select.p-sel{background:var(--surf3);border:1px solid var(--border);color:var(--
     <h2>50 Essential Papers</h2>
     <p>Track reading · Quiz per paper · Prioritized by defense relevance</p>
   </div>
+  <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;">
+    <button class="btn btn-p" onclick="togglePaperSummaries()" id="sum-toggle-btn">📋 Show Paper Summaries (Pre-Defense Study Guide)</button>
+  </div>
+  <div id="paper-summaries-panel" style="display:none;margin-bottom:16px;"></div>
   <div class="filter-row" id="paper-filters"></div>
   <div id="papers-container"></div>
 </section>
@@ -2663,6 +2667,371 @@ document.addEventListener('DOMContentLoaded',async()=>{
   await checkAntiOverStudy(); await updateStats(); await renderProgressCard();
   if(Notification.permission==='default') Notification.requestPermission();
 });
+</script>
+
+<script>
+// ══════════════════════════════════════
+// PAPER SUMMARIES — Pre-Defense Study Guide
+// ══════════════════════════════════════
+
+const SUMMARIES = [
+  // ── ANTHRACYCLINE MECHANISM ──
+  {cat:'Anthracycline Mechanism',
+   author:'Swain',year:2003,journal:'Cancer',pmid:'12569593',
+   model:'Retrospective clinical cohort — 630 DOX-treated patients',
+   findings:'Dose-dependent incidence of CHF: 3% at 400 mg/m², 7% at 550 mg/m², 18% at 700 mg/m². Established the cumulative dose-response paradigm that became standard of care.',
+   know:'This is the foundational dose-response paper your thesis directly challenges. Know the exact percentages. Your argument: even within dose-strata, only a subset develops cardiotoxicity — constitutional vulnerability explains inter-patient variability within the same dose. The paradigm is incomplete, not wrong.'},
+  {cat:'Anthracycline Mechanism',
+   author:'Zhang',year:2012,journal:'Nature Medicine',pmid:'23160103',
+   model:'Cardiomyocyte-specific Top2b knockout mouse + neonatal rat ventricular cardiomyocytes',
+   findings:'TOP2B deletion in cardiomyocytes completely protects against DOX-induced DSBs, transcriptome reprogramming, mitochondrial dysfunction, and progressive HF. Identified TOP2B as the essential mediator. ROS is secondary to DSBs.',
+   know:'Defines Axis 2 of your three-axis model. TOP2B traps DOX on DNA → DSBs → transcriptome disruption → impaired mitochondrial biogenesis → ROS (in that order). Your thesis adds Axis 3 (constitutional POLG vulnerability) that is orthogonal to this. When asked how your findings relate to this paper: "Zhang established Axis 2. Our contribution is a constitutionally pre-existing, TOP2B-independent Axis 3 that DEX cannot address."'},
+  {cat:'Anthracycline Mechanism',
+   author:'Sterba',year:2021,journal:'Circulation: Heart Failure',pmid:'34551586',
+   model:'Neonatal ventricular cardiomyocytes in vitro + chronic rabbit model in vivo (n=50)',
+   findings:'ADR-925 (DEX iron-chelating metabolite given exogenously at equivalent concentrations) provides NO cardioprotection. DEX works through TOP2B inhibition and depletion, NOT iron chelation. Definitively buries the iron-chelation hypothesis after 30 years.',
+   know:'This is the paradigm-shift paper on DEX. The key experiment: give ADR-925 exogenously at the same concentration DEX achieves — no protection. Therefore iron chelation is not the mechanism. DEX depletes TOP2B before DOX can form the trapped ternary complex that generates DSBs. This paper is why your antioxidant trial rebuttal works: antioxidant trials also targeted a consequence (ROS), not the cause (TOP2B → DSBs). DEX works because it targets the right mechanism.'},
+  {cat:'Anthracycline Mechanism',
+   author:'Wallace',year:2020,journal:'Circulation Research',pmid:'32078477',
+   model:'Review — preclinical and clinical studies',
+   findings:'Comprehensive review of mitochondrial determinants of DOX cardiomyopathy. Covers ETC dysfunction, OXPHOS impairment, mitochondrial biogenesis failure, and quality control (mitophagy/fission) as the central mechanisms. Positions mitochondria, not generic ROS, as the primary site of injury.',
+   know:'This is your primary literature home for the mitochondrial mechanism. Cite it whenever you discuss why mitochondria are central. Key points: (1) DOX preferentially accumulates in mitochondria due to cardiolipin binding; (2) mitochondrial dysfunction precedes contractile failure; (3) ETC impairment generates secondary ROS. Your thesis fits directly: constitutional ETC insufficiency from POLG-insertion-biased mtDNA compounds the DOX-induced ETC stress.'},
+  {cat:'Anthracycline Mechanism',
+   author:'Herrmann',year:2020,journal:'Nature Reviews Cardiology',pmid:'31836884',
+   model:'Review',
+   findings:'Comprehensive taxonomy of cancer therapy-induced cardiovascular toxicity. Classifies cardiotoxicity by mechanism (type I = irreversible cell death, type II = reversible dysfunction), time course, and drug class. Frames the field conceptually.',
+   know:'Know the Type I vs Type II distinction. Anthracyclines = Type I (irreversible, cumulative, dose-dependent). Trastuzumab = Type II (reversible, not dose-dependent). Your thesis contributes to explaining inter-patient variability in Type I toxicity through constitutional biology rather than dose alone.'},
+  {cat:'Anthracycline Mechanism',
+   author:'Minotti',year:2004,journal:'Pharmacological Reviews',pmid:'15100161',
+   model:'Review',
+   findings:'Seminal review of anthracycline pharmacology: redox cycling mechanism, iron chelation, semiquinone radical generation, and the original oxidative stress hypothesis. Establishes the field foundation that DEX was designed to address.',
+   know:'The historical basis for why antioxidant trials were run. The semiquinone radical + Fe²⁺ → OH• via Fenton. Minotti built the case for iron-catalyzed oxidative damage. This is what was found to be wrong (ROS is secondary). Cite when explaining why antioxidant trials were rational at the time but mechanistically misguided.'},
+  {cat:'Anthracycline Mechanism',
+   author:'Cardinale',year:2015,journal:'Circulation',pmid:'25847991',
+   model:'Clinical — 2625 cancer patients with DOX, long-term follow-up',
+   findings:'Early detection of cardiac dysfunction with hsTnI elevation followed by ACEi/beta-blocker therapy largely reversed LVEF decline. If intervention delayed >6 months, recovery was incomplete. Time-to-treat matters.',
+   know:'Supports your biomarker rationale: earlier identification = more reversible injury. "The window for cardioprotective intervention is early — constitutional biomarker identification before treatment begins is exactly when the window is widest."'},
+
+  // ── DEX CLINICAL TRIALS ──
+  {cat:'Dexrazoxane Trials',
+   author:'van Dalen',year:2011,journal:'Cochrane Database Systematic Reviews',pmid:'22161360',
+   model:'Meta-analysis of 10 RCTs (n=1619)',
+   findings:'Dexrazoxane significantly reduces clinical HF risk in anthracycline-treated patients (RR 0.29). No significant increase in secondary malignancies in adult studies. Cardioprotection consistent across adult populations.',
+   know:'The Cochrane evidence base for DEX. Key numbers: RR 0.29 for clinical HF. The secondary malignancy concern (especially in children) is the basis for the FDA 2011 restricted indication. More recent pediatric data (COG) shows the concern was overstated. DEX protects through TOP2B (now confirmed by Sterba 2021) — cite this when discussing why DEX is the only approved agent and why its 60-80% protection leaves a gap (your Axis 3).'},
+  {cat:'Dexrazoxane Trials',
+   author:'Lipshultz',year:2010,journal:'Lancet',pmid:'20381250',
+   model:'Randomised trial — paediatric ALL/lymphoblastic lymphoma (POG 9404)',
+   findings:'Dexrazoxane co-administration with DOX in children with T-cell ALL did not compromise anti-tumour efficacy or event-free survival, and significantly reduced cardiac damage biomarkers. No increase in secondary malignancies at 5 years.',
+   know:'The pivotal paediatric DEX trial. Addresses the secondary malignancy concern directly — no increase at 5 years. This is the evidence base for paediatric DEX use. For your defense: "The concern about secondary malignancies that led to FDA label restrictions in 2011 was primarily based on earlier data. The POG 9404 trial and subsequent analyses show no increase in secondary malignancies, and Topobexin (2025) as a TOP2B-selective agent would eliminate this concern entirely."'},
+
+  // ── ANTIOXIDANT TRIALS ──
+  {cat:'Antioxidant Trials',
+   author:'Bruynzeel',year:2007,journal:'Journal of Experimental & Clinical Cancer Research',pmid:'17877811',
+   model:'RCT — 94 cancer patients receiving DOX, randomised to vitamin E or placebo',
+   findings:'Vitamin E (400 IU/day) did not prevent DOX-induced decline in LVEF. No significant cardioprotection in any echocardiographic parameter.',
+   know:'One of the key vitamin E failure trials. Use as direct evidence that non-enzymatic chain-breaker antioxidants fail. Mechanism: vitamin E is a lipid-phase radical scavenger that cannot restore GSTM1 Phase II conjugation capacity and cannot reach the mitochondrial matrix at relevant concentrations.'},
+  {cat:'Antioxidant Trials',
+   author:'Myers',year:1983,journal:'Seminars in Oncology',pmid:'6220413',
+   model:'Early clinical exploration',
+   findings:'N-acetylcysteine (NAC) and other thiol-based antioxidants tested as cardioprotectants against DOX. No consistent protection observed. GSH depletion theory motivated the attempt.',
+   know:'Historical basis for NAC trials. NAC is a glutathione precursor — the rationale was DOX depletes GSH. The failure: GSH depletion is a consequence of Phase II detoxification trying to work, not the primary problem. Constitutional GSTM1 insufficiency means the enzyme is absent; giving more substrate (GSH via NAC) without the enzyme does not help.'},
+  {cat:'Antioxidant Trials',
+   author:'Kalay',year:2006,journal:'Journal of the American College of Cardiology',pmid:'16487849',
+   model:'RCT — 90 patients receiving epirubicin, randomised to carvedilol vs placebo',
+   findings:'Carvedilol (a beta-blocker with antioxidant properties) significantly preserved LVEF. This is the first positive RCT for a cardioprotective drug other than DEX. However, carvedilol works primarily through adrenergic blockade, not pure antioxidant mechanism.',
+   know:'Important nuance: carvedilol has partial antioxidant activity but works mainly through adrenergic pathway blockade and reduction of cardiac workload. Its success does NOT validate the antioxidant hypothesis — it validates the neurohormonal protection hypothesis. Carvedilol is one of the ESC-recommended cardioprotective agents in the 2022 guidelines. Know the distinction: mechanism of protection matters.'},
+  {cat:'Antioxidant Trials',
+   author:'Tebbi',year:2007,journal:'Journal of Clinical Oncology',pmid:'17646659',
+   model:'Randomised trial — paediatric patients with Hodgkin lymphoma',
+   findings:'Concern raised: paediatric patients receiving DEX with ABVD had higher secondary malignancy rates than DEX-naive controls. Led to FDA restricting DEX use to adults and patients who have already received >300 mg/m² DOX equivalent.',
+   know:'The paper that caused the FDA 2011 restriction on DEX. Controversial — later analyses showed the finding may reflect the high-risk lymphoma population, not a causal DEX effect. POG 9404 (Lipshultz 2010) did NOT show this in T-ALL patients. For defense: acknowledge the concern, cite the resolution (more recent COG data and Topobexin as future).'},
+  {cat:'Antioxidant Trials',
+   author:'Ladas',year:2004,journal:'Journal of Clinical Oncology',pmid:'15051764',
+   model:'Systematic review of antioxidant interventions in cancer patients',
+   findings:'Antioxidant supplementation does not consistently reduce chemotherapy-induced cardiotoxicity. Evidence inconsistent due to different agents, timing, tumour types, and regimens. Notes fundamental concern that antioxidants may reduce anti-tumour efficacy.',
+   know:'Your go-to citation for the antioxidant trial failure systematic review. Key finding: "evidence is insufficient" — not "antioxidants work but less well" but fundamentally wrong target. Layer on top: your thesis explains mechanistically WHY they failed (ROS is secondary; the constitutional deficit is enzymatic capacity, not radical species).'},
+
+  // ── POLG / mtDNA MECHANISM ──
+  {cat:'POLG & mtDNA',
+   author:'Anderson',year:2020,journal:'Nucleic Acids Research',pmid:'31745559',
+   model:'Biochemical — purified POLG protein, mass spectrometry, in vitro oxidation',
+   findings:'POLG exonuclease domain is a hotspot for oxidative modification. H₂O₂ selectively oxidises cysteine and methionine residues in the exo active site at concentrations as low as 50 µM. Oxidised POLG shows 20-fold increased error rate with preservation of polymerase activity — creating the pol/exo imbalance.',
+   know:'This is the mechanistic cornerstone of your POLG model. The two key facts: (1) the exo domain is preferentially oxidised vs the pol domain; (2) oxidised POLG makes 20-fold more errors. Every time someone asks "how does reduced GPX1 lead to insertion bias?" — this paper is the mechanistic bridge. Quote: "exo domain is an oxidation hotspot."'},
+  {cat:'POLG & mtDNA',
+   author:'Stewart',year:2015,journal:'Nature Reviews Genetics',pmid:'26370501',
+   model:'Review — human genetics, population studies, disease cohorts',
+   findings:'Comprehensive review of heteroplasmy dynamics. Key concepts: threshold effect (different tissues, different thresholds), vegetative segregation in dividing cells, purifying selection, the bottleneck at oogenesis, and somatic vs maternal heteroplasmy.',
+   know:'THE definitive heteroplasmy reference. Committee will ask about heteroplasmy. Know: (1) threshold varies by tissue — heart lowest at ~40%; (2) post-mitotic cells cannot dilute through division; (3) your insertion bias is a mutagenesis rate signature, not single-variant heteroplasmy — explain the distinction. "Heteroplasmy measures the frequency of a known variant; insertion bias measures constitutional POLG fidelity as a cumulative readout."'},
+  {cat:'POLG & mtDNA',
+   author:'Kennedy',year:2013,journal:'PLOS Genetics',pmid:'23593020',
+   model:'Ultra-sensitive sequencing (Duplex Sequencing) of human mtDNA',
+   findings:'Somatic mtDNA mutations are far more frequent than previously known. Most cells carry unique, low-heteroplasmy variants. Establishes the importance of distinguishing true somatic variants from sequencing errors via strand consensus calling.',
+   know:'Bennett will ask about this. Your sequencing methodology should be benchmarked against Kennedy 2013. Know: (1) VAF threshold reasoning; (2) strand-bias filtering; (3) panel-of-normals approach. "We applied strand-concordance filtering consistent with Kennedy et al. to distinguish true insertions from FFPE/PCR artefacts."'},
+  {cat:'POLG & mtDNA',
+   author:'Ju',year:2014,journal:'eLife',pmid:'24867637',
+   model:'Whole-mitochondrial genome sequencing of 1675 tumours and matched normals',
+   findings:'Somatic mtDNA mutations are common in cancer. Insertions and deletions have distinct spectra — deletions dominate in certain damage contexts. Provides comparative framework for interpreting your 77% insertion bias.',
+   know:'Your mechanistic discrimination argument uses this as context. The paper shows that different mutagenic processes produce different indel spectra — deletions dominate in TOP2B/DSB contexts, insertions dominate in replication error contexts. Your insertion-dominant pattern is therefore specifically consistent with POLG proofreading failure, not DSB-mediated deletion.'},
+  {cat:'POLG & mtDNA',
+   author:'Greaves',year:2012,journal:'Journal of Pathology',pmid:'22030598',
+   model:'Human aged tissues, disease cohorts, electron transport chain immunohistochemistry',
+   findings:'Defines the heteroplasmy threshold concept: respiratory chain deficiency manifests when mutant mtDNA exceeds ~60% in muscle, ~70% in neurons. Threshold varies by tissue OXPHOS demand. Post-mitotic cells accumulate mutations without dilution.',
+   know:'Directly supports your cardiac threshold argument (~40% for heart). Key quote from this paper: the threshold is tissue-specific and determined by spare respiratory capacity. Cardiac cells have the lowest spare capacity = lowest threshold = most vulnerable organ at a given heteroplasmy level. Your LVAD cohort has hearts at the clinical endpoint of threshold-crossing.'},
+  {cat:'POLG & mtDNA',
+   author:'Payne',year:2013,journal:'Human Molecular Genetics',pmid:'22271752',
+   model:'Ultra-deep mtDNA sequencing of 11,000 independent sites across cohort',
+   findings:'All humans carry low-level heteroplasmic variants at nearly every mtDNA position. Heteroplasmy is universal, not the exception. The relevant question is the rate of accumulation to pathological levels, not presence/absence.',
+   know:'Counters the naive question "but don\'t all people have some mtDNA mutations?" — yes, the question is the rate and spectrum. Your TOX patients don\'t just have mutations; they have a specific insertion-dominant pattern at a constitutively elevated rate reflecting impaired proofreading. Heteroplasmy is ubiquitous; the mutagenesis signature is what discriminates.'},
+
+  // ── MITOCHONDRIAL DYNAMICS ──
+  {cat:'Mitochondrial Dynamics',
+   author:'Youle',year:2012,journal:'Science',pmid:'22936770',
+   model:'Review — molecular biology of DRP1, MFN1/2, OPA1, and fission/fusion machinery',
+   findings:'Canonical reference for mitochondrial dynamics. Defines DRP1-GTP hydrolysis as the fission driver, MFN1/2 as OMM fusion mediators, OPA1 as IMM fusion mediator. Establishes the quality control function of asymmetric fission.',
+   know:'Your fundamental reference for fission/fusion machinery. When defending hyperfusion trap: DRP1-Ser637 phosphorylation (inhibitory) prevents GTP hydrolysis → no fission ring → no asymmetric daughters → Twig-Shirihai QC cannot operate. Know the phosphorylation sites: Ser616 (activating, CDK1/CAMKII) vs Ser637 (inhibitory, PKA).'},
+  {cat:'Mitochondrial Dynamics',
+   author:'Twig',year:2008,journal:'EMBO Journal',pmid:'18200046',
+   model:'INS1 pancreatic beta cells, live imaging, kinetic analysis',
+   findings:'Fission produces two daughters of unequal membrane potential. The depolarised daughter is selectively targeted for mitophagy via PINK1 accumulation. Fusion allows rescue of the healthy daughter. Asymmetric fission is the quality control checkpoint.',
+   know:'The foundational Twig-Shirihai model paper. Know the mechanism in detail: ~5 fission events per hour, ~5% yield sustained depolarisation → PINK1 accumulates → Parkin → ubiquitination of MFN1/2 → blocks refusion → mitophagy. In TOX hyperfused cells: fission rate suppressed (DRP1-S637-P) → no asymmetric daughters → PINK1 cannot accumulate → QC fails.'},
+  {cat:'Mitochondrial Dynamics',
+   author:'Dorn',year:2015,journal:'EMBO Molecular Medicine',pmid:'25693748',
+   model:'Review — cardiac-specific transgenic and knockout mouse models',
+   findings:'Comprehensive cardiac dynamics review. DRP1 deletion in cardiomyocytes is lethal. MFN1/2 knockout causes mtDNA depletion. Balance is essential. Hypertrophy is associated with fusion; atrophy with fission. Excess fission = lethal in heart.',
+   know:'Cardiac-specific dynamics context. The key message for your thesis: moderate, regulated hyperfusion (as compensation) is different from pathological hyperfusion (as constitutional incapacity for QC). In TOX, hyperfusion is not a protective state — it is compensatory mitochondrial content sharing that has exhausted the fusion reserve needed for the nucleoid remodelling response.'},
+  {cat:'Mitochondrial Dynamics',
+   author:'Ong',year:2010,journal:'Circulation',pmid:'20048204',
+   model:'Rat cardiomyocytes + in vivo ischaemia-reperfusion (I/R) model',
+   findings:'Inhibiting mitochondrial fission with Mdivi-1 (DRP1 inhibitor) reduces I/R injury. Fission precedes mPTP opening and cytochrome c release during I/R. Fission inhibition is cardioprotective in acute ischaemic context.',
+   know:'Henning will cite this. The distinction your defense requires: Ong shows acute fission inhibition during I/R is PROTECTIVE (fission drives the pathological cascade in I/R). In your model, constitutive fission SUPPRESSION in TOX prevents quality-control mitophagy (chronic pathology). Same molecular event (less fission), opposite clinical context (acute injury vs chronic QC failure). Be explicit: "The context is different — acute regulated suppression of pathological fission vs constitutive incapacity for quality-control fission."'},
+  {cat:'Mitochondrial Dynamics',
+   author:'Kim',year:2020,journal:'FASEB Journal',pmid:'31874068',
+   model:'Human fibroblasts + mouse embryonic fibroblasts, p53 overexpression + knockout',
+   findings:'p53 promotes mitochondrial elongation (hyperfusion) prior to cellular senescence. Mechanism: p53 activates PKA, which phosphorylates DRP1-Ser637 (inhibitory), suppressing DRP1 translocation to OMM. Inhibiting mitochondrial elongation suppressed senescence.',
+   know:'Your mechanistic link from ETC dysfunction → AMPK → p53 → PKA → DRP1-Ser637-P → hyperfusion → Twig-Shirihai QC failure → MiDAS senescence. The circular logic: the hyperfusion trap in TOX is driven by p53-PKA from constitutive AMPK activation (low NAD+/NADH) — and the same p53 that drives hyperfusion also drives senescence. Your pDRP1-Ser637 WB is validating this exact paper in your cardiomyocyte model.'},
+  {cat:'Mitochondrial Dynamics',
+   author:'Hoshino',year:2013,journal:'Nature Communications',pmid:'24067289',
+   model:'Mouse heart — p53 KO, DOX treatment + ageing',
+   findings:'Cytosolic p53 binds directly to Parkin\'s RING0 domain, sequestering it from damaged mitochondria. p53-deficient mice show better mitochondrial integrity and cardiac function. Parkin overexpression rescues; accompanies decreased SA-β-gal and inflammatory markers.',
+   know:'This paper specifically shows the p53-Parkin sequestration in the cardiac context. When DOX elevates p53 in TOX cardiomyocytes, p53 simultaneously blocks Parkin translocation (doubly blocking QC: DRP1-S637-P blocks fission = no asymmetric daughters, and Parkin sequestration blocks the rare depolarised units that do form). This is why your WB data should show Parkin-TOM20 colocalization reduced in TOX under DOX.'},
+
+  // ── SENESCENCE ──
+  {cat:'Senescence',
+   author:'Wiley',year:2016,journal:'Cell Metabolism',pmid:'26777689',
+   model:'Human cells — inhibition of OXPHOS, rotenone-treated, mtDNA-depleted',
+   findings:'Defines MiDAS (Mitochondrial Dysfunction-Associated Senescence). Trigger: elevated AMP:ATP → AMPK → p53-S15P → p21. Distinct SASP: lacks IL-1/IL-6/IL-8 arm, enriched for IFN-like factors and TGF-β. p53-dependent, largely 53BP1-negative (not nuclear DNA damage-driven).',
+   know:'The definition of MiDAS — your mechanistic framework for how ETC dysfunction in TOX cardiomyocytes drives a pre-senescent state. The SASP profile predicts the clinical phenotype: TGF-β dominant → fibrosis (matching histological signature of late anthracycline cardiotoxicity), not acute IL-6 spike (which would look like myocarditis, which is NOT the clinical presentation).'},
+  {cat:'Senescence',
+   author:'Victorelli',year:2023,journal:'Nature',pmid:'37730999',
+   model:'Human and mouse senescent cells + in vivo ageing models',
+   findings:'Minority MOMP (miMOMP) during senescence releases mtDNA through BAX/BAK macropores into the cytosol, activating cGAS-STING as a major SASP driver. Inhibition of MOMP in vivo reduces inflammatory markers and improves healthspan.',
+   know:'Your SASP generation mechanism. Damaged, insertion-biased mitochondria in TOX cells undergo minority MOMP → mtDNA leaks → cGAS-STING activation → SASP. Higher copy number in cardiotoxic hearts (your cardiac tissue data **) means more mtDNA substrate for leakage. Foijer\'s lab works on cGAS-STING; referencing this paper in response to his question is powerful.'},
+  {cat:'Senescence',
+   author:'Childs',year:2017,journal:'Nature Reviews Drug Discovery',pmid:'27748397',
+   model:'Review — human and mouse ageing, disease models',
+   findings:'Comprehensive senescence review: SASP components, senolytic/senomorphic strategies, role in ageing diseases. Covers p16-mediated replicative arrest vs stress-induced senescence. Senolytics (ABT-263, dasatinib+quercetin) clear senescent cells with health benefits.',
+   know:'Your foundation for the senescence chapter. Know: (1) SASP main components and their effects; (2) distinction between replicative (p16-dominant) and stress-induced senescence (p21-dominant = MiDAS); (3) cardiomyocytes are post-mitotic — they express senescence markers (SA-β-gal, p21, p16, SASP) without replicative arrest. The relevant therapeutic branch from this paper: senomorphics to reduce SASP without killing cells.'},
+  {cat:'Senescence',
+   author:'Dookun',year:2020,journal:'JCI Insight',pmid:'32294054',
+   model:'Mouse cardiac ischaemia-reperfusion, ABT-263 senolytic treatment',
+   findings:'Senescent cells accumulate in the heart after I/R. ABT-263 (navitoclax) senolytic treatment prevents post-I/R heart failure. Proves cardiac senescence is causally pathogenic, not merely correlative.',
+   know:'The causal proof that cardiac senescence drives HF — not just association. Strengthens your argument that the senescence programme driven by MiDAS in TOX cardiomyocytes is mechanistically responsible for progressive cardiomyopathy, not just a marker of it. Dookun\'s model = acute I/R senescence; your model = chronic constitutional + DOX-accelerated senescence. Both result in progressive HF if not cleared.'},
+  {cat:'Senescence',
+   author:'Campisi',year:2013,journal:'Annual Review of Physiology',pmid:'23398155',
+   model:'Review',
+   findings:'Seminal conceptualisation of senescence as a hallmark of ageing with four functions: tumour suppression, wound healing, embryonic development, and (pathological) chronic disease. SASP as the mechanism linking cell-autonomous senescence to tissue-level pathology.',
+   know:'The conceptual authority for calling what happens in TOX cardiomyocytes "senescence." Know the four faces of senescence and be able to explain why, in the post-mitotic cardiac context, the pathological SASP arm dominates. The protective (tumour-suppressive, wound-healing) arms are less relevant in non-dividing cells.'},
+
+  // ── iPSC METHODOLOGY ──
+  {cat:'iPSC Methodology',
+   author:'Takahashi',year:2007,journal:'Cell',pmid:'18035408',
+   model:'Adult human dermal fibroblasts',
+   findings:'Reprogramming of adult human somatic cells to iPSCs using OCT4, SOX2, KLF4, and c-MYC (Yamanaka factors). Induced pluripotency from non-embryonic sources. Nobel Prize 2012.',
+   know:'The foundational iPSC paper. Know the four Yamanaka factors cold: OCT4, SOX2, KLF4, c-MYC. Know that c-MYC increases oncogenic risk → later protocols use reduced or absent c-MYC. The constitutional argument for your thesis rests on this platform: reprogramming resets the epigenome and somatic damage history, so differences in the re-differentiated cells reflect the nuclear genetic background.'},
+  {cat:'iPSC Methodology',
+   author:'Lian',year:2012,journal:'PNAS',pmid:'22949648',
+   model:'hESC and hiPSC-CM differentiation protocol',
+   findings:'Temporal Wnt modulation protocol: CHIR99021 (GSK-3 inhibitor, Wnt activator) on Day 0, followed by IWP2 (Wnt inhibitor) on Day 3. Achieves >85% cTnT+ cardiomyocytes without co-culture. Scalable and reproducible.',
+   know:'Your differentiation protocol. If asked "how did you make your cardiomyocytes?" — this is the paper. Day 0: CHIR activates Wnt (mesoderm induction). Day 3: IWP2 inhibits Wnt (cardiac commitment). Know your own cTnT+ efficiency percentage and how it compares to the paper\'s benchmark.'},
+  {cat:'iPSC Methodology',
+   author:'Ronaldson-Bouchard',year:2018,journal:'Nature',pmid:'29662167',
+   model:'Human iPSC-CMs in engineered heart tissue with high-frequency electrical stimulation (HF-EHT)',
+   findings:'High-frequency electromechanical stimulation produces adult-like iPSC-CMs: organized sarcomeres, metabolic maturation (FAO-dominant), gene expression shift to adult cardiac programme, T-tubule development.',
+   know:'The benchmark for iPSC-CM maturation. Your dyn-EHTs are more mature than standard 2D CMs but less mature than Ronaldson-Bouchard HF-EHTs. Use this when defending maturation limitations: "Our dyn-EHT model achieves intermediate maturation. For absolute mechanistic claims, adult-like Ronaldson-Bouchard EHTs would be ideal — the comparison remains valid as an internal RES vs TOX control."'},
+  {cat:'iPSC Methodology',
+   author:'Streckfuss-Bömeke',year:2013,journal:'European Heart Journal',pmid:'23307812',
+   model:'iPSCs derived from three donor cell types: blood, fibroblast, urine',
+   findings:'iPSC source tissue influences epigenetic memory and differentiation efficiency. Blood-derived iPSCs show less donor tissue residual methylation bias than fibroblast-derived. But functionally, cardiomyocytes from different sources are equivalent.',
+   know:'Bennett will ask about epigenetic memory. Your iPSCs are fibroblast-derived. Streckfuss-Bömeke shows the functional cardiomyocytes are equivalent regardless of source. The residual epigenetic memory in early passage is diluted by extensive self-renewal. More important: your fibroblasts from the SAME patients show DIFFERENT mutagenesis patterns from the iPSC-CMs — this is cell-type specificity, which rules out reprogramming artefact.'},
+
+  // ── BIOENERGETICS ──
+  {cat:'Bioenergetics',
+   author:'Brand',year:2011,journal:'Biochemical Journal',pmid:'21255109',
+   model:'Methodological review — Seahorse XF and bioenergetics assay design',
+   findings:'Defines basal respiration, maximal respiration (FCCP-uncoupled), spare respiratory capacity (SRC = maximal − basal), ATP-linked respiration (oligomycin-sensitive), and proton leak. Establishes interpretation framework for OCR/ECAR data.',
+   know:'Every number in your Seahorse data must be defended with reference to this paper. SRC is the key parameter: it is the bioenergetic reserve. TOX cells have lower SRC under DOX. Lower SRC = closer to the bioenergetic ceiling = less buffer against additional stress. The 47% ATP reduction you show = total ATP production rate, not just OCR. Know the formula: ATP production = (oligomycin-sensitive OCR × P/O ratio) + (ECAR-derived glycolytic ATP).'},
+  {cat:'Bioenergetics',
+   author:'Bertero',year:2018,journal:'Nature Reviews Cardiology',pmid:'29915254',
+   model:'Review — metabolic remodelling in heart failure',
+   findings:'Heart failure is characterised by metabolic inflexibility: impaired FAO, glycolytic shift, reduced substrate switching capacity. The failing heart reverts to foetal metabolic programme. NAD+ depletion is central. Implications for therapeutic targeting.',
+   know:'Provides clinical context for TOX bioenergetics. TOX cardiomyocytes show metabolic rigidity (your Seahorse FAO data: negative ATP contribution from FAO in TOX under DOX). This mirrors the HF metabolic signature described here. The NAD+ depletion angle also connects to MiDAS (Wiley 2016): low NAD+/NADH → AMPK → p53 → senescence. Cite Bertero when explaining why FAO failure in TOX is significant.'},
+  {cat:'Bioenergetics',
+   author:'Subramanian',year:2005,journal:'PNAS',pmid:'16199517',
+   model:'Computational — gene set enrichment analysis methodology',
+   findings:'Defines GSEA: gene set enrichment analysis using ranked gene lists. NES (normalised enrichment score), FDR correction, running enrichment score. The standard for pathway-level transcriptomic analysis.',
+   know:'Your transcriptomics pathway analysis methodology. If asked about NES values, FDR cutoffs, or how you detected ETC enrichment in TOX: "We used GSEA (Subramanian 2005) with ranked gene lists, FDR <0.05, NES used for directionality." Know your top TOX-enriched pathways: REACTOME_RESPIRATORY_ELECTRON_TRANSPORT NES −2.35, GOBP_OXIDATIVE_PHOSPHORYLATION NES −2.13.'},
+
+  // ── REDOX ──
+  {cat:'Redox Biology',
+   author:'Schieber',year:2014,journal:'Current Biology',pmid:'24845678',
+   model:'Review',
+   findings:'Defines ROS as dual-role molecules: low concentrations are signalling molecules (redox signalling); high concentrations cause oxidative damage. The dose-response curve is the key concept. Not all ROS is pathological; threshold between signalling and damage is cell-type and compartment-specific.',
+   know:'Your conceptual framework for why baseline MitoSOX elevation in TOX is pathological (not just signalling). The constitutive elevation from insufficient GPX1 keeps H₂O₂ above the signalling range and into the oxidative damage range in the mitochondrial matrix — specifically reaching the POLG exo domain. Use this paper when explaining the difference between ROS as signalling vs ROS as POLG-impairing damage.'},
+  {cat:'Redox Biology',
+   author:'Lubos',year:2011,journal:'Antioxidants and Redox Signaling',pmid:'20666646',
+   model:'Review — GPX1 biology, human genetics, animal models',
+   findings:'Comprehensive GPX1 review. GPX1 is the primary intracellular H₂O₂ scavenger. Dual localisation: cytosol AND mitochondrial matrix. GPX1 polymorphisms (Pro198Leu) associate with increased CVD risk. GPX1-null mice show elevated H₂O₂ and accelerated cardiac dysfunction.',
+   know:'Your key paper for GPX1 WB findings. The dual localisation (cytosol + matrix) is mechanistically critical: GPX1 scavenges H₂O₂ directly in the matrix where POLG resides. Lower GPX1 in TOX = more H₂O₂ in the matrix → more POLG exo domain oxidation. The human genetics data (Pro198Leu) parallels the clinical constitutional vulnerability story for GSTM1.'},
+  {cat:'Redox Biology',
+   author:'Hayes',year:2005,journal:'Annual Review of Pharmacology and Toxicology',pmid:'15032570',
+   model:'Review',
+   findings:'Comprehensive GST superfamily review. Classifies alpha, mu, pi, theta, kappa classes. GSTM1 (mu class): detoxifies electrophilic DOX metabolites, catecholamine-derived electrophiles, and 4-HNE. GSTP1 (pi class): predominant cardiac isoform, conjugates 4-HNE. CDNB detects alpha, mu, pi classes — not theta.',
+   know:'Critical for the GST activity assay nuance. When asked "your CDNB assay measures the whole family, not GSTM1 specifically": "Correct — CDNB detects GSTA, GSTM, and GSTP isoforms. In cardiomyocytes, GSTP1 is the predominant isoform and likely the major contributor to the CDNB signal. The concordant reduction in GSTM1 protein (WB) and total Phase II activity (CDNB) suggests broad constitutional downregulation, likely including GSTP1."'},
+
+  // ── CLINICAL TRIALS — CARDIO-ONCOLOGY ──
+  {cat:'Clinical Trials',
+   author:'Zamorano',year:2016,journal:'European Heart Journal',pmid:'27567406',
+   model:'ESC position paper — expert consensus',
+   findings:'2016 ESC position paper defining cardiovascular toxicity from cancer therapies. Establishes surveillance protocols, monitoring algorithms, and management guidelines. Predates Lyon 2022 Guidelines.',
+   know:'The precursor to the 2022 ESC Guidelines. Know that the definition of CTRCD evolved: 2016 used absolute LVEF cutoffs; 2022 introduced GLS and biomarker-based subclinical CTRCD. Your cohort was likely managed under 2016 protocols. Cite this when contextualising your patient selection and monitoring history.'},
+  {cat:'Clinical Trials',
+   author:'Lyon',year:2022,journal:'European Heart Journal',pmid:'36017568',
+   model:'ESC Guideline — evidence review + expert consensus',
+   findings:'2022 ESC Cardio-Oncology Guidelines. Introduces HFA-ICOS risk categories (low/moderate/high/very high), subclinical CTRCD (GLS >15% relative reduction, troponin elevation), enhanced monitoring protocols, and cardioprotection algorithms including DEX at >300 mg/m².',
+   know:'Your clinical framework. Know: CTRCD = LVEF drop >10pp to <53% OR any drop to <53% with symptoms. Subclinical CTRCD = GLS >15% relative drop and/or troponin. DEX recommended at >300 mg/m² DOX equivalent. Monitoring: echo at baseline, during each cycle (high-risk), 3/6/12 months post-treatment, then annually ×5 years. Your biomarker fits as a pre-treatment tool to refine risk classification.'},
+  {cat:'Clinical Trials',
+   author:'Cardinale',year:2018,journal:'Journal of the American College of Cardiology',pmid:'29471938',
+   model:'Longitudinal clinical cohort — 2625 cancer patients, median follow-up 5.2 years',
+   findings:'Troponin I elevation during chemotherapy predicts subsequent LVEF decline. Patients who did NOT have troponin normalisation with ACEi therapy had persistent dysfunction. Defines troponin as the key on-treatment monitoring biomarker.',
+   know:'Your companion biomarker paper — hsTnI during treatment. Your mtDNA biomarker operates BEFORE treatment (constitutional risk stratification). hsTnI operates DURING treatment (damage detection). Together they form complementary stages of a precision cardio-oncology monitoring pathway. Never say they compete.'},
+  {cat:'Clinical Trials',
+   author:'Hortobagyi',year:2016,journal:'New England Journal of Medicine',pmid:'27573579',
+   model:'RCT MONALEESA-2 — 668 postmenopausal HR+/HER2− breast cancer patients',
+   findings:'Ribociclib + letrozole significantly improved PFS vs placebo + letrozole (25.3 vs 16 months). Established CDK4/6i as first-line breast cancer therapy. QTc prolongation identified as key cardiac safety concern.',
+   know:'The registration trial for ribociclib. Your Ch.5 addresses the cardiac mechanism of ribociclib cardiotoxicity. MONALEESA-2 established efficacy AND identified QTc prolongation as the main safety signal. Your finding (spliceosome dysfunction → hERG channel splicing defects → QTc) provides the molecular basis for the clinical observation. The QTc limit <450 ms before starting is from this trial\'s safety observations.'},
+  {cat:'Clinical Trials',
+   author:'de Baat',year:2021,journal:'European Heart Journal',pmid:'32985655',
+   model:'Clinical cohort — breast cancer patients, risk-stratification study',
+   findings:'Clinical risk stratification study for breast cancer cardiotoxicity. Traditional risk factors (age, hypertension, diabetes, BMI) incompletely predict who develops CTRCD. Calls for improved biomarker-based stratification tools.',
+   know:'Directly supports your biomarker rationale. "Traditional risk factors are inadequate for predicting individual cardiotoxicity risk — constitutional biological biomarkers are needed." Cite in introduction when establishing the unmet need for your mtDNA biomarker approach. The paper demonstrates the gap your thesis fills.'},
+
+  // ── COMMITTEE PAPERS ──
+  {cat:'Committee Papers',
+   author:'Meijers (de Boer)',year:2018,journal:'Circulation',pmid:'29352099',
+   model:'Clinical cohort + mouse model — SECRETE-HF study',
+   findings:'SECRETE-HF: failing hearts secrete factors that promote tumour growth. Patients with acute HF had higher cancer incidence. Establishes the bidirectional heart-cancer axis as a new field.',
+   know:'De Boer\'s key paper. Cite it by name in your answer to his SECRETE-HF question: "Your SECRETE-HF finding is exactly why cardiac protection in cancer patients matters beyond the individual — protecting cardiac function in constitutionally vulnerable patients prevents the secondary SASP-driven cycle." Demonstrates you read his work. The bidirectionality strengthens the case for cardioprotection: SASP from damaged cardiomyocytes could itself stimulate tumour growth.'},
+  {cat:'Committee Papers',
+   author:'Hong (Foijer)',year:2022,journal:'Nature',pmid:'35859180',
+   model:'CIN cell models + in vivo mouse, STING pathway analysis',
+   findings:'Chromosomal instability (CIN) in cancer cells activates cGAS-STING-IL6 through micronucleus formation and mtDNA leakage. STING inhibition reduces metastasis. Establishes cGAS-STING as the molecular bridge between genomic instability and inflammatory signalling.',
+   know:'Foijer\'s key paper — READ EVERY WORD. "Your 2022 Nature paper on cGAS/STING-IL6 in CIN provides exactly the mechanistic bridge between our mtDNA findings and the inflammatory phenotype. Damaged insertion-biased mitochondria leak mtDNA → cGAS-STING activation → SASP — the same axis you describe in CIN cancer cells." This is the most powerful cross-domain connection you can make in the defense.'},
+  {cat:'Committee Papers',
+   author:'Ong (Henning)',year:2010,journal:'Circulation',pmid:'20048204',
+   model:'Rat cardiomyocytes + in vivo I/R model',
+   findings:'DRP1 inhibition with Mdivi-1 reduces mitochondrial fragmentation during I/R reperfusion, reduces infarct size. Fission drives pathological cytochrome c release during I/R.',
+   know:'Henning\'s favourite DRP1 paper. The key distinction you need to make: Ong shows ACUTE regulated fission suppression is cardioprotective in I/R (correct context). Your model: CONSTITUTIVE fission suppression due to DRP1-S637-P in TOX prevents chronic quality-control mitophagy (pathological). Same endpoint (less fission), opposite clinical context. Prepare this distinction before going into the defense.'},
+  {cat:'Committee Papers',
+   author:'Kennedy (Bennett)',year:2013,journal:'PLOS Genetics',pmid:'23593020',
+   model:'Duplex Sequencing of human cell lines and tissues',
+   findings:'Ultra-sensitive error-corrected sequencing methodology. Somatic mtDNA mutations detectable at VAF as low as 10⁻⁷. Establishes strand-concordance consensus calling as the gold standard for distinguishing true variants from sequencing errors.',
+   know:'Bennett\'s methodological standard. Know your equivalent methodology: your VAF threshold, strand-bias filter, coverage depth, panel of normals approach. The key defence: cell-type specificity (insertion bias in CMs, deletion bias in fibroblasts from same donors) rules out platform artefact because the same sequencing pipeline produces different spectra in different tissues.'},
+  {cat:'Committee Papers',
+   author:'Lubberts (Gietema)',year:2023,journal:'Journal of Clinical Oncology',pmid:'36780638',
+   model:'Prospective cohort — testicular cancer survivors, long-term CV follow-up',
+   findings:'TC survivors treated with cisplatin-based chemotherapy show significantly elevated cardiovascular mortality and morbidity decades after treatment. Risk persists for 25+ years. Young age at treatment amplifies long-term risk.',
+   know:'Gietema\'s key clinical paper. "Your group\'s work on long-term CVD in testicular cancer survivors is exactly the clinical context our constitutional vulnerability framework would extend to. Young age amplifies the impact of constitutional vulnerability — 25 years of the POLG feedback loop running post-treatment is mechanistically how your late CVD observations occur." Shows you understand his clinical work.'},
+];
+
+let summariesVisible = false;
+function togglePaperSummaries(){
+  summariesVisible = !summariesVisible;
+  const btn = document.getElementById('sum-toggle-btn');
+  const panel = document.getElementById('paper-summaries-panel');
+  if(summariesVisible){
+    btn.textContent = '✕ Hide Paper Summaries';
+    renderSummaries();
+    panel.style.display = 'block';
+  } else {
+    btn.textContent = '📋 Show Paper Summaries (Pre-Defense Study Guide)';
+    panel.style.display = 'none';
+  }
+}
+
+function renderSummaries(){
+  const panel = document.getElementById('paper-summaries-panel');
+  if(panel.innerHTML && panel.innerHTML.length > 100) return; // already rendered
+
+  const cats = [...new Set(SUMMARIES.map(s=>s.cat))];
+  let html = `
+    <div style="background:var(--surf2);border:1px solid var(--border);border-radius:var(--r);padding:16px;margin-bottom:10px;">
+      <h3 style="margin-bottom:8px;">📚 Pre-Defense Paper Summaries</h3>
+      <p style="font-size:12.5px;color:var(--text3);margin-bottom:12px;">Read this the day before your defense. For each paper: first author, year, journal, PMID, model, main findings, and what you need to know for May 21.</p>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;" id="sum-cat-filters">
+        <button class="btn" style="font-size:11px;padding:4px 10px;" onclick="filterSummaries('All')" id="sumcat-All">All (${SUMMARIES.length})</button>
+        ${cats.map(c=>`<button class="btn" style="font-size:11px;padding:4px 10px;" onclick="filterSummaries('${c}')" id="sumcat-${c.replace(/[^a-zA-Z0-9]/g,'_')}">${c} (${SUMMARIES.filter(s=>s.cat===c).length})</button>`).join('')}
+      </div>
+      <div id="sum-cards"></div>
+    </div>`;
+  panel.innerHTML = html;
+  filterSummaries('All');
+}
+
+function filterSummaries(cat){
+  const filtered = cat==='All' ? SUMMARIES : SUMMARIES.filter(s=>s.cat===cat);
+  document.querySelectorAll('[id^="sumcat-"]').forEach(b=>{
+    b.style.background='';b.style.color='';
+  });
+  const btnId = 'sumcat-'+(cat==='All'?'All':cat.replace(/[^a-zA-Z0-9]/g,'_'));
+  const btn = document.getElementById(btnId);
+  if(btn){btn.style.background='var(--teal)';btn.style.color='#fff';}
+  const el = document.getElementById('sum-cards');
+  if(!el) return;
+  el.innerHTML = filtered.map((s,i)=>`
+    <div style="border:1px solid var(--border);border-radius:var(--r);margin-bottom:8px;overflow:hidden;background:var(--surf);">
+      <div style="padding:12px 16px;cursor:pointer;display:flex;align-items:flex-start;gap:12px;" onclick="toggleSum(${SUMMARIES.indexOf(s)})">
+        <div style="flex:1;">
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:3px;">
+            <span style="font-size:13px;font-weight:600;">${s.author} et al. (${s.year})</span>
+            <span style="font-size:11px;font-style:italic;color:var(--text3);">${s.journal}</span>
+            <span style="font-family:var(--mono);font-size:10px;color:var(--teal);background:rgba(26,188,156,.1);padding:2px 6px;border-radius:4px;">PMID ${s.pmid}</span>
+            <span style="font-size:10px;padding:2px 8px;border-radius:99px;background:var(--surf2);color:var(--text3);border:1px solid var(--border);">${s.cat}</span>
+          </div>
+          <div style="font-size:12px;color:var(--text3);">Model: ${s.model}</div>
+        </div>
+        <span style="color:var(--text3);font-size:12px;flex-shrink:0;" id="sum-icon-${SUMMARIES.indexOf(s)}">▶</span>
+      </div>
+      <div id="sum-body-${SUMMARIES.indexOf(s)}" style="display:none;border-top:1px solid var(--border);padding:14px 16px;">
+        <div style="margin-bottom:10px;">
+          <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--blue);margin-bottom:5px;">Main Findings</div>
+          <p style="font-size:13px;line-height:1.75;">${s.findings}</p>
+        </div>
+        <div style="background:rgba(26,188,156,.07);border:1px solid rgba(26,188,156,.2);border-radius:var(--r);padding:12px 14px;">
+          <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--teal);margin-bottom:5px;">🎯 What You Should Know for the Defense</div>
+          <p style="font-size:13px;line-height:1.78;">${s.know}</p>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function toggleSum(i){
+  const body = document.getElementById('sum-body-'+i);
+  const icon = document.getElementById('sum-icon-'+i);
+  if(!body) return;
+  const open = body.style.display==='block';
+  body.style.display = open?'none':'block';
+  if(icon) icon.textContent = open?'▶':'▼';
+}
 </script>
 </body>
 </html>
