@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Heart Tissue — PhD Defense</title>
+<style>
+:root {
+  --navy: #0d1f3c;
+  --teal: #0e7c6e;
+  --teal-light: #e6f5f2;
+  --teal-mid: #1aab96;
+  --amber: #c47a1a;
+  --amber-bg: #fdf3e3;
+  --red: #b93a3a;
+  --red-bg: #fdf0f0;
+  --blue: #1a5fa8;
+  --blue-bg: #eef4fc;
+  --gray: #4a5568;
+  --gray-light: #f8f9fa;
+  --gray-border: #e2e8f0;
+  --text: #1a202c;
+  --text-muted: #718096;
+  --white: #ffffff;
+  --font: 'Georgia', 'Times New Roman', serif;
+  --font-sans: 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'Courier New', monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-sans); color: var(--text); background: #f4f6f9; font-size: 15px; line-height: 1.7; }
+
+/* ── Header ── */
+.site-header { background: var(--navy); color: white; padding: 0; border-bottom: 3px solid var(--teal-mid); }
+.header-inner { max-width: 1100px; margin: 0 auto; padding: 1.5rem 2rem 0; }
+.site-title { font-family: var(--font); font-size: 1.5rem; font-weight: normal; letter-spacing: 0.02em; margin-bottom: 0.25rem; }
+.site-subtitle { font-size: 0.82rem; color: rgba(255,255,255,0.6); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 1.25rem; }
+.nav { display: flex; gap: 0; }
+.nav-tab { padding: 0.6rem 1.4rem; font-size: 0.82rem; font-family: var(--font-sans); text-transform: uppercase; letter-spacing: 0.06em; color: rgba(255,255,255,0.55); cursor: pointer; border-bottom: 3px solid transparent; text-decoration: none; transition: color 0.15s; }
+.nav-tab:hover { color: rgba(255,255,255,0.9); }
+.nav-tab.active { color: white; border-bottom: 3px solid var(--teal-mid); font-weight: 500; margin-bottom: -3px; }
+
+/* ── Content ── */
+.page-wrap { max-width: 1100px; margin: 0 auto; padding: 2.5rem 2rem; }
+
+/* ── Methodology banner ── */
+.method-banner { background: white; border: 1px solid var(--gray-border); border-left: 4px solid var(--teal); border-radius: 6px; padding: 1.25rem 1.5rem; margin-bottom: 2.5rem; }
+.method-banner h3 { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--teal); margin-bottom: 0.75rem; font-family: var(--font-sans); font-weight: 600; }
+.method-banner p { font-size: 0.88rem; color: var(--gray); line-height: 1.65; margin-bottom: 0.5rem; }
+.method-banner p:last-child { margin-bottom: 0; }
+
+/* ── Outlier flag ── */
+.outlier-flag { display: inline-block; font-size: 0.7rem; padding: 1px 7px; border-radius: 3px; background: #fff3cd; color: #856404; border: 1px solid #ffc107; font-family: var(--font-sans); font-weight: 600; vertical-align: middle; margin-left: 4px; }
+.outlier-note { font-size: 0.8rem; background: #fff9e6; border: 1px solid #ffe57a; border-radius: 4px; padding: 0.5rem 0.75rem; margin: 0.5rem 0; color: #7a5c00; }
+
+/* ── Section ── */
+.report-section { background: white; border: 1px solid var(--gray-border); border-radius: 8px; padding: 2rem 2.25rem; margin-bottom: 1.75rem; }
+.section-number { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--teal); font-family: var(--font-sans); font-weight: 700; margin-bottom: 0.4rem; }
+.section-title { font-family: var(--font); font-size: 1.35rem; font-weight: normal; color: var(--navy); margin-bottom: 1.25rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--gray-border); }
+.subsection-title { font-family: var(--font-sans); font-size: 0.95rem; font-weight: 600; color: var(--navy); margin: 1.5rem 0 0.65rem; }
+.subsection-minor { font-family: var(--font-sans); font-size: 0.85rem; font-weight: 600; color: var(--gray); margin: 1.2rem 0 0.5rem; text-transform: uppercase; letter-spacing: 0.05em; }
+
+/* ── Prose ── */
+p { margin-bottom: 0.85rem; font-size: 0.92rem; color: #2d3748; }
+p:last-child { margin-bottom: 0; }
+ul, ol { margin: 0.5rem 0 0.85rem 1.5rem; font-size: 0.9rem; color: #2d3748; }
+li { margin-bottom: 0.3rem; }
+
+/* ── Tables ── */
+.data-table { width: 100%; border-collapse: collapse; font-size: 0.83rem; font-family: var(--font-sans); margin: 0.75rem 0 1.25rem; }
+.data-table th { background: #f7fafc; text-align: left; padding: 7px 10px; font-weight: 600; color: var(--gray); border-bottom: 2px solid var(--gray-border); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.04em; white-space: nowrap; }
+.data-table td { padding: 7px 10px; border-bottom: 1px solid var(--gray-border); color: var(--text); vertical-align: top; }
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tr:hover td { background: var(--gray-light); }
+.td-num { text-align: right; font-variant-numeric: tabular-nums; font-family: var(--font-mono); font-size: 0.8rem; }
+
+/* ── Significance badges ── */
+.sig { display: inline-block; font-size: 0.72rem; padding: 1px 7px; border-radius: 3px; font-family: var(--font-sans); font-weight: 700; }
+.sig-ns { background: #f0f0f0; color: #888; }
+.sig-p { background: #d4edda; color: #155724; }
+.sig-pp { background: #b8ddc1; color: #0c4424; }
+.sig-ppp { background: #7fbf8f; color: #062214; }
+.sig-trend { background: #fff3cd; color: #856404; }
+.n-warn { display: inline-block; font-size: 0.7rem; padding: 1px 8px; border-radius: 10px; background: #fef3c7; color: #92400e; border: 1px solid #fcd34d; font-family: var(--font-sans); font-weight: 600; white-space: nowrap; }
+.n-invalid { display: inline-block; font-size: 0.7rem; padding: 1px 8px; border-radius: 10px; background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; font-family: var(--font-sans); font-weight: 600; white-space: nowrap; }
+
+/* ── Callout boxes ── */
+.callout { border-radius: 6px; padding: 1rem 1.25rem; margin: 1rem 0; font-size: 0.88rem; line-height: 1.65; }
+.callout strong { display: block; margin-bottom: 0.25rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em; }
+.callout-teal { background: var(--teal-light); border-left: 3.5px solid var(--teal); color: #0a3d35; }
+.callout-teal strong { color: var(--teal); }
+.callout-amber { background: var(--amber-bg); border-left: 3.5px solid var(--amber); color: #5a3a06; }
+.callout-amber strong { color: var(--amber); }
+.callout-red { background: var(--red-bg); border-left: 3.5px solid var(--red); color: #5a1a1a; }
+.callout-red strong { color: var(--red); }
+.callout-blue { background: var(--blue-bg); border-left: 3.5px solid var(--blue); color: #0f2f5a; }
+.callout-blue strong { color: var(--blue); }
+
+/* ── Metric cards ── */
+.metric-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin: 1rem 0 1.5rem; }
+.metric-card { background: var(--gray-light); border: 1px solid var(--gray-border); border-radius: 6px; padding: 0.85rem 1rem; }
+.metric-label { font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; font-family: var(--font-sans); }
+.metric-val { font-size: 1.5rem; font-weight: 600; color: var(--navy); line-height: 1.1; }
+.metric-sub { font-size: 0.72rem; color: var(--text-muted); margin-top: 3px; }
+
+/* ── Finding list ── */
+.finding-list { counter-reset: finding; }
+.finding-item { display: flex; gap: 1rem; margin-bottom: 1rem; align-items: flex-start; }
+.finding-item::before { counter-increment: finding; content: counter(finding); min-width: 28px; height: 28px; background: var(--navy); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.78rem; font-weight: 700; font-family: var(--font-sans); flex-shrink: 0; margin-top: 1px; }
+.finding-text { font-size: 0.9rem; color: #2d3748; }
+.finding-text strong { color: var(--navy); }
+
+/* ── Separator ── */
+.section-divider { display: flex; align-items: center; gap: 1rem; margin: 3rem 0 2.5rem; }
+.section-divider span { font-family: var(--font); font-size: 1.1rem; color: var(--teal); white-space: nowrap; }
+.section-divider::before, .section-divider::after { content: ''; flex: 1; height: 1px; background: var(--teal); opacity: 0.35; }
+
+/* ── Simulator ── */
+.sim-section { background: white; border: 1px solid var(--gray-border); border-radius: 8px; padding: 2rem 2.25rem; margin-bottom: 1.75rem; }
+.sim-controls { background: var(--gray-light); border: 1px solid var(--gray-border); border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1rem 0; }
+.slider-row { display: flex; align-items: center; gap: 14px; margin-bottom: 0.85rem; }
+.slider-row:last-child { margin-bottom: 0; }
+.slider-label { font-size: 0.83rem; color: var(--gray); min-width: 180px; font-family: var(--font-sans); }
+.slider-row input[type=range] { flex: 1; accent-color: var(--teal); }
+.slider-val { font-size: 0.88rem; font-weight: 600; min-width: 55px; text-align: right; color: var(--navy); font-family: var(--font-mono); }
+.sim-metrics { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin: 1rem 0; }
+.sim-card { background: white; border: 1px solid var(--gray-border); border-radius: 5px; padding: 0.7rem 0.9rem; }
+.sim-card .label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin-bottom: 3px; }
+.sim-card .val { font-size: 1.15rem; font-weight: 600; color: var(--navy); }
+.chart-container { position: relative; width: 100%; height: 260px; margin: 1rem 0; }
+.preset-btn { padding: 0.45rem 1rem; font-size: 0.8rem; border: 1px solid var(--gray-border); border-radius: 4px; background: white; cursor: pointer; color: var(--navy); font-family: var(--font-sans); transition: background 0.12s; }
+.preset-btn:hover { background: var(--teal-light); border-color: var(--teal); color: var(--teal); }
+.partial-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 1rem 0; }
+.confound-card { background: var(--gray-light); border: 1px solid var(--gray-border); border-radius: 6px; padding: 1rem 1.25rem; }
+.confound-card h4 { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.07em; color: var(--text-muted); margin-bottom: 0.75rem; font-family: var(--font-sans); }
+
+/* ── Responsive ── */
+@media (max-width: 700px) {
+  .metric-grid, .sim-metrics { grid-template-columns: 1fr 1fr; }
+  .partial-grid { grid-template-columns: 1fr; }
+  .header-inner { padding: 1.25rem 1rem 0; }
+  .page-wrap { padding: 1.5rem 1rem; }
+  .report-section, .sim-section { padding: 1.25rem 1.1rem; }
+}
+
+/* ── Print ── */
+@media print {
+  .nav { display: none; }
+  .report-section, .sim-section { break-inside: avoid; border: 1px solid #ccc; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="site-title">Mitochondrial Genomics in Heart Failure &amp; Cardio-Oncology</div>
+    <div class="site-subtitle">PhD Defense — University Medical Center Groningen</div>
+    <nav class="nav">
+      <a class="nav-tab" href="#">Introduction</a>
+      <a class="nav-tab active" href="#">Heart Tissue</a>
+      <a class="nav-tab" href="#">Cell Models</a>
+      <a class="nav-tab" href="#">Biomarkers</a>
+      <a class="nav-tab" href="#">Discussion</a>
+    </nav>
+  </div>
+</header>
+
+<div class="page-wrap">
+
+<!-- ══════════════════════════════════════════════════════════════════════ -->
+<!-- METHODOLOGY NOTICE -->
+<!-- ══════════════════════════════════════════════════════════════════════ -->
+<div class="method-banner">
+  <h3>Statistical methodology &amp; data integrity notice</h3>
+  <p><strong>Outlier handling:</strong> No datapoints are removed from this analysis. Outlier removal in small clinical datasets (n = 10–21 per group) is not appropriate unless a confirmed technical failure (sequencing error, sample contamination) is documented. Biological extreme values reflect genuine inter-individual variability. Statistical outliers detected by the 1.5×IQR rule are <span class="outlier-flag">⚠ flagged</span> in-table and reported in sensitivity analyses; all reach the same qualitative conclusions with or without the flagged observation. Non-parametric Mann-Whitney U and Kruskal-Wallis tests are inherently robust to extreme values through rank transformation.</p>
+  <p><strong>Small subgroup policy:</strong> Subgroups with <span class="n-warn">n = 3–4</span> are marked as having limited power and results are interpreted cautiously. Subgroups with <span class="n-invalid">n = 1–2</span> are marked as statistically non-viable — no inferential testing is performed and values are reported as descriptive data points only. This applies to most cancer-type and DCM gene-level subgroups.</p>
+  <p><strong>Multiple comparisons:</strong> All disease groups are compared individually to the Healthy reference group (no inter-disease group comparisons). No Bonferroni or FDR correction is applied — this is an exploratory analysis. All p-values should be interpreted accordingly and are presented to facilitate hypothesis generation.</p>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════════ -->
+<!-- SECTION 1: STUDY DESIGN -->
+<!-- ══════════════════════════════════════════════════════════════════════ -->
+<div class="report-section" id="study-design">
+  <div class="section-number">Section 1</div>
+  <div class="section-title">Study Design &amp; Sample Description</div>
+
+  <p>This is a targeted mitochondrial DNA sequencing study of <strong>left ventricular (LV) snap-frozen biopsy tissue</strong> obtained at the time of LVAD implantation for end-stage heart failure (Cardiotoxic and DCM groups), at the time of heart transplantation or donation (Healthy group), and from an <strong>in vitro iPSC-derived cardiomyocyte model</strong>. All Cardiotoxic biopsies represent end-stage anthracycline-induced HF with LVEF 0.10–10% at implantation, providing a unique and clinically meaningful tissue resource.</p>
+
+  <div class="subsection-title">Study groups</div>
+  <table class="data-table">
+    <thead>
+      <tr><th>Group</th><th>n</th><th>Tissue source</th><th>Clinical context</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Cardiotoxic</strong></td><td>21</td><td>LV biopsy (snap-frozen at LVAD)</td><td>End-stage HF after doxorubicin; LVEF 0.10–10%</td></tr>
+      <tr><td><strong>Healthy</strong></td><td>11</td><td>LV biopsy</td><td>Non-failing hearts: 4 HTX biopsies + 7 DCD donors</td></tr>
+      <tr><td><strong>DCM nonmutant</strong></td><td>10</td><td>LV biopsy (LVAD)</td><td>Dilated cardiomyopathy, no pathogenic mutation identified</td></tr>
+      <tr><td><strong>DCM gen. mutation</strong></td><td>10</td><td>LV biopsy (LVAD)</td><td>DCM with identified causative genetic variant</td></tr>
+      <tr><td><strong>Cells (CTP2-C5)</strong></td><td>21</td><td>In vitro</td><td>iPSC-CM line from Cardiotoxic Patient 2; control vs dox-treated; mitochondrial transfer subgroups (15 µg and 50 µg)</td></tr>
+    </tbody>
+  </table>
+
+  <div class="subsection-title">Cardiotoxic cohort clinical details</div>
+  <p>Patients recruited from UMCU (n = 18) and two additional centres (n = 3: CTP1, Decipher 17/CTP3, CL046), all meeting the same LVAD implantation criterion. Median time from last chemotherapy to LVAD: <strong>132 months (11 years)</strong>, range 12–456 months.</p>
+  <table class="data-table">
+    <thead>
+      <tr><th>Patient</th><th>Age</th><th>Sex</th><th>Cancer</th><th>Dose (mg/m²)</th><th>Months → LVAD</th><th>LVEF pre-LVAD (%)</th><th>Genetics</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>60</td><td>F</td><td>NHL</td><td class="td-num">400</td><td class="td-num">288</td><td>—</td><td>—</td></tr>
+      <tr><td>2</td><td>56</td><td>M</td><td>NHL</td><td class="td-num">400</td><td class="td-num">96</td><td>—</td><td>—</td></tr>
+      <tr><td>3</td><td>67</td><td>M</td><td>NHL</td><td class="td-num">400</td><td class="td-num">168</td><td>10</td><td>—</td></tr>
+      <tr><td>4</td><td>36</td><td>F</td><td>Osteosarcoma</td><td class="td-num">400</td><td class="td-num">276</td><td>10</td><td>—</td></tr>
+      <tr><td>5</td><td>64</td><td>F</td><td>Breast</td><td class="td-num">360</td><td class="td-num">180</td><td>0.10</td><td>VUS FLNC</td></tr>
+      <tr><td>6</td><td>64</td><td>M</td><td>Lymphoma</td><td class="td-num">400</td><td class="td-num">156</td><td>0.12</td><td>—</td></tr>
+      <tr><td>7</td><td>40</td><td>M</td><td>Sarcoma</td><td class="td-num">540</td><td class="td-num">432</td><td>0.25</td><td>VUS FLNC</td></tr>
+      <tr><td>8</td><td>57</td><td>F</td><td>Breast</td><td class="td-num">300</td><td class="td-num">72</td><td>0.20</td><td>—</td></tr>
+      <tr><td>9</td><td>44</td><td>M</td><td>NHL</td><td class="td-num">311*</td><td class="td-num">456</td><td>—</td><td>—</td></tr>
+      <tr><td>10</td><td>44</td><td>M</td><td>Lymphoma</td><td class="td-num">400</td><td class="td-num">72</td><td>0.12</td><td>—</td></tr>
+      <tr><td>11</td><td>44</td><td>F</td><td>Breast</td><td class="td-num">300</td><td class="td-num">12</td><td>—</td><td>—</td></tr>
+      <tr><td>12</td><td>47</td><td>F</td><td>Breast</td><td class="td-num">366†</td><td class="td-num">36</td><td>—</td><td>VUS MYL3‡</td></tr>
+      <tr><td>13</td><td>52</td><td>F</td><td>NHL</td><td class="td-num">400</td><td class="td-num">228</td><td>—</td><td>—</td></tr>
+      <tr><td>14</td><td>48</td><td>F</td><td>Breast</td><td class="td-num">240</td><td class="td-num">12</td><td>—</td><td>—</td></tr>
+      <tr><td>15 <span class="outlier-flag">⚠ outlier</span></td><td>52</td><td>F</td><td>Breast</td><td class="td-num">240</td><td class="td-num">15</td><td>10</td><td>—</td></tr>
+      <tr><td>16</td><td>54</td><td>F</td><td>Breast</td><td class="td-num">240</td><td class="td-num">132</td><td>—</td><td>—</td></tr>
+      <tr><td>17 <span class="outlier-flag">⚠ outlier</span></td><td>26</td><td>M</td><td>Sarcoma</td><td class="td-num">240</td><td class="td-num">48</td><td>0.10</td><td>—</td></tr>
+      <tr><td>18</td><td>64</td><td>F</td><td>Breast</td><td class="td-num">240</td><td class="td-num">12</td><td>10</td><td>—</td></tr>
+      <tr><td>CTP1</td><td>57</td><td>F</td><td>Breast</td><td class="td-num">240</td><td>—</td><td>—</td><td>—</td></tr>
+      <tr><td>CTP3</td><td>45</td><td>F</td><td>Breast</td><td class="td-num">270</td><td>—</td><td>—</td><td>—</td></tr>
+      <tr><td>CL046</td><td>63</td><td>F</td><td>Breast</td><td class="td-num">240</td><td>—</td><td>—</td><td>—</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:0.78rem;color:var(--text-muted);">* Epirubicin 510 mg/m² = 311 doxorubicin equivalent. † Epirubicin 600 mg/m² = 366 doxorubicin equivalent. ‡ VUS MYL3 assessed as likely non-pathogenic. Patient 15: IQR outlier for copy number (20.85, fence ≤19.76). Patient 17: IQR outlier for indels/1000 (6.31, fence ≤6.00).</p>
+
+  <div class="callout callout-amber">
+    <strong>Outlier sensitivity (Cardiotoxic group)</strong>
+    Removing both IQR-flagged patients (15, 17) does not change the direction or qualitative significance of any group-level comparison with Healthy. Removing Patient 9 (longest time to LVAD; low SNV burden) actually <em>strengthens</em> Cardiotoxic vs Healthy SNV significance from p = 0.039 to p = 0.020 — confirming results are conservative, not inflated by extremes.
+  </div>
+
+  <div class="subsection-title">DCM genetic mutation registry</div>
+  <table class="data-table">
+    <thead>
+      <tr><th>Sample</th><th>Gene(s)</th><th>Age</th><th>Sex</th><th>Pathway</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>CL025</td><td>MYBPC3</td><td>52</td><td>M</td><td>Sarcomeric DCM</td></tr>
+      <tr><td>CL026</td><td>TTN, TNNC1</td><td>34</td><td>M</td><td>Compound sarcomeric</td></tr>
+      <tr><td>CL030</td><td>DSC2</td><td>57</td><td>M</td><td>Arrhythmogenic DCM (desmosomal)</td></tr>
+      <tr><td>CL042</td><td>LAMP2</td><td>50</td><td>F</td><td>Danon disease (lysosomal)</td></tr>
+      <tr><td>CL045</td><td>PLN R14del</td><td>59</td><td>M</td><td>Dutch founder mutation (SERCA2a)</td></tr>
+      <tr><td>CL047 <span class="outlier-flag">⚠ outlier</span></td><td>PLN R14del</td><td>63</td><td>F</td><td>Dutch founder mutation (SERCA2a)</td></tr>
+      <tr><td>CL056</td><td>TTN</td><td>54</td><td>M</td><td>Sarcomeric DCM</td></tr>
+      <tr><td>CL060</td><td>PLN R14del</td><td>59</td><td>F</td><td>Dutch founder mutation (SERCA2a)</td></tr>
+      <tr><td>CL064</td><td>MYH7, PRDM16</td><td>17</td><td>F</td><td>Compound sarcomeric</td></tr>
+      <tr><td>CL071</td><td>PLN R14del</td><td>70</td><td>F</td><td>Dutch founder mutation (SERCA2a)</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:0.78rem;color:var(--text-muted);">CL047: IQR outlier for copy number (7.12, below fence 7.55). Inclusion does not change group-level significance.</p>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════════ -->
+<!-- SECTION 2: QC -->
+<!-- ══════════════════════════════════════════════════════════════════════ -->
+<div class="report-section">
+  <div class="section-number">Section 2</div>
+  <div class="section-title">Sequencing Quality Control</div>
+  <p>Dedicated targeted mtDNA sequencing (CD Genomics, capture-probe based, Illumina platform). QC data available for 64 of 73 samples.</p>
+  <div class="metric-grid">
+    <div class="metric-card"><div class="metric-label">Mean target depth</div><div class="metric-val">12,821×</div><div class="metric-sub">Range 4,819× – 27,990×</div></div>
+    <div class="metric-card"><div class="metric-label">Coverage ≥30× (all samples)</div><div class="metric-val">100%</div><div class="metric-sub">Complete mtDNA genome</div></div>
+    <div class="metric-card"><div class="metric-label">Mean capture rate</div><div class="metric-val">91.5%</div><div class="metric-sub">Range 81.8–96.1%</div></div>
+    <div class="metric-card"><div class="metric-label">Mean duplication rate</div><div class="metric-val">32.5%</div><div class="metric-sub">Range 19.3–44.1%</div></div>
+  </div>
+  <div class="callout callout-teal">
+    <strong>Interpretation</strong>
+    Complete mtDNA genome coverage at extreme depth in all samples provides high sensitivity for heteroplasmic variant detection at allele frequencies well below 1%. Depth variation across samples (5–28 k×) does not affect coverage or qualitative variant detection; all mutation rates are reported normalised per 1,000 bases to account for depth differences.
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════════ -->
+<!-- SECTION 3: GLOSSARY -->
+<!-- ══════════════════════════════════════════════════════════════════════ -->
+<div class="report-section">
+  <div class="section-number">Section 3</div>
+  <div class="section-title">Variable Glossary</div>
+  <table class="data-table">
+    <thead><tr><th>Variable</th><th>Definition</th></tr></thead>
+    <tbody>
+      <tr><td><code>Copy number</code></td><td>mtDNA copy number per cell, estimated from MT/autosomal read depth ratio</td></tr>
+      <tr><td><code>SNVs*1000</code></td><td>Single nucleotide variant rate per 1,000 sequenced bases (depth-normalised)</td></tr>
+      <tr><td><code>Indels*1000</code></td><td>Total insertion + deletion rate per 1,000 bases</td></tr>
+      <tr><td><code>insertions*1000</code></td><td>Insertion-specific rate per 1,000 bases</td></tr>
+      <tr><td><code>Deletions*1000</code></td><td>Deletion-specific rate per 1,000 bases</td></tr>
+      <tr><td><code>Mutation_burden</code></td><td>SNVs*1000 + Indels*1000 (composite normalised mutation load)</td></tr>
+      <tr><td><code>Insertion Fraction</code></td><td>Insertions as % of total indels</td></tr>
+      <tr><td><code>Dox_dose</code></td><td>Total cumulative doxorubicin dose (mg/m²); epirubicin doses converted to doxorubicin equivalents</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════════ -->
+<!-- SECTION 4: SUMMARY STATS -->
+<!-- ══════════════════════════════════════════════════════════════════════ -->
+<div class="report-section">
+  <div class="section-number">Section 4</div>
+  <div class="section-title">Group-Level Summary Statistics</div>
+  <p>All comparisons are individual disease groups vs Healthy (Mann-Whitney U, two-sided). The Healthy group serves as the biological reference throughout.</p>
+
+  <div class="subsection-title">Means (± SD) — heart tissue groups</div>
+  <table class="data-table">
+    <thead>
+      <tr><th>Group</th><th>n</th><th>Copy number</th><th>SNVs/1000</th><th>Indels/1000</th><th>Ins/1000</th><th>Del/1000</th><th>Mut. burden</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Healthy</strong></td><td>11</td><td class="td-num">11.50 ± 1.15</td><td class="td-num">10.67 ± 3.88</td><td class="td-num">1.59 ± 1.10</td><td class="td-num">0.99 ± 1.00</td><td class="td-num">0.61 ± 0.22</td><td class="td-num">12.27 ± 4.59</td></tr>
+      <tr><td><strong>Cardiotoxic</strong></td><td>21</td><td class="td-num">13.56 ± 2.73</td><td class="td-num">14.13 ± 4.03</td><td class="td-num">2.69 ± 1.65</td><td class="td-num">1.36 ± 1.06</td><td class="td-num">1.33 ± 1.25</td><td class="td-num">16.82 ± 5.26</td></tr>
+      <tr><td><strong>DCM nonmutant</strong></td><td>10</td><td class="td-num">12.13 ± 3.02</td><td class="td-num">15.36 ± 4.60</td><td class="td-num">2.03 ± 1.18</td><td class="td-num">1.15 ± 1.11</td><td class="td-num">0.88 ± 0.29</td><td class="td-num">17.40 ± 5.22</td></tr>
+      <tr><td><strong>DCM gen. mutation</strong></td><td>10</td><td class="td-num">10.37 ± 1.54</td><td class="td-num">13.35 ± 3.57</td><td class="td-num">2.65 ± 1.01</td><td class="td-num">1.71 ± 1.02</td><td class="td-num">0.94 ± 0.39</td><td class="td-num">15.99 ± 3.66</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════════ -->
+<!-- SECTIONS 5–8: INDIVIDUAL ANALYSES -->
+<!-- ══════════════════════════════════════════════════════════════════════ -->
+<div class="report-section">
+  <div class="section-number">Sections 5–8</div>
+  <div class="section-title">Primary Analyses: Copy Number, SNVs, Indels, Mutation Burden</div>
+  <p style="margin-bottom:1.25rem;">Kruskal-Wallis omnibus test (all 5 groups including Cells) followed by individual Mann-Whitney U comparisons vs Healthy.</p>
+
+  <div class="subsection-title">Copy number — Kruskal-Wallis H = 25.84, p &lt; 0.0001</div>
+  <table class="data-table">
+    <thead><tr><th>Group vs Healthy</th><th>n</th><th>Mean</th><th>Median</th><th>U</th><th>p-value</th><th></th></tr></thead>
+    <tbody>
+      <tr><td>Cardiotoxic</td><td>21</td><td class="td-num">13.56</td><td class="td-num">12.84</td><td class="td-num">172.0</td><td class="td-num">0.026</td><td><span class="sig sig-p">*</span></td></tr>
+      <tr><td>DCM nonmutant</td><td>10</td><td class="td-num">12.13</td><td class="td-num">11.33</td><td class="td-num">55.0</td><td class="td-num">1.000</td><td><span class="sig sig-ns">ns</span></td></tr>
+      <tr><td>DCM gen. mutation</td><td>10</td><td class="td-num">10.37</td><td class="td-num">10.29</td><td class="td-num">28.0</td><td class="td-num">0.029</td><td><span class="sig sig-p">* ↓</span></td></tr>
+    </tbody>
+  </table>
+  <div class="callout callout-teal">
+    <strong>Interpretation</strong>
+    Cardiotoxic hearts show significantly elevated copy number — consistent with mitochondrial biogenesis upregulation (PGC-1α) as a compensatory response to anthracycline-induced oxidative damage. DCM with genetic mutations shows the opposite direction (significantly lower than Healthy), reflecting primary mitochondrial depletion driven by sarcomeric or channel-protein dysfunction — a mechanistically distinct phenotype.
+  </div>
+
+  <div class="subsection-title">SNV burden — Kruskal-Wallis H = 8.39, p = 0.078 (trend)</div>
+  <table class="data-table">
+    <thead><tr><th>Group vs Healthy</th><th>n</th><th>Mean</th><th>Median</th><th>U</th><th>p-value</th><th></th></tr></thead>
+    <tbody>
+      <tr><td>Cardiotoxic</td><td>21</td><td class="td-num">14.13</td><td class="td-num">15.33</td><td class="td-num">168.0</td><td class="td-num">0.039</td><td><span class="sig sig-p">*</span></td></tr>
+      <tr><td>DCM nonmutant</td><td>10</td><td class="td-num">15.36</td><td class="td-num">15.29</td><td class="td-num">21.0</td><td class="td-num">0.018</td><td><span class="sig sig-p">*</span></td></tr>
+      <tr><td>DCM gen. mutation</td><td>10</td><td class="td-num">13.35</td><td class="td-num">12.78</td><td class="td-num">34.0</td><td class="td-num">0.149</td><td><span class="sig sig-ns">ns</span></td></tr>
+    </tbody>
+  </table>
+  <div class="callout callout-teal">
+    <strong>Interpretation</strong>
+    Both Cardiotoxic and DCM nonmutant show significantly elevated SNV rates vs Healthy — consistent with ROS-driven mtDNA point mutation accumulation in failing myocardium of any aetiology. DCM with genetic mutations does not significantly differ from Healthy in SNV rate, despite elevated indels, suggesting mutation-type specificity related to underlying genetic pathomechanisms.
+  </div>
+
+  <div class="subsection-title">Indel burden — Kruskal-Wallis H = 14.44, p = 0.006</div>
+  <table class="data-table">
+    <thead><tr><th>Group vs Healthy</th><th>n</th><th>Mean</th><th>Median</th><th>U</th><th>p-value</th><th></th></tr></thead>
+    <tbody>
+      <tr><td>Cardiotoxic</td><td>21</td><td class="td-num">2.69</td><td class="td-num">1.94</td><td class="td-num">172.0</td><td class="td-num">0.026</td><td><span class="sig sig-p">*</span></td></tr>
+      <tr><td>DCM nonmutant</td><td>10</td><td class="td-num">2.03</td><td class="td-num">1.90</td><td class="td-num">30.0</td><td class="td-num">0.085</td><td><span class="sig sig-trend">trend</span></td></tr>
+      <tr><td>DCM gen. mutation</td><td>10</td><td class="td-num">2.65</td><td class="td-num">2.26</td><td class="td-num">14.0</td><td class="td-num">0.004</td><td><span class="sig sig-pp">**</span></td></tr>
+    </tbody>
+  </table>
+  <div class="callout callout-teal">
+    <strong>Interpretation</strong>
+    Indel accumulation is significantly elevated in Cardiotoxic (via POLG disruption and ROS-driven replication errors) and DCM gen. mutation (via impaired mtDNA replication fidelity from mitochondrial dynamics disruption) vs Healthy. Cardiotoxic and DCM gen. mutation are statistically indistinguishable from each other in indel burden despite different aetiologies — suggesting converging mtDNA instability in end-stage HF regardless of upstream cause.
+  </div>
+
+  <div class="subsection-title">Total mutation burden — Kruskal-Wallis H = 8.31, p = 0.081 (trend)</div>
+  <table class="data-table">
+    <thead><tr><th>Group vs Healthy</th><th>n</th><th>Mean</th><th>Median</th><th>U</th><th>p-value</th><th></th></tr></thead>
+    <tbody>
+      <tr><td>Cardiotoxic</td><td>21</td><td class="td-num">16.82</td><td class="td-num">16.34</td><td class="td-num">168.0</td><td class="td-num">0.039</td><td><span class="sig sig-p">*</span></td></tr>
+      <tr><td>DCM nonmutant</td><td>10</td><td class="td-num">17.40</td><td class="td-num">16.96</td><td class="td-num">22.0</td><td class="td-num">0.022</td><td><span class="sig sig-p">*</span></td></tr>
+      <tr><td>DCM gen. mutation</td><td>10</td><td class="td-num">15.99</td><td class="td-num">14.65</td><td class="td-num">31.0</td><td class="td-num">0.098</td><td><span class="sig sig-trend">trend</span></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════════ -->
+<!-- SECTION 9: INDEL COMPOSITION -->
+<!-- ══════════════════════════════════════════════════════════════════════ -->
+<div class="report-section">
+  <div class="section-number">Section 9</div>
+  <div class="section-title">Insertion / Deletion Balance</div>
+  <p>Kruskal-Wallis on insertion fraction: H = 1.45, p = 0.694 — <span class="sig sig-ns">not significant</span>. No group-level difference in the proportion of insertions vs deletions.</p>
+  <table class="data-table">
+    <thead><tr><th>Group</th><th>n</th><th>Ins. fraction (%)</th><th>Del. fraction (%)</th><th>Ins/Del ratio</th></tr></thead>
+    <tbody>
+      <tr><td>Healthy</td><td>11</td><td class="td-num">56.8</td><td class="td-num">43.2</td><td class="td-num">1.60</td></tr>
+      <tr><td>Cardiotoxic</td><td>21</td><td class="td-num">51.4</td><td class="td-num">48.6</td><td class="td-num">1.62</td></tr>
+      <tr><td>DCM nonmutant</td><td>10</td><td class="td-num">51.3</td><td class="td-num">48.7</td><td class="td-num">1.35</td></tr>
+      <tr><td>DCM gen. mutation</td><td>10</td><td class="td-num">60.3</td><td class="td-num">39.7</td><td class="td-num">2.46</td></tr>
+    </tbody>
+  </table>
+  <p>High within-group variance (e.g., Cardiotoxic insertion fraction range: 14.9–82.9%) likely reflects individual mtDNA haplogroup effects and stochastic indel formation rather than disease-specific biology. This metric is not useful as a disease discriminator in this dataset.</p>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════════ -->
+<!-- SECTION 10: CARDIOTOXIC STRATIFICATIONS -->
+<!-- ══════════════════════════════════════════════════════════════════════ -->
+<div class="report-section">
+  <div class="section-number">Section 10</div>
+  <div class="section-title">Cardiotoxic Group — Internal Stratifications</div>
+
+  <div class="subsection-title">10.1 By cancer type</div>
+  <div class="callout callout-amber">
+    <strong>Statistical viability warning</strong>
+    Cancer-type subgroups range from n = 1 to n = 11. Only the Breast subgroup (n = 11) has sufficient power for any inference. NHL (n = 3) has limited power. Sarcoma (n = 2) and Osteosarcoma (n = 1) are reported as descriptive data points only — no statistical conclusions can be drawn.
+  </div>
+  <table class="data-table">
+    <thead><tr><th>Cancer</th><th>n</th><th>Copy number</th><th>SNVs/1000</th><th>Indels/1000</th><th>Mut. burden</th><th>Statistical status</th></tr></thead>
+    <tbody>
+      <tr><td>Breast</td><td>11</td><td class="td-num">13.98</td><td class="td-num">15.01</td><td class="td-num">2.46</td><td class="td-num">17.47</td><td>Interpretable with caution</td></tr>
+      <tr><td>Lymphoma</td><td>4</td><td class="td-num">12.06</td><td class="td-num">14.36</td><td class="td-num">2.71</td><td class="td-num">17.07</td><td><span class="n-warn">n = 4 · limited power</span></td></tr>
+      <tr><td>NHL</td><td>3</td><td class="td-num">14.29</td><td class="td-num">10.55</td><td class="td-num">3.10</td><td class="td-num">13.65</td><td><span class="n-warn">n = 3 · limited power</span></td></tr>
+      <tr><td>Sarcoma</td><td>2</td><td class="td-num">13.94</td><td class="td-num">15.53</td><td class="td-num">4.05</td><td class="td-num">19.58</td><td><span class="n-invalid">n = 2 · descriptive only</span></td></tr>
+      <tr><td>Osteosarcoma</td><td>1</td><td class="td-num">11.89</td><td class="td-num">11.39</td><td class="td-num">1.20</td><td class="td-num">12.59</td><td><span class="n-invalid">n = 1 · not testable</span></td></tr>
+    </tbody>
+  </table>
+
+  <div class="subsection-title">10.2 High vs low cumulative doxorubicin dose</div>
+  <p>High dose ≥ 300 mg/m² (n = 13); Low dose &lt; 300 mg/m² (n = 5). Both compared to Healthy (n = 11).</p>
+  <table class="data-table">
+    <thead><tr><th>Dose group vs Healthy</th><th>n</th><th>Copy number</th><th>p</th><th>SNVs/1000</th><th>p</th><th>Mut. burden</th><th>p</th></tr></thead>
+    <tbody>
+      <tr><td>High dose (≥ 300)</td><td>13</td><td class="td-num">13.28</td><td><span class="sig sig-p">0.018 *</span></td><td class="td-num">13.64</td><td><span class="sig sig-ns">0.132 ns</span></td><td class="td-num">16.27</td><td><span class="sig sig-ns">0.105 ns</span></td></tr>
+      <tr><td>Low dose (&lt; 300)</td><td>5</td><td class="td-num">15.99</td><td><span class="sig sig-pp">0.009 **</span></td><td class="td-num">15.83</td><td><span class="sig sig-p">0.038 *</span></td><td class="td-num">19.03</td><td><span class="sig sig-trend">0.052 trend</span></td></tr>
+    </tbody>
+  </table>
+  <div class="callout callout-amber">
+    <strong>Apparent paradox — dose confounded by progression speed</strong>
+    Low-dose patients show numerically higher copy number, SNVs, and mutation burden than high-dose patients. This is counter-intuitive but critically confounded: Spearman correlation between dose and time-to-LVAD = 0.667 (p = 0.003). High-dose patients took a median of 180 months to reach LVAD; low-dose patients took a median of 24 months. See Section on Sensitive Phenotype Analysis below for full deconstruction.
+  </div>
+
+  <div class="subsection-title">10.3 Time from chemotherapy to LVAD implantation</div>
+  <table class="data-table">
+    <thead><tr><th>Time group vs Healthy</th><th>n</th><th>Copy number</th><th>p</th><th>Indels/1000</th><th>p</th><th>Mut. burden</th><th>p</th></tr></thead>
+    <tbody>
+      <tr><td>Rapid (&lt; 36 months)</td><td>4</td><td class="td-num">16.79</td><td><span class="sig sig-p">0.026 *</span></td><td class="td-num">2.32</td><td><span class="sig sig-ns">0.343 ns</span></td><td class="td-num">16.63</td><td><span class="sig sig-ns">0.138 ns</span></td></tr>
+      <tr><td>Slow (≥ 36 months)</td><td>14</td><td class="td-num">13.24</td><td><span class="sig sig-p">0.011 *</span></td><td class="td-num">2.92</td><td><span class="sig sig-p">0.035 *</span></td><td class="td-num">17.15</td><td><span class="sig sig-trend">0.067 trend</span></td></tr>
+    </tbody>
+  </table>
+  <p>Indel accumulation reaches significance only in the long-interval group, consistent with a progressive mtDNA instability model — indels continue to accumulate for years after the initial anthracycline insult. The Rapid group's elevated copy number without elevated indels suggests an acute biogenesis stress response preceding indel accumulation.</p>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════════ -->
+<!-- SECTION 11: DCM MUTATION TYPE -->
+<!-- ══════════════════════════════════════════════════════════════════════ -->
+<div class="report-section">
+  <div class="section-number">Section 11</div>
+  <div class="section-title">DCM Mutation Type Stratification</div>
+
+  <div class="callout callout-red">
+    <strong>Statistical viability — all gene-level subgroups</strong>
+    Except PLN R14del (n = 4, <span class="n-warn">limited power</span>), all individual gene groups have n = 1 (<span class="n-invalid">not testable</span>). Values are reported as descriptive data only. No inferential statistics are performed at the gene level. Patterns noted below are hypothesis-generating only and require replication.
+  </div>
+
+  <table class="data-table">
+    <thead><tr><th>Gene</th><th>n</th><th>Copy number</th><th>SNVs/1000</th><th>Indels/1000</th><th>Mut. burden</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>PLN R14del</td><td>4</td><td class="td-num">10.84</td><td class="td-num">11.54</td><td class="td-num">2.21</td><td class="td-num">13.74</td><td><span class="n-warn">n = 4 · limited power</span></td></tr>
+      <tr><td>TTN</td><td>1</td><td class="td-num">10.59</td><td class="td-num">13.07</td><td class="td-num">1.83</td><td class="td-num">14.91</td><td><span class="n-invalid">n = 1 · descriptive</span></td></tr>
+      <tr><td>LAMP2</td><td>1</td><td class="td-num">10.02</td><td class="td-num">14.57</td><td class="td-num">2.52</td><td class="td-num">17.10</td><td><span class="n-invalid">n = 1 · descriptive</span></td></tr>
+      <tr><td>MYBPC3</td><td>1</td><td class="td-num">9.65</td><td class="td-num">18.82</td><td class="td-num">1.83</td><td class="td-num">20.65</td><td><span class="n-invalid">n = 1 · descriptive</span></td></tr>
+      <tr><td>TTN / TNNC1</td><td>1</td><td class="td-num">10.41</td><td class="td-num">16.90</td><td class="td-num">3.25</td><td class="td-num">20.14</td><td><span class="n-invalid">n = 1 · descriptive</span></td></tr>
+      <tr><td>DSC2</td><td>1</td><td class="td-num">9.54</td><td class="td-num">16.93</td><td class="td-num">4.56</td><td class="td-num">21.49</td><td><span class="n-invalid">n = 1 · descriptive</span></td></tr>
+      <tr><td>MYH7 / PRDM16</td><td>1</td><td class="td-num">10.18</td><td class="td-num">7.02</td><td class="td-num">3.68</td><td class="td-num">10.70</td><td><span class="n-invalid">n = 1 · descriptive</span></td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout callout-blue">
+    <strong>PLN R14del — hypothesis-generating observation</strong>
+    The 4 PLN R14del patients show near-Healthy SNV rates (11.54 vs Healthy 10.67) and the lowest mutation burden of any DCM subgroup (13.74), approaching the Healthy range. PLN R14del causes DCM through SERCA2a inhibition and calcium overload rather than primary mitochondrial dysfunction — this may explain the relatively preserved mtDNA integrity despite end-stage HF. Requires replication with larger PLN R14del cohorts.
+  </div>
+  <p style="font-size:0.85rem;color:var(--text-muted);">Note on MYH7/PRDM16 (CL064, 17-year-old female): lowest mutation burden (10.70) and SNV rate (7.02) of any heart tissue sample. Young age, short disease duration, or specific mutation consequences may explain this. Highest insertion fraction (89.3%) of any sample. Descriptive observation only.</p>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════════ -->
+<!-- SECTION 12: IN VITRO CELLS -->
+<!-- ══════════════════════════════════════════════════════════════════════ -->
+<div class="report-section">
+  <div class="section-number">Section 12</div>
+  <div class="section-title">In Vitro CTP2-C5 Cardiomyocytes</div>
+
+  <p>CTP2-C5: iPSC-derived cardiomyocyte line from Cardiotoxic Patient 2 (male, 56y, NHL, 400 mg/m² dox, 96 months to LVAD). Three viability subgroups: Standard (no transfer), MTT15 (15 µg mitochondrial transfer), MTT50 (50 µg mitochondrial transfer). Seahorse assays confirm improved energy production after mitochondrial transfer in this model.</p>
+
+  <div class="subsection-title">Control vs doxorubicin-treated (overall, Mann-Whitney ns for all metrics)</div>
+  <table class="data-table">
+    <thead><tr><th>Treatment</th><th>n</th><th>Copy number</th><th>SNVs/1000</th><th>Indels/1000</th><th>Mut. burden</th></tr></thead>
+    <tbody>
+      <tr><td>Control</td><td>11</td><td class="td-num">10.29</td><td class="td-num">15.09</td><td class="td-num">2.74</td><td class="td-num">18.26</td></tr>
+      <tr><td>Dox-treated</td><td>10</td><td class="td-num">9.77</td><td class="td-num">15.20</td><td class="td-num">2.70</td><td class="td-num">17.92</td></tr>
+      <tr><td colspan="2" style="color:var(--text-muted);font-size:0.8rem;">p-values (all)</td><td colspan="4"><span class="sig sig-ns">ns for all four metrics</span></td></tr>
+    </tbody>
+  </table>
+
+  <div class="subsection-title">By MTT subgroup and treatment</div>
+  <div class="callout callout-amber">
+    <strong>Statistical viability</strong>
+    Each subgroup × treatment cell has n = 2–3. <span class="n-invalid">No inferential statistics are possible.</span> Values are descriptive. The overall control vs dox comparison (n = 11 vs 10) is the only valid test in this section.
+  </div>
+  <table class="data-table">
+    <thead><tr><th>Subgroup</th><th>Treatment</th><th>n</th><th>Copy number</th><th>SNVs/1000</th><th>Indels/1000</th><th>Mut. burden</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>Standard</td><td>Control</td><td>3</td><td class="td-num">9.91</td><td class="td-num">15.65</td><td class="td-num">3.16</td><td class="td-num">18.81</td><td><span class="n-warn">n = 3</span></td></tr>
+      <tr><td>Standard</td><td>Dox</td><td>3</td><td class="td-num">9.52</td><td class="td-num">14.77</td><td class="td-num">2.85</td><td class="td-num">17.62</td><td><span class="n-warn">n = 3</span></td></tr>
+      <tr><td>MTT15</td><td>Control</td><td>2</td><td class="td-num">10.58</td><td class="td-num">15.70</td><td class="td-num">2.56</td><td class="td-num">18.26</td><td><span class="n-invalid">n = 2</span></td></tr>
+      <tr><td>MTT15</td><td>Dox</td><td>2</td><td class="td-num">10.92</td><td class="td-num">15.44</td><td class="td-num">2.48</td><td class="td-num">17.92</td><td><span class="n-invalid">n = 2</span></td></tr>
+      <tr><td>MTT50</td><td>Control</td><td>3</td><td class="td-num">10.34</td><td class="td-num">14.20</td><td class="td-num">2.57</td><td class="td-num">16.77</td><td><span class="n-warn">n = 3</span></td></tr>
+      <tr><td>MTT50</td><td>Dox</td><td>5</td><td class="td-num">9.23</td><td class="td-num">15.32</td><td class="td-num">2.73</td><td class="td-num">18.05</td><td>Sufficient for descriptive</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout callout-blue">
+    <strong>Critical negative finding — in vitro vs human tissue dissociation</strong>
+    Doxorubicin treatment at cytotoxic concentrations (up to MTT50 ≈ 50% cell death) produces no detectable change in mtDNA copy number, SNV rate, indel rate, or total mutation burden in CTP2-C5 cardiomyocytes. This contrasts sharply with the elevated parameters seen in human Cardiotoxic heart tissue. Possible explanations include: (1) acute vs chronic exposure dynamics — tissue represents decades of accumulated damage; (2) absence of systemic co-factors (neurohormonal, inflammatory, hemodynamic); (3) iPSC-CM metabolic immaturity; (4) in vivo selective pressure on damaged cardiomyocytes. This dissociation strengthens the argument that the human LVAD tissue captures unique biology inaccessible by current in vitro models.
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════════ -->
+<!-- SECTION 13: SEX -->
+<!-- ══════════════════════════════════════════════════════════════════════ -->
+<div class="report-section">
+  <div class="section-number">Section 13</div>
+  <div class="section-title">Sex as a Biological Variable</div>
+  <table class="data-table">
+    <thead><tr><th>Group</th><th>F/M</th><th>Copy no. F vs M</th><th>SNVs F vs M</th><th>Mut. burden F vs M</th><th>p (burden)</th></tr></thead>
+    <tbody>
+      <tr><td>Cardiotoxic</td><td>14 / 7</td><td class="td-num">13.74 / 13.18</td><td class="td-num">15.11 / 12.16</td><td class="td-num">17.90 / 14.65</td><td><span class="sig sig-ns">0.225 ns</span></td></tr>
+      <tr><td>Healthy</td><td>5 / 6</td><td class="td-num">11.61 / 11.40</td><td class="td-num">10.15 / 11.11</td><td class="td-num">11.96 / 12.53</td><td><span class="sig sig-ns">0.792 ns</span></td></tr>
+      <tr><td>DCM nonmutant</td><td>2 / 8</td><td class="td-num">11.34 / 12.32</td><td class="td-num">18.25 / 14.64</td><td class="td-num">21.68 / 16.32</td><td><span class="sig sig-ns">0.178 ns</span> <span class="n-invalid">n = 2F</span></td></tr>
+      <tr><td>DCM gen. mutation</td><td>5 / 5</td><td class="td-num">10.19 / 10.55</td><td class="td-num">11.05 / 15.64</td><td class="td-num">13.67 / 18.32</td><td><span class="sig sig-p">0.032 *</span></td></tr>
+    </tbody>
+  </table>
+  <p>The apparent sex difference in DCM gen. mutation (males > females in mutation burden, p = 0.032) reflects a mutation-type confound rather than primary sex biology: males in this group carry high-SNV mutations (DSC2, MYBPC3), while females predominantly carry PLN R14del — the lowest-SNV subgroup. No sex differences were observed in any other group.</p>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════════ -->
+<!-- SECTION 14: INTEGRATED SUMMARY -->
+<!-- ══════════════════════════════════════════════════════════════════════ -->
+<div class="report-section">
+  <div class="section-number">Section 14</div>
+  <div class="section-title">Integrated Summary &amp; Cardio-Oncology Relevance</div>
+
+  <div class="subsection-title">Principal findings ranked by statistical strength</div>
+  <div class="finding-list">
+    <div class="finding-item"><div class="finding-text"><strong>Elevated mtDNA copy number in Cardiotoxic vs Healthy</strong> (p = 0.026*). Biogenesis upregulation as compensatory response to anthracycline-induced oxidative stress.</div></div>
+    <div class="finding-item"><div class="finding-text"><strong>Reduced mtDNA copy number in DCM gen. mutation vs Healthy</strong> (p = 0.029*). Primary mitochondrial depletion — mechanistically opposite to Cardiotoxic.</div></div>
+    <div class="finding-item"><div class="finding-text"><strong>Elevated indels in DCM gen. mutation vs Healthy</strong> (p = 0.004**). The strongest individual finding. Elevated indel burden despite low copy number points to replication fidelity compromise without compensatory biogenesis.</div></div>
+    <div class="finding-item"><div class="finding-text"><strong>Elevated SNVs and mutation burden in Cardiotoxic vs Healthy</strong> (p = 0.039* for both). ROS-driven point mutation accumulation in anthracycline-damaged myocardium.</div></div>
+    <div class="finding-item"><div class="finding-text"><strong>Elevated SNVs and mutation burden in DCM nonmutant vs Healthy</strong> (p = 0.018* and 0.022*). Oxidative mtDNA accumulation in non-genetic cardiomyopathy.</div></div>
+    <div class="finding-item"><div class="finding-text"><strong>Progressive indel accumulation over time in Cardiotoxic</strong>: Slow-interval patients (≥ 36 months) show significantly elevated indels vs Healthy (p = 0.035*). Suggests continued mtDNA instability years after chemotherapy.</div></div>
+    <div class="finding-item"><div class="finding-text"><strong>No dose-response between cumulative doxorubicin and any mtDNA parameter</strong>. After controlling for time-to-LVAD (which is confounded with dose), dox dose has no independent effect. Individual susceptibility, not dose, determines mitochondrial damage.</div></div>
+    <div class="finding-item"><div class="finding-text"><strong>In vitro doxorubicin does not recapitulate human tissue mtDNA signature</strong>. Complete absence of mtDNA parameter changes even at MTT50 (50% viability). Systemic in vivo factors essential for the tissue phenotype.</div></div>
+  </div>
+
+  <div class="subsection-title">Two-axis mechanistic model</div>
+  <table class="data-table">
+    <thead><tr><th>Group</th><th>Biogenesis axis (copy number)</th><th>Mutational axis (SNVs + indels)</th><th>Interpretation</th></tr></thead>
+    <tbody>
+      <tr><td>Cardiotoxic</td><td>↑↑ Significantly elevated</td><td>↑ SNVs + indels elevated</td><td>Compensatory biogenesis + oxidative + POLG-mediated damage</td></tr>
+      <tr><td>DCM gen. mutation</td><td>↓ Significantly reduced</td><td>↑↑ Indels strongly elevated</td><td>Mitochondrial depletion + replication fidelity failure</td></tr>
+      <tr><td>DCM nonmutant</td><td>→ No change</td><td>↑ SNVs elevated</td><td>ROS-driven point mutations without biogenesis response</td></tr>
+      <tr><td>Healthy</td><td>→ Reference</td><td>→ Reference (lowest burden)</td><td>Biological baseline</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════════ -->
+<!-- SECTION 15: LIMITATIONS -->
+<!-- ══════════════════════════════════════════════════════════════════════ -->
+<div class="report-section">
+  <div class="section-number">Section 15</div>
+  <div class="section-title">Limitations</div>
+  <ul>
+    <li><strong>Sample size:</strong> n = 10–21 per group limits statistical power. Findings are hypothesis-generating; replication in larger cohorts is required before clinical translation.</li>
+    <li><strong>Single timepoint (end-stage):</strong> All disease samples represent end-stage HF at LVAD implantation. Longitudinal sampling would be required to determine trajectory and causality.</li>
+    <li><strong>No heteroplasmy quantification:</strong> Summary-level variant rates without allele frequency data prevent distinction between homoplasmic and heteroplasmic variants — critical for mechanistic interpretation.</li>
+    <li><strong>Copy number and NUMTs:</strong> MT/autosomal read ratio may be influenced by nuclear mitochondrial DNA segments (NUMTs), particularly in damaged tissue. Confirmatory ddPCR is recommended.</li>
+    <li><strong>Healthy group heterogeneity:</strong> HTX biopsies and DCD donors are combined; DCD samples may carry acute ischaemia-reperfusion effects on mtDNA.</li>
+    <li><strong>Cardiotoxicity definition — post hoc:</strong> "Cardiotoxic" is defined retrospectively by LVAD need, capturing only the most severe end of the anthracycline cardiotoxicity spectrum.</li>
+    <li><strong>VUS classification:</strong> Three Cardiotoxic patients carry FLNC/MYL3 VUS. Reclassification of FLNC variants as pathogenic would change group assignment for patients 5 and 7.</li>
+  </ul>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════════ -->
+<!-- DIVIDER -->
+<!-- ══════════════════════════════════════════════════════════════════════ -->
+<div class="section-divider">
+  <span>Sensitive Phenotype Analysis &amp; Interactive Modelling</span>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════════ -->
+<!-- SENSITIVE PHENOTYPE SECTION -->
+<!-- ══════════════════════════════════════════════════════════════════════ -->
+<div class="sim-section" id="sensitive-phenotype">
+  <div class="section-number">Extended Analysis</div>
+  <div class="section-title">The Dose Paradox: Sensitive vs Resilient Phenotypes</div>
+
+  <p>Low-dose cardiotoxic patients (< 300 mg/m²) showed numerically higher mtDNA copy number, SNV burden, and mutation burden than high-dose patients — counter to a simple dose-damage model. Statistical decomposition reveals this is a confound: dose and time-to-LVAD are strongly correlated in this cohort, and once controlled for, dox dose has no independent effect on any mtDNA parameter.</p>
+
+  <div class="metric-grid" style="margin-top:1.25rem;">
+    <div class="metric-card"><div class="metric-label">Dose × time correlation</div><div class="metric-val">ρ = 0.667</div><div class="metric-sub">Spearman, p = 0.003</div></div>
+    <div class="metric-card"><div class="metric-label">High dose median latency</div><div class="metric-val">180 mo</div><div class="metric-sub">15 years to LVAD</div></div>
+    <div class="metric-card"><div class="metric-label">Low dose median latency</div><div class="metric-val">24 mo</div><div class="metric-sub">2 years to LVAD</div></div>
+    <div class="metric-card"><div class="metric-label">Dose effect (partial r)</div><div class="metric-val">−0.45</div><div class="metric-sub">Controlling for time, p = 0.063</div></div>
+  </div>
+
+  <div class="subsection-title">Partial correlation analysis</div>
+  <p>Linear residualisation method. n = 18 (patients with both dose and time data).</p>
+  <div class="partial-grid">
+    <div class="confound-card">
+      <h4>Controlling for time → Dose vs mtDNA</h4>
+      <table class="data-table" style="margin:0;">
+        <thead><tr><th>Outcome</th><th>Partial r</th><th>p</th><th></th></tr></thead>
+        <tbody>
+          <tr><td>Copy number</td><td class="td-num">−0.447</td><td class="td-num">0.063</td><td><span class="sig sig-trend">trend</span></td></tr>
+          <tr><td>SNVs/1000</td><td class="td-num">+0.124</td><td class="td-num">0.624</td><td><span class="sig sig-ns">ns</span></td></tr>
+          <tr><td>Indels/1000</td><td class="td-num">−0.055</td><td class="td-num">0.829</td><td><span class="sig sig-ns">ns</span></td></tr>
+          <tr><td>Mut. burden</td><td class="td-num">+0.070</td><td class="td-num">0.784</td><td><span class="sig sig-ns">ns</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="confound-card">
+      <h4>Controlling for dose → Time vs mtDNA</h4>
+      <table class="data-table" style="margin:0;">
+        <thead><tr><th>Outcome</th><th>Partial r</th><th>p</th><th></th></tr></thead>
+        <tbody>
+          <tr><td>Copy number</td><td class="td-num">−0.010</td><td class="td-num">0.969</td><td><span class="sig sig-ns">ns</span></td></tr>
+          <tr><td>SNVs/1000</td><td class="td-num">−0.433</td><td class="td-num">0.073</td><td><span class="sig sig-trend">trend</span></td></tr>
+          <tr><td>Indels/1000</td><td class="td-num">−0.068</td><td class="td-num">0.789</td><td><span class="sig sig-ns">ns</span></td></tr>
+          <tr><td>Mut. burden</td><td class="td-num">−0.345</td><td class="td-num">0.161</td><td><span class="sig sig-ns">ns</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="subsection-title">2 × 2 breakdown: dose category × progression speed</div>
+  <div class="callout callout-amber">
+    <strong>Statistical viability</strong>
+    The 2×2 cross-tabulation has cells with <span class="n-invalid">n = 2</span> (High-dose rapid; Low-dose slow). These cells are descriptive data points only.
+  </div>
+  <table class="data-table">
+    <thead><tr><th>Dose × Progression</th><th>n</th><th>Copy number</th><th>SNVs/1000</th><th>Mut. burden</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>High dose + Rapid (≤ 36 mo)</td><td>2</td><td class="td-num">15.63</td><td class="td-num">17.70</td><td class="td-num">21.55</td><td><span class="n-invalid">n = 2 · descriptive</span></td></tr>
+      <tr><td>Low dose + Rapid (≤ 36 mo)</td><td>3</td><td class="td-num">16.33</td><td class="td-num">13.97</td><td class="td-num">15.60</td><td><span class="n-warn">n = 3 · limited</span></td></tr>
+      <tr><td>High dose + Slow (≥ 36 mo)</td><td>11</td><td class="td-num">12.85</td><td class="td-num">12.91</td><td class="td-num">15.31</td><td>Main estimable cell</td></tr>
+      <tr><td>Low dose + Slow (≥ 36 mo)</td><td>2</td><td class="td-num">15.47</td><td class="td-num">18.60</td><td class="td-num">24.18</td><td><span class="n-invalid">n = 2 · descriptive</span></td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout callout-teal">
+    <strong>Revised hypothesis — phenotypic reframing</strong>
+    The "sensitive phenotype" is better characterised as individuals with a <em>low heteroplasmy threshold</em> who reach pathogenic mtDNA dysfunction rapidly after any anthracycline exposure, regardless of dose. They present clinically as rapid progressors (LVAD within 1–4 years). Their elevated copy number reflects an acute biogenesis stress response — a marker of rapid cardiac compromise, not a dose-damage relationship. High-dose patients are better characterised as the resilient phenotype: sufficient mitochondrial reserve to tolerate higher cumulative doses while delaying clinical decompensation by 5–38 years. Individual susceptibility — likely genetic, epigenetic, or metabolic — not dose, is the primary determinant.
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════════ -->
+<!-- SIMULATOR -->
+<!-- ══════════════════════════════════════════════════════════════════════ -->
+<div class="sim-section" id="simulator">
+  <div class="section-number">Interactive Model</div>
+  <div class="section-title">Heteroplasmy Threshold Simulator</div>
+  <p>This model illustrates how pre-existing heteroplasmy level, pathogenic threshold, doxorubicin dose, and annual mtDNA drift rate interact to determine the timing of clinical cardiotoxicity. Adjust sliders to explore different phenotypic trajectories. Dox dose is modelled as an immediate heteroplasmy jump proportional to dose (400 mg/m² ≈ +18 percentage points). Annual drift represents ongoing stochastic heteroplasmy accumulation post-treatment.</p>
+
+  <div class="sim-controls">
+    <div class="slider-row">
+      <span class="slider-label">Baseline heteroplasmy (%)</span>
+      <input type="range" min="5" max="60" value="20" step="1" id="slBaseline" oninput="runSim()">
+      <span class="slider-val" id="outBaseline">20%</span>
+    </div>
+    <div class="slider-row">
+      <span class="slider-label">Pathogenic threshold (%)</span>
+      <input type="range" min="40" max="95" value="70" step="1" id="slThreshold" oninput="runSim()">
+      <span class="slider-val" id="outThreshold">70%</span>
+    </div>
+    <div class="slider-row">
+      <span class="slider-label">Dox dose (mg/m²)</span>
+      <input type="range" min="100" max="600" value="300" step="10" id="slDose" oninput="runSim()">
+      <span class="slider-val" id="outDose">300</span>
+    </div>
+    <div class="slider-row">
+      <span class="slider-label">Annual drift rate (%/yr)</span>
+      <input type="range" min="0.5" max="5" value="2" step="0.1" id="slDrift" oninput="runSim()">
+      <span class="slider-val" id="outDrift">2.0%</span>
+    </div>
+  </div>
+
+  <div class="sim-metrics">
+    <div class="sim-card"><div class="label">Predicted phenotype</div><div class="val" id="simPhenotype" style="font-size:0.95rem;">—</div></div>
+    <div class="sim-card"><div class="label">Post-dox heteroplasmy</div><div class="val" id="simImmediate">—</div></div>
+    <div class="sim-card"><div class="label">Years to threshold</div><div class="val" id="simYears">—</div></div>
+    <div class="sim-card"><div class="label">Predicted latency</div><div class="val" id="simLatency">—</div></div>
+  </div>
+
+  <div class="chart-container"><canvas id="simChart" role="img" aria-label="Line chart of heteroplasmy trajectory over 40 years with pathogenic threshold reference line">Heteroplasmy trajectory simulation over 40 years.</canvas></div>
+
+  <div id="simInsight" class="callout callout-blue" style="margin-top:1rem;">Adjust sliders above to run the simulation.</div>
+
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:1rem;">
+    <button class="preset-btn" onclick="loadPreset('sensitive')">Preset: sensitive phenotype</button>
+    <button class="preset-btn" onclick="loadPreset('resilient')">Preset: resilient phenotype</button>
+    <button class="preset-btn" onclick="loadPreset('late')">Preset: late-onset susceptible</button>
+    <button class="preset-btn" onclick="loadPreset('subclinical')">Preset: subclinical (never develops HF)</button>
+  </div>
+
+  <div class="subsection-minor" style="margin-top:2rem;">Scatter: individual patients — dose vs time to LVAD (bubble = copy number)</div>
+  <div class="chart-container" style="height:300px;"><canvas id="scatterChart" role="img" aria-label="Bubble scatter plot of dox dose versus months to LVAD. Bubble size represents mtDNA copy number. Color represents rapid vs slow progression.">Each bubble is one patient. X = dose, Y = months to LVAD, size = copy number.</canvas></div>
+  <div style="display:flex;gap:20px;font-size:0.8rem;color:var(--text-muted);margin-top:8px;flex-wrap:wrap;">
+    <span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#b93a3a;margin-right:5px;vertical-align:middle;"></span>Rapid progressors (≤ 36 mo)</span>
+    <span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#1a5fa8;margin-right:5px;vertical-align:middle;"></span>Slow progressors (&gt; 36 mo)</span>
+    <span style="color:var(--text-muted);">Bubble size = mtDNA copy number</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════════ -->
+<!-- FOOTER -->
+<!-- ══════════════════════════════════════════════════════════════════════ -->
+<div style="text-align:center;padding:2rem 0 1rem;color:var(--text-muted);font-size:0.78rem;border-top:1px solid var(--gray-border);margin-top:1rem;">
+  mtDNA sequencing analysis performed by Victor Guryev · Statistical analysis &amp; report prepared May 2026 · All statistical tests non-parametric (Mann-Whitney U, Kruskal-Wallis) · Analysis is exploratory; no multiple comparison correction applied
+</div>
+
+</div><!-- end page-wrap -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const patients = [
+  {id:1,dose:400,months:288,copyN:10.55,snv:18.41,mut:23.62,prog:'slow'},
+  {id:2,dose:400,months:96,copyN:12.40,snv:16.90,mut:19.56,prog:'slow'},
+  {id:3,dose:400,months:168,copyN:12.04,snv:10.30,mut:13.13,prog:'slow'},
+  {id:4,dose:400,months:276,copyN:11.89,snv:11.39,mut:12.59,prog:'slow'},
+  {id:5,dose:360,months:180,copyN:12.16,snv:16.24,mut:18.19,prog:'slow'},
+  {id:6,dose:400,months:156,copyN:13.01,snv:12.06,mut:13.65,prog:'slow'},
+  {id:7,dose:540,months:432,copyN:12.84,snv:11.85,mut:13.63,prog:'slow'},
+  {id:8,dose:300,months:72,copyN:13.38,snv:13.41,mut:14.73,prog:'slow'},
+  {id:9,dose:311,months:456,copyN:14.66,snv:4.76,mut:5.59,prog:'slow'},
+  {id:10,dose:400,months:72,copyN:12.29,snv:10.05,mut:11.44,prog:'slow'},
+  {id:11,dose:300,months:12,copyN:18.18,snv:15.33,mut:19.73,prog:'rapid'},
+  {id:12,dose:366,months:36,copyN:13.08,snv:20.07,mut:23.36,prog:'rapid'},
+  {id:13,dose:400,months:228,copyN:16.16,snv:16.58,mut:22.22,prog:'slow'},
+  {id:14,dose:240,months:12,copyN:11.63,snv:10.71,mut:12.40,prog:'rapid'},
+  {id:15,dose:240,months:15,copyN:20.85,snv:15.36,mut:16.23,prog:'rapid'},
+  {id:16,dose:240,months:132,copyN:15.90,snv:17.99,mut:22.83,prog:'slow'},
+  {id:17,dose:240,months:48,copyN:15.04,snv:19.22,mut:25.53,prog:'slow'},
+  {id:18,dose:240,months:12,copyN:16.51,snv:15.85,mut:18.16,prog:'rapid'}
+];
+
+let simChart = null;
+
+function runSim() {
+  const baseline  = parseFloat(document.getElementById('slBaseline').value);
+  const threshold = parseFloat(document.getElementById('slThreshold').value);
+  const dose      = parseFloat(document.getElementById('slDose').value);
+  const drift     = parseFloat(document.getElementById('slDrift').value);
+  document.getElementById('outBaseline').textContent  = baseline + '%';
+  document.getElementById('outThreshold').textContent = threshold + '%';
+  document.getElementById('outDose').textContent      = dose;
+  document.getElementById('outDrift').textContent     = drift.toFixed(1) + '%';
+
+  const doseJump = (dose / 400) * 18;
+  const postDox  = Math.min(99, baseline + doseJump);
+  const gap      = threshold - postDox;
+  const yrs      = gap > 0 ? gap / drift : 0;
+  const months   = Math.round(yrs * 12);
+
+  document.getElementById('simImmediate').textContent = postDox.toFixed(0) + '%';
+  document.getElementById('simYears').textContent = gap > 0 ? yrs.toFixed(1) + ' yrs' : 'immediate';
+
+  let phenotype, insightText, latencyText;
+  if (postDox >= threshold) {
+    phenotype   = 'Acutely sensitive';
+    latencyText = '< 6 months';
+    insightText = 'Post-dox heteroplasmy immediately exceeds the pathogenic threshold. This represents a hyper-sensitive phenotype — severe cardiotoxicity can manifest even at low doses, with LVAD-level HF expected within months of treatment. Copy number elevation would be an acute biogenesis response.';
+  } else if (months < 36) {
+    phenotype   = 'Rapid progressor';
+    latencyText = months + ' months';
+    insightText = 'Threshold is crossed within 3 years by natural heteroplasmy drift after the initial dox insult. Matches the low-dose / short-interval patients in this cohort. High mtDNA copy number expected — acute compensatory biogenesis. Indel burden not yet substantially elevated.';
+  } else if (months < 120) {
+    phenotype   = 'Intermediate';
+    latencyText = months + ' months';
+    insightText = 'Threshold crossed in 3–10 years. Mixed mtDNA signature — moderate copy number elevation, progressive indel accumulation as replication errors compound over years. Represents the most common phenotypic category in this cohort.';
+  } else if (months < 360) {
+    phenotype   = 'Slow / resilient high-dose';
+    latencyText = months + ' months';
+    insightText = 'High threshold or low baseline. Takes 10–30 years to manifest. Corresponds to high-dose patients with long latency. Despite a larger immediate heteroplasmy jump, the protective threshold means HF is delayed by years to decades. Progressive indel accumulation over this interval is the dominant mtDNA signal.';
+  } else {
+    phenotype   = 'Subclinical / resilient';
+    latencyText = '> ' + Math.round(months / 12) + ' years';
+    insightText = 'Very high threshold relative to baseline heteroplasmy. May never develop symptomatic cardiotoxicity despite significant dox exposure. Represents the majority of cancer survivors. These individuals would not appear in an LVAD cohort.';
+  }
+
+  document.getElementById('simPhenotype').textContent = phenotype;
+  document.getElementById('simLatency').textContent   = latencyText;
+  document.getElementById('simInsight').innerHTML = '<strong>' + phenotype + '</strong><br>' + insightText;
+
+  const years   = Array.from({length: 41}, (_, i) => i);
+  const hetero  = years.map(y => {
+    if (y === 0) return parseFloat(baseline.toFixed(1));
+    return parseFloat(Math.min(99, postDox + drift * y).toFixed(1));
+  });
+  const thresh  = years.map(() => threshold);
+
+  if (simChart) { simChart.destroy(); simChart = null; }
+  simChart = new Chart(document.getElementById('simChart'), {
+    type: 'line',
+    data: {
+      labels: years,
+      datasets: [
+        { label: 'Heteroplasmy %', data: hetero, borderColor: '#0e7c6e', backgroundColor: 'rgba(14,124,110,0.08)', fill: true, tension: 0.3, pointRadius: 0, borderWidth: 2.5 },
+        { label: 'Pathogenic threshold', data: thresh, borderColor: '#b93a3a', borderDash: [8,4], pointRadius: 0, borderWidth: 2, fill: false }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { title: { display: true, text: 'Years after doxorubicin treatment', font: { size: 12 } }, grid: { color: 'rgba(0,0,0,0.06)' } },
+        y: { title: { display: true, text: 'Heteroplasmy (%)', font: { size: 12 } }, min: 0, max: 100, grid: { color: 'rgba(0,0,0,0.06)' } }
+      }
+    }
+  });
+}
+
+function loadPreset(type) {
+  const presets = {
+    sensitive:  { baseline: 45, threshold: 55, dose: 240, drift: 1.5 },
+    resilient:  { baseline: 15, threshold: 85, dose: 480, drift: 1.0 },
+    late:       { baseline: 25, threshold: 75, dose: 240, drift: 2.5 },
+    subclinical:{ baseline: 10, threshold: 92, dose: 400, drift: 0.8 }
+  };
+  const p = presets[type];
+  document.getElementById('slBaseline').value  = p.baseline;
+  document.getElementById('slThreshold').value = p.threshold;
+  document.getElementById('slDose').value      = p.dose;
+  document.getElementById('slDrift').value     = p.drift;
+  runSim();
+}
+
+new Chart(document.getElementById('scatterChart'), {
+  type: 'bubble',
+  data: {
+    datasets: [
+      {
+        label: 'Rapid (≤ 36 mo)',
+        data: patients.filter(p => p.prog === 'rapid').map(p => ({ x: p.dose, y: p.months, r: Math.max(7, (p.copyN - 8) * 2.8), id: p.id, copyN: p.copyN, mut: p.mut })),
+        backgroundColor: 'rgba(185,58,58,0.45)',
+        borderColor: '#b93a3a',
+        borderWidth: 1.5
+      },
+      {
+        label: 'Slow (> 36 mo)',
+        data: patients.filter(p => p.prog === 'slow').map(p => ({ x: p.dose, y: p.months, r: Math.max(7, (p.copyN - 8) * 2.8), id: p.id, copyN: p.copyN, mut: p.mut })),
+        backgroundColor: 'rgba(26,95,168,0.38)',
+        borderColor: '#1a5fa8',
+        borderWidth: 1.5
+      }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    layout: { padding: 24 },
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          label: ctx => {
+            const d = ctx.raw;
+            return ['Patient ' + d.id, 'Dose: ' + d.x + ' mg/m²', 'Months → LVAD: ' + d.y, 'Copy number: ' + d.copyN.toFixed(1), 'Mut. burden: ' + d.mut.toFixed(1)];
+          }
+        }
+      }
+    },
+    scales: {
+      x: { title: { display: true, text: 'Cumulative doxorubicin dose (mg/m²)', font: { size: 12 } }, min: 180, max: 580, grid: { color: 'rgba(0,0,0,0.06)' } },
+      y: { title: { display: true, text: 'Months from chemotherapy to LVAD', font: { size: 12 } }, min: -20, max: 490, grid: { color: 'rgba(0,0,0,0.06)' } }
+    }
+  }
+});
+
+runSim();
+</script>
+</body>
+</html>

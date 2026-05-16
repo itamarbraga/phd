@@ -278,6 +278,7 @@ select.p-sel{background:var(--surf3);border:1px solid var(--border);color:var(--
     <button class="tb" onclick="go('mechanism')">Mechanism</button>
     <button class="tb" onclick="go('experiments')">Experiments</button>
     <button class="tb" onclick="go('chapter4')">Chapter 4</button>
+    <button class="tb" onclick="go('hearttissue')">Heart Tissue</button>
   </div>
   <div class="nav-cd" id="cd">—</div>
 </nav>
@@ -1911,6 +1912,19 @@ window.go=function(id){
   if(id==='chapter4') setTimeout(initChapter4,0);
 };
 </script>
+
+<!-- ══════════════════════════════════════
+     HEART TISSUE
+══════════════════════════════════════ -->
+<section class="page" id="page-hearttissue" style="padding:0;max-width:100%;">
+  <iframe
+    src="/heart_tissue_embed.html"
+    title="Heart Tissue — mtDNA Sequencing Analysis"
+    style="width:100%;height:calc(100vh - 54px);border:none;display:block;"
+    loading="lazy"
+  ></iframe>
+</section>
+
 </main>
 
 <div class="stop-banner" id="stop-banner">
@@ -2609,7 +2623,7 @@ function go(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.tb').forEach(b=>b.classList.remove('active'));
   document.getElementById('page-'+id).classList.add('active');
-  ['dash','plan','quiz','papers','esg','committee','strategy','mechanism','experiments','chapter4'].forEach((t,i)=>{ if(t===id) document.querySelectorAll('.tb')[i].classList.add('active'); });
+  ['dash','plan','quiz','papers','esg','committee','strategy','mechanism','experiments','chapter4','hearttissue'].forEach((t,i)=>{ if(t===id) document.querySelectorAll('.tb')[i].classList.add('active'); });
   if(id==='quiz') initQuiz();
   if(id==='papers') renderPapers();
   if(id==='plan'){ renderCal(); setTimeout(()=>{ const el=document.getElementById('dc-'+today()); if(el) el.classList.add('open'); },100); }
