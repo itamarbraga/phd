@@ -173,18 +173,18 @@ code { font-family: var(--font-mono); font-size: 0.85em; background: #f0f4f8; pa
 <div class="toc">
   <h3>Quick navigation</h3>
   <div class="toc-links">
-    <a href="#study-design">§1 Study design &amp; cohort</a>
-    <a href="#qc">§2 Sequencing QC</a>
-    <a href="#copy-number">§5 Copy number</a>
-    <a href="#snvs">§6 SNV burden</a>
-    <a href="#indels">§7 Indel burden</a>
-    <a href="#burden">§8 Mutation burden</a>
-    <a href="#cardiotoxic">§10 Cardiotoxic stratifications</a>
-    <a href="#dcm-genes">§11 DCM mutation types</a>
-    <a href="#cells">§12 In vitro model</a>
-    <a href="#summary">§14 Integrated summary</a>
-    <a href="#sensitive-phenotype">Extended: Sensitive phenotype analysis</a>
-    <a href="#simulator">Interactive: Threshold simulator</a>
+    <a href="#" onclick="scrollTo('study-design');return false;">§1 Study design &amp; cohort</a>
+    <a href="#" onclick="scrollTo('qc');return false;">§2 Sequencing QC</a>
+    <a href="#" onclick="scrollTo('copy-number');return false;">§5 Copy number</a>
+    <a href="#" onclick="scrollTo('snvs');return false;">§6 SNV burden</a>
+    <a href="#" onclick="scrollTo('indels');return false;">§7 Indel burden</a>
+    <a href="#" onclick="scrollTo('burden');return false;">§8 Mutation burden</a>
+    <a href="#" onclick="scrollTo('cardiotoxic');return false;">§10 Cardiotoxic stratifications</a>
+    <a href="#" onclick="scrollTo('dcm-genes');return false;">§11 DCM mutation types</a>
+    <a href="#" onclick="scrollTo('cells');return false;">§12 In vitro model</a>
+    <a href="#" onclick="scrollTo('summary');return false;">§14 Integrated summary</a>
+    <a href="#" onclick="scrollTo('sensitive-phenotype');return false;">Extended: Sensitive phenotype analysis</a>
+    <a href="#" onclick="scrollTo('simulator');return false;">Interactive: Threshold simulator</a>
   </div>
 </div>
 
@@ -313,7 +313,7 @@ code { font-family: var(--font-mono); font-size: 0.85em; background: #f0f4f8; pa
   <div class="section-title">Primary Analyses — Copy Number, SNVs, Indels, Mutation Burden</div>
   <p>All groups compared to <strong>Healthy</strong> (Mann-Whitney U, two-sided). <span class="sig sig-p">* p&lt;0.05</span> <span class="sig sig-pp">** p&lt;0.01</span> <span class="sig sig-trend">trend p&lt;0.10</span></p>
 
-  <div class="subsection-title" id="copy-number">Copy number — Kruskal-Wallis H = 25.84, p &lt; 0.0001</div>
+  <div class="subsection-title">Copy number — Kruskal-Wallis H = 25.84, p &lt; 0.0001</div>
   <table class="data-table">
     <thead><tr><th>Group vs Healthy</th><th>n</th><th>Mean</th><th>Median</th><th>U</th><th>p-value</th><th></th></tr></thead>
     <tbody>
@@ -609,6 +609,12 @@ code { font-family: var(--font-mono); font-size: 0.85em; background: #f0f4f8; pa
 
 </div>
 
+<script>
+function scrollTo(id){
+  const el = document.getElementById(id);
+  if(el){ el.scrollIntoView({behavior:'smooth', block:'start'}); }
+}
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script>
 const pts=[{id:1,dose:400,months:288,copyN:10.55,mut:23.62,prog:'slow'},{id:2,dose:400,months:96,copyN:12.40,mut:19.56,prog:'slow'},{id:3,dose:400,months:168,copyN:12.04,mut:13.13,prog:'slow'},{id:4,dose:400,months:276,copyN:11.89,mut:12.59,prog:'slow'},{id:5,dose:360,months:180,copyN:12.16,mut:18.19,prog:'slow'},{id:6,dose:400,months:156,copyN:13.01,mut:13.65,prog:'slow'},{id:7,dose:540,months:432,copyN:12.84,mut:13.63,prog:'slow'},{id:8,dose:300,months:72,copyN:13.38,mut:14.73,prog:'slow'},{id:9,dose:311,months:456,copyN:14.66,mut:5.59,prog:'slow'},{id:10,dose:400,months:72,copyN:12.29,mut:11.44,prog:'slow'},{id:11,dose:300,months:12,copyN:18.18,mut:19.73,prog:'rapid'},{id:12,dose:366,months:36,copyN:13.08,mut:23.36,prog:'rapid'},{id:13,dose:400,months:228,copyN:16.16,mut:22.22,prog:'slow'},{id:14,dose:240,months:12,copyN:11.63,mut:12.40,prog:'rapid'},{id:15,dose:240,months:15,copyN:20.85,mut:16.23,prog:'rapid'},{id:16,dose:240,months:132,copyN:15.90,mut:22.83,prog:'slow'},{id:17,dose:240,months:48,copyN:15.04,mut:25.53,prog:'slow'},{id:18,dose:240,months:12,copyN:16.51,mut:18.16,prog:'rapid'}];
